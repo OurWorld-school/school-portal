@@ -1,0 +1,65 @@
+.Resgister-h3 {
+  text-align: center;
+  font-size: xx-large;
+  font-weight: 600;
+  color: #e53238;
+}
+.register-display-div {
+  display: flex;
+  justify-content: space-between;
+  /* flex-wrap: wrap; */
+  gap: 50px;
+  align-items: center;
+  margin-top: 60px;
+}
+.register-div-img {
+  width: 350px;
+  height: 300px;
+}
+.register-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.register-border {
+  text-transform: uppercase;
+  border: 1px solid#e53238;
+  background-color: #e53238;
+  color: white;
+  font-size: medium;
+  font-weight: 500;
+  width: 225px;
+  height: 40px;
+  /* align-items: center; */
+  margin-left: auto;
+  display: flex;
+  margin-right: auto;
+  position: relative;
+  left: auto;
+  right: auto;
+  text-align: center;
+
+  top: -15px;
+  border-radius: 2px;
+}
+.register-border button {
+  width: 225px;
+  height: 40px;
+  border-color: orangered;
+  text-align: center;
+  align-content: center;
+}
+@media (max-width: 1200px) {
+  .register-display-div {
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-around;
+  }
+}
+@media (max-width: 760px) {
+  .register-display-div {
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: center;
+  }
+}

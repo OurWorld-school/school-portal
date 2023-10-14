@@ -1,0 +1,116 @@
+.about {
+  background: url("../../assets/images/build.jpg") no-repeat left;
+  background-size: 55%;
+  background-color: #fdfdfd;
+  overflow: hidden;
+  padding: 100px 0;
+}
+.inner-section {
+  width: 55%;
+  float: right;
+  /* background-color: #000d6b; */
+  background-color: #ff6900;
+  padding: 140px;
+  box-shadow: 13px 12px 8px rgba(0, 0, 0, 0.3);
+}
+.inner-section h1 {
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-weight: 900;
+}
+.text {
+  font-size: large;
+  color: white;
+  line-height: 30px;
+  text-align: justify;
+  margin-bottom: 40px;
+}
+.skills {
+}
+.skills button {
+  border-radius: 1px solid #3d65b8;
+  background: linear-gradient(rgb(130, 0, 39), #d63d0e);
+  /* font-size: medium; */
+  text-align: center;
+  /* letter-spacing: 2px;
+    border: none;
+    border-radius: 20px;
+    padding: 8px;
+    width: 200px; */
+
+  color: white;
+  cursor: pointer;
+}
+.skills button:hover {
+  transition: 1s;
+  background-color: red;
+  color: white;
+}
+@media screen and (max-width: 1200px) {
+  .inner-section {
+    padding: 80px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .about {
+    background-size: 100%;
+    padding: 100px 40px;
+  }
+  .inner-section {
+    width: 100%;
+  }
+  .text {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .about {
+    padding: 0;
+  }
+  .text {
+    text-align: center;
+    font-family: "Poppins";
+  }
+  .skills {
+    display: flex;
+    justify-content: center;
+  }
+  .abt-h {
+    text-align: center;
+  }
+  .inner-section {
+    padding: 60px;
+  }
+  .skills button {
+    font-size: medium;
+    padding: 5px;
+    width: 160px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .about {
+    padding: 0;
+  }
+  .text {
+    align-items: center;
+    text-align: center;
+    line-height: normal;
+    font-family: "Poppins";
+  }
+  .abt-h {
+    text-align: center;
+  }
+  .inner-section {
+    padding: 60px;
+  }
+  .skills {
+    display: flex;
+    justify-content: center;
+  }
+  .skills button {
+    font-size: medium;
+    padding: 5px;
+    width: 160px;
+  }
+}

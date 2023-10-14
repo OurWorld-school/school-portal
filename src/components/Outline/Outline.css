@@ -1,0 +1,29 @@
+.skiller-div {
+  width: 100%;
+  margin-top: 100px;
+}
+.btn-block3 {
+  background: transparent;
+}
+.hr-2 {
+  display: none;
+}
+.skiller-col {
+  display: flex;
+  margin-top: 40px;
+  justify-content: space-between;
+  align-items: center;
+}
+.portal-border-div {
+  width: 300px;
+  height: 200px;
+  border: 1px solid goldenrod;
+}
+.portal-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+  color: forestgreen;
+  margin-top: 50px;
+}
