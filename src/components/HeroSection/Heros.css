@@ -29,7 +29,7 @@
 }
 .hero-content h1 {
   font-size: 60px;
-  font-weight: 700;
+  font-weight: 600;
   /* font-style: italic; */
   color: #e53238;
   /* margin-bottom: 1rem; */
@@ -57,8 +57,13 @@
   text-align: center;
   color: white;
 }
+.read-btn:hover {
+  background-color: green;
+  border-color: greenyellow;
+  color: white;
+}
 .hero-content h2 {
-  font-size: 40px;
+  font-size: 60px;
 
   margin-left: auto;
   margin-right: auto;

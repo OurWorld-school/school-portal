@@ -40,7 +40,7 @@ const Heros = () => {
       </Slider>
       <div className="hero-content">
         <h1>Welcome To</h1>
-        <h2>Our World Nursery & Primary School</h2>
+        <h2>Our World International Nursery & Primary School</h2>
         <div className="read-btn">
           <Button className="btn-read" style={{ color: "white" }}>
             Read More

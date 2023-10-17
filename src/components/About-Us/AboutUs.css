@@ -41,11 +41,12 @@
   color: white;
   cursor: pointer;
 }
-.skills button:hover {
-  transition: 1s;
-  background-color: red;
+.skills .skills-btn:hover {
+  background-color: green;
+  border-color: greenyellow;
   color: white;
 }
+
 @media screen and (max-width: 1200px) {
   .inner-section {
     padding: 80px;
