@@ -10,6 +10,7 @@ import image5 from "../../assets/images/assemble.jpeg";
 import build from "../../assets/images/build.jpeg";
 import "./Heros.css";
 import { Button } from "@mui/material";
+import { Typewriter } from "react-simple-typewriter";
 const Heros = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -39,7 +40,16 @@ const Heros = () => {
         ))}
       </Slider>
       <div className="hero-content">
-        <h1>Welcome To</h1>
+        <h1>
+          <Typewriter
+            words={["Welcome To"]}
+            cursor
+            deleteSpeed={50}
+            typeSpeed={200}
+            delaySpeed={1000}
+            loop={false}
+          />
+        </h1>
         <h2>Our World International Nursery & Primary School</h2>
         <div className="read-btn">
           <Button className="btn-read" style={{ color: "white" }}>
