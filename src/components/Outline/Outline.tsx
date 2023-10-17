@@ -1,6 +1,6 @@
 import React from "react";
 import "./Outline.css";
-import { RiContactsLine } from "react-icons/ri";
+// import { RiContactsLine } from "react-icons/ri";
 import { BsBookHalf, BsCheckSquare } from "react-icons/bs";
 import { MdAccountBox, MdManageAccounts } from "react-icons/md";
 import {
@@ -41,7 +41,7 @@ const Outline = () => {
         <div className="portal-border-div">
           <div className="first-portl-div-icon">
             <div className="portal-icon">
-              <RiContactsLine />{" "}
+              <MdManageAccounts />{" "}
             </div>
           </div>
 
