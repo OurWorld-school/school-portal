@@ -6,7 +6,7 @@ import nurserys from "../../assets/images/nurserys.jpg";
 import { Button } from "react-bootstrap";
 const RegisterWithUs = () => {
   return (
-    <div>
+    <div className="register-head-div">
       <div>
         <h3 className="Resgister-h3">Register With Us Today</h3>
       </div>

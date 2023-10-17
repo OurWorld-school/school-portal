@@ -1,5 +1,5 @@
 .about {
-  background: url("../../assets/images/build.jpg") no-repeat left;
+  background: url("../../assets/images/build.jpeg") no-repeat left;
   background-size: 55%;
   background-color: #fdfdfd;
   overflow: hidden;
@@ -55,6 +55,17 @@
   .about {
     background-size: 100%;
     padding: 100px 40px;
+  }
+  .inner-section {
+    width: 100%;
+  }
+  .text {
+    text-align: center;
+  }
+}
+@media screen and (max-width: 768px) {
+  .about {
+    margin-top: 70px;
   }
   .inner-section {
     width: 100%;

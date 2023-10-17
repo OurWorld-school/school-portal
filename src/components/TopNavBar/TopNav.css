@@ -1,8 +1,9 @@
 .topnav-div {
   width: 100%;
-  background: darkorange;
+  /* background: #ff6900; */
+  background-color: darkorange;
   /* background: rgb(178, 215, 216); */
-
+  height: 8vh;
   display: flex;
   position: fixed;
 
@@ -12,6 +13,7 @@
 }
 .topnav {
   position: relative;
+
   z-index: 2;
 }
 .topnav-div-img {
@@ -32,9 +34,12 @@
   }
 }
 @media (max-width: 480px) {
-  .topnav-div-img {
+  .topnav-div {
+    display: none;
+  }
+  .topnav-img {
+    width: auto;
     height: 8vh;
-    display: flex;
-    float: left;
+    object-fit: contain;
   }
 }

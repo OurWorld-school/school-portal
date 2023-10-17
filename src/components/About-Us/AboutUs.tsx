@@ -17,7 +17,7 @@ const About = () => {
             just doing justice to my task.
           </p>
           <div className="skills">
-            <Button>Contact Us</Button>
+            <Button>Read More</Button>
           </div>
         </div>
       </div>

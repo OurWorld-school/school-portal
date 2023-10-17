@@ -1,6 +1,8 @@
 import React from "react";
 import "./Outline.css";
 import { RiContactsLine } from "react-icons/ri";
+import { BsBookHalf, BsCheckSquare } from "react-icons/bs";
+import { MdAccountBox, MdManageAccounts } from "react-icons/md";
 import {
   FaCheck,
   FaBookReader,
@@ -37,29 +39,52 @@ const Outline = () => {
       </Row>
       <div className="skiller-col">
         <div className="portal-border-div">
-          <div className="portal-icon">
-            <RiContactsLine />{" "}
+          <div className="first-portl-div-icon">
+            <div className="portal-icon">
+              <RiContactsLine />{" "}
+            </div>
           </div>
-          <div>ADMISSION REQUIREMENT</div>
-          <Button className="btn-block-for" type="button">
-            More Info
-          </Button>
+
+          <div className="portal-phase">
+            <div className="portal-write">ADMISSION REQUIREMENT</div>
+            <div className="portal-btn">
+              <Button className="btn-portal">More Info</Button>
+            </div>
+          </div>
         </div>
         <div className="portal-border-div">
           <div className="portal-icon">
-            <RiContactsLine />{" "}
+            <BsCheckSquare />{" "}
           </div>{" "}
+          <div className="portal-phase">
+            <div className="portal-write">Check Result</div>
+            <div className="portal-btn">
+              <Button className="btn-portal">More Info</Button>
+            </div>
+          </div>
         </div>
         <div className="portal-border-div">
           {" "}
           <div className="portal-icon">
-            <RiContactsLine />{" "}
+            <BsBookHalf />{" "}
+          </div>
+          <div className="portal-phase">
+            <div className="portal-write">Online Learning</div>
+            <div className="portal-btn">
+              <Button className="btn-portal">More Info</Button>
+            </div>
           </div>
         </div>
         <div className="portal-border-div">
           <div className="portal-icon">
-            <RiContactsLine />{" "}
+            <MdManageAccounts />{" "}
           </div>{" "}
+          <div className="portal-phase">
+            <div className="portal-write">Student Portal</div>
+            <div className="portal-btn">
+              <Button className="btn-portal">More Info</Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

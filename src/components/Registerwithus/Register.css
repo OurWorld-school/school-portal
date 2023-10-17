@@ -57,9 +57,12 @@
   }
 }
 @media (max-width: 760px) {
+  .register-head-div {
+    margin-top: 70px;
+  }
   .register-display-div {
     flex-wrap: wrap;
-    gap: 50px;
+    gap: 70px;
     justify-content: center;
   }
 }

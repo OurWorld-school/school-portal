@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import image1 from "../../assets/images/hero2.jpg";
-import image2 from "../../assets/images/hero2.jpg";
-import image3 from "../../assets/images/hero2.jpg";
+import image1 from "../../assets/images/buildi.jpeg";
+import image2 from "../../assets/images/comp.jpeg";
+import image3 from "../../assets/images/band.jpeg";
+import image4 from "../../assets/images/computer.jpeg";
+import image5 from "../../assets/images/assemble.jpeg";
+import build from "../../assets/images/build.jpeg";
 import "./Heros.css";
+import { Button } from "@mui/material";
 const Heros = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Define your background images in an array
-  const backgroundImages = [image1, image2, image3];
+  const backgroundImages = [build, image1, image3, image2, image5];
 
   const settings = {
     dots: true,
@@ -35,9 +39,14 @@ const Heros = () => {
         ))}
       </Slider>
       <div className="hero-content">
-        <h1>Your Hero Title</h1>
-        <p>Your hero description goes here.</p>
-        <p>Current Slide: {currentSlide + 1}</p>
+        <h1>Welcome To</h1>
+        <h2>Our World Nursery & Primary School</h2>
+        <div className="read-btn">
+          <Button className="btn-read" style={{ color: "white" }}>
+            Read More
+          </Button>
+        </div>
+        {/* <p>Current Slide: {currentSlide + 1}</p> */}
       </div>
     </div>
   );

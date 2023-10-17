@@ -15,6 +15,8 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import "./Header.css";
 import { Container } from "@mui/material";
+import logo from "../../assets/images/logo.jpeg";
+import { Link } from "react-router-dom";
 interface Props {
   /**
    * Injected by the documentation to work in an iframe.
@@ -37,7 +39,7 @@ export default function Header(props: Props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        Praise Int.School
+        Our World Int'l. School
       </Typography>
       <Divider />
       <List>
@@ -78,21 +80,83 @@ export default function Header(props: Props) {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: "none" } }}
           >
-            <MenuIcon />
+            <MenuIcon className="menu-icon" />
           </IconButton>
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            sx={{ flexGrow: 1, display: { sm: "block" } }}
           >
-            OUR WORLD Int.SCHOOL
+            <div className="logo-div-img">
+              <img src={logo} alt="be" className="logo-img" />
+            </div>
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {/* {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
-              </Button>
-            ))} */}
+            <List>
+              <ul
+                style={{
+                  display: "flex",
+
+                  justifyContent: "flex-end",
+                  alignItems: "flex-end",
+                  textAlign: "right",
+                }}
+              >
+                <ListItem>
+                  {" "}
+                  <Link
+                    to="/"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    Admission
+                  </Link>
+                </ListItem>
+                <ListItem>
+                  {" "}
+                  <Link
+                    to="/"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <span>Check</span>
+                    <span style={{ marginLeft: "5px" }}>Result</span>
+                  </Link>
+                </ListItem>
+                <ListItem>
+                  <Link
+                    to="/"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    {" "}
+                    <span>Online</span>
+                    <span style={{ marginLeft: "5px" }}>Learning</span>
+                  </Link>
+                </ListItem>
+                <ListItem>
+                  <Link
+                    to="/"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <span>Login</span>
+                  </Link>
+                </ListItem>
+
+                <ListItem>
+                  {" "}
+                  <span>Sign</span>
+                  <span style={{ marginLeft: "5px" }}>Up</span>
+                </ListItem>
+
+                <ListItem>
+                  <Link
+                    to="/"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <span>Contact</span>
+                    <span style={{ marginLeft: "5px" }}>Us</span>
+                  </Link>
+                </ListItem>
+              </ul>
+            </List>
           </Box>
         </Toolbar>
       </AppBar>
