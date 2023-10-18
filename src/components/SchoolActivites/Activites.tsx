@@ -3,7 +3,29 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import "./Activites.css";
 import { Row } from "react-bootstrap";
-
+import pix1 from "../../assets/images/activity1.jpeg";
+import pix2 from "../../assets/images/buildi.jpeg";
+import pix3 from "../../assets/images/activity2.jpeg";
+import pix4 from "../../assets/images/activity3.jpeg";
+import pix5 from "../../assets/images/band.jpeg";
+import pix6 from "../../assets/images/build.jpeg";
+import pix7 from "../../assets/images/activity6.jpeg";
+import pix8 from "../../assets/images/activity5.jpeg";
+import pix9 from "../../assets/images/activity4.jpeg";
+import pix10 from "../../assets/images/activity8.jpeg";
+import pix11 from "../../assets/images/activity9.jpeg";
+import pix12 from "../../assets/images/activity10.jpeg";
+import pix13 from "../../assets/images/nurs.jpeg";
+import pix14 from "../../assets/images/pri.jpeg";
+import pix15 from "../../assets/images/activity1.jpeg";
+import pix16 from "../../assets/images/pri.jpeg";
+import pix17 from "../../assets/images/activity1.jpeg";
+import pix18 from "../../assets/images/prim.jpeg";
+import pix19 from "../../assets/images/activity1.jpeg";
+import pix20 from "../../assets/images/pri2.jpeg";
+import pix21 from "../../assets/images/assemble.jpeg";
+import pix22 from "../../assets/images/secondary.jpeg";
+import pix23 from "../../assets/images/activity1.jpeg";
 function srcset(image: any, size: any, rows = 1, cols = 1) {
   return {
     src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
@@ -107,119 +129,119 @@ export default function Activites() {
 
 const itemData = [
   {
-    img: "https://static.independent.co.uk/s3fs-public/thumbnails/image/2018/07/02/10/school-uniform.jpg?quality=75&width=1200&auto=webp",
+    img: pix1,
     title: "Breakfast",
     rows: 2,
     cols: 2,
   },
   {
-    img: "https://static9.depositphotos.com/1037987/1188/i/950/depositphotos_11880191-stock-photo-teenage-student-answering-question-studying.jpg",
+    img: pix2,
     title: "Burger",
   },
   {
-    img: "https://static9.depositphotos.com/1037987/1188/i/950/depositphotos_11880191-stock-photo-teenage-student-answering-question-studying.jpg",
+    img: pix3,
     title: "Camera",
   },
   {
-    img: "https://static5.depositphotos.com/1037987/476/i/600/depositphotos_4761206-stock-photo-high-school-students-answering-question.jpg",
+    img: pix4,
     title: "Coffee",
     cols: 2,
   },
   {
-    img: "https://image.shutterstock.com/image-photo/female-teacher-helping-pupil-using-260nw-779645455.jpg",
+    img: pix4,
     title: "Hats",
     cols: 2,
   },
   {
-    img: "https://images.unsplash.com/photo-1602052577122-f73b9710adba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    img: pix5,
     title: "Honey",
     author: "@arwinneil",
     rows: 2,
     cols: 2,
   },
   {
-    img: "https://ichef.bbci.co.uk/news/976/cpsprodpb/175E3/production/_105851759_secschool2.jpg",
+    img: pix6,
     title: "Basketball",
   },
   {
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeEvSjN99re2cvkd-WeYi3BmgqQ5M5l6fxx0e-jvPV5X5LDo0c1iGzwZMVZ7fzDLLo9vE&usqp=CAU",
+    img: pix7,
     title: "Fern",
   },
   {
-    img: "https://s37356.pcdn.co/wp-content/uploads/2021/03/literacyplanet-12-Lesson-Plans-for-Teaching-Writing.jpeg",
+    img: pix8,
     title: "Mushrooms",
     rows: 2,
     cols: 2,
   },
   {
-    img: "https://ichef.bbci.co.uk/news/976/cpsprodpb/175E3/production/_105851759_secschool2.jpg",
+    img: pix9,
     title: "Tomato basil",
   },
   {
-    img: "https://assets-global.website-files.com/5e8183b729502fe2fcbe10fe/5f74042fe620621e363e728c_owis-secondary.jpg",
+    img: pix10,
     title: "Sea star",
   },
   {
-    img: "https://www.pngall.com/wp-content/uploads/4/School-Bus-PNG-Image.png",
+    img: pix11,
     title: "Bike",
     cols: 2,
   },
 
   {
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe9WLYUPQ-g_iqtaTRexJJTeuU0rf8BSmJxG_-jBS5dNkxOdM2I_6XpiM77QrNBY6j-4Y&usqp=CAU",
+    img: pix12,
     title: "Breakfast",
     rows: 2,
     cols: 2,
   },
   {
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoeMPC0-uzpFRuea7H14BBU9lPdbyo7Hjj3mN-nHlyBoGUlvKYINlw7nihfuBimNe9lXY&usqp=CAU",
+    img: pix13,
     title: "Burger",
   },
   {
-    img: "https://www.wolfreton.co.uk/_site/data/files/images/slideshow/9E1BD60C8EA433FCB89B96C8C7D8C902.jpg",
+    img: pix14,
     title: "Camera",
   },
   {
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMm7Wdhu4bWw4vLlTsWLMQlaeFgebZwISJqV46qBJ4lTCywWMttf-VF7SmNIVXsR5iTU8&usqp=CAU",
+    img: pix15,
     title: "Coffee",
     cols: 2,
   },
   {
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCFHH_8SVeWm2iDuLMhMu2_LTQoPMK9Jdw3AXXTzJG6pokF84oRGAzzM0E1yaoqJIX3jo&usqp=CAU",
+    img: pix16,
     title: "Hats",
     cols: 2,
   },
   {
-    img: "https://collegefutures.org/wp-content/uploads/2020/01/istock-latina-graduate-hugging-father.jpg",
+    img: pix17,
     title: "Honey",
     author: "@arwinneil",
     rows: 2,
     cols: 2,
   },
   {
-    img: "https://www.innovadesigngroup.co.uk/wp-content/uploads/2015/05/Wing.jpg",
+    img: pix18,
     title: "Basketball",
   },
   {
-    img: "https://www.thoughtco.com/thmb/VQ7dJqhE5bDJ8S8Mbhb5qiyMXPU=/395x0/filters:no_upscale():max_bytes(150000):strip_icc()/classroomjettaproductionsdigitalvision-57bb30eb3df78c8763dec1d7.jpg",
+    img: pix19,
     title: "Fern",
   },
   {
-    img: "https://images.unsplash.com/photo-1602052577122-f73b9710adba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    img: pix20,
     title: "Mushrooms",
     rows: 2,
     cols: 2,
   },
   {
-    img: "https://images.unsplash.com/photo-1602052577122-f73b9710adba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    img: pix21,
     title: "Tomato basil",
   },
   {
-    img: "https://collegefutures.org/wp-content/uploads/2020/01/istock-latina-graduate-hugging-father.jpg",
+    img: pix22,
     title: "Sea star",
   },
   {
-    img: "https://www.pngall.com/wp-content/uploads/4/School-Bus-PNG-Image.png",
+    img: pix23,
     title: "Bike",
     cols: 2,
   },

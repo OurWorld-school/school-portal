@@ -6,6 +6,11 @@
   height: 8vh;
   display: flex;
   position: fixed;
+  justify-content: center;
+  gap: 70px;
+
+  color: white;
+  font-size: 14px;
 
   /* flex-direction: row;
   
@@ -13,7 +18,7 @@
 }
 .topnav {
   position: relative;
-
+  background-color: darkorange;
   z-index: 2;
 }
 .topnav-div-img {
@@ -27,6 +32,15 @@
   width: auto;
   height: 18vh;
   object-fit: cover;
+}
+.top-flex-icon {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.topnav-icons {
+  font-size: large;
+  color: greenyellow;
 }
 @media (max-width: 700px) {
   .topnav-div h2 {

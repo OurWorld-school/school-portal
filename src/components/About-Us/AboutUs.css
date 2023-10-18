@@ -1,5 +1,5 @@
 .about {
-  background: url("../../assets/images/build.jpeg") no-repeat left;
+  background: url("../../assets/images/buildi.jpeg") no-repeat left;
   background-size: 55%;
   background-color: #fdfdfd;
   overflow: hidden;
@@ -20,9 +20,11 @@
 }
 .text {
   font-size: large;
+  width: 100%;
+  text-align: start;
   color: white;
-  line-height: 30px;
-  text-align: justify;
+  /* line-height: 30px; */
+  /* text-align: justify; */
   margin-bottom: 40px;
 }
 .skills {

@@ -37,19 +37,70 @@ export default function Header(props: Props) {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+    <Box
+      onClick={handleDrawerToggle}
+      sx={{
+        textAlign: "center",
+        backgroundColor: "darkorange",
+        color: "white",
+        height: "100vh",
+      }}
+    >
       <Typography variant="h6" sx={{ my: 2 }}>
         Our World Int'l. School
       </Typography>
       <Divider />
-      <List>
-        {/* {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
+      <List
+        style={{
+          display: "block",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+        }}
+      >
+        <ul
+          style={{
+            display: "block",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            lineHeight: "50px",
+          }}
+        >
+          <ListItem>
+            {" "}
+            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+              {" "}
+              Admission
+            </Link>
           </ListItem>
-        ))} */}
+          <ListItem>
+            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+              {" "}
+              Check Result
+            </Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+              {" "}
+              Online Learning
+            </Link>
+          </ListItem>
+
+          <ListItem> Login</ListItem>
+          <ListItem>
+            {" "}
+            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+              Sign Up
+            </Link>
+          </ListItem>
+          <ListItem>
+            {" "}
+            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+              Contact Us
+            </Link>
+          </ListItem>
+        </ul>
       </List>
     </Box>
   );

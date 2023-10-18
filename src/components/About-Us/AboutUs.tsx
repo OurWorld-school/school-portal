@@ -10,11 +10,11 @@ const About = () => {
             About Us
           </h1>
           <p className="text">
-            First, make it clear what your company does from the beginning of
-            your About Us page. There is little chance that users get to your
-            page by accident. And customers may still not understand clearly
-            what they can buy. This is just a sample, you add your content am
-            just doing justice to my task.
+            Our World International School is a pre-childs formation home with
+            basis on pre-school, nursery and primary experience located in Rd
+            19, A1 Federal Housing Estate Umuguma Owerri Nigeria. It is a
+            private establishement that provides non-parallel quality education
+            for children between early childhood and childhood stage.
           </p>
           <div className="skills">
             <Button className="skills-btn">Read More</Button>

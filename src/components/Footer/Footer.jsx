@@ -108,14 +108,14 @@ const Footer = () => {
           {/* <!-- Section: Links  --> */}
 
           {/* <!-- Copyright --> */}
-          <div class="text-center p-3 copy-right-div ">
+          <div class="text-center p-3 mt-3 copy-right-div ">
             © 2023 Copyright:
             <Link
               to="/"
               class="text-white text-decoration-none "
               style={{ marginLeft: "5px" }}
             >
-              OUR WORLD INT. NUSERY & PRIMARY SCHOOL
+              OUR WORLD INT'L. NUSERY & PRIMARY SCHOOL
             </Link>
           </div>
           {/* <!-- Copyright --> */}
