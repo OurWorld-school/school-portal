@@ -87,17 +87,17 @@ const Footer = () => {
                   />
                   <p>
                     <i class="fas fa-home mr-5"></i> OUR WORLD Int. School
-                    Secretariate: Owerri Imo State
+                    Secretariate:Road 19 A1 Federal Housing Umuguma Owerri
                   </p>
                   <p>
                     <i class="fas fa-envelope mr-5"></i>{" "}
-                    todaysmuziksite@gmail.com
+                    ourworldintschool1@gmail.com
                   </p>
                   <p>
-                    <i class="fas fa-phone mr-5"></i> +234816757488
+                    <i class="fas fa-phone mr-5"></i> +2349032402902
                   </p>
                   <p>
-                    <i class="fas fa-print mr-5"></i> +2348168950707
+                    <i class="fas fa-print mr-5">+2349077231031</i>
                   </p>
                 </div>
                 {/* <!-- Grid column --> */}

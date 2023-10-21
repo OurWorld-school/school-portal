@@ -87,10 +87,23 @@ export default function Header(props: Props) {
             </Link>
           </ListItem>
 
-          <ListItem> Login</ListItem>
           <ListItem>
             {" "}
-            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+            <Link
+              to="/login"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              {" "}
+              Login
+            </Link>
+          </ListItem>
+          <ListItem>
+            {" "}
+            <Link
+              to="/register
+            "
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               Sign Up
             </Link>
           </ListItem>
@@ -125,6 +138,7 @@ export default function Header(props: Props) {
       >
         <Toolbar>
           <IconButton
+            className="header-iconbtn"
             color="inherit"
             aria-label="open drawer"
             edge="start"
@@ -138,9 +152,11 @@ export default function Header(props: Props) {
             component="div"
             sx={{ flexGrow: 1, display: { sm: "block" } }}
           >
-            <div className="logo-div-img">
-              <img src={logo} alt="be" className="logo-img" />
-            </div>
+            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+              <div className="logo-div-img">
+                <img src={logo} alt="be" className="logo-img" />
+              </div>
+            </Link>
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             <List>
@@ -184,7 +200,7 @@ export default function Header(props: Props) {
                 </ListItem>
                 <ListItem>
                   <Link
-                    to="/"
+                    to="/login"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
                     <span>Login</span>
@@ -192,8 +208,13 @@ export default function Header(props: Props) {
                 </ListItem>
 
                 <ListItem>
-                  {" "}
-                  <span>Sign</span>
+                  <Link
+                    to="/register"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    {" "}
+                    <span>Sign</span>
+                  </Link>
                   <span style={{ marginLeft: "5px" }}>Up</span>
                 </ListItem>
 

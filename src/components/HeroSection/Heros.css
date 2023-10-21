@@ -11,7 +11,7 @@
   height: 100vh;
   overflow: hidden; /* Hide any image overflow */
   position: relative;
-  /* background: linear-gradient(pink, orange, purple); */
+  background: linear-gradient(pink, orange, purple);
 }
 .hero-slide img {
   width: 100%;

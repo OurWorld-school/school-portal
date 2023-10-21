@@ -18,7 +18,7 @@ const HomePage = () => {
         <Outline />
         <Activites />
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import "./Register.css";
-import baby from "../../assets/images/baby.jpg";
+import baby from "../../assets/images/creche2.jpeg";
 import nursery from "../../assets/images/nurs.jpeg";
 import secondary from "../../assets/images/secondary.jpeg";
 import primary from "../../assets/images/prim.jpeg";
