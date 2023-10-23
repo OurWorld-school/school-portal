@@ -13,6 +13,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import imgLogin from "../../assets/images/build.jpeg";
 import {
   FormControl,
   IconButton,
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     backgroundImage:
-      "url(https://images.unsplash.com/photo-1695968699604-defce4d13128?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY5Nzg4OTU1NQ&ixlib=rb-4.0.3&q=80&w=1080)",
+      "url('https://ik.imagekit.io/ourworldschool/WhatsApp%20Image%202023-10-12%20at%207.16.31%20AM%20(1).jpeg?updatedAt=1698108954751' )",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -64,7 +65,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
   },
   submit: {
+    color: "white",
     margin: theme.spacing(3, 0, 2),
+    borderColor: "greenyellow",
+    backgroundColor: "green",
   },
 }));
 
@@ -205,7 +209,7 @@ const LoginScreen = () => {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  color="primary"
+                  // color="primary"
                   className={classes.submit}
                 >
                   Sign In
@@ -226,9 +230,9 @@ const LoginScreen = () => {
                 </Link>
               </Grid>
             </Grid>
-            <Box mt={5}>
+            {/* <Box mt={5}>
               <MadeWithLove />
-            </Box>
+            </Box> */}
           </form>
         </div>
       </Grid>

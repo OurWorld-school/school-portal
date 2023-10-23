@@ -64,6 +64,9 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    color: "white",
+    borderColor: "greenyellow",
+    backgroundColor: "green",
   },
 }));
 
@@ -376,7 +379,6 @@ export default function SignUp() {
                 onSubmit={handleLoader}
                 fullWidth
                 variant="contained"
-                color="primary"
                 className={classes.submit}
               >
                 Sign Up

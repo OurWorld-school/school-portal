@@ -64,6 +64,9 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    color: "white",
+    borderColor: "greenyellow",
+    backgroundColor: "green",
   },
 }));
 type Props = {
@@ -368,7 +371,7 @@ const StaffRegisteration: React.FC<Props> = () => {
                 onSubmit={handleLoader}
                 fullWidth
                 variant="contained"
-                color="primary"
+                // color="primary"
                 className={classes.submit}
               >
                 Sign Up
