@@ -142,9 +142,7 @@ const LoginScreen = () => {
       })
       .catch((err) => {
         setLoading(false);
-        toast.error(
-          "Failed to create a post, check your network connection or input the correct textfields"
-        );
+        toast.error("Invalid User credentails");
       });
   };
   return (

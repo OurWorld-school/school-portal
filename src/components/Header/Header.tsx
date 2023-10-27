@@ -16,7 +16,15 @@ import Button from "@mui/material/Button";
 import "./Header.css";
 import { Container } from "@mui/material";
 import logo from "../../assets/images/logo.jpeg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserApi } from "../../data/Api";
+import axios from "axios";
+import Dropdown from "@mui/joy/Dropdown";
+// import IconButton from "@mui/joy/IconButton";
+import Menu from "@mui/joy/Menu";
+import MenuButton from "@mui/joy/MenuButton";
+import MenuItem from "@mui/joy/MenuItem";
+import MoreVert from "@mui/icons-material/MoreVert";
 interface Props {
   /**
    * Injected by the documentation to work in an iframe.
@@ -29,6 +37,32 @@ const drawerWidth = 240;
 // const navItems = ["Home", "About", "Contact"];
 
 export default function Header(props: Props) {
+  const [userData, setUserData] = React.useState<any>({});
+  const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
+  React.useEffect(() => {
+    const fetchPosts = async () => {
+      const { data } = await axios.get(UserApi + userId);
+      console.log(data);
+      // const foundData = data.find((item) => item.artist === artist);
+      setUserData(data);
+    };
+
+    fetchPosts();
+  }, [userId]);
+
+  React.useEffect(() => {
+    if (userId) {
+      navigate("/");
+    } else {
+      navigate("/");
+    }
+  }, [userId]);
+  const logout = () => {
+    localStorage.setItem("userId", "");
+
+    navigate("/");
+  };
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -75,7 +109,10 @@ export default function Header(props: Props) {
             </Link>
           </ListItem>
           <ListItem>
-            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+            <Link
+              to="/check-result"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               {" "}
               Check Result
             </Link>
@@ -89,30 +126,52 @@ export default function Header(props: Props) {
 
           <ListItem>
             {" "}
-            <Link
-              to="/login"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              {" "}
-              Login
-            </Link>
-          </ListItem>
-          <ListItem>
-            {" "}
-            <Link
-              to="/register
-            "
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              Sign Up
-            </Link>
-          </ListItem>
-          <ListItem>
-            {" "}
             <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
               Contact Us
             </Link>
           </ListItem>
+          {userData ? (
+            <div>
+              <Dropdown>
+                <MenuButton
+                  slots={{ root: IconButton }}
+                  slotProps={{
+                    root: { variant: "outlined", color: "neutral" },
+                  }}
+                >
+                  <MoreVert />
+                </MenuButton>
+                <Menu>
+                  <MenuItem>Profile</MenuItem>
+                  <MenuItem>My account</MenuItem>
+                  <MenuItem onClick={logout}>Logout</MenuItem>
+                </Menu>
+              </Dropdown>
+            </div>
+          ) : (
+            <>
+              <ListItem>
+                {" "}
+                <Link
+                  to="/login"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  {" "}
+                  Login
+                </Link>
+              </ListItem>
+              <ListItem>
+                {" "}
+                <Link
+                  to="/register
+            "
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  Sign Up
+                </Link>
+              </ListItem>
+            </>
+          )}
         </ul>
       </List>
     </Box>
@@ -181,7 +240,7 @@ export default function Header(props: Props) {
                 <ListItem>
                   {" "}
                   <Link
-                    to="/"
+                    to="/check-result"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
                     <span>Check</span>
@@ -198,25 +257,6 @@ export default function Header(props: Props) {
                     <span style={{ marginLeft: "5px" }}>Learning</span>
                   </Link>
                 </ListItem>
-                <ListItem>
-                  <Link
-                    to="/login"
-                    style={{ textDecoration: "none", color: "inherit" }}
-                  >
-                    <span>Login</span>
-                  </Link>
-                </ListItem>
-
-                <ListItem>
-                  <Link
-                    to="/register"
-                    style={{ textDecoration: "none", color: "inherit" }}
-                  >
-                    {" "}
-                    <span>Sign</span>
-                  </Link>
-                  <span style={{ marginLeft: "5px" }}>Up</span>
-                </ListItem>
 
                 <ListItem>
                   <Link
@@ -227,6 +267,47 @@ export default function Header(props: Props) {
                     <span style={{ marginLeft: "5px" }}>Us</span>
                   </Link>
                 </ListItem>
+                {userData ? (
+                  <div>
+                    <Dropdown>
+                      <MenuButton
+                        slots={{ root: IconButton }}
+                        slotProps={{
+                          root: { variant: "outlined", color: "neutral" },
+                        }}
+                      >
+                        <MoreVert />
+                      </MenuButton>
+                      <Menu>
+                        <MenuItem>{userData?.firstName}</MenuItem>
+                        <MenuItem>My account</MenuItem>
+                        <MenuItem onClick={logout}>Logout</MenuItem>
+                      </Menu>
+                    </Dropdown>
+                  </div>
+                ) : (
+                  <>
+                    <ListItem>
+                      <Link
+                        to="/login"
+                        style={{ textDecoration: "none", color: "inherit" }}
+                      >
+                        <span>Login</span>
+                      </Link>
+                    </ListItem>
+
+                    <ListItem>
+                      <Link
+                        to="/register"
+                        style={{ textDecoration: "none", color: "inherit" }}
+                      >
+                        {" "}
+                        <span>Sign</span>
+                      </Link>
+                      <span style={{ marginLeft: "5px" }}>Up</span>
+                    </ListItem>
+                  </>
+                )}
               </ul>
             </List>
           </Box>

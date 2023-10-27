@@ -11,7 +11,7 @@ import {
 } from "react-icons/fa";
 import { Button, Row } from "react-bootstrap";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Outline = () => {
   const navigate = useNavigate();
@@ -59,7 +59,13 @@ const Outline = () => {
           <div className="portal-phase">
             <div className="portal-write">Check Result</div>
             <div className="portal-btn">
-              <Button className="btn-portal">More Info</Button>
+              <Link
+                to="/check-result"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                {" "}
+                <Button className="btn-portal">More Info</Button>
+              </Link>
             </div>
           </div>
         </div>

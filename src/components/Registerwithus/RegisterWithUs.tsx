@@ -2,7 +2,7 @@ import React from "react";
 import "./Register.css";
 import baby from "../../assets/images/creche2.jpeg";
 import nursery from "../../assets/images/nurs.jpeg";
-import secondary from "../../assets/images/secondary.jpeg";
+import secondary from "../../assets/images/secskul.jpeg";
 import primary from "../../assets/images/prim.jpeg";
 import { Button } from "react-bootstrap";
 const RegisterWithUs = () => {
