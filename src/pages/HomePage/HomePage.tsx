@@ -7,10 +7,14 @@ import RegisterWithUs from "../../components/Registerwithus/RegisterWithUs";
 import Footer from "../../components/Footer/Footer";
 import Outline from "../../components/Outline/Outline";
 import Heros from "../../components/HeroSection/Heros";
+import Header from "../../components/Header/Header";
+import TopNavBar from "../../components/TopNavBar/TopNavBar";
 
 const HomePage = () => {
   return (
     <div>
+      <TopNavBar />
+      <Header />
       <Heros />
       <div className="container">
         <About />
@@ -18,7 +22,7 @@ const HomePage = () => {
         <Outline />
         <Activites />
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

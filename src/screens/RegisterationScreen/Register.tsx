@@ -17,7 +17,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { registerApi } from "../../data/Api";
-import { UserReg } from "../../data/Data.Type";
+
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import {
@@ -29,7 +29,10 @@ import {
   FormLabel,
 } from "@mui/material";
 import CircularIndeterminate from "../../components/Loading/Progress";
+import MenuItem from "@mui/material/MenuItem";
 
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { UserReg } from "../../data/Data.Type";
 function MadeWithLove() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -69,7 +72,16 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "green",
   },
 }));
-
+const ITEM_HEIGHT = 100;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 export default function SignUp() {
   const classes = useStyles();
   const navigate = useNavigate();
@@ -81,6 +93,7 @@ export default function SignUp() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [schoolRegNumber, setSchoolRegNumber] = useState("");
   const [contactAdress, setContAdress] = useState("");
+  const [currentClass, setCurrentClass] = useState("");
   const [password, setPassword] = useState("");
   const [roles, setRoles] = useState("Student");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -124,7 +137,7 @@ export default function SignUp() {
   const submitHandler = (e: any) => {
     e.preventDefault();
     setLoading(true);
-    const data: UserReg = {
+    const data: any = {
       firstName: firstName,
       lastName: lastName,
       phoneNumber: phoneNumber,
@@ -133,6 +146,7 @@ export default function SignUp() {
       passportPhoto: passportPhoto,
       email: email,
       roles: roles,
+      currentClass: currentClass,
       password: password,
       confirmPassword: confirmPassword,
     };
@@ -161,12 +175,12 @@ export default function SignUp() {
           setEmail("");
           setPassword("");
           setConfirmPassword("");
-
+          setCurrentClass("");
           localStorage.setItem("userId", res.data._id);
 
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/booking");
+          navigate("/");
         } else {
           toast.error(res.data.error);
         }
@@ -229,6 +243,32 @@ export default function SignUp() {
                 value={schoolRegNumber}
                 onChange={(e) => setSchoolRegNumber(e.target.value)}
               />
+            </Grid>
+            <Grid>
+              <FormControl sx={{ m: 1, width: 395 }}>
+                <InputLabel id="demo-multiple-name-label">Class</InputLabel>
+
+                <Select
+                  labelId="demo-multiple-name-label"
+                  id="demo-multiple-name"
+                  fullWidth
+                  MenuProps={MenuProps}
+                  // multiple
+                  value={currentClass}
+                  onChange={(e) => setCurrentClass(e.target.value)}
+                  // input={<OutlinedInput label="Name" />}
+                >
+                  <MenuItem value="Nursery-1">Nursery-1</MenuItem>
+                  <MenuItem value="Nursery-2">Nursery-2</MenuItem>
+                  <MenuItem value="Nursery-3">Nursery-3</MenuItem>
+                  <MenuItem value="Basic-1">Basic-1</MenuItem>
+                  <MenuItem value="Basic-2">Basic-2</MenuItem>
+                  <MenuItem value="Basic-3">Basic-3</MenuItem>
+                  <MenuItem value="Basic-4">Basic-4</MenuItem>
+                  <MenuItem value="Basic-5">Basic-5</MenuItem>
+                  <MenuItem value="Basic-6">Basic-6</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item xs={12}>
               <TextField

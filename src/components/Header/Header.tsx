@@ -51,13 +51,13 @@ export default function Header(props: Props) {
     fetchPosts();
   }, [userId]);
 
-  React.useEffect(() => {
-    if (userId) {
-      navigate("/");
-    } else {
-      navigate("/");
-    }
-  }, [userId]);
+  // React.useEffect(() => {
+  //   if (userId) {
+  //     navigate("/");
+  //   } else {
+  //     navigate("/");
+  //   }
+  // }, [userId]);
   const logout = () => {
     localStorage.setItem("userId", "");
 

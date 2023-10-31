@@ -9,7 +9,10 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Button } from "@material-ui/core";
 import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 import { Nursery1CheckresultApi, Nursery1resultApi } from "../../../data/Api";
+import CircularIndeterminate from "../../../components/Loading/Progress";
 
 const ITEM_HEIGHT = 100;
 const ITEM_PADDING_TOP = 8;
@@ -38,6 +41,7 @@ const CheckNursery1result: React.FC<Props> = () => {
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedTerm, setSelectedTerm] = useState("");
   const [resultData, setResultData] = useState<any>([]);
+  const [loading, setLoading] = useState(false);
 
   // State to store the API response
   const [apiData, setApiData] = useState(null);
@@ -52,6 +56,7 @@ const CheckNursery1result: React.FC<Props> = () => {
   // Function to make the API GET request
 
   const fetchApiData = () => {
+    setLoading(true);
     // Make your API GET request here using a library like Axios or the built-in fetch API
     // Replace 'YOUR_API_ENDPOINT' with the actual API URL
     fetch(
@@ -60,11 +65,16 @@ const CheckNursery1result: React.FC<Props> = () => {
       .then((response) => response.json())
       .then((data) => {
         setApiData(data);
+        setLoading(false);
+        navigate(`/my-result/${selectedYear}/${userId}/${selectedTerm}`);
+        console.log(data);
+        toast.success("Result sucessful");
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
+        setLoading(false);
+        toast.error("No result found");
       });
-    // navigate("/my-result");
   };
   useEffect(() => {
     const fetchPosts = async () => {
@@ -151,24 +161,29 @@ const CheckNursery1result: React.FC<Props> = () => {
                 </Select>
               </FormControl>
             </div>
-            <div>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                style={{
-                  color: "white",
-                  backgroundColor: "green",
-                  border: "greenyellow",
-                  width: "45%",
-                  marginTop: "25px",
-                }}
-                className="proceed-btn"
-                onClick={fetchApiData}
-              >
-                Check Result
-              </Button>
-            </div>
+            {loading ? (
+              <CircularIndeterminate />
+            ) : (
+              <div>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  style={{
+                    color: "white",
+                    backgroundColor: "green",
+                    border: "greenyellow",
+                    width: "45%",
+                    marginTop: "25px",
+                  }}
+                  className="proceed-btn"
+                  onClick={fetchApiData}
+                >
+                  Check Result
+                </Button>
+                <ToastContainer />
+              </div>
+            )}
           </div>
         </div>
       </div>

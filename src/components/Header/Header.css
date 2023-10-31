@@ -9,8 +9,12 @@
   height: 10vh; */
 }
 .menu-icon {
-  display: none;
+  display: flex;
+  position: relative;
+  left: 67480px;
+  right: 0px;
 }
+
 .header-icon-btn {
   display: none;
 }
@@ -23,6 +27,12 @@
   height: 100%;
   object-fit: contain;
 }
+@media (max-width: 1400px) {
+  .menu-icon {
+    display: none;
+  }
+}
+
 @media (max-width: 968px) {
   .menu-icon {
     display: flex;
