@@ -10,10 +10,12 @@ import LoginScreen from "./screens/LoginScreen/LoginScreen";
 import StaffRegisteration from "./screens/RegisterationScreen/StaffRegisteration";
 import CheckResult from "./screens/CheckResult/CheckResult";
 import CheckNursery1result from "./screens/CheckResult/CheckNursery1result/CheckNursery1result";
-import ViewResult from "./screens/ViewResultScreen/ViewResult";
+// import ViewResult from "./screens/ViewResultScreen/ViewResult";
 import AdminUsers from "./backoffice/AdminPanel/AdminUsers/AdminUsers";
 import Nursery1students from "./backoffice/AdminPanel/AdminUsers/Nursery1students/Nursery1students";
 import InputNursery1result from "./backoffice/AdminPanel/InputResult/InputNursery1result";
+import AdmissionPortal from "./screens/AdminsionPortal/AdminssionPortal";
+import { ViewResult } from "./screens/ViewResultScreen/ViewResult";
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginScreen />} />
+        <Route path="/admission" element={<AdmissionPortal />} />
 
         <Route path="/staff-registeration" element={<StaffRegisteration />} />
         <Route path="/check-result" element={<CheckResult />} />

@@ -38,6 +38,7 @@ const drawerWidth = 240;
 
 export default function Header(props: Props) {
   const [userData, setUserData] = React.useState<any>({});
+  const [logoutUser, setLogoutUser] = React.useState<any>();
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
   React.useEffect(() => {
@@ -59,7 +60,7 @@ export default function Header(props: Props) {
   //   }
   // }, [userId]);
   const logout = () => {
-    localStorage.setItem("userId", "");
+    setLogoutUser(localStorage.setItem("userId", ""));
 
     navigate("/");
   };
@@ -132,21 +133,20 @@ export default function Header(props: Props) {
           </ListItem>
           {userData ? (
             <div>
-              <Dropdown>
-                <MenuButton
-                  slots={{ root: IconButton }}
-                  slotProps={{
-                    root: { variant: "outlined", color: "neutral" },
-                  }}
-                >
-                  <MoreVert />
-                </MenuButton>
-                <Menu>
-                  <MenuItem>Profile</MenuItem>
-                  <MenuItem>My account</MenuItem>
-                  <MenuItem onClick={logout}>Logout</MenuItem>
-                </Menu>
-              </Dropdown>
+              <ListItem>
+                <div>
+                  {userData?.firstName} {userData?.lastName}{" "}
+                </div>
+              </ListItem>
+              <ListItem>
+                <div>Account Profile </div>
+              </ListItem>
+              <ListItem>
+                {" "}
+                <div onClick={logout} style={{ cursor: "pointer" }}>
+                  Logout{" "}
+                </div>
+              </ListItem>
             </div>
           ) : (
             <>
@@ -267,6 +267,25 @@ export default function Header(props: Props) {
                     <span style={{ marginLeft: "5px" }}>Us</span>
                   </Link>
                 </ListItem>
+                <ListItem>
+                  <Link
+                    to="/login"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <span>Login</span>
+                  </Link>
+                </ListItem>
+
+                <ListItem>
+                  <Link
+                    to="/register"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    {" "}
+                    <span>Sign</span>
+                  </Link>
+                  <span style={{ marginLeft: "5px" }}>Up</span>
+                </ListItem>
                 {userData ? (
                   <div>
                     <Dropdown>
@@ -286,27 +305,7 @@ export default function Header(props: Props) {
                     </Dropdown>
                   </div>
                 ) : (
-                  <>
-                    <ListItem>
-                      <Link
-                        to="/login"
-                        style={{ textDecoration: "none", color: "inherit" }}
-                      >
-                        <span>Login</span>
-                      </Link>
-                    </ListItem>
-
-                    <ListItem>
-                      <Link
-                        to="/register"
-                        style={{ textDecoration: "none", color: "inherit" }}
-                      >
-                        {" "}
-                        <span>Sign</span>
-                      </Link>
-                      <span style={{ marginLeft: "5px" }}>Up</span>
-                    </ListItem>
-                  </>
+                  <></>
                 )}
               </ul>
             </List>

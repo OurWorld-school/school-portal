@@ -29,6 +29,9 @@ import {
   FormLabel,
 } from "@mui/material";
 import CircularIndeterminate from "../../components/Loading/Progress";
+import TopNavBar from "../../components/TopNavBar/TopNavBar";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 function MadeWithLove() {
   return (
@@ -81,7 +84,7 @@ const StaffRegisteration: React.FC<Props> = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [roles, setRoles] = useState("staff");
+  const [userType, setUserType] = useState("staff");
   const [schoolRegNumber, setSchoolRegNumber] = useState("null");
   const [contactAdress, setContAdress] = useState("");
   const [password, setPassword] = useState("");
@@ -127,12 +130,12 @@ const StaffRegisteration: React.FC<Props> = () => {
   const submitHandler = (e: any) => {
     e.preventDefault();
     setLoading(true);
-    const data: UserReg = {
+    const data: any = {
       firstName: firstName,
       lastName: lastName,
       phoneNumber: phoneNumber,
       contactAdress: contactAdress,
-      roles: roles,
+      userType: userType,
       schoolRegNumber: schoolRegNumber,
       passportPhoto: passportPhoto,
       email: email,
@@ -155,11 +158,11 @@ const StaffRegisteration: React.FC<Props> = () => {
         setLoading(false);
         if (res.data) {
           setFirstName("");
-          setRoles("");
+          setUserType("");
           setLastName("");
           setPhoneNumber("");
           setContAdress("");
-          setRoles("");
+
           setSchoolRegNumber("");
           setPassportPhoto("");
           setEmail("");
@@ -170,7 +173,7 @@ const StaffRegisteration: React.FC<Props> = () => {
 
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/booking");
+          navigate("/");
         } else {
           toast.error(res.data.error);
         }
@@ -183,205 +186,213 @@ const StaffRegisteration: React.FC<Props> = () => {
       });
   };
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <form className={classes.form} onSubmit={submitHandler}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                label="First Name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              />
+    <>
+      <TopNavBar /> <Header />
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <form className={classes.form} onSubmit={submitHandler}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="fname"
+                  name="firstName"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="firstName"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  label="First Name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  autoComplete="lname"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="phoneNumber"
+                  label="Contact Phone Number"
+                  name="phoneNumber"
+                  autoComplete="phoneNumber"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="contact address"
+                  label="Contact Adress"
+                  name="contact adress"
+                  autoComplete="contact adress"
+                  value={contactAdress}
+                  onChange={(e) => setContAdress(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl
+                  fullWidth
+                  // sx={{ m: 1 }}
+                  variant="outlined"
+                  // className="input-label-input-divs"
+                >
+                  <InputLabel htmlFor="outlined-adornment-password">
+                    Password
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-password"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    fullWidth
+                    required
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Password"
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl
+                  fullWidth
+                  // sx={{ m: 1 }}
+                  variant="outlined"
+                  // className="input-label-input-divs"
+                >
+                  <InputLabel htmlFor="outlined-adornment-password">
+                    Confirm Password
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-password"
+                    type={showPassword ? "text" : "password"}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    fullWidth
+                    required
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Password"
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <FormLabel className="mb-2">*Passport Photograph*</FormLabel>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="passport"
+                  // label="Passport Photo"
+                  id="passport"
+                  autoComplete="passportPhoto"
+                  // type={showPassword ? "text" : "password"}
+                  // value={passportPhoto}
+                  type="file"
+                  // accept="image/*"
+                  // accept=".jpeg, .png, .jpg, "
+                  onChange={uploadimage}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      value="allowExtraEmails"
+                      color="primary"
+                      required
+                    />
+                  }
+                  label="I am pledging that all the all informations i entered is correct."
+                />
+              </Grid>
             </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="phoneNumber"
-                label="Contact Phone Number"
-                name="phoneNumber"
-                autoComplete="phoneNumber"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="contact address"
-                label="Contact Adress"
-                name="contact adress"
-                autoComplete="contact adress"
-                value={contactAdress}
-                onChange={(e) => setContAdress(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl
-                fullWidth
-                // sx={{ m: 1 }}
-                variant="outlined"
-                // className="input-label-input-divs"
-              >
-                <InputLabel htmlFor="outlined-adornment-password">
-                  Password
-                </InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+            {loading ? (
+              <CircularIndeterminate />
+            ) : (
+              <div>
+                <Button
+                  type="submit"
+                  onSubmit={handleLoader}
                   fullWidth
-                  required
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
-                />
-              </FormControl>
+                  variant="contained"
+                  // color="primary"
+                  className={classes.submit}
+                >
+                  Sign Up
+                </Button>
+                <ToastContainer />
+              </div>
+            )}
+            <Grid container justify="flex-end">
+              <Grid item>
+                <Link href="/register" variant="body2">
+                  Are you a student? Sign up here
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <FormControl
-                fullWidth
-                // sx={{ m: 1 }}
-                variant="outlined"
-                // className="input-label-input-divs"
-              >
-                <InputLabel htmlFor="outlined-adornment-password">
-                  Confirm Password
-                </InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={showPassword ? "text" : "password"}
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  fullWidth
-                  required
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <FormLabel className="mb-2">*Passport Photograph*</FormLabel>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="passport"
-                // label="Passport Photo"
-                id="passport"
-                autoComplete="passportPhoto"
-                // type={showPassword ? "text" : "password"}
-                // value={passportPhoto}
-                type="file"
-                // accept="image/*"
-                // accept=".jpeg, .png, .jpg, "
-                onChange={uploadimage}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <Checkbox value="allowExtraEmails" color="primary" required />
-                }
-                label="I am pledging that all the all informations i entered is correct."
-              />
-            </Grid>
-          </Grid>
-
-          {loading ? (
-            <CircularIndeterminate />
-          ) : (
-            <div>
-              <Button
-                type="submit"
-                onSubmit={handleLoader}
-                fullWidth
-                variant="contained"
-                // color="primary"
-                className={classes.submit}
-              >
-                Sign Up
-              </Button>
-              <ToastContainer />
-            </div>
-          )}
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link href="/register" variant="body2">
-                Are you a student? Sign up here
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container>
+          </form>
+        </div>
+      </Container>
+      <Footer />{" "}
+    </>
   );
 };
 export default StaffRegisteration;

@@ -53,13 +53,14 @@ const rows = [
 ];
 
 export default function AdminUsers() {
-  const [viewUser, setViewUser] = React.useState([]);
+  const [viewUser, setViewUser] = React.useState<string[]>([]);
   React.useEffect(() => {
     const fetchPosts = async () => {
       const { data } = await axios.get(UserApi);
       console.log(data);
+      const sortedData = data;
       // const foundData = data.find((item) => item.artist === artist);
-      setViewUser(data);
+      setViewUser(sortedData);
     };
 
     fetchPosts();
