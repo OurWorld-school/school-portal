@@ -10,12 +10,12 @@ import Paper from "@mui/material/Paper";
 
 import axios from "axios";
 
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaCheckSquare, FaEdit, FaTrash } from "react-icons/fa";
 import Button from "@mui/material/Button";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 import { UserApi } from "../../../../data/Api";
 import AdminLayout from "../../AdminLayout";
-import { Link } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -47,7 +47,7 @@ function createData(
   return { name, calories, fat, carbs, protein };
 }
 
-export default function Nursery1students() {
+export default function AdminViewAdmin() {
   const [viewUser, setViewUser] = React.useState([]);
   const [filteredData, setFilteredData] = React.useState([]);
 
@@ -70,9 +70,7 @@ export default function Nursery1students() {
   }, []);
   React.useEffect(() => {
     // Filter the data based on genre "afrobeat"
-    const filtered = viewUser.filter(
-      (item: any) => item.currentClass === "Nursery-1"
-    );
+    const filtered = viewUser.filter((item: any) => item.isAdmin === "true");
     setFilteredData(filtered);
     console.log(filtered);
   }, [viewUser]);
@@ -93,13 +91,13 @@ export default function Nursery1students() {
               <th>Image</th>
               <th>First Name</th>
               <th>Last Name</th>
-              <th>Class</th>
-              <th>School Reg No</th>
+              <th>User Type</th>
+              <th>User Role</th>
               <th>Phone Number</th>
               <th>Contact Address</th>
               <th>Email</th>
-              <th>Input Result</th>
-              <th>Update User Current Class</th>
+              <th>Assign Role</th>
+              <th>Assign Admin</th>
             </tr>
           </thead>
           <tbody>
@@ -118,8 +116,8 @@ export default function Nursery1students() {
                 </td>
                 <td>{row?.firstName}</td>
                 <td>{row?.lastName}</td>
-                <td>{row?.currentClass}</td>
-                <td>{row?.schoolRegNumber}</td>
+                <td>{row?.userType}</td>
+                <td>{row?.roles}</td>
                 <td>{row?.phoneNumber}</td>
                 <td>{row?.contactAdress}</td>
                 <td>{row?.email}</td>
@@ -127,7 +125,7 @@ export default function Nursery1students() {
                   {" "}
                   <Link to={`/post-nursery2result/${row?._id}`}>
                     <Button className="btn-sm">
-                      <BsFillBookmarkCheckFill />{" "}
+                      <FaEdit />{" "}
                     </Button>
                   </Link>{" "}
                 </td>
@@ -135,7 +133,7 @@ export default function Nursery1students() {
                   {" "}
                   <Link to={`/updateusserclassby-admin/${row?._id}`}>
                     <Button className="btn-sm">
-                      <FaEdit />{" "}
+                      <FaCheckSquare />{" "}
                     </Button>
                   </Link>{" "}
                 </td>

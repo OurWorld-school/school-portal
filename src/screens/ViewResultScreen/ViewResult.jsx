@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button, Container } from "@material-ui/core";
 import "./ViewResult.css";
 import logo from "../../assets/images/logo.jpeg";
@@ -15,6 +15,7 @@ export const ViewResult = React.forwardRef((props, ref) => {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
+  const navigate = useNavigate();
   const { selectedYear, userId, selectedTerm } = useParams();
   const [viewResult, setViewResult] = useState({});
   useEffect(() => {
@@ -28,6 +29,13 @@ export const ViewResult = React.forwardRef((props, ref) => {
     };
 
     fetchPosts();
+  }, []);
+  useEffect(() => {
+    if (viewResult?.length == 0) {
+      navigate("/Nursery1-result");
+    } else {
+      navigate(`/my-result/${selectedYear}/${userId}/${selectedTerm}`);
+    }
   }, []);
   return (
     <>
@@ -49,7 +57,9 @@ export const ViewResult = React.forwardRef((props, ref) => {
                   <div>Imo State, Nigeria</div>
                 </div>
                 <div className="sheet-div">
-                  <div>NURSERY & PRIMARY SCHOOL TERMINAL RESULT SHEET</div>
+                  <div style={{ textTransform: "uppercase" }}>
+                    {viewResult?.classes} SCHOOL TERMINAL RESULT SHEET
+                  </div>
                 </div>
               </div>
               <div className="img-passport-result-div">

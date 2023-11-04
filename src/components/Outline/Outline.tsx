@@ -60,7 +60,7 @@ const Outline = () => {
             <div className="portal-write">Check Result</div>
             <div className="portal-btn">
               <Link
-                to="/check-result"
+                to="/online-result"
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 {" "}

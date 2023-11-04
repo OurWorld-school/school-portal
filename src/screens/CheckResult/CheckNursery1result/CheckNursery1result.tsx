@@ -71,8 +71,9 @@ const CheckNursery1result: React.FC<Props> = () => {
         toast.success("Result sucessful");
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
+        // console.error("Error fetching data:", error);
         setLoading(false);
+        navigate("/Nursery1-result");
         toast.error("No result found");
       });
   };

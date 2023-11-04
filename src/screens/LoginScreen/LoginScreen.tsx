@@ -138,7 +138,13 @@ const LoginScreen = () => {
           localStorage.setItem("isAdmin", res.data.isAdmin);
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/");
+          {
+            res.data.isAdmin == true
+              ? navigate("/admin-layout")
+              : res.data.roles == "Form-Teacher"
+              ? navigate("/admin-layout")
+              : navigate("/");
+          }
         } else {
           toast.error(res.data.error);
         }

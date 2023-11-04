@@ -78,7 +78,7 @@ export default function Header(props: Props) {
         textAlign: "center",
         backgroundColor: "darkorange",
         color: "white",
-        height: "100vh",
+        height: "140vh",
       }}
     >
       <Typography variant="h6" sx={{ my: 2 }}>
@@ -111,7 +111,7 @@ export default function Header(props: Props) {
           </ListItem>
           <ListItem>
             <Link
-              to="/check-result"
+              to="/online-result"
               style={{ textDecoration: "none", color: "inherit" }}
             >
               {" "}
@@ -129,6 +129,26 @@ export default function Header(props: Props) {
             {" "}
             <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
               Contact Us
+            </Link>
+          </ListItem>
+          <ListItem>
+            {" "}
+            <Link
+              to="/login"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              {" "}
+              Login
+            </Link>
+          </ListItem>
+          <ListItem>
+            {" "}
+            <Link
+              to="/register
+            "
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              Sign Up
             </Link>
           </ListItem>
           {userData ? (
@@ -240,7 +260,7 @@ export default function Header(props: Props) {
                 <ListItem>
                   {" "}
                   <Link
-                    to="/check-result"
+                    to="/online-result"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
                     <span>Check</span>

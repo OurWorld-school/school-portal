@@ -47,7 +47,7 @@ function createData(
   return { name, calories, fat, carbs, protein };
 }
 
-export default function Nursery1students() {
+export default function Basic2students() {
   const [viewUser, setViewUser] = React.useState([]);
   const [filteredData, setFilteredData] = React.useState([]);
 
@@ -71,7 +71,7 @@ export default function Nursery1students() {
   React.useEffect(() => {
     // Filter the data based on genre "afrobeat"
     const filtered = viewUser.filter(
-      (item: any) => item.currentClass === "Nursery-1"
+      (item: any) => item.currentClass === "Basic-2"
     );
     setFilteredData(filtered);
     console.log(filtered);

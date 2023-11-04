@@ -94,3 +94,8 @@
     width: 80%;
   }
 }
+@media (max-width: 480px) {
+  .check-result-col-div {
+    height: auto;
+  }
+}

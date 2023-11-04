@@ -264,6 +264,7 @@ export default function SignUp() {
                     onChange={(e) => setCurrentClass(e.target.value)}
                     // input={<OutlinedInput label="Name" />}
                   >
+                    <MenuItem value="Pre-Nursery">Pre-Nursery</MenuItem>
                     <MenuItem value="Nursery-1">Nursery-1</MenuItem>
                     <MenuItem value="Nursery-2">Nursery-2</MenuItem>
                     <MenuItem value="Nursery-3">Nursery-3</MenuItem>
@@ -315,7 +316,7 @@ export default function SignUp() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <FormControl
                   fullWidth
                   // sx={{ m: 1 }}
@@ -380,7 +381,7 @@ export default function SignUp() {
                     label="Password"
                   />
                 </FormControl>
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <FormLabel className="mb-2">*Passport Photograph*</FormLabel>
                 <TextField

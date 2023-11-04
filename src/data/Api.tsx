@@ -4,3 +4,4 @@ export const UserApi = "http://localhost:5000/api/users/";
 export const Nursery1resultApi = "http://localhost:5000/api/nursery1result/";
 export const Nursery1CheckresultApi =
   "http://localhost:5000/api/nursery1result/results/";
+export const scratchCardApi = "http://localhost:5000/api/scratchcard/";

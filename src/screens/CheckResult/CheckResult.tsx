@@ -51,6 +51,14 @@ const CheckResult = () => {
       navigate("/login");
     }
   }, [userId]);
+  const ScratchCardId = localStorage.getItem("ScratchCardId");
+  useEffect(() => {
+    if (ScratchCardId) {
+      navigate("/check-result");
+    } else {
+      navigate("/online-result");
+    }
+  }, [userId]);
   const handleButtonClick = () => {
     // You can define your navigation logic based on the selectedValue here
     if (selectedValue === "Nursery1-result") {

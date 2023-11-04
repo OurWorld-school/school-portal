@@ -16,6 +16,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import AdminMenu from "./AdminDashboard/AdminMenu";
+import { UserApi } from "../../data/Api";
+import axios from "axios";
+import HomePage from "../../pages/HomePage/HomePage";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -30,6 +34,19 @@ interface Props {
 
 export default function AdminLayout(props: Props) {
   const { window } = props;
+  const [viewUser, setViewUser] = React.useState<any>({});
+  const userId = localStorage.getItem("userId");
+  React.useEffect(() => {
+    const fetchPosts = async () => {
+      const { data } = await axios.get(UserApi + userId);
+      console.log(data);
+      const sortedData = data;
+      // const foundData = data.find((item) => item.artist === artist);
+      setViewUser(sortedData);
+    };
+
+    fetchPosts();
+  }, []);
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -55,86 +72,180 @@ export default function AdminLayout(props: Props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{
-          bgcolor: "white",
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
-          >
-            <MenuIcon sx={{ color: "#171744" }} />
-          </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            style={{ color: "#171744", textDecoration: "none" }}
-          >
-            Admin Dashboard
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
-      </Box>
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-        }}
-      >
-        <Toolbar />
-        <Typography paragraph>{props.children}</Typography>
-        <Typography paragraph></Typography>
-      </Box>
-    </Box>
+    <>
+      {viewUser?.isAdmin == true ? (
+        <>
+          <Box sx={{ display: "flex" }}>
+            <CssBaseline />
+            <AppBar
+              position="fixed"
+              sx={{
+                bgcolor: "white",
+                width: { sm: `calc(100% - ${drawerWidth}px)` },
+                ml: { sm: `${drawerWidth}px` },
+              }}
+            >
+              <Toolbar>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="start"
+                  onClick={handleDrawerToggle}
+                  sx={{ mr: 2, display: { sm: "none" } }}
+                >
+                  <MenuIcon sx={{ color: "#171744" }} />
+                </IconButton>
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="div"
+                  style={{ color: "#171744", textDecoration: "none" }}
+                >
+                  <Link to="/"> Admin Dashboard</Link>
+                </Typography>
+              </Toolbar>
+            </AppBar>
+            <Box
+              component="nav"
+              sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+              aria-label="mailbox folders"
+            >
+              {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+              <Drawer
+                container={container}
+                variant="temporary"
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                ModalProps={{
+                  keepMounted: true, // Better open performance on mobile.
+                }}
+                sx={{
+                  display: { xs: "block", sm: "none" },
+                  "& .MuiDrawer-paper": {
+                    boxSizing: "border-box",
+                    width: drawerWidth,
+                  },
+                }}
+              >
+                {drawer}
+              </Drawer>
+              <Drawer
+                variant="permanent"
+                sx={{
+                  display: { xs: "none", sm: "block" },
+                  "& .MuiDrawer-paper": {
+                    boxSizing: "border-box",
+                    width: drawerWidth,
+                  },
+                }}
+                open
+              >
+                {drawer}
+              </Drawer>
+            </Box>
+            <Box
+              component="main"
+              sx={{
+                flexGrow: 1,
+                p: 3,
+                width: { sm: `calc(100% - ${drawerWidth}px)` },
+              }}
+            >
+              <Toolbar />
+              <Typography paragraph>{props.children}</Typography>
+              <Typography paragraph></Typography>
+            </Box>
+          </Box>
+        </>
+      ) : viewUser?.roles == "Form-Teacher" ? (
+        <>
+          <Box sx={{ display: "flex" }}>
+            <CssBaseline />
+            <AppBar
+              position="fixed"
+              sx={{
+                bgcolor: "white",
+                width: { sm: `calc(100% - ${drawerWidth}px)` },
+                ml: { sm: `${drawerWidth}px` },
+              }}
+            >
+              <Toolbar>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="start"
+                  onClick={handleDrawerToggle}
+                  sx={{ mr: 2, display: { sm: "none" } }}
+                >
+                  <MenuIcon sx={{ color: "#171744" }} />
+                </IconButton>
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="div"
+                  style={{ color: "#171744", textDecoration: "none" }}
+                >
+                  <Link to="/"> Admin Dashboard</Link>
+                </Typography>
+              </Toolbar>
+            </AppBar>
+            <Box
+              component="nav"
+              sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+              aria-label="mailbox folders"
+            >
+              {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+              <Drawer
+                container={container}
+                variant="temporary"
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                ModalProps={{
+                  keepMounted: true, // Better open performance on mobile.
+                }}
+                sx={{
+                  display: { xs: "block", sm: "none" },
+                  "& .MuiDrawer-paper": {
+                    boxSizing: "border-box",
+                    width: drawerWidth,
+                  },
+                }}
+              >
+                {drawer}
+              </Drawer>
+              <Drawer
+                variant="permanent"
+                sx={{
+                  display: { xs: "none", sm: "block" },
+                  "& .MuiDrawer-paper": {
+                    boxSizing: "border-box",
+                    width: drawerWidth,
+                  },
+                }}
+                open
+              >
+                {drawer}
+              </Drawer>
+            </Box>
+            <Box
+              component="main"
+              sx={{
+                flexGrow: 1,
+                p: 3,
+                width: { sm: `calc(100% - ${drawerWidth}px)` },
+              }}
+            >
+              <Toolbar />
+              <Typography paragraph>{props.children}</Typography>
+              <Typography paragraph></Typography>
+            </Box>
+          </Box>
+        </>
+      ) : (
+        <>
+          <HomePage />{" "}
+        </>
+      )}
+    </>
   );
 }
