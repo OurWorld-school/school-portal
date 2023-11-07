@@ -79,9 +79,6 @@ export default function AdminUsers() {
               <StyledTableCell align="right">Phone Number</StyledTableCell>
               <StyledTableCell align="right">Contact Address</StyledTableCell>
               {/* <StyledTableCell align="right">Edith Profile</StyledTableCell> */}
-              <StyledTableCell align="right">Input Result</StyledTableCell>
-              <StyledTableCell align="right"></StyledTableCell>
-              <StyledTableCell align="right"></StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -117,24 +114,6 @@ export default function AdminUsers() {
                 </StyledTableCell>
                 <StyledTableCell align="right">
                   {row?.contactAdress}
-                </StyledTableCell>
-                <StyledTableCell>
-                  <Button className="btn-sm">
-                    <BsFillBookmarkCheckFill />{" "}
-                  </Button>
-                </StyledTableCell>
-                <StyledTableCell>
-                  <Button className="btn-sm">
-                    <FaEdit />
-                  </Button>
-                </StyledTableCell>
-                <StyledTableCell>
-                  <Button
-                    //   variant="danger"
-                    className="btn-sm"
-                  >
-                    <FaTrash />
-                  </Button>
                 </StyledTableCell>
               </StyledTableRow>
             ))}

@@ -27,6 +27,21 @@ import Basic4students from "./backoffice/AdminPanel/AdminUsers/Nursery1students/
 import AdminViewStaffs from "./backoffice/AdminPanel/AdminUsers/AdminStaffs/AdminViewStaffs";
 import AdminViewRoles from "./backoffice/AdminPanel/AdminUsers/AdminStaffs/AdminViewRoles";
 import AdminViewAdmin from "./backoffice/AdminPanel/AdminUsers/AdminStaffs/AdminViewAdmins";
+import AdminNursery1Results from "./backoffice/AdminPanel/AdminDashboard/AdminResults/AdminNursery1results";
+import AdminPreNurseryResult from "./backoffice/AdminPanel/AdminDashboard/AdminResults/AdminPreNurseryResult";
+import AdminNursery2Result from "./backoffice/AdminPanel/AdminDashboard/AdminResults/AdminNursery2Result";
+import AdminNursery3Result from "./backoffice/AdminPanel/AdminDashboard/AdminResults/AdminNursery3Result";
+import AdminBasic1Result from "./backoffice/AdminPanel/AdminDashboard/AdminResults/AdminBasic1Result";
+import AdminBasic2Result from "./backoffice/AdminPanel/AdminDashboard/AdminResults/AdminBasic2Result";
+import AdminBasic3Result from "./backoffice/AdminPanel/AdminDashboard/AdminResults/AdminBasic3Result";
+import AdminBasic4Result from "./backoffice/AdminPanel/AdminDashboard/AdminResults/AdminBasic4Result";
+import {
+  AdminUserResultNursery,
+  AdminUserResultNursery2ndterm,
+  AdminUserResultNursery3rdterm,
+} from "./backoffice/AdminPanel/AdminDashboard/AdminUserResults/AdminUserResultNursery";
+import InputPreNurseryResult from "./backoffice/AdminPanel/InputResult/InputPreNurseryResult";
+import InputNursery3Result from "./backoffice/AdminPanel/InputResult/InputNursery3Result";
 
 function App() {
   return (
@@ -38,7 +53,6 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginScreen />} />
         <Route path="/admission" element={<AdmissionPortal />} />
-
         <Route path="/staff-registeration" element={<StaffRegisteration />} />
         <Route path="/check-result" element={<CheckResult />} />
         <Route path="/Nursery1-result" element={<CheckNursery1result />} />
@@ -60,12 +74,40 @@ function App() {
         <Route path="/staffs" element={<AdminViewStaffs />} />
         <Route path="/viewroles" element={<AdminViewRoles />} />
         <Route path="/viewadmins" element={<AdminViewAdmin />} />
+        <Route path="/pre-nurseryResult" element={<AdminPreNurseryResult />} />
+        <Route path="/nusery1Result" element={<AdminNursery1Results />} />
+        <Route path="/nusery2Result" element={<AdminNursery2Result />} />
+        <Route path="/nusery3Result" element={<AdminNursery3Result />} />
+        <Route path="/basic1Result" element={<AdminBasic1Result />} />
+        <Route path="/basic2Result" element={<AdminBasic2Result />} />
+        <Route path="/basic3Result" element={<AdminBasic3Result />} />
+        <Route path="/basic4Result" element={<AdminBasic4Result />} />
         <Route
           path="/post-nursery1-result/:id"
           element={<InputNursery1result />}
         />
-
+        <Route
+          path="/view-nursery1-student-result/:id"
+          element={<AdminUserResultNursery />}
+        />
+        <Route
+          path="/view-nursery1-student-result-2ndterm/:id"
+          element={<AdminUserResultNursery2ndterm />}
+        />
+        <Route
+          path="/view-nursery1-student-result-3rdterm/:id"
+          element={<AdminUserResultNursery3rdterm />}
+        />
         {/* /////// */}
+        <Route
+          path="/post-prenursery-result/:id"
+          element={<InputPreNurseryResult />}
+        />
+
+        <Route
+          path="/post-nursery3result/:id"
+          element={<InputNursery3Result />}
+        />
       </Routes>
       {/* <Footer /> */}
     </div>

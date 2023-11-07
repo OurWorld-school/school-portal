@@ -79,8 +79,15 @@ export default function PreNurserystudents() {
 
   return (
     <AdminLayout>
-      <Table responsive="sm" striped bordered variant="dark">
-        <thead>
+      <Table responsive="sm" striped bordered>
+        <thead
+          style={{
+            backgroundColor: "#e53238",
+            color: "white",
+            fontSize: "medium",
+            fontWeight: "500",
+          }}
+        >
           <tr>
             <th>Image</th>
             <th>First Name</th>

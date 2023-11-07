@@ -23,6 +23,9 @@ import {
 } from "@mui/material";
 import CircularIndeterminate from "../../components/Loading/Progress";
 import { UserApi, scratchCardApi } from "../../data/Api";
+import TopNavBar from "../../components/TopNavBar/TopNavBar";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 const ITEM_HEIGHT = 100;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -73,7 +76,7 @@ const ScratchCard: React.FC<Props> = () => {
     fetchPosts();
   }, [userId]);
   useEffect(() => {
-    if (userData?.password?.length == 0) {
+    if (!userData?.password) {
       navigate("/updateUserProfile");
     } else {
       navigate("/online-result");
@@ -134,134 +137,147 @@ const ScratchCard: React.FC<Props> = () => {
   };
 
   return (
-    <div>
-      <div className="check-result-flex-div">
-        <div className="check-result-col-div">
-          <div className="guideline-div">
-            <h3 className="tip-h3">Tips</h3>
-            <ul className="ul-list-style">
-              <li>
-                Obtain your Registration Code from your schools / Director
-              </li>
-              <li>
-                Obtain a scratch card from your school or a verified vendor
-              </li>
-              <li>
-                Scratch off the covered / sealed area to reveal the card pin
-              </li>
-              <li>
-                Enter the Pin and Serial number and other details required
-              </li>
-              <li>
-                Click on the » Check result button (located at the bottom)
-              </li>
-            </ul>
+    <>
+      <TopNavBar />
+      <Header />
+      <div>
+        <div className="check-result-flex-div">
+          <div className="check-result-col-div">
+            <div className="guideline-div">
+              <h3 className="tip-h3">Tips</h3>
+              <ul className="ul-list-style">
+                <li>
+                  Obtain your Registration Code from your schools / Director
+                </li>
+                <li>
+                  Obtain a scratch card from your school or a verified vendor
+                </li>
+                <li>
+                  Scratch off the covered / sealed area to reveal the card pin
+                </li>
+                <li>
+                  Enter the Pin and Serial number and other details required
+                </li>
+                <li>
+                  Click on the » Check result button (located at the bottom)
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div className="select-check-div">
-          <div>
-            <h2>Result Checker</h2>
-            <form onSubmit={submitHandler}>
-              {/* <div className="form-control-div"> */}
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <FormControl
-                    sx={{ m: 1, width: 300 }}
-                    // fullWidth
-                    // sx={{ m: 1 }}
-                    variant="outlined"
-                    // className="input-label-input-divs"
-                  >
-                    <InputLabel htmlFor="outlined-adornment-password">
-                      Scratch Card Serial Number
-                    </InputLabel>
-                    <OutlinedInput
-                      id="outlined-adornment-password"
-                      type={showPassword ? "text" : "password"}
-                      value={serialNo}
-                      onChange={(e) => setSerialNo(e.target.value)}
-                      fullWidth
-                      required
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge="end"
-                          >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="Scratch Card Password"
-                    />
-                  </FormControl>
+          <div className="select-check-div">
+            <div>
+              <h2>Result Checker</h2>
+              <form onSubmit={submitHandler}>
+                {/* <div className="form-control-div"> */}
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <FormControl
+                      sx={{ m: 1, width: 300 }}
+                      // fullWidth
+                      // sx={{ m: 1 }}
+                      variant="outlined"
+                      // className="input-label-input-divs"
+                    >
+                      <InputLabel htmlFor="outlined-adornment-password">
+                        Scratch Card Serial Number
+                      </InputLabel>
+                      <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={showPassword ? "text" : "password"}
+                        value={serialNo}
+                        onChange={(e) => setSerialNo(e.target.value)}
+                        fullWidth
+                        required
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword}
+                              onMouseDown={handleMouseDownPassword}
+                              edge="end"
+                            >
+                              {showPassword ? (
+                                <VisibilityOff />
+                              ) : (
+                                <Visibility />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="Scratch Card Password"
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControl
+                      sx={{ m: 1, width: 300 }}
+                      // fullWidth
+                      // sx={{ m: 1 }}
+                      variant="outlined"
+                      // className="input-label-input-divs"
+                    >
+                      <InputLabel htmlFor="outlined-adornment-password">
+                        Scratch Card Pin
+                      </InputLabel>
+                      <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={showPassword ? "text" : "password"}
+                        value={pin}
+                        onChange={(e) => setPin(e.target.value)}
+                        fullWidth
+                        required
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword}
+                              onMouseDown={handleMouseDownPassword}
+                              edge="end"
+                            >
+                              {showPassword ? (
+                                <VisibilityOff />
+                              ) : (
+                                <Visibility />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="Ppin"
+                      />
+                    </FormControl>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <FormControl
-                    sx={{ m: 1, width: 300 }}
-                    // fullWidth
-                    // sx={{ m: 1 }}
-                    variant="outlined"
-                    // className="input-label-input-divs"
-                  >
-                    <InputLabel htmlFor="outlined-adornment-password">
-                      Scratch Card Pin
-                    </InputLabel>
-                    <OutlinedInput
-                      id="outlined-adornment-password"
-                      type={showPassword ? "text" : "password"}
-                      value={pin}
-                      onChange={(e) => setPin(e.target.value)}
-                      fullWidth
-                      required
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge="end"
-                          >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="Ppin"
-                    />
-                  </FormControl>
-                </Grid>
-              </Grid>
-              {/* </div> */}
+                {/* </div> */}
 
-              {loading ? (
-                <CircularIndeterminate />
-              ) : (
-                <div>
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    style={{
-                      color: "white",
-                      backgroundColor: "green",
-                      border: "greenyellow",
-                      width: "45%",
-                      marginTop: "25px",
-                    }}
-                    className="proceed-btn"
-                  >
-                    Proceed
-                  </Button>
-                  <ToastContainer />
-                </div>
-              )}
-            </form>
+                {loading ? (
+                  <CircularIndeterminate />
+                ) : (
+                  <div>
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      style={{
+                        color: "white",
+                        backgroundColor: "green",
+                        border: "greenyellow",
+                        width: "45%",
+                        marginTop: "25px",
+                      }}
+                      className="proceed-btn"
+                    >
+                      Proceed
+                    </Button>
+                    <ToastContainer />
+                  </div>
+                )}
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <Footer />{" "}
+    </>
   );
 };
 

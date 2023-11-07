@@ -36,6 +36,7 @@ import { UserReg } from "../../data/Data.Type";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import TopNavBar from "../../components/TopNavBar/TopNavBar";
+import "./Register.css";
 function MadeWithLove() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -251,7 +252,13 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControl sx={{ m: 1, width: 395 }}>
+                <FormControl
+                  sx={{
+                    m: 1,
+                    // width: 320,
+                  }}
+                  className="form-select-div-s"
+                >
                   <InputLabel id="demo-multiple-name-label">Class</InputLabel>
 
                   <Select
@@ -409,7 +416,7 @@ export default function SignUp() {
                       required
                     />
                   }
-                  label="I am pledging that all the all informations i entered is correct."
+                  label="I am pledging that all the informations i entered are correct."
                 />
               </Grid>
             </Grid>
