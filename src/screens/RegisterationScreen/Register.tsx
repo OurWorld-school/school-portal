@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "green",
   },
 }));
-const ITEM_HEIGHT = 100;
+const ITEM_HEIGHT = 800;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
   PaperProps: {
@@ -255,7 +255,7 @@ export default function SignUp() {
                 <FormControl
                   sx={{
                     m: 1,
-                    // width: 320,
+                    // width: 370,
                   }}
                   className="form-select-div-s"
                 >
@@ -279,8 +279,6 @@ export default function SignUp() {
                     <MenuItem value="Basic-2">Basic-2</MenuItem>
                     <MenuItem value="Basic-3">Basic-3</MenuItem>
                     <MenuItem value="Basic-4">Basic-4</MenuItem>
-                    <MenuItem value="Basic-5">Basic-5</MenuItem>
-                    <MenuItem value="Basic-6">Basic-6</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>

@@ -42,6 +42,11 @@ import {
 } from "./backoffice/AdminPanel/AdminDashboard/AdminUserResults/AdminUserResultNursery";
 import InputPreNurseryResult from "./backoffice/AdminPanel/InputResult/InputPreNurseryResult";
 import InputNursery3Result from "./backoffice/AdminPanel/InputResult/InputNursery3Result";
+import InputBasic1Result from "./backoffice/AdminPanel/InputResult/InputBasic1Result";
+import InputBasic2Result from "./backoffice/AdminPanel/InputResult/InputBasic2Result";
+import InputBasic3Result from "./backoffice/AdminPanel/InputResult/InputBasic3Result";
+import InputBasic4Result from "./backoffice/AdminPanel/InputResult/InputBasic4Result";
+import InputNursery2Result from "./backoffice/AdminPanel/InputResult/InputNusery2Result";
 
 function App() {
   return (
@@ -98,16 +103,24 @@ function App() {
           path="/view-nursery1-student-result-3rdterm/:id"
           element={<AdminUserResultNursery3rdterm />}
         />
+
         {/* /////// */}
         <Route
           path="/post-prenursery-result/:id"
           element={<InputPreNurseryResult />}
         />
-
+        <Route
+          path="/post-nursery2result/:id"
+          element={<InputNursery2Result />}
+        />
         <Route
           path="/post-nursery3result/:id"
           element={<InputNursery3Result />}
         />
+        <Route path="/post-basic1result/:id" element={<InputBasic1Result />} />
+        <Route path="/post-basic2result/:id" element={<InputBasic2Result />} />
+        <Route path="/post-basic3result/:id" element={<InputBasic3Result />} />
+        <Route path="/post-basic4result/:id" element={<InputBasic4Result />} />
       </Routes>
       {/* <Footer /> */}
     </div>

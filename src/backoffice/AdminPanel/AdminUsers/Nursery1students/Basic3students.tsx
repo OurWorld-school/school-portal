@@ -125,7 +125,7 @@ export default function Basic3students() {
                 <td>{row?.email}</td>
                 <td>
                   {" "}
-                  <Link to={`/post-nursery2result/${row?._id}`}>
+                  <Link to={`/post-basic3result/${row?._id}`}>
                     <Button className="btn-sm">
                       <BsFillBookmarkCheckFill />{" "}
                     </Button>

@@ -59,6 +59,10 @@ export default function AdminUsers() {
       const { data } = await axios.get(UserApi);
       console.log(data);
       const sortedData = data;
+      // const sortedData = data.sort((a: any, b: any) => {
+      //   // Change 'name' to the property you want to sort by
+      //   return a.name.localeCompare(b.name);
+      // });
       // const foundData = data.find((item) => item.artist === artist);
       setViewUser(sortedData);
     };
