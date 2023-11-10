@@ -1,6 +1,13 @@
 export const registerApi = "http://localhost:5000/api/auth/registers";
 export const loginApi = "http://localhost:5000/api/auth/login";
 export const UserApi = "http://localhost:5000/api/users/";
+export const UpdateUserApi = "http://localhost:5000/api/users/update/";
+export const UpdateUserCurrentClassApi =
+  "http://localhost:5000/api/users/currentclasses/";
+export const AssignUserRolesApi =
+  "http://localhost:5000/api/users/update/changeUserRole/";
+export const AssignUserAdminApi =
+  "http://localhost:5000/api/users/update/isAdmin/";
 export const Nursery1resultApi = "http://localhost:5000/api/nursery1result/";
 export const Nursery1CheckresultApi =
   "http://localhost:5000/api/nursery1result/results/";
@@ -13,3 +20,5 @@ export const Basic3resultApi = "http://localhost:5000/api/basic3result/";
 export const Basic4resultApi = "http://localhost:5000/api/basic4result/";
 export const PreNurseryresultApi =
   "http://localhost:5000/api/prenurseryresult/";
+export const UpdatePreNurseryresultApi =
+  "http://localhost:5000/api/prenurseryresult/update/";

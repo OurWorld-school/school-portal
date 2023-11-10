@@ -123,7 +123,7 @@ export default function AdminViewStaffs() {
                 <td>{row?.email}</td>
                 <td>
                   {" "}
-                  <Link to={`/post-nursery2result/${row?._id}`}>
+                  <Link to={`/update-user-roles-by-admin/${row?._id}`}>
                     <Button className="btn-sm">
                       <FaEdit />{" "}
                     </Button>
@@ -131,7 +131,7 @@ export default function AdminViewStaffs() {
                 </td>
                 <td>
                   {" "}
-                  <Link to={`/updateusserclassby-admin/${row?._id}`}>
+                  <Link to={`/update-user-admin-by-admin/${row?._id}`}>
                     <Button className="btn-sm">
                       <FaCheckSquare />{" "}
                     </Button>

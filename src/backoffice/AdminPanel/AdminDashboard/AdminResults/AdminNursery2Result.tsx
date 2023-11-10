@@ -159,6 +159,7 @@ export default function AdminNursery2Result() {
               <th>Form Teacher Remark</th>
               <th>Head Teacher</th>
               <th>View Result Details</th>
+              <th>Update Result</th>
             </tr>
           </thead>
           <tbody>
@@ -192,9 +193,17 @@ export default function AdminNursery2Result() {
 
                 <td>
                   {" "}
-                  <Link to={`/view-nursery1-student-result/${row?._id}`}>
+                  <Link to={`/view-nursery2-student-result/${row?._id}`}>
                     <Button className="btn-sm">
                       <BsFillBookmarkCheckFill />{" "}
+                    </Button>
+                  </Link>{" "}
+                </td>
+                <td>
+                  {" "}
+                  <Link to={`/view-nursery2-student-result-update/${row?._id}`}>
+                    <Button className="btn-sm">
+                      <FaEdit />
                     </Button>
                   </Link>{" "}
                 </td>
@@ -228,6 +237,7 @@ export default function AdminNursery2Result() {
                 <th>Form Teacher Remark</th>
                 <th>Head Teacher</th>
                 <th>View Result Details</th>
+                <th>Update Result</th>
               </tr>
             </thead>
             <tbody>
@@ -261,9 +271,19 @@ export default function AdminNursery2Result() {
 
                   <td>
                     {" "}
-                    <Link to={`/view-nursery1-student-result/${row?._id}`}>
+                    <Link to={`/view-nursery2-student-result/${row?._id}`}>
                       <Button className="btn-sm">
                         <BsFillBookmarkCheckFill />{" "}
+                      </Button>
+                    </Link>{" "}
+                  </td>
+                  <td>
+                    {" "}
+                    <Link
+                      to={`/view-nursery2-student-result-update/${row?._id}`}
+                    >
+                      <Button className="btn-sm">
+                        <FaEdit />
                       </Button>
                     </Link>{" "}
                   </td>
@@ -299,6 +319,7 @@ export default function AdminNursery2Result() {
                 <th>Form Teacher Remark</th>
                 <th>Head Teacher</th>
                 <th>View Result Details</th>
+                <th>Update Result</th>
               </tr>
             </thead>
             <tbody>
@@ -332,9 +353,19 @@ export default function AdminNursery2Result() {
 
                   <td>
                     {" "}
-                    <Link to={`/view-nursery1-student-result/${row?._id}`}>
+                    <Link to={`/view-nursery2-student-result/${row?._id}`}>
                       <Button className="btn-sm">
                         <BsFillBookmarkCheckFill />{" "}
+                      </Button>
+                    </Link>{" "}
+                  </td>
+                  <td>
+                    {" "}
+                    <Link
+                      to={`/view-nursery2-student-result-update/${row?._id}`}
+                    >
+                      <Button className="btn-sm">
+                        <FaEdit />
                       </Button>
                     </Link>{" "}
                   </td>

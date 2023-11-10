@@ -75,13 +75,13 @@ const ScratchCard: React.FC<Props> = () => {
 
     fetchPosts();
   }, [userId]);
-  useEffect(() => {
-    if (!userData?.password) {
-      navigate("/updateUserProfile");
-    } else {
-      navigate("/online-result");
-    }
-  }, [userId]);
+  // useEffect(() => {
+  //   if (!userData?.password) {
+  //     navigate("/update-user-profile");
+  //   } else if (userData?.password) {
+  //     navigate("/online-result");
+  //   }
+  // }, []);
   useEffect(() => {
     if (userId) {
       navigate("/online-result");

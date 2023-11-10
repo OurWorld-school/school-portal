@@ -158,6 +158,7 @@ export default function AdminNursery1Results() {
               <th>Form Teacher Remark</th>
               <th>Head Teacher</th>
               <th>View Result Details</th>
+              <th>Update Result</th>
             </tr>
           </thead>
           <tbody>
@@ -197,6 +198,14 @@ export default function AdminNursery1Results() {
                     </Button>
                   </Link>{" "}
                 </td>
+                <td>
+                  {" "}
+                  <Link to={`/view-nursery1-student-result-update/${row?._id}`}>
+                    <Button className="btn-sm">
+                      <FaEdit />
+                    </Button>
+                  </Link>{" "}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -227,6 +236,7 @@ export default function AdminNursery1Results() {
                 <th>Form Teacher Remark</th>
                 <th>Head Teacher</th>
                 <th>View Result Details</th>
+                <th>Update Result</th>
               </tr>
             </thead>
             <tbody>
@@ -260,11 +270,19 @@ export default function AdminNursery1Results() {
 
                   <td>
                     {" "}
-                    <Link
-                      to={`/view-nursery1-student-result-2ndterm/${row?._id}`}
-                    >
+                    <Link to={`/view-nursery1-student-result/${row?._id}`}>
                       <Button className="btn-sm">
                         <BsFillBookmarkCheckFill />{" "}
+                      </Button>
+                    </Link>{" "}
+                  </td>
+                  <td>
+                    {" "}
+                    <Link
+                      to={`/view-nursery1-student-result-update/${row?._id}`}
+                    >
+                      <Button className="btn-sm">
+                        <FaEdit />
                       </Button>
                     </Link>{" "}
                   </td>
@@ -300,6 +318,7 @@ export default function AdminNursery1Results() {
                 <th>Form Teacher Remark</th>
                 <th>Head Teacher</th>
                 <th>View Result Details</th>
+                <th>Update Result</th>
               </tr>
             </thead>
             <tbody>
@@ -333,11 +352,19 @@ export default function AdminNursery1Results() {
 
                   <td>
                     {" "}
-                    <Link
-                      to={`/view-nursery1-student-resul-3rdterm/${row?._id}`}
-                    >
+                    <Link to={`/view-nursery1-student-result/${row?._id}`}>
                       <Button className="btn-sm">
                         <BsFillBookmarkCheckFill />{" "}
+                      </Button>
+                    </Link>{" "}
+                  </td>
+                  <td>
+                    {" "}
+                    <Link
+                      to={`/view-nursery1-student-result-update/${row?._id}`}
+                    >
+                      <Button className="btn-sm">
+                        <FaEdit />
                       </Button>
                     </Link>{" "}
                   </td>

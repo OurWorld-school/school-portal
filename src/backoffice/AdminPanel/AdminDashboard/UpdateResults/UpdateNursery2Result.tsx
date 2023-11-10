@@ -1,27 +1,19 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import {
-  Basic1resultApi,
-  Basic2resultApi,
-  Nursery1resultApi,
-  Nursery2resultApi,
-  Nursery3resultApi,
-  PreNurseryresultApi,
-  UserApi,
-} from "../../../data/Api";
-import { Nursery1Data } from "../../../data/Data.Type";
-import CircularIndeterminate from "../../../components/Loading/Progress";
-import AdminLayout from "../AdminLayout";
+
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent, selectClasses } from "@mui/material/Select";
 import { Dropdown } from "react-bootstrap";
-import "./InputResult.css";
+
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { TextField, Button } from "@mui/material";
+import { Nursery2resultApi, UserApi } from "../../../../data/Api";
+import AdminLayout from "../../AdminLayout";
+import CircularIndeterminate from "../../../../components/Loading/Progress";
 const ITEM_HEIGHT = 100;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -32,11 +24,11 @@ const MenuProps = {
     },
   },
 };
-const InputNursery2Result = () => {
+const UpdateNursery2Result = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [user, setUser] = useState(id);
+  //   const [user, setUser] = useState(id);
   console.log(id);
   const [term, setTerm] = useState("");
   const [year, setYear] = useState("");
@@ -216,20 +208,20 @@ const InputNursery2Result = () => {
   };
   React.useEffect(() => {
     const fetchPosts = async () => {
-      const { data } = await axios.get(UserApi + id);
+      const { data } = await axios.get(UserApi);
       console.log(data);
       // const foundData = data.find((item) => item.artist === artist);
       setUserDatas(data);
     };
 
     fetchPosts();
-  }, [id]);
+  }, []);
 
   const submitHandler = (e: any) => {
     e.preventDefault();
     setLoading(true);
     const data: any = {
-      user: user,
+      //   user: user,
       classes: classes,
       year: year,
       TotalScore: TotalScore,
@@ -382,13 +374,13 @@ const InputNursery2Result = () => {
     };
 
     axios
-      .post(Nursery2resultApi, data, headers)
+      .post(Nursery2resultApi + id, data, headers)
 
       .then((res) => {
         console.log(res.data);
         setLoading(false);
         if (res.data) {
-          setUser("");
+          //   setUser("");
           setTerm(" ");
           setYear(" ");
           setHmRemark("");
@@ -1960,7 +1952,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
@@ -1977,7 +1968,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="TotalScore"
                       label="Total Score"
@@ -1991,7 +1981,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="TotalAverage"
                       label="Total Average"
@@ -2004,7 +1993,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="TotalGrade"
                       label="Total Grade"
@@ -2017,7 +2005,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="Position"
                       label="Position"
@@ -2030,7 +2017,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="numberInClass"
                       label="Number In Class"
@@ -2046,7 +2032,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       multiline
                       rows={6}
                       fullWidth
@@ -2062,7 +2047,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       multiline
                       rows={6}
                       fullWidth
@@ -2078,18 +2062,12 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="schoolRegNumber"
                       label="School Registeration/Admission Number"
                       name="schoolRegNumber"
                       autoComplete="schoolRegNumber"
                       autoFocus
-                      placeholder={
-                        userDatas
-                          ? ` ${userDatas?.schoolRegNumber}`
-                          : "loading..."
-                      }
                       style={{
                         color: "black",
                         fontSize: "x-large",
@@ -2186,4 +2164,4 @@ const InputNursery2Result = () => {
   );
 };
 
-export default InputNursery2Result;
+export default UpdateNursery2Result;

@@ -1,27 +1,19 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import {
-  Basic1resultApi,
-  Basic2resultApi,
-  Nursery1resultApi,
-  Nursery2resultApi,
-  Nursery3resultApi,
-  PreNurseryresultApi,
-  UserApi,
-} from "../../../data/Api";
-import { Nursery1Data } from "../../../data/Data.Type";
-import CircularIndeterminate from "../../../components/Loading/Progress";
-import AdminLayout from "../AdminLayout";
+
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent, selectClasses } from "@mui/material/Select";
 import { Dropdown } from "react-bootstrap";
-import "./InputResult.css";
+
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { TextField, Button } from "@mui/material";
+import { Basic1resultApi, UserApi } from "../../../../data/Api";
+import AdminLayout from "../../AdminLayout";
+import CircularIndeterminate from "../../../../components/Loading/Progress";
 const ITEM_HEIGHT = 100;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -32,11 +24,11 @@ const MenuProps = {
     },
   },
 };
-const InputNursery2Result = () => {
+const UpdateBasic1Result = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [user, setUser] = useState(id);
+  //   const [user, setUser] = useState(id);
   console.log(id);
   const [term, setTerm] = useState("");
   const [year, setYear] = useState("");
@@ -96,7 +88,7 @@ const InputNursery2Result = () => {
     grade: "",
     remark: "",
   });
-  const [SocialStudiesData, setSocialStudiesData] = useState({
+  const [NationalValuesData, setNationalValuesData] = useState({
     test: 0,
     exam: 0,
     totalScore: 0,
@@ -117,7 +109,13 @@ const InputNursery2Result = () => {
     grade: "",
     remark: "",
   });
-
+  const [HistoryData, setHistoryData] = useState({
+    test: 0,
+    exam: 0,
+    totalScore: 0,
+    grade: "",
+    remark: "",
+  });
   const [PhonicsData, setPhonicsData] = useState({
     test: 0,
     exam: 0,
@@ -139,7 +137,7 @@ const InputNursery2Result = () => {
     grade: "",
     remark: "",
   });
-  const [WritingData, setWritingData] = useState({
+  const [PVCData, setPVCData] = useState({
     test: 0,
     exam: 0,
     totalScore: 0,
@@ -177,15 +175,18 @@ const InputNursery2Result = () => {
       [name]: value,
     });
   };
-  const handleInputChangeSocialStudies = (e: any) => {
+  const handleInputChangeNationalValues = (e: any) => {
     const { name, value } = e.target;
-    setSocialStudiesData({ ...SocialStudiesData, [name]: value });
+    setNationalValuesData({ ...NationalValuesData, [name]: value });
   };
   const handleInputChangeCRK = (e: any) => {
     const { name, value } = e.target;
     setCRKData({ ...CRKData, [name]: value });
   };
-
+  const handleInputChangeHistory = (e: any) => {
+    const { name, value } = e.target;
+    setHistoryData({ ...HistoryData, [name]: value });
+  };
   const handleInputChangePhonics = (e: any) => {
     const { name, value } = e.target;
     setPhonicsData({ ...PhonicsData, [name]: value });
@@ -206,9 +207,9 @@ const InputNursery2Result = () => {
     const { name, value } = e.target;
     setBasicScienceData({ ...BasicScienceData, [name]: value });
   };
-  const handleInputChangeWriting = (e: any) => {
+  const handleInputChangePVC = (e: any) => {
     const { name, value } = e.target;
-    setWritingData({ ...WritingData, [name]: value });
+    setPVCData({ ...PVCData, [name]: value });
   };
   const handleInputChangeIgbo = (e: any) => {
     const { name, value } = e.target;
@@ -229,7 +230,7 @@ const InputNursery2Result = () => {
     e.preventDefault();
     setLoading(true);
     const data: any = {
-      user: user,
+      //   user: user,
       classes: classes,
       year: year,
       TotalScore: TotalScore,
@@ -322,14 +323,14 @@ const InputNursery2Result = () => {
           remark: IgboData.remark,
         },
       ],
-      SocialStudies: [
+      PVC: [
         // ...English,
         {
-          test: SocialStudiesData.test,
-          exam: SocialStudiesData.exam,
-          totalScore: SocialStudiesData.totalScore,
-          grade: SocialStudiesData.grade,
-          remark: SocialStudiesData.remark,
+          test: PVCData.test,
+          exam: PVCData.exam,
+          totalScore: PVCData.totalScore,
+          grade: PVCData.grade,
+          remark: PVCData.remark,
         },
       ],
       French: [
@@ -342,14 +343,14 @@ const InputNursery2Result = () => {
           remark: FrenchData.remark,
         },
       ],
-      Writing: [
+      History: [
         // ...English,
         {
-          test: WritingData.test,
-          exam: WritingData.exam,
-          totalScore: WritingData.totalScore,
-          grade: WritingData.grade,
-          remark: WritingData.remark,
+          test: HistoryData.test,
+          exam: HistoryData.exam,
+          totalScore: HistoryData.totalScore,
+          grade: HistoryData.grade,
+          remark: HistoryData.remark,
         },
       ],
       BasicScience: [
@@ -372,6 +373,16 @@ const InputNursery2Result = () => {
           remark: ComputerData.remark,
         },
       ],
+      NationalValues: [
+        // ...English,
+        {
+          test: NationalValuesData.test,
+          exam: NationalValuesData.exam,
+          totalScore: NationalValuesData.totalScore,
+          grade: NationalValuesData.grade,
+          remark: NationalValuesData.remark,
+        },
+      ],
     };
 
     const headers: any = {
@@ -382,13 +393,13 @@ const InputNursery2Result = () => {
     };
 
     axios
-      .post(Nursery2resultApi, data, headers)
+      .post(Basic1resultApi + id, data, headers)
 
       .then((res) => {
         console.log(res.data);
         setLoading(false);
         if (res.data) {
-          setUser("");
+          //   setUser("");
           setTerm(" ");
           setYear(" ");
           setHmRemark("");
@@ -402,7 +413,7 @@ const InputNursery2Result = () => {
           setNumberInClass(Number);
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/nusery2Result");
+          navigate("/nusery3Result");
         } else {
           toast.error(res.data.error);
         }
@@ -500,7 +511,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Test/C.A"
@@ -522,7 +532,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
@@ -545,7 +554,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
@@ -572,7 +580,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
@@ -594,7 +601,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
@@ -629,7 +635,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             type="number"
@@ -651,7 +656,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
@@ -673,7 +677,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
@@ -695,7 +698,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
@@ -717,7 +719,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
@@ -753,7 +754,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Test/C.A"
@@ -775,7 +775,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
@@ -797,7 +796,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
@@ -819,7 +817,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
@@ -841,7 +838,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
@@ -877,7 +873,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Test/C.A"
@@ -899,7 +894,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
@@ -921,7 +915,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
@@ -943,7 +936,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
@@ -965,7 +957,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
@@ -1001,7 +992,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Test/C.A"
@@ -1023,7 +1013,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
@@ -1045,7 +1034,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
@@ -1067,7 +1055,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
@@ -1089,7 +1076,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
@@ -1115,7 +1101,7 @@ const InputNursery2Result = () => {
                         }}
                         className="result-input-elect-nursery1"
                       >
-                        Social Studies
+                        National Values
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -1125,14 +1111,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={SocialStudiesData.test}
-                            onChange={handleInputChangeSocialStudies}
+                            value={NationalValuesData.test}
+                            onChange={handleInputChangeNationalValues}
                           />
                         </div>
                         <div
@@ -1147,14 +1132,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={SocialStudiesData.exam}
-                            onChange={handleInputChangeSocialStudies}
+                            value={NationalValuesData.exam}
+                            onChange={handleInputChangeNationalValues}
                           />
                         </div>
                         <div
@@ -1169,14 +1153,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
                             type="number"
                             name="totalScore"
-                            value={SocialStudiesData.totalScore}
-                            onChange={handleInputChangeSocialStudies}
+                            value={NationalValuesData.totalScore}
+                            onChange={handleInputChangeNationalValues}
                           />
                         </div>
                         <div
@@ -1191,14 +1174,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
                             name="grade"
                             type="text"
-                            value={SocialStudiesData.grade}
-                            onChange={handleInputChangeSocialStudies}
+                            value={NationalValuesData.grade}
+                            onChange={handleInputChangeNationalValues}
                           />
                         </div>
                         <div
@@ -1213,21 +1195,136 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
                             label="Remark"
                             type="text"
-                            value={SocialStudiesData.remark}
-                            onChange={handleInputChangeSocialStudies}
+                            value={NationalValuesData.remark}
+                            onChange={handleInputChangeNationalValues}
                           />
                         </div>
                       </Dropdown.Menu>
                     </Dropdown>
                     {/* ///Social Habit end input */}
                     {/* ///Rhymes */}
+                    <Dropdown>
+                      <Dropdown.Toggle
+                        variant="success"
+                        id="dropdown-basic"
+                        style={{
+                          border: "1px solid green",
+                          backgroundColor: "white",
+                          marginTop: "15px",
+                          color: "black",
+                        }}
+                        className="result-input-elect-nursery1"
+                      >
+                        History
+                      </Dropdown.Toggle>
 
+                      <Dropdown.Menu>
+                        <div className="col-md-6 mb-2 mt-2 ">
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            rows={4}
+                            id="outlined-required"
+                            label="Test/C.A"
+                            type="number"
+                            name="test"
+                            value={HistoryData.test}
+                            onChange={handleInputChangeHistory}
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            rows={4}
+                            id="outlined-required"
+                            label="Exam"
+                            name="exam"
+                            type="number"
+                            value={HistoryData.exam}
+                            onChange={handleInputChangeHistory}
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-2"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            rows={4}
+                            id="outlined-required"
+                            label="Total Score"
+                            type="number"
+                            name="totalScore"
+                            value={HistoryData.totalScore}
+                            onChange={handleInputChangeHistory}
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            rows={4}
+                            id="outlined-required"
+                            label="Grade"
+                            name="grade"
+                            type="text"
+                            value={HistoryData.grade}
+                            onChange={handleInputChangeHistory}
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            rows={4}
+                            id="outlined-required"
+                            name="remark"
+                            label="Remark"
+                            type="text"
+                            value={HistoryData.remark}
+                            onChange={handleInputChangeHistory}
+                          />
+                        </div>
+                      </Dropdown.Menu>
+                    </Dropdown>
                     {/* ///Rhymes end input */}
                     {/* ///Writing */}
                     <Dropdown>
@@ -1252,7 +1349,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Test/C.A"
@@ -1274,7 +1370,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
@@ -1296,7 +1391,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
@@ -1318,7 +1412,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
@@ -1340,7 +1433,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
@@ -1376,7 +1468,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Test/C.A"
@@ -1398,7 +1489,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
@@ -1420,7 +1510,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
@@ -1442,7 +1531,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
@@ -1464,7 +1552,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
@@ -1490,7 +1577,7 @@ const InputNursery2Result = () => {
                         }}
                         className="result-input-elect-nursery1"
                       >
-                        Writing
+                        P V C (Pro Vocational Studies)
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -1500,14 +1587,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={WritingData.test}
-                            onChange={handleInputChangeWriting}
+                            value={PVCData.test}
+                            onChange={handleInputChangePVC}
                           />
                         </div>
                         <div
@@ -1522,14 +1608,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={WritingData.exam}
-                            onChange={handleInputChangeWriting}
+                            value={PVCData.exam}
+                            onChange={handleInputChangePVC}
                           />
                         </div>
                         <div
@@ -1544,14 +1629,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
                             type="number"
                             name="totalScore"
-                            value={WritingData.totalScore}
-                            onChange={handleInputChangeWriting}
+                            value={PVCData.totalScore}
+                            onChange={handleInputChangePVC}
                           />
                         </div>
                         <div
@@ -1566,14 +1650,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
                             name="grade"
                             type="text"
-                            value={WritingData.grade}
-                            onChange={handleInputChangeWriting}
+                            value={PVCData.grade}
+                            onChange={handleInputChangePVC}
                           />
                         </div>
                         <div
@@ -1588,14 +1671,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
                             label="Remark"
                             type="text"
-                            value={WritingData.remark}
-                            onChange={handleInputChangeWriting}
+                            value={PVCData.remark}
+                            onChange={handleInputChangePVC}
                           />
                         </div>
                       </Dropdown.Menu>
@@ -1624,7 +1706,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Test/C.A"
@@ -1646,7 +1727,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
@@ -1668,7 +1748,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
@@ -1690,7 +1769,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
@@ -1712,7 +1790,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
@@ -1748,7 +1825,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Test/C.A"
@@ -1770,7 +1846,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
@@ -1792,7 +1867,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
@@ -1814,7 +1888,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
@@ -1836,7 +1909,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
@@ -1872,7 +1944,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Test/C.A"
@@ -1894,7 +1965,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
@@ -1916,7 +1986,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
@@ -1960,7 +2029,6 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
@@ -1977,7 +2045,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="TotalScore"
                       label="Total Score"
@@ -1991,7 +2058,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="TotalAverage"
                       label="Total Average"
@@ -2004,7 +2070,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="TotalGrade"
                       label="Total Grade"
@@ -2017,7 +2082,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="Position"
                       label="Position"
@@ -2030,7 +2094,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="numberInClass"
                       label="Number In Class"
@@ -2046,7 +2109,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       multiline
                       rows={6}
                       fullWidth
@@ -2062,7 +2124,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       multiline
                       rows={6}
                       fullWidth
@@ -2078,18 +2139,12 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="schoolRegNumber"
                       label="School Registeration/Admission Number"
                       name="schoolRegNumber"
                       autoComplete="schoolRegNumber"
                       autoFocus
-                      placeholder={
-                        userDatas
-                          ? ` ${userDatas?.schoolRegNumber}`
-                          : "loading..."
-                      }
                       style={{
                         color: "black",
                         fontSize: "x-large",
@@ -2111,7 +2166,7 @@ const InputNursery2Result = () => {
                         // input={<OutlinedInput label="Name" />}
                         MenuProps={MenuProps}
                       >
-                        <MenuItem value="Nursery-2">Nursery-2</MenuItem>
+                        <MenuItem value="Basic-1">Basic-1</MenuItem>
                       </Select>
                     </FormControl>
                     <FormControl sx={{ m: 1, width: 370 }}>
@@ -2186,4 +2241,4 @@ const InputNursery2Result = () => {
   );
 };
 
-export default InputNursery2Result;
+export default UpdateBasic1Result;

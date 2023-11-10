@@ -19,7 +19,7 @@ import AdminMenu from "./AdminDashboard/AdminMenu";
 import { UserApi } from "../../data/Api";
 import axios from "axios";
 import HomePage from "../../pages/HomePage/HomePage";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -34,8 +34,18 @@ interface Props {
 
 export default function AdminLayout(props: Props) {
   const { window } = props;
+  const navigate = useNavigate();
   const [viewUser, setViewUser] = React.useState<any>({});
   const userId = localStorage.getItem("userId");
+  const isAdmin: any = localStorage.getItem("isAdmin");
+  const roles = localStorage.getItem("roles");
+  // React.useEffect(() => {
+  //   if (isAdmin == true) {
+  //     navigate("/admin-layout");
+  //   } else {
+  //     navigate("/");
+  //   }
+  // }, [isAdmin]);
   React.useEffect(() => {
     const fetchPosts = async () => {
       const { data } = await axios.get(UserApi + userId);
@@ -73,7 +83,7 @@ export default function AdminLayout(props: Props) {
 
   return (
     <>
-      {viewUser?.isAdmin == true ? (
+      {viewUser?.isAdmin === true ? (
         <>
           <Box sx={{ display: "flex" }}>
             <CssBaseline />

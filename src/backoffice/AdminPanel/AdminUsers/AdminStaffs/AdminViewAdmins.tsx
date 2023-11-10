@@ -70,7 +70,7 @@ export default function AdminViewAdmin() {
   }, []);
   React.useEffect(() => {
     // Filter the data based on genre "afrobeat"
-    const filtered = viewUser.filter((item: any) => item.isAdmin === "true");
+    const filtered = viewUser.filter((item: any) => item.isAdmin === true);
     setFilteredData(filtered);
     console.log(filtered);
   }, [viewUser]);
@@ -123,7 +123,7 @@ export default function AdminViewAdmin() {
                 <td>{row?.email}</td>
                 <td>
                   {" "}
-                  <Link to={`/post-nursery2result/${row?._id}`}>
+                  <Link to={`/update-user-roles-by-admin/${row?._id}`}>
                     <Button className="btn-sm">
                       <FaEdit />{" "}
                     </Button>
@@ -131,7 +131,7 @@ export default function AdminViewAdmin() {
                 </td>
                 <td>
                   {" "}
-                  <Link to={`/updateusserclassby-admin/${row?._id}`}>
+                  <Link to={`/update-user-admin-by-admin/${row?._id}`}>
                     <Button className="btn-sm">
                       <FaCheckSquare />{" "}
                     </Button>

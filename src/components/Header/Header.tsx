@@ -159,7 +159,12 @@ export default function Header(props: Props) {
                 </div>
               </ListItem>
               <ListItem>
-                <div>Account Profile </div>
+                <Link
+                  to="/update-user-profile"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  Update User Profile
+                </Link>{" "}
               </ListItem>
               <ListItem>
                 {" "}
@@ -319,7 +324,14 @@ export default function Header(props: Props) {
                       </MenuButton>
                       <Menu>
                         <MenuItem>{userData?.firstName}</MenuItem>
-                        <MenuItem>My account</MenuItem>
+                        <MenuItem>
+                          <Link
+                            to="/update-user-profile"
+                            style={{ textDecoration: "none", color: "initial" }}
+                          >
+                            Update User Profile
+                          </Link>{" "}
+                        </MenuItem>
                         <MenuItem onClick={logout}>Logout</MenuItem>
                       </Menu>
                     </Dropdown>

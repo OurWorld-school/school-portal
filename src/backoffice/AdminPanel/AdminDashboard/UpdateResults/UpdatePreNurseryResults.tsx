@@ -1,27 +1,23 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import {
-  Basic1resultApi,
-  Basic2resultApi,
-  Nursery1resultApi,
-  Nursery2resultApi,
-  Nursery3resultApi,
-  PreNurseryresultApi,
-  UserApi,
-} from "../../../data/Api";
-import { Nursery1Data } from "../../../data/Data.Type";
-import CircularIndeterminate from "../../../components/Loading/Progress";
-import AdminLayout from "../AdminLayout";
+
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent, selectClasses } from "@mui/material/Select";
 import { Dropdown } from "react-bootstrap";
-import "./InputResult.css";
+
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { TextField, Button } from "@mui/material";
+import {
+  PreNurseryresultApi,
+  UpdatePreNurseryresultApi,
+  UserApi,
+} from "../../../../data/Api";
+import AdminLayout from "../../AdminLayout";
+import CircularIndeterminate from "../../../../components/Loading/Progress";
 const ITEM_HEIGHT = 100;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -32,12 +28,12 @@ const MenuProps = {
     },
   },
 };
-const InputNursery2Result = () => {
+const UpdatePreNurseryResults = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [user, setUser] = useState(id);
-  console.log(id);
+  //   const [user, setUser] = useState(userId);
+  //   console.log(userId);
   const [term, setTerm] = useState("");
   const [year, setYear] = useState("");
   const [TotalScore, setTotalScore] = useState(Number);
@@ -61,175 +57,116 @@ const InputNursery2Result = () => {
   // const [englishData, setEnglishData] = useState({
   //   English: [],
   // });
-  const [EnglishData, setEnglishData] = useState({
-    test: 0,
-    exam: 0,
-    totalScore: 0,
+
+  const [NumeracyData, setNumeracyData] = useState<any>({
+    test: Number,
+    exam: Number,
+    totalScore: Number,
     grade: "",
     remark: "",
   });
-  const [MathsData, setMathsData] = useState({
-    test: 0,
-    exam: 0,
-    totalScore: 0,
+  const [LiteracyData, setLiteracyData] = useState({
+    test: Number,
+    exam: Number,
+    totalScore: Number,
     grade: "",
     remark: "",
   });
-  const [VerbalReasoningData, setVerbalReasoningData] = useState<any>({
-    test: 0,
-    exam: 0,
-    totalScore: 0,
+  const [ColouringData, setColouringData] = useState({
+    test: Number,
+    exam: Number,
+    totalScore: Number,
     grade: "",
     remark: "",
   });
-  const [QuantitativeReasoningData, setQuantitativeReasoningData] = useState({
-    test: 0,
-    exam: 0,
-    totalScore: 0,
+  const [HealthHabitData, setHealthHabitData] = useState({
+    test: Number,
+    exam: Number,
+    totalScore: Number,
     grade: "",
     remark: "",
   });
-  const [BasicScienceData, setBasicScienceData] = useState({
-    test: 0,
-    exam: 0,
-    totalScore: 0,
+  const [PreScienceData, setPreScienceData] = useState({
+    test: Number,
+    exam: Number,
+    totalScore: Number,
     grade: "",
     remark: "",
   });
-  const [SocialStudiesData, setSocialStudiesData] = useState({
-    test: 0,
-    exam: 0,
-    totalScore: 0,
+  const [PracticalLifeData, setPracticalLifeData] = useState({
+    test: Number,
+    exam: Number,
+    totalScore: Number,
     grade: "",
     remark: "",
   });
-  const [CRKData, setCRKData] = useState({
-    test: 0,
-    exam: 0,
-    totalScore: 0,
+  const [RhymesData, setRhymesData] = useState({
+    test: Number,
+    exam: Number,
+    totalScore: Number,
     grade: "",
     remark: "",
   });
-  const [CreativeArtData, setCreativeArtData] = useState({
-    test: 0,
-    exam: 0,
-    totalScore: 0,
+  const [SensorialActivityData, setSensorialActivityData] = useState({
+    test: Number,
+    exam: Number,
+    totalScore: Number,
     grade: "",
     remark: "",
   });
 
-  const [PhonicsData, setPhonicsData] = useState({
-    test: 0,
-    exam: 0,
-    totalScore: 0,
-    grade: "",
-    remark: "",
-  });
-  const [FrenchData, setFrenchData] = useState({
-    test: 0,
-    exam: 0,
-    totalScore: 0,
-    grade: "",
-    remark: "",
-  });
-  const [IgboData, setIgboData] = useState({
-    test: 0,
-    exam: 0,
-    totalScore: 0,
-    grade: "",
-    remark: "",
-  });
-  const [WritingData, setWritingData] = useState({
-    test: 0,
-    exam: 0,
-    totalScore: 0,
-    grade: "",
-    remark: "",
-  });
-  const [ComputerData, setComputerData] = useState({
-    test: 0,
-    exam: 0,
-    totalScore: 0,
-    grade: "",
-    remark: "",
-  });
-
-  const handleInputChangeEnglish = (e: any) => {
+  const handleInputChangeNumeracy = (e: any) => {
     const { name, value } = e.target;
-    setEnglishData({
-      ...EnglishData,
+    setNumeracyData({
+      ...NumeracyData,
       [name]: value,
       // totalScore: parseFloat(NumeracyData.test) + parseFloat(NumeracyData.exam),
     });
   };
-  const handleInputChangeMaths = (e: any) => {
+  const handleInputChangeLiteracy = (e: any) => {
     const { name, value } = e.target;
-    setMathsData({ ...MathsData, [name]: value });
+    setLiteracyData({ ...LiteracyData, [name]: value });
   };
-  const handleInputChangeVerbalReasoning = (e: any) => {
+  const handleInputChangeColouring = (e: any) => {
     const { name, value } = e.target;
-    setVerbalReasoningData({ ...VerbalReasoningData, [name]: value });
+    setColouringData({ ...ColouringData, [name]: value });
   };
-  const handleInputChangeQuantitativeReasoning = (e: any) => {
+  const handleInputChangeHealthHabit = (e: any) => {
     const { name, value } = e.target;
-    setQuantitativeReasoningData({
-      ...QuantitativeReasoningData,
-      [name]: value,
-    });
+    setHealthHabitData({ ...HealthHabitData, [name]: value });
   };
-  const handleInputChangeSocialStudies = (e: any) => {
+  const handleInputChangePreScience = (e: any) => {
     const { name, value } = e.target;
-    setSocialStudiesData({ ...SocialStudiesData, [name]: value });
+    setPreScienceData({ ...PreScienceData, [name]: value });
   };
-  const handleInputChangeCRK = (e: any) => {
+  const handleInputChangePracticalLife = (e: any) => {
     const { name, value } = e.target;
-    setCRKData({ ...CRKData, [name]: value });
+    setPracticalLifeData({ ...PracticalLifeData, [name]: value });
   };
+  const handleInputChangeRhymes = (e: any) => {
+    const { name, value } = e.target;
+    setRhymesData({ ...RhymesData, [name]: value });
+  };
+  const handleInputChangeSensorialActivity = (e: any) => {
+    const { name, value } = e.target;
+    setSensorialActivityData({ ...SensorialActivityData, [name]: value });
+  };
+  //   React.useEffect(() => {
+  //     const fetchPosts = async () => {
+  //       const { data } = await axios.get(UserApi + userId);
+  //       console.log(data);
+  //       // const foundData = data.find((item) => item.artist === artist);
+  //       setUserDatas(data);
+  //     };
 
-  const handleInputChangePhonics = (e: any) => {
-    const { name, value } = e.target;
-    setPhonicsData({ ...PhonicsData, [name]: value });
-  };
-  const handleInputChangeFrench = (e: any) => {
-    const { name, value } = e.target;
-    setFrenchData({ ...FrenchData, [name]: value });
-  };
-  const handleInputChangeComputer = (e: any) => {
-    const { name, value } = e.target;
-    setComputerData({ ...ComputerData, [name]: value });
-  };
-  const handleInputChangeCreativeArt = (e: any) => {
-    const { name, value } = e.target;
-    setCreativeArtData({ ...CreativeArtData, [name]: value });
-  };
-  const handleInputChangeBasicScience = (e: any) => {
-    const { name, value } = e.target;
-    setBasicScienceData({ ...BasicScienceData, [name]: value });
-  };
-  const handleInputChangeWriting = (e: any) => {
-    const { name, value } = e.target;
-    setWritingData({ ...WritingData, [name]: value });
-  };
-  const handleInputChangeIgbo = (e: any) => {
-    const { name, value } = e.target;
-    setIgboData({ ...IgboData, [name]: value });
-  };
-  React.useEffect(() => {
-    const fetchPosts = async () => {
-      const { data } = await axios.get(UserApi + id);
-      console.log(data);
-      // const foundData = data.find((item) => item.artist === artist);
-      setUserDatas(data);
-    };
-
-    fetchPosts();
-  }, [id]);
+  //     fetchPosts();
+  //   }, [userId]);
 
   const submitHandler = (e: any) => {
     e.preventDefault();
     setLoading(true);
     const data: any = {
-      user: user,
+      //   user: user,
       classes: classes,
       year: year,
       TotalScore: TotalScore,
@@ -241,135 +178,85 @@ const InputNursery2Result = () => {
       HmRemark: HmRemark,
       numberInClass: numberInClass,
       schoolRegNumber: schoolRegNumber,
-      English: [
+      Numeracy: [
         // ...English,
         {
-          test: EnglishData.test,
-          exam: EnglishData.exam,
-          totalScore: EnglishData.totalScore,
-          grade: EnglishData.grade,
-          remark: EnglishData.remark,
+          test: NumeracyData.test,
+          exam: NumeracyData.exam,
+          totalScore: NumeracyData.totalScore,
+          grade: NumeracyData.grade,
+          remark: NumeracyData.remark,
         },
       ],
 
-      Mathematics: [
+      Literacy: [
         // ...English,
         {
-          test: MathsData.test,
-          exam: MathsData.exam,
-          totalScore: MathsData.totalScore,
-          grade: MathsData.grade,
-          remark: MathsData.remark,
+          test: LiteracyData.test,
+          exam: LiteracyData.exam,
+          totalScore: LiteracyData.totalScore,
+          grade: LiteracyData.grade,
+          remark: LiteracyData.remark,
         },
       ],
-      VerbalReasoning: [
+      Colouring: [
         // ...English,
         {
-          test: VerbalReasoningData.test,
-          exam: VerbalReasoningData.exam,
-          totalScore: VerbalReasoningData.totalScore,
-          grade: VerbalReasoningData.grade,
-          remark: VerbalReasoningData.remark,
+          test: ColouringData.test,
+          exam: ColouringData.exam,
+          totalScore: ColouringData.totalScore,
+          grade: ColouringData.grade,
+          remark: ColouringData.remark,
         },
       ],
-      QuantitativeReasoning: [
+      HealthHabit: [
         // ...English,
         {
-          test: QuantitativeReasoningData.test,
-          exam: QuantitativeReasoningData.exam,
-          totalScore: QuantitativeReasoningData.totalScore,
-          grade: QuantitativeReasoningData.grade,
-          remark: QuantitativeReasoningData.remark,
+          test: HealthHabitData.test,
+          exam: HealthHabitData.exam,
+          totalScore: HealthHabitData.totalScore,
+          grade: HealthHabitData.grade,
+          remark: HealthHabitData.remark,
         },
       ],
-      CreativeArt: [
+      PreScience: [
         // ...English,
         {
-          test: CreativeArtData.test,
-          exam: CreativeArtData.exam,
-          totalScore: CreativeArtData.totalScore,
-          grade: CreativeArtData.grade,
-          remark: CreativeArtData.remark,
+          test: PreScienceData.test,
+          exam: PreScienceData.exam,
+          totalScore: PreScienceData.totalScore,
+          grade: PreScienceData.grade,
+          remark: PreScienceData.remark,
         },
       ],
-      Phonics: [
+      PracticalLife: [
         // ...English,
         {
-          test: PhonicsData.test,
-          exam: PhonicsData.exam,
-          totalScore: PhonicsData.totalScore,
-          grade: PhonicsData.grade,
-          remark: PhonicsData.remark,
+          test: PracticalLifeData.test,
+          exam: PracticalLifeData.exam,
+          totalScore: PracticalLifeData.totalScore,
+          grade: PracticalLifeData.grade,
+          remark: PracticalLifeData.remark,
         },
       ],
-      CRK: [
+      Rhymes: [
         // ...English,
         {
-          test: CRKData.test,
-          exam: CRKData.exam,
-          totalScore: CRKData.totalScore,
-          grade: CRKData.grade,
-          remark: CRKData.remark,
+          test: RhymesData.test,
+          exam: RhymesData.exam,
+          totalScore: RhymesData.totalScore,
+          grade: RhymesData.grade,
+          remark: RhymesData.remark,
         },
       ],
-      Igbo: [
+      SensorialActivity: [
         // ...English,
         {
-          test: IgboData.test,
-          exam: IgboData.exam,
-          totalScore: IgboData.totalScore,
-          grade: IgboData.grade,
-          remark: IgboData.remark,
-        },
-      ],
-      SocialStudies: [
-        // ...English,
-        {
-          test: SocialStudiesData.test,
-          exam: SocialStudiesData.exam,
-          totalScore: SocialStudiesData.totalScore,
-          grade: SocialStudiesData.grade,
-          remark: SocialStudiesData.remark,
-        },
-      ],
-      French: [
-        // ...English,
-        {
-          test: FrenchData.test,
-          exam: FrenchData.exam,
-          totalScore: FrenchData.totalScore,
-          grade: FrenchData.grade,
-          remark: FrenchData.remark,
-        },
-      ],
-      Writing: [
-        // ...English,
-        {
-          test: WritingData.test,
-          exam: WritingData.exam,
-          totalScore: WritingData.totalScore,
-          grade: WritingData.grade,
-          remark: WritingData.remark,
-        },
-      ],
-      BasicScience: [
-        // ...English,
-        {
-          test: BasicScienceData.test,
-          exam: BasicScienceData.exam,
-          totalScore: BasicScienceData.totalScore,
-          grade: BasicScienceData.grade,
-          remark: BasicScienceData.remark,
-        },
-      ],
-      Computer: [
-        // ...English,
-        {
-          test: ComputerData.test,
-          exam: ComputerData.exam,
-          totalScore: ComputerData.totalScore,
-          grade: ComputerData.grade,
-          remark: ComputerData.remark,
+          test: SensorialActivityData.test,
+          exam: SensorialActivityData.exam,
+          totalScore: SensorialActivityData.totalScore,
+          grade: SensorialActivityData.grade,
+          remark: SensorialActivityData.remark,
         },
       ],
     };
@@ -382,13 +269,13 @@ const InputNursery2Result = () => {
     };
 
     axios
-      .post(Nursery2resultApi, data, headers)
+      .put(UpdatePreNurseryresultApi + id, data, headers)
 
       .then((res) => {
         console.log(res.data);
         setLoading(false);
         if (res.data) {
-          setUser("");
+          //   setUser("");
           setTerm(" ");
           setYear(" ");
           setHmRemark("");
@@ -402,7 +289,7 @@ const InputNursery2Result = () => {
           setNumberInClass(Number);
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/nusery2Result");
+          navigate("/pre-nurseryResult");
         } else {
           toast.error(res.data.error);
         }
@@ -449,7 +336,7 @@ const InputNursery2Result = () => {
                     className="  d-flex justify-content-center"
                     style={{ fontSize: "x-large", fontWeight: "600" }}
                   >
-                    Input Nursery 1 Result of
+                    Update Pre-Nursery Result of
                   </h3>
                   <div
                     className="text-center mb-4"
@@ -490,7 +377,7 @@ const InputNursery2Result = () => {
                         }}
                         className="result-input-elect-nursery1"
                       >
-                        English Studies
+                        Numeracy
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -500,14 +387,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={EnglishData.test}
-                            onChange={handleInputChangeEnglish}
+                            value={NumeracyData.test}
+                            onChange={handleInputChangeNumeracy}
                           />
                         </div>
                         <div
@@ -522,14 +408,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={EnglishData.exam}
-                            onChange={handleInputChangeEnglish}
+                            value={NumeracyData.exam}
+                            onChange={handleInputChangeNumeracy}
                           />
                         </div>
                         <div
@@ -545,14 +430,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
                             type="number"
                             name="totalScore"
-                            value={EnglishData.totalScore}
-                            onChange={handleInputChangeEnglish}
+                            value={NumeracyData.totalScore}
+                            onChange={handleInputChangeNumeracy}
                             // onChange={() =>
                             //   setNumeracyData(
                             //     NumeracyData.test + NumeracyData.exam
@@ -572,14 +456,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
                             name="grade"
                             type="text"
-                            value={EnglishData.grade}
-                            onChange={handleInputChangeEnglish}
+                            value={NumeracyData.grade}
+                            onChange={handleInputChangeNumeracy}
                           />
                         </div>
                         <div
@@ -594,14 +477,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
                             label="Remark"
                             type="text"
-                            value={EnglishData.remark}
-                            onChange={handleInputChangeEnglish}
+                            value={NumeracyData.remark}
+                            onChange={handleInputChangeNumeracy}
                           />
                         </div>
                       </Dropdown.Menu>
@@ -619,7 +501,7 @@ const InputNursery2Result = () => {
                         }}
                         className="result-input-elect-nursery1"
                       >
-                        Mathematics
+                        Literacy
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -629,14 +511,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             type="number"
                             label="Test/C.A"
                             name="test"
-                            value={MathsData.test}
-                            onChange={handleInputChangeMaths}
+                            value={LiteracyData.test}
+                            onChange={handleInputChangeLiteracy}
                           />
                         </div>
                         <div
@@ -651,14 +532,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={MathsData.exam}
-                            onChange={handleInputChangeMaths}
+                            value={LiteracyData.exam}
+                            onChange={handleInputChangeLiteracy}
                           />
                         </div>
                         <div
@@ -673,14 +553,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
                             type="number"
                             name="totalScore"
-                            value={MathsData.totalScore}
-                            onChange={handleInputChangeMaths}
+                            value={LiteracyData.totalScore}
+                            onChange={handleInputChangeLiteracy}
                           />
                         </div>
                         <div
@@ -695,14 +574,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
                             name="grade"
                             type="text"
-                            value={MathsData.grade}
-                            onChange={handleInputChangeMaths}
+                            value={LiteracyData.grade}
+                            onChange={handleInputChangeLiteracy}
                           />
                         </div>
                         <div
@@ -717,14 +595,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
                             label="Remark"
                             type="text"
-                            value={MathsData.remark}
-                            onChange={handleInputChangeMaths}
+                            value={LiteracyData.remark}
+                            onChange={handleInputChangeLiteracy}
                           />
                         </div>
                       </Dropdown.Menu>
@@ -743,7 +620,7 @@ const InputNursery2Result = () => {
                         }}
                         className="result-input-elect-nursery1"
                       >
-                        Basic Science & Technology
+                        Colouring
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -753,14 +630,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={BasicScienceData.test}
-                            onChange={handleInputChangeBasicScience}
+                            value={ColouringData.test}
+                            onChange={handleInputChangeColouring}
                           />
                         </div>
                         <div
@@ -775,14 +651,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={BasicScienceData.exam}
-                            onChange={handleInputChangeBasicScience}
+                            value={ColouringData.exam}
+                            onChange={handleInputChangeColouring}
                           />
                         </div>
                         <div
@@ -797,14 +672,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
                             type="number"
                             name="totalScore"
-                            value={BasicScienceData.totalScore}
-                            onChange={handleInputChangeBasicScience}
+                            value={ColouringData.totalScore}
+                            onChange={handleInputChangeColouring}
                           />
                         </div>
                         <div
@@ -819,14 +693,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
                             name="grade"
                             type="text"
-                            value={BasicScienceData.grade}
-                            onChange={handleInputChangeBasicScience}
+                            value={ColouringData.grade}
+                            onChange={handleInputChangeColouring}
                           />
                         </div>
                         <div
@@ -841,14 +714,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
                             label="Remark"
                             type="text"
-                            value={BasicScienceData.remark}
-                            onChange={handleInputChangeBasicScience}
+                            value={ColouringData.remark}
+                            onChange={handleInputChangeColouring}
                           />
                         </div>
                       </Dropdown.Menu>
@@ -867,7 +739,7 @@ const InputNursery2Result = () => {
                         }}
                         className="result-input-elect-nursery1"
                       >
-                        Verbal Reasoning
+                        Health Habit
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -877,14 +749,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={VerbalReasoningData.test}
-                            onChange={handleInputChangeVerbalReasoning}
+                            value={HealthHabitData.test}
+                            onChange={handleInputChangeHealthHabit}
                           />
                         </div>
                         <div
@@ -899,14 +770,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={VerbalReasoningData.exam}
-                            onChange={handleInputChangeVerbalReasoning}
+                            value={HealthHabitData.exam}
+                            onChange={handleInputChangeHealthHabit}
                           />
                         </div>
                         <div
@@ -921,14 +791,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
                             type="number"
                             name="totalScore"
-                            value={VerbalReasoningData.totalScore}
-                            onChange={handleInputChangeVerbalReasoning}
+                            value={HealthHabitData.totalScore}
+                            onChange={handleInputChangeHealthHabit}
                           />
                         </div>
                         <div
@@ -943,14 +812,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
                             name="grade"
                             type="text"
-                            value={VerbalReasoningData.grade}
-                            onChange={handleInputChangeVerbalReasoning}
+                            value={HealthHabitData.grade}
+                            onChange={handleInputChangeHealthHabit}
                           />
                         </div>
                         <div
@@ -965,14 +833,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
                             label="Remark"
                             type="text"
-                            value={VerbalReasoningData.remark}
-                            onChange={handleInputChangeVerbalReasoning}
+                            value={HealthHabitData.remark}
+                            onChange={handleInputChangeHealthHabit}
                           />
                         </div>
                       </Dropdown.Menu>
@@ -991,7 +858,7 @@ const InputNursery2Result = () => {
                         }}
                         className="result-input-elect-nursery1"
                       >
-                        Quantitative Reasoning
+                        Pre Science
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -1001,14 +868,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={QuantitativeReasoningData.test}
-                            onChange={handleInputChangeQuantitativeReasoning}
+                            value={PreScienceData.test}
+                            onChange={handleInputChangePreScience}
                           />
                         </div>
                         <div
@@ -1023,14 +889,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={QuantitativeReasoningData.exam}
-                            onChange={handleInputChangeQuantitativeReasoning}
+                            value={PreScienceData.exam}
+                            onChange={handleInputChangePreScience}
                           />
                         </div>
                         <div
@@ -1045,14 +910,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
                             type="number"
                             name="totalScore"
-                            value={QuantitativeReasoningData.totalScore}
-                            onChange={handleInputChangeQuantitativeReasoning}
+                            value={PreScienceData.totalScore}
+                            onChange={handleInputChangePreScience}
                           />
                         </div>
                         <div
@@ -1067,14 +931,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
                             name="grade"
                             type="text"
-                            value={QuantitativeReasoningData.grade}
-                            onChange={handleInputChangeQuantitativeReasoning}
+                            value={PreScienceData.grade}
+                            onChange={handleInputChangePreScience}
                           />
                         </div>
                         <div
@@ -1089,14 +952,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
                             label="Remark"
                             type="text"
-                            value={QuantitativeReasoningData.remark}
-                            onChange={handleInputChangeQuantitativeReasoning}
+                            value={PreScienceData.remark}
+                            onChange={handleInputChangePreScience}
                           />
                         </div>
                       </Dropdown.Menu>
@@ -1115,7 +977,126 @@ const InputNursery2Result = () => {
                         }}
                         className="result-input-elect-nursery1"
                       >
-                        Social Studies
+                        Practical Life
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        <div className="col-md-6 mb-2 mt-2 ">
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            rows={4}
+                            id="outlined-required"
+                            label="Test/C.A"
+                            type="number"
+                            name="test"
+                            value={PracticalLifeData.test}
+                            onChange={handleInputChangePracticalLife}
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            rows={4}
+                            id="outlined-required"
+                            label="Exam"
+                            name="exam"
+                            type="number"
+                            value={PracticalLifeData.exam}
+                            onChange={handleInputChangePracticalLife}
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-2"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            rows={4}
+                            id="outlined-required"
+                            label="Total Score"
+                            type="number"
+                            name="totalScore"
+                            value={PracticalLifeData.totalScore}
+                            onChange={handleInputChangePracticalLife}
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            rows={4}
+                            id="outlined-required"
+                            label="Grade"
+                            name="grade"
+                            type="text"
+                            value={PracticalLifeData.grade}
+                            onChange={handleInputChangePracticalLife}
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            rows={4}
+                            id="outlined-required"
+                            name="remark"
+                            label="Remark"
+                            type="text"
+                            value={PracticalLifeData.remark}
+                            onChange={handleInputChangePracticalLife}
+                          />
+                        </div>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    {/* ///Social Habit end input */}
+                    {/* ///Rhymes */}
+                    <Dropdown>
+                      <Dropdown.Toggle
+                        variant="success"
+                        id="dropdown-basic"
+                        style={{
+                          border: "1px solid green",
+                          backgroundColor: "white",
+                          marginTop: "15px",
+                          color: "black",
+                        }}
+                        className="result-input-elect-nursery1"
+                      >
+                        Rhymes
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -1131,8 +1112,8 @@ const InputNursery2Result = () => {
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={SocialStudiesData.test}
-                            onChange={handleInputChangeSocialStudies}
+                            value={RhymesData.test}
+                            onChange={handleInputChangeRhymes}
                           />
                         </div>
                         <div
@@ -1147,14 +1128,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={SocialStudiesData.exam}
-                            onChange={handleInputChangeSocialStudies}
+                            value={RhymesData.exam}
+                            onChange={handleInputChangeRhymes}
                           />
                         </div>
                         <div
@@ -1169,14 +1149,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
                             type="number"
                             name="totalScore"
-                            value={SocialStudiesData.totalScore}
-                            onChange={handleInputChangeSocialStudies}
+                            value={RhymesData.totalScore}
+                            onChange={handleInputChangeRhymes}
                           />
                         </div>
                         <div
@@ -1191,14 +1170,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
                             name="grade"
                             type="text"
-                            value={SocialStudiesData.grade}
-                            onChange={handleInputChangeSocialStudies}
+                            value={RhymesData.grade}
+                            onChange={handleInputChangeRhymes}
                           />
                         </div>
                         <div
@@ -1213,21 +1191,17 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
                             label="Remark"
                             type="text"
-                            value={SocialStudiesData.remark}
-                            onChange={handleInputChangeSocialStudies}
+                            value={RhymesData.remark}
+                            onChange={handleInputChangeRhymes}
                           />
                         </div>
                       </Dropdown.Menu>
                     </Dropdown>
-                    {/* ///Social Habit end input */}
-                    {/* ///Rhymes */}
-
                     {/* ///Rhymes end input */}
                     {/* ///Writing */}
                     <Dropdown>
@@ -1242,7 +1216,7 @@ const InputNursery2Result = () => {
                         }}
                         className="result-input-elect-nursery1"
                       >
-                        Phonics
+                        Sensorial Activity
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -1252,14 +1226,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={PhonicsData.test}
-                            onChange={handleInputChangePhonics}
+                            value={SensorialActivityData.test}
+                            onChange={handleInputChangeSensorialActivity}
                           />
                         </div>
                         <div
@@ -1274,14 +1247,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={PhonicsData.exam}
-                            onChange={handleInputChangePhonics}
+                            value={SensorialActivityData.exam}
+                            onChange={handleInputChangeSensorialActivity}
                           />
                         </div>
                         <div
@@ -1296,14 +1268,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Total Score"
                             type="number"
                             name="totalScore"
-                            value={PhonicsData.totalScore}
-                            onChange={handleInputChangePhonics}
+                            value={SensorialActivityData.totalScore}
+                            onChange={handleInputChangeSensorialActivity}
                           />
                         </div>
                         <div
@@ -1318,14 +1289,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             label="Grade"
                             name="grade"
                             type="text"
-                            value={PhonicsData.grade}
-                            onChange={handleInputChangePhonics}
+                            value={SensorialActivityData.grade}
+                            onChange={handleInputChangeSensorialActivity}
                           />
                         </div>
                         <div
@@ -1340,634 +1310,13 @@ const InputNursery2Result = () => {
                               width: "150px",
                               marginLeft: "4px",
                             }}
-                            required
                             rows={4}
                             id="outlined-required"
                             name="remark"
                             label="Remark"
                             type="text"
-                            value={PhonicsData.remark}
-                            onChange={handleInputChangePhonics}
-                          />
-                        </div>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                    {/* ///Writing end input */}
-                    {/* ///Writing */}
-                    <Dropdown>
-                      <Dropdown.Toggle
-                        variant="success"
-                        id="dropdown-basic"
-                        style={{
-                          border: "1px solid green",
-                          backgroundColor: "white",
-                          marginTop: "15px",
-                          color: "black",
-                        }}
-                        className="result-input-elect-nursery1"
-                      >
-                        CRK
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu>
-                        <div className="col-md-6 mb-2 mt-2 ">
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Test/C.A"
-                            type="number"
-                            name="test"
-                            value={CRKData.test}
-                            onChange={handleInputChangeCRK}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Exam"
-                            name="exam"
-                            type="number"
-                            value={CRKData.exam}
-                            onChange={handleInputChangeCRK}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-2"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Total Score"
-                            type="number"
-                            name="totalScore"
-                            value={CRKData.totalScore}
-                            onChange={handleInputChangeCRK}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Grade"
-                            name="grade"
-                            type="text"
-                            value={CRKData.grade}
-                            onChange={handleInputChangeCRK}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            name="remark"
-                            label="Remark"
-                            type="text"
-                            value={CRKData.remark}
-                            onChange={handleInputChangeCRK}
-                          />
-                        </div>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                    {/* ///Writing end input */}
-                    {/* ///Writing */}
-                    <Dropdown>
-                      <Dropdown.Toggle
-                        variant="success"
-                        id="dropdown-basic"
-                        style={{
-                          border: "1px solid green",
-                          backgroundColor: "white",
-                          marginTop: "15px",
-                          color: "black",
-                        }}
-                        className="result-input-elect-nursery1"
-                      >
-                        Writing
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu>
-                        <div className="col-md-6 mb-2 mt-2 ">
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Test/C.A"
-                            type="number"
-                            name="test"
-                            value={WritingData.test}
-                            onChange={handleInputChangeWriting}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Exam"
-                            name="exam"
-                            type="number"
-                            value={WritingData.exam}
-                            onChange={handleInputChangeWriting}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-2"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Total Score"
-                            type="number"
-                            name="totalScore"
-                            value={WritingData.totalScore}
-                            onChange={handleInputChangeWriting}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Grade"
-                            name="grade"
-                            type="text"
-                            value={WritingData.grade}
-                            onChange={handleInputChangeWriting}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            name="remark"
-                            label="Remark"
-                            type="text"
-                            value={WritingData.remark}
-                            onChange={handleInputChangeWriting}
-                          />
-                        </div>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                    {/* ///Writing end input */}
-                    {/* ///Writing */}
-                    <Dropdown>
-                      <Dropdown.Toggle
-                        variant="success"
-                        id="dropdown-basic"
-                        style={{
-                          border: "1px solid green",
-                          backgroundColor: "white",
-                          marginTop: "15px",
-                          color: "black",
-                        }}
-                        className="result-input-elect-nursery1"
-                      >
-                        Igbo Language
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu>
-                        <div className="col-md-6 mb-2 mt-2 ">
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Test/C.A"
-                            type="number"
-                            name="test"
-                            value={IgboData.test}
-                            onChange={handleInputChangeIgbo}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Exam"
-                            name="exam"
-                            type="number"
-                            value={IgboData.exam}
-                            onChange={handleInputChangeIgbo}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-2"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Total Score"
-                            type="number"
-                            name="totalScore"
-                            value={IgboData.totalScore}
-                            onChange={handleInputChangeIgbo}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Grade"
-                            name="grade"
-                            type="text"
-                            value={IgboData.grade}
-                            onChange={handleInputChangeIgbo}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            name="remark"
-                            label="Remark"
-                            type="text"
-                            value={IgboData.remark}
-                            onChange={handleInputChangeIgbo}
-                          />
-                        </div>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                    {/* ///Writing end input */}
-                    {/* ///Writing */}
-                    <Dropdown>
-                      <Dropdown.Toggle
-                        variant="success"
-                        id="dropdown-basic"
-                        style={{
-                          border: "1px solid green",
-                          backgroundColor: "white",
-                          marginTop: "15px",
-                          color: "black",
-                        }}
-                        className="result-input-elect-nursery1"
-                      >
-                        French
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu>
-                        <div className="col-md-6 mb-2 mt-2 ">
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Test/C.A"
-                            type="number"
-                            name="test"
-                            value={FrenchData.test}
-                            onChange={handleInputChangeFrench}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Exam"
-                            name="exam"
-                            type="number"
-                            value={FrenchData.exam}
-                            onChange={handleInputChangeFrench}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-2"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Total Score"
-                            type="number"
-                            name="totalScore"
-                            value={FrenchData.totalScore}
-                            onChange={handleInputChangeFrench}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Grade"
-                            name="grade"
-                            type="text"
-                            value={FrenchData.grade}
-                            onChange={handleInputChangeFrench}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            name="remark"
-                            label="Remark"
-                            type="text"
-                            value={FrenchData.remark}
-                            onChange={handleInputChangeFrench}
-                          />
-                        </div>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                    {/* ///Writing end input */}
-                    {/* ///Writing */}
-                    <Dropdown>
-                      <Dropdown.Toggle
-                        variant="success"
-                        id="dropdown-basic"
-                        style={{
-                          border: "1px solid green",
-                          backgroundColor: "white",
-                          marginTop: "15px",
-                          color: "black",
-                        }}
-                        className="result-input-elect-nursery1"
-                      >
-                        Computer
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu>
-                        <div className="col-md-6 mb-2 mt-2 ">
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Test/C.A"
-                            type="number"
-                            name="test"
-                            value={ComputerData.test}
-                            onChange={handleInputChangeComputer}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Exam"
-                            name="exam"
-                            type="number"
-                            value={ComputerData.exam}
-                            onChange={handleInputChangeComputer}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-2"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Total Score"
-                            type="number"
-                            name="totalScore"
-                            value={ComputerData.totalScore}
-                            onChange={handleInputChangeComputer}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Grade"
-                            name="grade"
-                            type="text"
-                            value={ComputerData.grade}
-                            onChange={handleInputChangeComputer}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            name="remark"
-                            label="Remark"
-                            type="text"
-                            value={ComputerData.remark}
-                            onChange={handleInputChangeComputer}
+                            value={SensorialActivityData.remark}
+                            onChange={handleInputChangeSensorialActivity}
                           />
                         </div>
                       </Dropdown.Menu>
@@ -1977,7 +1326,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="TotalScore"
                       label="Total Score"
@@ -1986,12 +1334,11 @@ const InputNursery2Result = () => {
                       autoComplete="classes"
                       autoFocus
                       value={TotalScore}
-                      onChange={(e) => setTotalScore(parseInt(e.target.value))}
+                      onChange={(e: any) => setTotalScore(e.target.value)}
                     />
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="TotalAverage"
                       label="Total Average"
@@ -2004,7 +1351,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="TotalGrade"
                       label="Total Grade"
@@ -2017,7 +1363,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="Position"
                       label="Position"
@@ -2030,7 +1375,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="numberInClass"
                       label="Number In Class"
@@ -2039,14 +1383,11 @@ const InputNursery2Result = () => {
                       type="number"
                       autoFocus
                       value={numberInClass}
-                      onChange={(e) =>
-                        setNumberInClass(parseInt(e.target.value))
-                      }
+                      onChange={(e: any) => setNumberInClass(e.target.value)}
                     />
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       multiline
                       rows={6}
                       fullWidth
@@ -2062,7 +1403,6 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       multiline
                       rows={6}
                       fullWidth
@@ -2078,18 +1418,12 @@ const InputNursery2Result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
-                      required
                       fullWidth
                       id="schoolRegNumber"
                       label="School Registeration/Admission Number"
                       name="schoolRegNumber"
                       autoComplete="schoolRegNumber"
                       autoFocus
-                      placeholder={
-                        userDatas
-                          ? ` ${userDatas?.schoolRegNumber}`
-                          : "loading..."
-                      }
                       style={{
                         color: "black",
                         fontSize: "x-large",
@@ -2111,7 +1445,7 @@ const InputNursery2Result = () => {
                         // input={<OutlinedInput label="Name" />}
                         MenuProps={MenuProps}
                       >
-                        <MenuItem value="Nursery-2">Nursery-2</MenuItem>
+                        <MenuItem value="Nursery-1">Pre-Nursery</MenuItem>
                       </Select>
                     </FormControl>
                     <FormControl sx={{ m: 1, width: 370 }}>
@@ -2186,4 +1520,4 @@ const InputNursery2Result = () => {
   );
 };
 
-export default InputNursery2Result;
+export default UpdatePreNurseryResults;

@@ -181,7 +181,9 @@ export default function SignUp() {
           setConfirmPassword("");
           setCurrentClass("");
           localStorage.setItem("userId", res.data._id);
+          localStorage.setItem("roles", res.data.roles);
 
+          localStorage.setItem("isAdmin", res.data.isAdmin);
           console.log(res.data);
           toast.success("post sucessful");
           navigate("/");

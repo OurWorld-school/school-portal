@@ -127,14 +127,9 @@ const LoginScreen = () => {
           setEmail("");
           setPassword("");
 
-          localStorage.setItem("firstName", res.data.firstName);
-          localStorage.setItem("lastName", res.data.lastName);
-
-          localStorage.setItem("email", res.data.email);
           localStorage.setItem("userId", res.data._id);
           localStorage.setItem("roles", res.data.roles);
-          localStorage.setItem("phoneNumber", res.data.phoneNumber);
-          localStorage.setItem("contactAdress", res.data.contactAdress);
+
           localStorage.setItem("isAdmin", res.data.isAdmin);
           console.log(res.data);
           toast.success("post sucessful");
@@ -235,8 +230,8 @@ const LoginScreen = () => {
                 </Link>
               </Grid> */}
                 <Grid item>
-                  <Link href="/register" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  <Link href="/update-user-profile" variant="body2">
+                    {"Generate your Login Password Here"}
                   </Link>
                 </Grid>
               </Grid>

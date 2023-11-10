@@ -165,6 +165,7 @@ export default function AdminBasic3Result() {
               <th>Form Teacher Remark</th>
               <th>Head Teacher</th>
               <th>View Result Details</th>
+              <th>Update Result</th>
             </tr>
           </thead>
           <tbody>
@@ -198,9 +199,17 @@ export default function AdminBasic3Result() {
 
                 <td>
                   {" "}
-                  <Link to={`/view-nursery1-student-result/${row?._id}`}>
+                  <Link to={`/view-basic3-student-result/${row?._id}`}>
                     <Button className="btn-sm">
                       <BsFillBookmarkCheckFill />{" "}
+                    </Button>
+                  </Link>{" "}
+                </td>
+                <td>
+                  {" "}
+                  <Link to={`/view-basic3-student-result-update/${row?._id}`}>
+                    <Button className="btn-sm">
+                      <FaEdit />
                     </Button>
                   </Link>{" "}
                 </td>
@@ -234,6 +243,7 @@ export default function AdminBasic3Result() {
                 <th>Form Teacher Remark</th>
                 <th>Head Teacher</th>
                 <th>View Result Details</th>
+                <th>Update Result</th>
               </tr>
             </thead>
             <tbody>
@@ -267,9 +277,17 @@ export default function AdminBasic3Result() {
 
                   <td>
                     {" "}
-                    <Link to={`/view-nursery1-student-result/${row?._id}`}>
+                    <Link to={`/view-basic3-student-result/${row?._id}`}>
                       <Button className="btn-sm">
                         <BsFillBookmarkCheckFill />{" "}
+                      </Button>
+                    </Link>{" "}
+                  </td>
+                  <td>
+                    {" "}
+                    <Link to={`/view-basic3-student-result-update/${row?._id}`}>
+                      <Button className="btn-sm">
+                        <FaEdit />
                       </Button>
                     </Link>{" "}
                   </td>
@@ -305,6 +323,7 @@ export default function AdminBasic3Result() {
                 <th>Form Teacher Remark</th>
                 <th>Head Teacher</th>
                 <th>View Result Details</th>
+                <th>Update Result</th>
               </tr>
             </thead>
             <tbody>
@@ -338,9 +357,17 @@ export default function AdminBasic3Result() {
 
                   <td>
                     {" "}
-                    <Link to={`/view-nursery1-student-result/${row?._id}`}>
+                    <Link to={`/view-basic3-student-result/${row?._id}`}>
                       <Button className="btn-sm">
                         <BsFillBookmarkCheckFill />{" "}
+                      </Button>
+                    </Link>{" "}
+                  </td>
+                  <td>
+                    {" "}
+                    <Link to={`/view-basic3-student-result-update/${row?._id}`}>
+                      <Button className="btn-sm">
+                        <FaEdit />
                       </Button>
                     </Link>{" "}
                   </td>

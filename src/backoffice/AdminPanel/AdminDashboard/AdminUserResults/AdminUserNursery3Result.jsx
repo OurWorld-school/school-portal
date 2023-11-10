@@ -6,17 +6,15 @@ import { Button, Container } from "@material-ui/core";
 import logo from "../../../../assets/images/logo.jpeg";
 import Table from "react-bootstrap/Table";
 import stamp from "../../../../assets/images/stamp.png";
-import { Nursery1resultApi } from "../../../../data/Api";
+import { Nursery3resultApi } from "../../../../data/Api";
 import AdminLayout from "../../AdminLayout";
 
-export const AdminUserResultNursery1 = () => {
+export const AdminUserNursery3Result = () => {
   const { id } = useParams();
-
   const [viewResult, setViewResult] = useState({});
-
   useEffect(() => {
     const fetchPosts = async () => {
-      const { data } = await axios.get(Nursery1resultApi + id);
+      const { data } = await axios.get(Nursery3resultApi + id);
       console.log(data);
       // const foundData = data.find((item) => item.artist === artist);
       setViewResult(data);
@@ -157,40 +155,73 @@ export const AdminUserResultNursery1 = () => {
                     </td>
                   </tr>
                   <tr>
-                    <td>HEALTH SCIENCE </td>
+                    <td>Verbal Reasoning </td>
                     <td>
                       {" "}
-                      {viewResult?.HealthScience?.map((item) => (
+                      {viewResult?.VerbalReasoning?.map((item) => (
                         <div key={item._id}>{item?.test}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.HealthScience?.map((item) => (
+                      {viewResult?.VerbalReasoning?.map((item) => (
                         <div key={item._id}>{item?.exam}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.HealthScience?.map((item) => (
+                      {viewResult?.VerbalReasoning?.map((item) => (
                         <div key={item._id}>{item?.totalScore}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.HealthScience?.map((item) => (
+                      {viewResult?.VerbalReasoning?.map((item) => (
                         <div key={item._id}>{item?.grade}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.HealthScience?.map((item) => (
+                      {viewResult?.VerbalReasoning?.map((item) => (
                         <div key={item._id}>{item?.remark}</div>
                       ))}
                     </td>
                   </tr>
                   <tr>
-                    <td>BASIC SCIENCE </td>
+                    <td>Quantitative Reasoning </td>
+                    <td>
+                      {" "}
+                      {viewResult?.QuantitativeReasoning?.map((item) => (
+                        <div key={item._id}>{item?.test}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.QuantitativeReasoning?.map((item) => (
+                        <div key={item._id}>{item?.exam}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.QuantitativeReasoning?.map((item) => (
+                        <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.QuantitativeReasoning?.map((item) => (
+                        <div key={item._id}>{item?.grade}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.QuantitativeReasoning?.map((item) => (
+                        <div key={item._id}>{item?.remark}</div>
+                      ))}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Basic Science </td>
                     <td>
                       {" "}
                       {viewResult?.BasicScience?.map((item) => (
@@ -223,133 +254,298 @@ export const AdminUserResultNursery1 = () => {
                     </td>
                   </tr>
                   <tr>
-                    <td>SOCIAL HABIT </td>
+                    <td> National Values </td>
                     <td>
                       {" "}
-                      {viewResult?.SocialHabit?.map((item) => (
+                      {viewResult?.NationalValues?.map((item) => (
                         <div key={item._id}>{item?.test}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.SocialHabit?.map((item) => (
+                      {viewResult?.NationalValues?.map((item) => (
                         <div key={item._id}>{item?.exam}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.SocialHabit?.map((item) => (
+                      {viewResult?.NationalValues?.map((item) => (
                         <div key={item._id}>{item?.totalScore}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.SocialHabit?.map((item) => (
+                      {viewResult?.NationalValues?.map((item) => (
                         <div key={item._id}>{item?.grade}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.SocialHabit?.map((item) => (
+                      {viewResult?.NationalValues?.map((item) => (
                         <div key={item._id}>{item?.remark}</div>
                       ))}
                     </td>
                   </tr>
                   <tr>
-                    <td>AGRIC SCIENCE </td>
+                    <td>C.R.K</td>
                     <td>
                       {" "}
-                      {viewResult?.AgricScience?.map((item) => (
+                      {viewResult?.CRK?.map((item) => (
                         <div key={item._id}>{item?.test}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.AgricScience?.map((item) => (
+                      {viewResult?.CRK?.map((item) => (
                         <div key={item._id}>{item?.exam}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.AgricScience?.map((item) => (
+                      {viewResult?.CRK?.map((item) => (
                         <div key={item._id}>{item?.totalScore}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.AgricScience?.map((item) => (
+                      {viewResult?.CRK?.map((item) => (
                         <div key={item._id}>{item?.grade}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.AgricScience?.map((item) => (
+                      {viewResult?.CRK?.map((item) => (
                         <div key={item._id}>{item?.remark}</div>
                       ))}
                     </td>
                   </tr>
                   <tr>
-                    <td>WRITING</td>
+                    <td>CreativeArt </td>
                     <td>
                       {" "}
-                      {viewResult?.Writing?.map((item) => (
+                      {viewResult?.CreativeArt?.map((item) => (
                         <div key={item._id}>{item?.test}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.Writing?.map((item) => (
+                      {viewResult?.CreativeArt?.map((item) => (
                         <div key={item._id}>{item?.exam}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.Writing?.map((item) => (
+                      {viewResult?.CreativeArt?.map((item) => (
                         <div key={item._id}>{item?.totalScore}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.Writing?.map((item) => (
+                      {viewResult?.CreativeArt?.map((item) => (
                         <div key={item._id}>{item?.grade}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.Writing?.map((item) => (
+                      {viewResult?.CreativeArt?.map((item) => (
                         <div key={item._id}>{item?.remark}</div>
                       ))}
                     </td>
                   </tr>
                   <tr>
-                    <td>RHYMES </td>
+                    <td>History </td>
                     <td>
                       {" "}
-                      {viewResult?.Rhymes?.map((item) => (
+                      {viewResult?.History?.map((item) => (
                         <div key={item._id}>{item?.test}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.Rhymes?.map((item) => (
+                      {viewResult?.History?.map((item) => (
                         <div key={item._id}>{item?.exam}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.Rhymes?.map((item) => (
+                      {viewResult?.History?.map((item) => (
                         <div key={item._id}>{item?.totalScore}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.Rhymes?.map((item) => (
+                      {viewResult?.History?.map((item) => (
                         <div key={item._id}>{item?.grade}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.Rhymes?.map((item) => (
+                      {viewResult?.History?.map((item) => (
+                        <div key={item._id}>{item?.remark}</div>
+                      ))}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Phonics </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Phonics?.map((item) => (
+                        <div key={item._id}>{item?.test}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Phonics?.map((item) => (
+                        <div key={item._id}>{item?.exam}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Phonics?.map((item) => (
+                        <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Phonics?.map((item) => (
+                        <div key={item._id}>{item?.grade}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Phonics?.map((item) => (
+                        <div key={item._id}>{item?.remark}</div>
+                      ))}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>French </td>
+                    <td>
+                      {" "}
+                      {viewResult?.French?.map((item) => (
+                        <div key={item._id}>{item?.test}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.French?.map((item) => (
+                        <div key={item._id}>{item?.exam}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.French?.map((item) => (
+                        <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.French?.map((item) => (
+                        <div key={item._id}>{item?.grade}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.French?.map((item) => (
+                        <div key={item._id}>{item?.remark}</div>
+                      ))}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Igbo </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Igbo?.map((item) => (
+                        <div key={item._id}>{item?.test}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Igbo?.map((item) => (
+                        <div key={item._id}>{item?.exam}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Igbo?.map((item) => (
+                        <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Igbo?.map((item) => (
+                        <div key={item._id}>{item?.grade}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Igbo?.map((item) => (
+                        <div key={item._id}>{item?.remark}</div>
+                      ))}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Pre Vocational Studies </td>
+                    <td>
+                      {" "}
+                      {viewResult?.PVC?.map((item) => (
+                        <div key={item._id}>{item?.test}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.PVC?.map((item) => (
+                        <div key={item._id}>{item?.exam}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.PVC?.map((item) => (
+                        <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.PVC?.map((item) => (
+                        <div key={item._id}>{item?.grade}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.PVC?.map((item) => (
+                        <div key={item._id}>{item?.remark}</div>
+                      ))}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Computer </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Computer?.map((item) => (
+                        <div key={item._id}>{item?.test}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Computer?.map((item) => (
+                        <div key={item._id}>{item?.exam}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Computer?.map((item) => (
+                        <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Computer?.map((item) => (
+                        <div key={item._id}>{item?.grade}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Computer?.map((item) => (
                         <div key={item._id}>{item?.remark}</div>
                       ))}
                     </td>
