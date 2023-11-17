@@ -7,9 +7,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
+import { TextField } from "@mui/material";
 import axios from "axios";
+import Modal from "react-bootstrap/Modal";
 
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Button from "@mui/material/Button";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
@@ -24,7 +27,9 @@ import {
   Basic4resultApi,
   Nursery2resultApi,
   Nursery3resultApi,
+  UpdatePosiionBasic4resultApi,
 } from "../../../../data/Api";
+import CircularIndeterminate from "../../../../components/Loading/Progress";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -138,6 +143,63 @@ export default function AdminBasic4Result() {
     setFilteredData3(filtered3);
     console.log(filtered3);
   }, [viewResult3]);
+  const [show, setShow] = React.useState(false);
+
+  const [Position, setPosition] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const handleLoader = () => {
+    setLoading(true);
+
+    // Perform any other actions that need to be done when the button is clicked
+  };
+  const submitHandler = (e: any) => {
+    e.preventDefault();
+    setLoading(true);
+    const data: any = {
+      //   user: user,
+      Position: Position,
+    };
+
+    const headers: any = {
+      "Custom-Header": "xxxx-xxxx-xxxx-xxxx",
+      "Content-Type": "application/json",
+      // Accept: "application/json",
+      // body: JSON.stringify(data),
+    };
+
+    axios
+      .put(
+        UpdatePosiionBasic4resultApi + viewResult.map((item: any) => item._id),
+        data,
+        headers
+      )
+
+      .then((res) => {
+        console.log(res.data);
+        setLoading(false);
+        if (res.data) {
+          //   setUser("");
+
+          setPosition(" ");
+
+          console.log(res.data);
+          toast.success("post sucessful");
+          // navigate("/pre-nurseryResult");
+          handleClose();
+          window.location.reload();
+        } else {
+          toast.error(res.data.error);
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        toast.error(
+          "Failed to create a post, check your network connection or input the correct textfields"
+        );
+      });
+  };
   return (
     <AdminLayout>
       <div style={{ marginLeft: "auto", marginRight: "auto" }}>
@@ -165,6 +227,7 @@ export default function AdminBasic4Result() {
               <th>Number In Class</th>
               <th>Form Teacher Remark</th>
               <th>Head Teacher</th>
+              <th>Assign Position</th>
               <th>View Result Details</th>
               <th>Update Result</th>
             </tr>
@@ -197,7 +260,56 @@ export default function AdminBasic4Result() {
                 <td>{row?.numberInClass} </td>
                 <td>{row?.Remark}</td>
                 <td>{row?.HmRemark}</td>
+                <td>
+                  {" "}
+                  <Button className="btn-sm" onClick={handleShow}>
+                    <FaEdit />{" "}
+                  </Button>
+                </td>
+                {/* modal */}
+                <Modal show={show} onHide={handleClose} centered>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Student Position</Modal.Title>
+                  </Modal.Header>
+                  <form onSubmit={submitHandler}>
+                    <Modal.Body>
+                      <TextField
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        id="Position"
+                        label="Position"
+                        name="Position"
+                        autoComplete="Position"
+                        autoFocus
+                        value={Position}
+                        onChange={(e) => setPosition(e.target.value)}
+                      />
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button onClick={handleClose}>Close</Button>
+                      {loading ? (
+                        <CircularIndeterminate />
+                      ) : (
+                        <div
+                          className="d-flex justify-content-center"
 
+                          // onClick={handleLoader}
+                        >
+                          <Button
+                            fullWidth
+                            onSubmit={handleLoader}
+                            type="submit"
+                          >
+                            Assign Position
+                          </Button>
+                          <ToastContainer />
+                        </div>
+                      )}
+                    </Modal.Footer>
+                  </form>
+                </Modal>
+                {/* modal */}
                 <td>
                   {" "}
                   <Link to={`/view-basic4-student-result/${row?._id}`}>
@@ -243,6 +355,7 @@ export default function AdminBasic4Result() {
                 <th>Number In Class</th>
                 <th>Form Teacher Remark</th>
                 <th>Head Teacher</th>
+                <th>Assign Position</th>
                 <th>View Result Details</th>
                 <th>Update Result</th>
               </tr>
@@ -275,7 +388,56 @@ export default function AdminBasic4Result() {
                   <td>{row?.numberInClass} </td>
                   <td>{row?.Remark}</td>
                   <td>{row?.HmRemark}</td>
+                  <td>
+                    {" "}
+                    <Button className="btn-sm" onClick={handleShow}>
+                      <FaEdit />{" "}
+                    </Button>
+                  </td>
+                  {/* modal */}
+                  <Modal show={show} onHide={handleClose} centered>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Student Position</Modal.Title>
+                    </Modal.Header>
+                    <form onSubmit={submitHandler}>
+                      <Modal.Body>
+                        <TextField
+                          variant="outlined"
+                          margin="normal"
+                          fullWidth
+                          id="Position"
+                          label="Position"
+                          name="Position"
+                          autoComplete="Position"
+                          autoFocus
+                          value={Position}
+                          onChange={(e) => setPosition(e.target.value)}
+                        />
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button onClick={handleClose}>Close</Button>
+                        {loading ? (
+                          <CircularIndeterminate />
+                        ) : (
+                          <div
+                            className="d-flex justify-content-center"
 
+                            // onClick={handleLoader}
+                          >
+                            <Button
+                              fullWidth
+                              onSubmit={handleLoader}
+                              type="submit"
+                            >
+                              Assign Position
+                            </Button>
+                            <ToastContainer />
+                          </div>
+                        )}
+                      </Modal.Footer>
+                    </form>
+                  </Modal>
+                  {/* modal */}
                   <td>
                     {" "}
                     <Link to={`/view-basic4-student-result/${row?._id}`}>
@@ -323,6 +485,7 @@ export default function AdminBasic4Result() {
                 <th>Number In Class</th>
                 <th>Form Teacher Remark</th>
                 <th>Head Teacher</th>
+                <th>Assign Position</th>
                 <th>View Result Details</th>
                 <th>Update Result </th>
               </tr>
@@ -355,7 +518,56 @@ export default function AdminBasic4Result() {
                   <td>{row?.numberInClass} </td>
                   <td>{row?.Remark}</td>
                   <td>{row?.HmRemark}</td>
+                  <td>
+                    {" "}
+                    <Button className="btn-sm" onClick={handleShow}>
+                      <FaEdit />{" "}
+                    </Button>
+                  </td>
+                  {/* modal */}
+                  <Modal show={show} onHide={handleClose} centered>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Student Position</Modal.Title>
+                    </Modal.Header>
+                    <form onSubmit={submitHandler}>
+                      <Modal.Body>
+                        <TextField
+                          variant="outlined"
+                          margin="normal"
+                          fullWidth
+                          id="Position"
+                          label="Position"
+                          name="Position"
+                          autoComplete="Position"
+                          autoFocus
+                          value={Position}
+                          onChange={(e) => setPosition(e.target.value)}
+                        />
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button onClick={handleClose}>Close</Button>
+                        {loading ? (
+                          <CircularIndeterminate />
+                        ) : (
+                          <div
+                            className="d-flex justify-content-center"
 
+                            // onClick={handleLoader}
+                          >
+                            <Button
+                              fullWidth
+                              onSubmit={handleLoader}
+                              type="submit"
+                            >
+                              Assign Position
+                            </Button>
+                            <ToastContainer />
+                          </div>
+                        )}
+                      </Modal.Footer>
+                    </form>
+                  </Modal>
+                  {/* modal */}
                   <td>
                     {" "}
                     <Link to={`/view-nursery1-student-result/${row?._id}`}>

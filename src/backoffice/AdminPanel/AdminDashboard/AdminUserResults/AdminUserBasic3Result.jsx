@@ -15,6 +15,7 @@ import AdminLayout from "../../AdminLayout";
 
 export const AdminUserBasic3Result = () => {
   const { id } = useParams();
+
   const [viewResult, setViewResult] = useState({});
   useEffect(() => {
     const fetchPosts = async () => {
