@@ -82,7 +82,7 @@ const StaffRegisteration: React.FC<Props> = () => {
   const [firstName, setFirstName] = useState("");
   const [passportPhoto, setPassportPhoto] = useState("");
   const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+
   const [phoneNumber, setPhoneNumber] = useState("");
   const [userType, setUserType] = useState("staff");
   const [schoolRegNumber, setSchoolRegNumber] = useState("null");
@@ -138,7 +138,7 @@ const StaffRegisteration: React.FC<Props> = () => {
       userType: userType,
       schoolRegNumber: schoolRegNumber,
       passportPhoto: passportPhoto,
-      email: email,
+
       password: password,
       confirmPassword: confirmPassword,
     };
@@ -165,7 +165,7 @@ const StaffRegisteration: React.FC<Props> = () => {
 
           setSchoolRegNumber("");
           setPassportPhoto("");
-          setEmail("");
+
           setPassword("");
           setConfirmPassword("");
 
@@ -255,19 +255,7 @@ const StaffRegisteration: React.FC<Props> = () => {
                   onChange={(e) => setContAdress(e.target.value)}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </Grid>
+
               <Grid item xs={12}>
                 <FormControl
                   fullWidth

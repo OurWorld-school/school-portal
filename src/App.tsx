@@ -78,6 +78,7 @@ import { AdminUserResultNursery1 } from "./backoffice/AdminPanel/AdminDashboard/
 import UpdateStudentClass from "./backoffice/AdminPanel/AdminDashboard/UpdateStudentClass/UpdateStudentClass";
 import AssignRoles from "./backoffice/AdminPanel/AdminUsers/AdminStaffs/AssignRoles";
 import AssignAdmin from "./backoffice/AdminPanel/AdminUsers/AdminStaffs/AssignAdmin";
+import StaffLogin from "./screens/LoginScreen/StaffLogin";
 
 function App() {
   return (
@@ -89,6 +90,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/update-user-profile" element={<UserProfileScreen />} />
         <Route path="/login" element={<LoginScreen />} />
+        <Route path="/staff-login" element={<StaffLogin />} />
         <Route path="/admission" element={<AdmissionPortal />} />
         <Route path="/staff-registeration" element={<StaffRegisteration />} />
         <Route path="/check-result" element={<CheckResult />} />
@@ -117,7 +119,7 @@ function App() {
         <Route path="/basic3Result" element={<AdminBasic3Result />} />
         <Route path="/basic4Result" element={<AdminBasic4Result />} />
         <Route
-          path="/post-nursery1-result/:id"
+          path="/post-nursery1result/:id"
           element={<InputNursery1result />}
         />
 
@@ -149,35 +151,35 @@ function App() {
         {/* Result Checker Routes */}
         {/* View student result */}
         <Route
-          path="/my-result-prenursery/:selectedYear/:userId/:selectedTerm"
+          path="/my-results-prenursery/:selectedYear/:userId/:selectedTerm"
           element={<ViewPreNurseryResult />}
         />
         <Route
-          path="/my-result/:selectedYear/:userId/:selectedTerm"
+          path="/my-results-nursery1/:selectedYear/:userId/:selectedTerm"
           element={<ViewResult />}
         />
         <Route
-          path="/my-result-nursery2/:selectedYear/:userId/:selectedTerm"
+          path="/my-results-nursery2/:selectedYear/:userId/:selectedTerm"
           element={<ViewNursery2Result />}
         />
         <Route
-          path="/my-result-nursery3/:selectedYear/:userId/:selectedTerm"
+          path="/my-results-nursery3/:selectedYear/:userId/:selectedTerm"
           element={<ViewNursery3Result />}
         />
         <Route
-          path="/my-result-basic1/:selectedYear/:userId/:selectedTerm"
+          path="/my-results-basic1/:selectedYear/:userId/:selectedTerm"
           element={<ViewBasic1Result />}
         />
         <Route
-          path="/my-result-basic2/:selectedYear/:userId/:selectedTerm"
+          path="/my-results-basic2/:selectedYear/:userId/:selectedTerm"
           element={<ViewBasic2Result />}
         />
         <Route
-          path="/my-result-basic3/:selectedYear/:userId/:selectedTerm"
+          path="/my-results-basic3/:selectedYear/:userId/:selectedTerm"
           element={<ViewBasic3Result />}
         />
         <Route
-          path="/my-result-basic4/:selectedYear/:userId/:selectedTerm"
+          path="/my-results-basic4/:selectedYear/:userId/:selectedTerm"
           element={<ViewBasic4Result />}
         />
         {/* view student result */}

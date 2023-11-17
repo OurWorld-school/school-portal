@@ -20,23 +20,22 @@ export const ViewNursery2Result = React.forwardRef((props, ref) => {
   const [viewResult, setViewResult] = useState({});
   useEffect(() => {
     const fetchPosts = async () => {
-      const { data } = await axios.get(
-        `http://localhost:5000/api/nursery2result/results/${userId}/${selectedYear}/${selectedTerm}`
-      );
-      console.log(data);
-      // const foundData = data.find((item) => item.artist === artist);
-      setViewResult(data);
+      try {
+        const { data } = await axios.get(
+          `https://ourworldintschool.onrender.com/api/nursery2result/results/${userId}/${selectedYear}/${selectedTerm}`
+        );
+        console.log(data);
+        // const foundData = data.find((item) => item.artist === artist);
+        setViewResult(data);
+      } catch (error) {
+        // Handle the error here
+        navigate("/Nursery2-result");
+        console.error("Result not Found:", error);
+      }
     };
-
     fetchPosts();
   }, []);
-  useEffect(() => {
-    if (viewResult?.length == 0) {
-      navigate("/Nursery1-result");
-    } else {
-      navigate(`/my-result/${selectedYear}/${userId}/${selectedTerm}`);
-    }
-  }, []);
+
   return (
     <>
       <TopNavBar />

@@ -93,7 +93,7 @@ export default function SignUp() {
   const [firstName, setFirstName] = useState("");
   const [passportPhoto, setPassportPhoto] = useState("");
   const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [schoolRegNumber, setSchoolRegNumber] = useState("");
   const [contactAdress, setContAdress] = useState("");
@@ -148,7 +148,7 @@ export default function SignUp() {
       contactAdress: contactAdress,
       schoolRegNumber: schoolRegNumber,
       passportPhoto: passportPhoto,
-      email: email,
+      // email: email,
       userType: userType,
       currentClass: currentClass,
       password: password,
@@ -176,7 +176,7 @@ export default function SignUp() {
           setContAdress("");
           setPassportPhoto("");
           setUserType("");
-          setEmail("");
+          // setEmail("");
           setPassword("");
           setConfirmPassword("");
           setCurrentClass("");
@@ -310,7 +310,7 @@ export default function SignUp() {
                   onChange={(e) => setContAdress(e.target.value)}
                 />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <TextField
                   variant="outlined"
                   required
@@ -322,7 +322,7 @@ export default function SignUp() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-              </Grid>
+              </Grid> */}
               {/* <Grid item xs={12}>
                 <FormControl
                   fullWidth

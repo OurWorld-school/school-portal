@@ -18,6 +18,9 @@ import {
   PreNurseryresultApi,
 } from "../../../data/Api";
 import CircularIndeterminate from "../../../components/Loading/Progress";
+import TopNavBar from "../../../components/TopNavBar/TopNavBar";
+import Header from "../../../components/Header/Header";
+import Footer from "../../../components/Footer/Footer";
 
 const ITEM_HEIGHT = 100;
 const ITEM_PADDING_TOP = 8;
@@ -65,14 +68,14 @@ const CheckNursery2Result: React.FC<Props> = () => {
     // Make your API GET request here using a library like Axios or the built-in fetch API
     // Replace 'YOUR_API_ENDPOINT' with the actual API URL
     fetch(
-      `http://localhost:5000/api/nursery2result/results/${userId}/${selectedYear}/${selectedTerm}`
+      `https://ourworldintschool.onrender.com/api/nursery2result/results/${userId}/${selectedYear}/${selectedTerm}`
     )
       .then((response) => response.json())
       .then((data) => {
         setApiData(data);
         setLoading(false);
         navigate(
-          `/my-result-nursery2/${selectedYear}/${userId}/${selectedTerm}`
+          `/my-results-nursery2/${selectedYear}/${userId}/${selectedTerm}`
         );
         console.log(data);
         toast.success("Result sucessful");
@@ -80,7 +83,7 @@ const CheckNursery2Result: React.FC<Props> = () => {
       .catch((error) => {
         // console.error("Error fetching data:", error);
         setLoading(false);
-        navigate("/Nursery2-result");
+        // navigate("/Nursery2-result");
         toast.error("No result found");
       });
   };
@@ -95,107 +98,112 @@ const CheckNursery2Result: React.FC<Props> = () => {
     fetchPosts();
   }, []);
   return (
-    <div>
-      <div className="check-result-flex-div">
-        <div className="check-result-col-div">
-          <div className="guideline-div">
-            <h3 className="tip-h3">Tips</h3>
-            <ul className="ul-list-style">
-              <li>
-                Obtain your Registration Code from your schools / Director
-              </li>
-              <li>
-                Obtain a scratch card from your school or a verified vendor
-              </li>
-              <li>
-                Scratch off the covered / sealed area to reveal the card pin
-              </li>
-              <li>
-                Enter the Pin and Serial number and other details required
-              </li>
-              <li>
-                Click on the » Check result button (located at the bottom)
-              </li>
-            </ul>
+    <>
+      <TopNavBar />
+      <Header />
+      <div>
+        <div className="check-result-flex-div">
+          <div className="check-result-col-div">
+            <div className="guideline-div">
+              <h3 className="tip-h3">Tips</h3>
+              <ul className="ul-list-style">
+                <li>
+                  Obtain your Registration Code from your schools / Director
+                </li>
+                <li>
+                  Obtain a scratch card from your school or a verified vendor
+                </li>
+                <li>
+                  Scratch off the covered / sealed area to reveal the card pin
+                </li>
+                <li>
+                  Enter the Pin and Serial number and other details required
+                </li>
+                <li>
+                  Click on the » Check result button (located at the bottom)
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div className="select-check-div">
-          <div>
-            <h2>Result Checker</h2>
-            <div className="form-control-div">
-              {" "}
-              <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="demo-multiple-name-label">Year</InputLabel>
-                <Select
-                  labelId="demo-multiple-name-label"
-                  id="demo-multiple-name"
-                  // multiple
-                  // value={personName}
-                  onChange={handleSelectChange}
-                  value={selectedYear}
-                  // input={<OutlinedInput label="Name" />}
-                  MenuProps={MenuProps}
-                >
-                  <MenuItem value="2023">2023</MenuItem>
-                  {/* {resultData?.map((item: any) => (
+          <div className="select-check-div">
+            <div>
+              <h2>Result Checker</h2>
+              <div className="form-control-div">
+                {" "}
+                <FormControl sx={{ m: 1, width: 300 }}>
+                  <InputLabel id="demo-multiple-name-label">Year</InputLabel>
+                  <Select
+                    labelId="demo-multiple-name-label"
+                    id="demo-multiple-name"
+                    // multiple
+                    // value={personName}
+                    onChange={handleSelectChange}
+                    value={selectedYear}
+                    // input={<OutlinedInput label="Name" />}
+                    MenuProps={MenuProps}
+                  >
+                    <MenuItem value="2023">2023</MenuItem>
+                    {/* {resultData?.map((item: any) => (
                     <>
                       <MenuItem value={item?.year}>{item?.year} </MenuItem>
                     </>
                   ))} */}
-                </Select>
-              </FormControl>
-            </div>
-            <div className="form-control-div">
-              <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="demo-multiple-name-label">Term</InputLabel>
+                  </Select>
+                </FormControl>
+              </div>
+              <div className="form-control-div">
+                <FormControl sx={{ m: 1, width: 300 }}>
+                  <InputLabel id="demo-multiple-name-label">Term</InputLabel>
 
-                <Select
-                  labelId="demo-multiple-name-label"
-                  id="demo-multiple-name"
-                  // multiple
-                  value={selectedTerm}
-                  onChange={handleSelectTermChange}
-                  // input={<OutlinedInput label="Name" />}
-                  MenuProps={MenuProps}
-                >
-                  <MenuItem value="1st-Term">1st Term</MenuItem>
-                  <MenuItem value="2nd-Term">2nd Term</MenuItem>
-                  <MenuItem value="3rd-Term">3rd Term</MenuItem>
-                  {/* {resultData?.map((item: any) => (
+                  <Select
+                    labelId="demo-multiple-name-label"
+                    id="demo-multiple-name"
+                    // multiple
+                    value={selectedTerm}
+                    onChange={handleSelectTermChange}
+                    // input={<OutlinedInput label="Name" />}
+                    MenuProps={MenuProps}
+                  >
+                    <MenuItem value="1st-Term">1st Term</MenuItem>
+                    <MenuItem value="2nd-Term">2nd Term</MenuItem>
+                    <MenuItem value="3rd-Term">3rd Term</MenuItem>
+                    {/* {resultData?.map((item: any) => (
                     <>
                       <MenuItem value={item?.term}>{item?.term} </MenuItem>
                     </>
                   ))} */}
-                </Select>
-              </FormControl>
-            </div>
-            {loading ? (
-              <CircularIndeterminate />
-            ) : (
-              <div>
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  style={{
-                    color: "white",
-                    backgroundColor: "green",
-                    border: "greenyellow",
-                    width: "45%",
-                    marginTop: "25px",
-                  }}
-                  className="proceed-btn"
-                  onClick={fetchApiData}
-                >
-                  Check Result
-                </Button>
-                <ToastContainer />
+                  </Select>
+                </FormControl>
               </div>
-            )}
+              {loading ? (
+                <CircularIndeterminate />
+              ) : (
+                <div>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    style={{
+                      color: "white",
+                      backgroundColor: "green",
+                      border: "greenyellow",
+                      width: "45%",
+                      marginTop: "25px",
+                    }}
+                    className="proceed-btn"
+                    onClick={fetchApiData}
+                  >
+                    Check Result
+                  </Button>
+                  <ToastContainer />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

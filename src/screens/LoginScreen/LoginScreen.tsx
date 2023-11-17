@@ -21,7 +21,7 @@ import {
   InputLabel,
   OutlinedInput,
 } from "@mui/material";
-import { loginApi } from "../../data/Api";
+import { StudentloginApi, loginApi } from "../../data/Api";
 import { UserLogin } from "../../data/Data.Type";
 import { useNavigate } from "react-router-dom";
 import Visibility from "@mui/icons-material/Visibility";
@@ -79,7 +79,7 @@ const LoginScreen = () => {
   const classes = useStyles();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
+  const [schoolRegNumber, setSchoolRegNumber] = useState("");
 
   const [password, setPassword] = useState("");
 
@@ -105,8 +105,8 @@ const LoginScreen = () => {
   const submitHandler = (e: any) => {
     e.preventDefault();
     setLoading(true);
-    const data: UserLogin = {
-      email: email,
+    const data: any = {
+      schoolRegNumber: schoolRegNumber,
       password: password,
     };
 
@@ -118,13 +118,13 @@ const LoginScreen = () => {
     };
 
     axios
-      .post(loginApi, data, headers)
+      .post(StudentloginApi, data, headers)
 
       .then((res) => {
         console.log(res.data);
         setLoading(false);
         if (res.data) {
-          setEmail("");
+          setSchoolRegNumber("");
           setPassword("");
 
           localStorage.setItem("userId", res.data._id);
@@ -168,15 +168,16 @@ const LoginScreen = () => {
               <TextField
                 variant="outlined"
                 margin="normal"
+                type="text"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="schoolRegNumber"
+                label="School Admission Number"
+                name="schoolRegNumber"
+                autoComplete="schoolRegNumber"
                 autoFocus
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={schoolRegNumber}
+                onChange={(e) => setSchoolRegNumber(e.target.value)}
               />
               <FormControl variant="outlined" fullWidth>
                 <InputLabel htmlFor="outlined-adornment-password">
@@ -231,7 +232,18 @@ const LoginScreen = () => {
               </Grid> */}
                 <Grid item>
                   <Link href="/update-user-profile" variant="body2">
-                    {"Generate your Login Password Here"}
+                    {"Generate your Login Password Here."}
+                  </Link>
+                </Grid>
+              </Grid>
+              <Grid container>
+                <Grid item>
+                  <Link
+                    href="/staff-login"
+                    variant="body2"
+                    style={{ color: "green" }}
+                  >
+                    {"Are You a Staff?. Login Here."}
                   </Link>
                 </Grid>
               </Grid>

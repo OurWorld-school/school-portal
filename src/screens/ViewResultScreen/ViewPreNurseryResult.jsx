@@ -20,23 +20,29 @@ export const ViewPreNurseryResult = React.forwardRef((props, ref) => {
   const [viewResult, setViewResult] = useState({});
   useEffect(() => {
     const fetchPosts = async () => {
-      const { data } = await axios.get(
-        `http://localhost:5000/api/prenurseryresul/results/${userId}/${selectedYear}/${selectedTerm}`
-      );
-      console.log(data);
-      // const foundData = data.find((item) => item.artist === artist);
-      setViewResult(data);
+      try {
+        const { data } = await axios.get(
+          `https://ourworldintschool.onrender.com/api/prenurseryresult/results/${userId}/${selectedYear}/${selectedTerm}`
+        );
+        console.log(data);
+        // const foundData = data.find((item) => item.artist === artist);
+        setViewResult(data);
+      } catch (error) {
+        // Handle the error here
+        navigate("/PreNursery-result");
+        console.error("Result not Found:", error);
+      }
     };
 
     fetchPosts();
   }, []);
-  useEffect(() => {
-    if (viewResult?.id) {
-      navigate("/PreNursery-result");
-    } else {
-      navigate(`/my-result/${selectedYear}/${userId}/${selectedTerm}`);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (viewResult?.id) {
+  //     navigate("/PreNursery-result");
+  //   } else {
+  //     navigate(`/my-result/${selectedYear}/${userId}/${selectedTerm}`);
+  //   }
+  // }, []);
   return (
     <>
       <TopNavBar />
@@ -421,5 +427,3 @@ export const ViewPreNurseryResult = React.forwardRef((props, ref) => {
     </>
   );
 });
-
-// export default ViewResult;

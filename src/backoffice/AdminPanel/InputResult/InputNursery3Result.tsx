@@ -37,8 +37,8 @@ const InputNursery3Result = () => {
   console.log(id);
   const [term, setTerm] = useState("");
   const [year, setYear] = useState("");
-  const [TotalScore, setTotalScore] = useState(Number);
-  const [TotalAverage, setTotalAverage] = useState("");
+  const [TotalScore, setTotalScore] = useState(0);
+  const [TotalAverage, setTotalAverage] = useState(0);
   const [Position, setPosition] = useState("");
   const [numberInClass, setNumberInClass] = useState(Number);
   const [TotalGrade, setTotalGrade] = useState("");
@@ -156,70 +156,174 @@ const InputNursery3Result = () => {
     grade: "",
     remark: "",
   });
+  const calculateResultTotalAverage = () => {
+    // const average = total / Object.keys(scores).length;
+    // setGrandAverage(average);
+    const GrandTotalAverage = TotalScore / 14;
+    // NumeracyData.test +
+    // NumeracyData.exam +
+    // LiteracyData.test +
+    // LiteracyData.exam / 2;
 
-  const handleInputChangeEnglish = (e: any) => {
-    const { name, value } = e.target;
-    setEnglishData({
-      ...EnglishData,
-      [name]: value,
-      // totalScore: parseFloat(NumeracyData.test) + parseFloat(NumeracyData.exam),
-    });
+    setTotalAverage(parseFloat(GrandTotalAverage.toFixed(2)));
   };
-  const handleInputChangeMaths = (e: any) => {
-    const { name, value } = e.target;
-    setMathsData({ ...MathsData, [name]: value });
+  const calculateResultTotalScore = () => {
+    const GrandTotal =
+      EnglishData.test +
+      EnglishData.exam +
+      MathsData.test +
+      MathsData.exam +
+      BasicScienceData.test +
+      BasicScienceData.exam +
+      PhonicsData.test +
+      PhonicsData.exam +
+      VerbalReasoningData.test +
+      VerbalReasoningData.exam +
+      QuantitativeReasoningData.test +
+      QuantitativeReasoningData.exam +
+      PVCData.test +
+      PVCData.exam +
+      HistoryData.test +
+      HistoryData.exam +
+      IgboData.test +
+      IgboData.exam +
+      ComputerData.test +
+      ComputerData.exam +
+      NationalValuesData.test +
+      NationalValuesData.exam +
+      CreativeArtData.test +
+      CreativeArtData.exam +
+      FrenchData.test +
+      FrenchData.exam +
+      CRKData.test +
+      CRKData.exam;
+    setTotalScore(GrandTotal);
   };
-  const handleInputChangeVerbalReasoning = (e: any) => {
-    const { name, value } = e.target;
-    setVerbalReasoningData({ ...VerbalReasoningData, [name]: value });
+  const handleInputChange = (
+    subject:
+      | "EnglishData"
+      | "MathsData"
+      | "BasicScienceData"
+      | "VerbalReasoningData"
+      | "QuantitativeReasoningData"
+      | "PVCData"
+      | "IgboData"
+      | "ComputerData"
+      | "CreativeArtData"
+      | "HistoryData"
+      | "PhonicsData"
+      | "NationalValuesData"
+      | "FrenchData"
+      | "CRKData",
+    type: "test" | "exam" | "grade" | "remark",
+    value: number
+  ) => {
+    switch (subject) {
+      case "EnglishData":
+        setEnglishData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "MathsData":
+        setMathsData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "VerbalReasoningData":
+        setVerbalReasoningData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "QuantitativeReasoningData":
+        setQuantitativeReasoningData((prev: any) => ({
+          ...prev,
+          [type]: value,
+        }));
+        break;
+      case "BasicScienceData":
+        setBasicScienceData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "NationalValuesData":
+        setNationalValuesData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "PhonicsData":
+        setPhonicsData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "PVCData":
+        setPVCData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "HistoryData":
+        setHistoryData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "IgboData":
+        setIgboData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "ComputerData":
+        setComputerData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "CRKData":
+        setCRKData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "FrenchData":
+        setFrenchData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "CreativeArtData":
+        setCreativeArtData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+    }
   };
-  const handleInputChangeQuantitativeReasoning = (e: any) => {
-    const { name, value } = e.target;
-    setQuantitativeReasoningData({
-      ...QuantitativeReasoningData,
-      [name]: value,
-    });
+  const calculateEnglishDataTotal = () => {
+    const totalScore = EnglishData.test + EnglishData.exam;
+    setEnglishData({ ...EnglishData, totalScore });
   };
-  const handleInputChangeNationalValues = (e: any) => {
-    const { name, value } = e.target;
-    setNationalValuesData({ ...NationalValuesData, [name]: value });
+  const calculateMathsDataTotal = () => {
+    const totalScore = MathsData.test + MathsData.exam;
+    setMathsData({ ...MathsData, totalScore });
   };
-  const handleInputChangeCRK = (e: any) => {
-    const { name, value } = e.target;
-    setCRKData({ ...CRKData, [name]: value });
+  const calculateVerbalReasoningDataTotal = () => {
+    const totalScore = VerbalReasoningData.test + VerbalReasoningData.exam;
+    setVerbalReasoningData({ ...VerbalReasoningData, totalScore });
   };
-  const handleInputChangeHistory = (e: any) => {
-    const { name, value } = e.target;
-    setHistoryData({ ...HistoryData, [name]: value });
+  const calculateQuantitativeReasoningDataTotal = () => {
+    const totalScore =
+      QuantitativeReasoningData.test + QuantitativeReasoningData.exam;
+    setQuantitativeReasoningData({ ...QuantitativeReasoningData, totalScore });
   };
-  const handleInputChangePhonics = (e: any) => {
-    const { name, value } = e.target;
-    setPhonicsData({ ...PhonicsData, [name]: value });
+  const calculateHistoryDataTotal = () => {
+    const totalScore = HistoryData.test + HistoryData.exam;
+    setHistoryData({ ...HistoryData, totalScore });
   };
-  const handleInputChangeFrench = (e: any) => {
-    const { name, value } = e.target;
-    setFrenchData({ ...FrenchData, [name]: value });
+  const calculateNationalValuesDataTotal = () => {
+    const totalScore = NationalValuesData.test + NationalValuesData.exam;
+    setNationalValuesData({ ...NationalValuesData, totalScore });
   };
-  const handleInputChangeComputer = (e: any) => {
-    const { name, value } = e.target;
-    setComputerData({ ...ComputerData, [name]: value });
+  const calculateCreativeArtDataTotal = () => {
+    const totalScore = CreativeArtData.test + CreativeArtData.exam;
+    setCreativeArtData({ ...CreativeArtData, totalScore });
   };
-  const handleInputChangeCreativeArt = (e: any) => {
-    const { name, value } = e.target;
-    setCreativeArtData({ ...CreativeArtData, [name]: value });
+  const calculatePhonicsDataTotal = () => {
+    const totalScore = PhonicsData.test + PhonicsData.exam;
+    setPhonicsData({ ...PhonicsData, totalScore });
   };
-  const handleInputChangeBasicScience = (e: any) => {
-    const { name, value } = e.target;
-    setBasicScienceData({ ...BasicScienceData, [name]: value });
+  const calculateBasicScienceDataTotal = () => {
+    const totalScore = BasicScienceData.test + BasicScienceData.exam;
+    setBasicScienceData({ ...BasicScienceData, totalScore });
   };
-  const handleInputChangePVC = (e: any) => {
-    const { name, value } = e.target;
-    setPVCData({ ...PVCData, [name]: value });
+  const calculateFrenchDataTotal = () => {
+    const totalScore = FrenchData.test + FrenchData.exam;
+    setFrenchData({ ...FrenchData, totalScore });
   };
-  const handleInputChangeIgbo = (e: any) => {
-    const { name, value } = e.target;
-    setIgboData({ ...IgboData, [name]: value });
+  const calculateCRKDataTotal = () => {
+    const totalScore = CRKData.test + CRKData.exam;
+    setCRKData({ ...CRKData, totalScore });
   };
+  const calculatePVCDataTotal = () => {
+    const totalScore = PVCData.test + PVCData.exam;
+    setPVCData({ ...PVCData, totalScore });
+  };
+  const calculateIgboDataTotal = () => {
+    const totalScore = IgboData.test + IgboData.exam;
+    setIgboData({ ...IgboData, totalScore });
+  };
+  const calculateComputerDataTotal = () => {
+    const totalScore = ComputerData.test + ComputerData.exam;
+    setComputerData({ ...ComputerData, totalScore });
+  };
+
   React.useEffect(() => {
     const fetchPosts = async () => {
       const { data } = await axios.get(UserApi + id);
@@ -412,7 +516,7 @@ const InputNursery3Result = () => {
           setSchoolRegNumber(" ");
           setTotalScore(Number);
           setTotalGrade(" ");
-          setTotalAverage(" ");
+          setTotalAverage(Number);
           setClasses(" ");
           setRemark(" ");
           setNumberInClass(Number);
@@ -465,7 +569,7 @@ const InputNursery3Result = () => {
                     className="  d-flex justify-content-center"
                     style={{ fontSize: "x-large", fontWeight: "600" }}
                   >
-                    Input Nursery 1 Result of
+                    Input Nursery 3 Result of
                   </h3>
                   <div
                     className="text-center mb-4"
@@ -523,7 +627,14 @@ const InputNursery3Result = () => {
                             type="number"
                             name="test"
                             value={EnglishData.test}
-                            onChange={handleInputChangeEnglish}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "EnglishData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateEnglishDataTotal}
                           />
                         </div>
                         <div
@@ -545,7 +656,14 @@ const InputNursery3Result = () => {
                             name="exam"
                             type="number"
                             value={EnglishData.exam}
-                            onChange={handleInputChangeEnglish}
+                            onBlur={calculateEnglishDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "EnglishData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -568,12 +686,7 @@ const InputNursery3Result = () => {
                             type="number"
                             name="totalScore"
                             value={EnglishData.totalScore}
-                            onChange={handleInputChangeEnglish}
-                            // onChange={() =>
-                            //   setNumeracyData(
-                            //     NumeracyData.test + NumeracyData.exam
-                            //   )
-                            // }
+                            onBlur={calculateResultTotalScore}
                           />
                         </div>
                         <div
@@ -595,7 +708,13 @@ const InputNursery3Result = () => {
                             name="grade"
                             type="text"
                             value={EnglishData.grade}
-                            onChange={handleInputChangeEnglish}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "EnglishData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -617,7 +736,13 @@ const InputNursery3Result = () => {
                             label="Remark"
                             type="text"
                             value={EnglishData.remark}
-                            onChange={handleInputChangeEnglish}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "EnglishData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -652,7 +777,14 @@ const InputNursery3Result = () => {
                             label="Test/C.A"
                             name="test"
                             value={MathsData.test}
-                            onChange={handleInputChangeMaths}
+                            onBlur={calculateMathsDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "MathsData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -674,7 +806,14 @@ const InputNursery3Result = () => {
                             name="exam"
                             type="number"
                             value={MathsData.exam}
-                            onChange={handleInputChangeMaths}
+                            onBlur={calculateMathsDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "MathsData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -696,7 +835,7 @@ const InputNursery3Result = () => {
                             type="number"
                             name="totalScore"
                             value={MathsData.totalScore}
-                            onChange={handleInputChangeMaths}
+                            onBlur={calculateResultTotalScore}
                           />
                         </div>
                         <div
@@ -718,7 +857,13 @@ const InputNursery3Result = () => {
                             name="grade"
                             type="text"
                             value={MathsData.grade}
-                            onChange={handleInputChangeMaths}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "MathsData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -740,7 +885,13 @@ const InputNursery3Result = () => {
                             label="Remark"
                             type="text"
                             value={MathsData.remark}
-                            onChange={handleInputChangeMaths}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "MathsData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -776,7 +927,14 @@ const InputNursery3Result = () => {
                             type="number"
                             name="test"
                             value={BasicScienceData.test}
-                            onChange={handleInputChangeBasicScience}
+                            onBlur={calculateBasicScienceDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "BasicScienceData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -798,7 +956,14 @@ const InputNursery3Result = () => {
                             name="exam"
                             type="number"
                             value={BasicScienceData.exam}
-                            onChange={handleInputChangeBasicScience}
+                            onBlur={calculateBasicScienceDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "BasicScienceData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -820,7 +985,7 @@ const InputNursery3Result = () => {
                             type="number"
                             name="totalScore"
                             value={BasicScienceData.totalScore}
-                            onChange={handleInputChangeBasicScience}
+                            onBlur={calculateResultTotalScore}
                           />
                         </div>
                         <div
@@ -842,7 +1007,13 @@ const InputNursery3Result = () => {
                             name="grade"
                             type="text"
                             value={BasicScienceData.grade}
-                            onChange={handleInputChangeBasicScience}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "BasicScienceData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -864,7 +1035,13 @@ const InputNursery3Result = () => {
                             label="Remark"
                             type="text"
                             value={BasicScienceData.remark}
-                            onChange={handleInputChangeBasicScience}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "BasicScienceData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -900,7 +1077,14 @@ const InputNursery3Result = () => {
                             type="number"
                             name="test"
                             value={VerbalReasoningData.test}
-                            onChange={handleInputChangeVerbalReasoning}
+                            onBlur={calculateVerbalReasoningDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "VerbalReasoningData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -922,7 +1106,14 @@ const InputNursery3Result = () => {
                             name="exam"
                             type="number"
                             value={VerbalReasoningData.exam}
-                            onChange={handleInputChangeVerbalReasoning}
+                            onBlur={calculateVerbalReasoningDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "VerbalReasoningData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -944,7 +1135,7 @@ const InputNursery3Result = () => {
                             type="number"
                             name="totalScore"
                             value={VerbalReasoningData.totalScore}
-                            onChange={handleInputChangeVerbalReasoning}
+                            onBlur={calculateResultTotalScore}
                           />
                         </div>
                         <div
@@ -966,7 +1157,13 @@ const InputNursery3Result = () => {
                             name="grade"
                             type="text"
                             value={VerbalReasoningData.grade}
-                            onChange={handleInputChangeVerbalReasoning}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "VerbalReasoningData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -988,7 +1185,13 @@ const InputNursery3Result = () => {
                             label="Remark"
                             type="text"
                             value={VerbalReasoningData.remark}
-                            onChange={handleInputChangeVerbalReasoning}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "VerbalReasoningData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -1024,7 +1227,14 @@ const InputNursery3Result = () => {
                             type="number"
                             name="test"
                             value={QuantitativeReasoningData.test}
-                            onChange={handleInputChangeQuantitativeReasoning}
+                            onBlur={calculateQuantitativeReasoningDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "QuantitativeReasoningData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1046,7 +1256,14 @@ const InputNursery3Result = () => {
                             name="exam"
                             type="number"
                             value={QuantitativeReasoningData.exam}
-                            onChange={handleInputChangeQuantitativeReasoning}
+                            onBlur={calculateQuantitativeReasoningDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "QuantitativeReasoningData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1068,7 +1285,7 @@ const InputNursery3Result = () => {
                             type="number"
                             name="totalScore"
                             value={QuantitativeReasoningData.totalScore}
-                            onChange={handleInputChangeQuantitativeReasoning}
+                            onBlur={calculateResultTotalScore}
                           />
                         </div>
                         <div
@@ -1090,7 +1307,13 @@ const InputNursery3Result = () => {
                             name="grade"
                             type="text"
                             value={QuantitativeReasoningData.grade}
-                            onChange={handleInputChangeQuantitativeReasoning}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "QuantitativeReasoningData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1112,7 +1335,13 @@ const InputNursery3Result = () => {
                             label="Remark"
                             type="text"
                             value={QuantitativeReasoningData.remark}
-                            onChange={handleInputChangeQuantitativeReasoning}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "QuantitativeReasoningData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -1148,7 +1377,14 @@ const InputNursery3Result = () => {
                             type="number"
                             name="test"
                             value={NationalValuesData.test}
-                            onChange={handleInputChangeNationalValues}
+                            onBlur={calculateNationalValuesDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "NationalValuesData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1170,7 +1406,14 @@ const InputNursery3Result = () => {
                             name="exam"
                             type="number"
                             value={NationalValuesData.exam}
-                            onChange={handleInputChangeNationalValues}
+                            onBlur={calculateNationalValuesDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "NationalValuesData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1192,7 +1435,7 @@ const InputNursery3Result = () => {
                             type="number"
                             name="totalScore"
                             value={NationalValuesData.totalScore}
-                            onChange={handleInputChangeNationalValues}
+                            onBlur={calculateResultTotalScore}
                           />
                         </div>
                         <div
@@ -1214,7 +1457,13 @@ const InputNursery3Result = () => {
                             name="grade"
                             type="text"
                             value={NationalValuesData.grade}
-                            onChange={handleInputChangeNationalValues}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "NationalValuesData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1236,7 +1485,13 @@ const InputNursery3Result = () => {
                             label="Remark"
                             type="text"
                             value={NationalValuesData.remark}
-                            onChange={handleInputChangeNationalValues}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "NationalValuesData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -1272,7 +1527,14 @@ const InputNursery3Result = () => {
                             type="number"
                             name="test"
                             value={HistoryData.test}
-                            onChange={handleInputChangeHistory}
+                            onBlur={calculateHistoryDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "HistoryData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1294,7 +1556,14 @@ const InputNursery3Result = () => {
                             name="exam"
                             type="number"
                             value={HistoryData.exam}
-                            onChange={handleInputChangeHistory}
+                            onBlur={calculateHistoryDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "HistoryData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1316,7 +1585,7 @@ const InputNursery3Result = () => {
                             type="number"
                             name="totalScore"
                             value={HistoryData.totalScore}
-                            onChange={handleInputChangeHistory}
+                            onBlur={calculateResultTotalScore}
                           />
                         </div>
                         <div
@@ -1338,7 +1607,13 @@ const InputNursery3Result = () => {
                             name="grade"
                             type="text"
                             value={HistoryData.grade}
-                            onChange={handleInputChangeHistory}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "HistoryData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1360,7 +1635,13 @@ const InputNursery3Result = () => {
                             label="Remark"
                             type="text"
                             value={HistoryData.remark}
-                            onChange={handleInputChangeHistory}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "HistoryData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -1396,7 +1677,14 @@ const InputNursery3Result = () => {
                             type="number"
                             name="test"
                             value={PhonicsData.test}
-                            onChange={handleInputChangePhonics}
+                            onBlur={calculatePhonicsDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "PhonicsData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1418,7 +1706,14 @@ const InputNursery3Result = () => {
                             name="exam"
                             type="number"
                             value={PhonicsData.exam}
-                            onChange={handleInputChangePhonics}
+                            onBlur={calculatePhonicsDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "PhonicsData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1440,7 +1735,7 @@ const InputNursery3Result = () => {
                             type="number"
                             name="totalScore"
                             value={PhonicsData.totalScore}
-                            onChange={handleInputChangePhonics}
+                            onBlur={calculateResultTotalScore}
                           />
                         </div>
                         <div
@@ -1462,7 +1757,13 @@ const InputNursery3Result = () => {
                             name="grade"
                             type="text"
                             value={PhonicsData.grade}
-                            onChange={handleInputChangePhonics}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "PhonicsData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1484,7 +1785,163 @@ const InputNursery3Result = () => {
                             label="Remark"
                             type="text"
                             value={PhonicsData.remark}
-                            onChange={handleInputChangePhonics}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "PhonicsData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    {/* ///Writing end input */}
+                    {/* ///Writing */}
+                    <Dropdown>
+                      <Dropdown.Toggle
+                        variant="success"
+                        id="dropdown-basic"
+                        style={{
+                          border: "1px solid green",
+                          backgroundColor: "white",
+                          marginTop: "15px",
+                          color: "black",
+                        }}
+                        className="result-input-elect-nursery1"
+                      >
+                        Creative Art
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        <div className="col-md-6 mb-2 mt-2 ">
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Test/C.A"
+                            type="number"
+                            name="test"
+                            value={CreativeArtData.test}
+                            onBlur={calculateCreativeArtDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "CreativeArtData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Exam"
+                            name="exam"
+                            type="number"
+                            value={CreativeArtData.exam}
+                            onBlur={calculateCreativeArtDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "CreativeArtData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-2"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Total Score"
+                            type="number"
+                            name="totalScore"
+                            value={CreativeArtData.totalScore}
+                            onBlur={calculateResultTotalScore}
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Grade"
+                            name="grade"
+                            type="text"
+                            value={CreativeArtData.grade}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "CreativeArtData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            name="remark"
+                            label="Remark"
+                            type="text"
+                            value={CreativeArtData.remark}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "CreativeArtData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -1520,7 +1977,14 @@ const InputNursery3Result = () => {
                             type="number"
                             name="test"
                             value={CRKData.test}
-                            onChange={handleInputChangeCRK}
+                            onBlur={calculateCRKDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "CRKData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1542,7 +2006,14 @@ const InputNursery3Result = () => {
                             name="exam"
                             type="number"
                             value={CRKData.exam}
-                            onChange={handleInputChangeCRK}
+                            onBlur={calculateCRKDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "CRKData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1564,7 +2035,7 @@ const InputNursery3Result = () => {
                             type="number"
                             name="totalScore"
                             value={CRKData.totalScore}
-                            onChange={handleInputChangeCRK}
+                            onBlur={calculateResultTotalScore}
                           />
                         </div>
                         <div
@@ -1586,7 +2057,13 @@ const InputNursery3Result = () => {
                             name="grade"
                             type="text"
                             value={CRKData.grade}
-                            onChange={handleInputChangeCRK}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "CRKData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1608,7 +2085,13 @@ const InputNursery3Result = () => {
                             label="Remark"
                             type="text"
                             value={CRKData.remark}
-                            onChange={handleInputChangeCRK}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "CRKData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -1627,7 +2110,7 @@ const InputNursery3Result = () => {
                         }}
                         className="result-input-elect-nursery1"
                       >
-                        P V C (Pro Vocational Studies)
+                        P V S (Pre Vocational Studies)
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -1644,7 +2127,14 @@ const InputNursery3Result = () => {
                             type="number"
                             name="test"
                             value={PVCData.test}
-                            onChange={handleInputChangePVC}
+                            onBlur={calculatePVCDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "PVCData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1666,7 +2156,14 @@ const InputNursery3Result = () => {
                             name="exam"
                             type="number"
                             value={PVCData.exam}
-                            onChange={handleInputChangePVC}
+                            onBlur={calculatePVCDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "PVCData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1688,7 +2185,7 @@ const InputNursery3Result = () => {
                             type="number"
                             name="totalScore"
                             value={PVCData.totalScore}
-                            onChange={handleInputChangePVC}
+                            onBlur={calculateResultTotalScore}
                           />
                         </div>
                         <div
@@ -1710,7 +2207,13 @@ const InputNursery3Result = () => {
                             name="grade"
                             type="text"
                             value={PVCData.grade}
-                            onChange={handleInputChangePVC}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "PVCData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1732,7 +2235,13 @@ const InputNursery3Result = () => {
                             label="Remark"
                             type="text"
                             value={PVCData.remark}
-                            onChange={handleInputChangePVC}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "PVCData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -1768,7 +2277,14 @@ const InputNursery3Result = () => {
                             type="number"
                             name="test"
                             value={IgboData.test}
-                            onChange={handleInputChangeIgbo}
+                            onBlur={calculateIgboDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "IgboData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1790,7 +2306,14 @@ const InputNursery3Result = () => {
                             name="exam"
                             type="number"
                             value={IgboData.exam}
-                            onChange={handleInputChangeIgbo}
+                            onBlur={calculateIgboDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "IgboData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1812,7 +2335,7 @@ const InputNursery3Result = () => {
                             type="number"
                             name="totalScore"
                             value={IgboData.totalScore}
-                            onChange={handleInputChangeIgbo}
+                            onBlur={calculateResultTotalScore}
                           />
                         </div>
                         <div
@@ -1834,7 +2357,13 @@ const InputNursery3Result = () => {
                             name="grade"
                             type="text"
                             value={IgboData.grade}
-                            onChange={handleInputChangeIgbo}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "IgboData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1856,7 +2385,13 @@ const InputNursery3Result = () => {
                             label="Remark"
                             type="text"
                             value={IgboData.remark}
-                            onChange={handleInputChangeIgbo}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "IgboData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -1892,7 +2427,14 @@ const InputNursery3Result = () => {
                             type="number"
                             name="test"
                             value={FrenchData.test}
-                            onChange={handleInputChangeFrench}
+                            onBlur={calculateFrenchDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "FrenchData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1914,7 +2456,14 @@ const InputNursery3Result = () => {
                             name="exam"
                             type="number"
                             value={FrenchData.exam}
-                            onChange={handleInputChangeFrench}
+                            onBlur={calculateFrenchDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "FrenchData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1936,7 +2485,7 @@ const InputNursery3Result = () => {
                             type="number"
                             name="totalScore"
                             value={FrenchData.totalScore}
-                            onChange={handleInputChangeFrench}
+                            onBlur={calculateResultTotalScore}
                           />
                         </div>
                         <div
@@ -1958,7 +2507,13 @@ const InputNursery3Result = () => {
                             name="grade"
                             type="text"
                             value={FrenchData.grade}
-                            onChange={handleInputChangeFrench}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "FrenchData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1980,7 +2535,13 @@ const InputNursery3Result = () => {
                             label="Remark"
                             type="text"
                             value={FrenchData.remark}
-                            onChange={handleInputChangeFrench}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "FrenchData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -2016,7 +2577,14 @@ const InputNursery3Result = () => {
                             type="number"
                             name="test"
                             value={ComputerData.test}
-                            onChange={handleInputChangeComputer}
+                            onBlur={calculateComputerDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "ComputerData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -2038,7 +2606,14 @@ const InputNursery3Result = () => {
                             name="exam"
                             type="number"
                             value={ComputerData.exam}
-                            onChange={handleInputChangeComputer}
+                            onBlur={calculateComputerDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "ComputerData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -2060,7 +2635,7 @@ const InputNursery3Result = () => {
                             type="number"
                             name="totalScore"
                             value={ComputerData.totalScore}
-                            onChange={handleInputChangeComputer}
+                            onBlur={calculateResultTotalScore}
                           />
                         </div>
                         <div
@@ -2082,7 +2657,13 @@ const InputNursery3Result = () => {
                             name="grade"
                             type="text"
                             value={ComputerData.grade}
-                            onChange={handleInputChangeComputer}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "ComputerData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -2104,7 +2685,13 @@ const InputNursery3Result = () => {
                             label="Remark"
                             type="text"
                             value={ComputerData.remark}
-                            onChange={handleInputChangeComputer}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "ComputerData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -2123,7 +2710,10 @@ const InputNursery3Result = () => {
                       autoComplete="classes"
                       autoFocus
                       value={TotalScore}
-                      onChange={(e) => setTotalScore(parseInt(e.target.value))}
+                      onBlur={calculateResultTotalAverage}
+                      onChange={(e) =>
+                        setTotalScore(parseInt(e.target.value, 10))
+                      }
                     />
                     <TextField
                       variant="outlined"
@@ -2136,7 +2726,9 @@ const InputNursery3Result = () => {
                       autoComplete="TotalAverage"
                       autoFocus
                       value={TotalAverage}
-                      onChange={(e) => setTotalAverage(e.target.value)}
+                      onChange={(e) =>
+                        setTotalAverage(parseInt(e.target.value, 10))
+                      }
                     />
                     <TextField
                       variant="outlined"
@@ -2151,7 +2743,7 @@ const InputNursery3Result = () => {
                       value={TotalGrade}
                       onChange={(e) => setTotalGrade(e.target.value)}
                     />
-                    <TextField
+                    {/* <TextField
                       variant="outlined"
                       margin="normal"
                       required
@@ -2163,7 +2755,7 @@ const InputNursery3Result = () => {
                       autoFocus
                       value={Position}
                       onChange={(e) => setPosition(e.target.value)}
-                    />
+                    /> */}
                     <TextField
                       variant="outlined"
                       margin="normal"

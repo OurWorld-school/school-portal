@@ -1,11 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import {
-  Nursery1resultApi,
-  PreNurseryresultApi,
-  UserApi,
-} from "../../../data/Api";
+import { PreNurseryresultApi, UserApi } from "../../../data/Api";
 import { Nursery1Data } from "../../../data/Data.Type";
 import CircularIndeterminate from "../../../components/Loading/Progress";
 import AdminLayout from "../AdminLayout";
@@ -28,6 +24,11 @@ const MenuProps = {
     },
   },
 };
+interface SubjectTextFields {
+  test: number;
+  exam: number;
+  totalScore?: number; // optional, as it will be calculated
+}
 const InputPreNurseryResult = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -36,8 +37,8 @@ const InputPreNurseryResult = () => {
   console.log(id);
   const [term, setTerm] = useState("");
   const [year, setYear] = useState("");
-  const [TotalScore, setTotalScore] = useState(Number);
-  const [TotalAverage, setTotalAverage] = useState("");
+  const [TotalScore, setTotalScore] = useState(0);
+  const [TotalAverage, setTotalAverage] = useState(0);
   const [Position, setPosition] = useState("");
   const [numberInClass, setNumberInClass] = useState(Number);
   const [TotalGrade, setTotalGrade] = useState("");
@@ -58,7 +59,7 @@ const InputPreNurseryResult = () => {
   //   English: [],
   // });
 
-  const [NumeracyData, setNumeracyData] = useState<any>({
+  const [NumeracyData, setNumeracyData] = useState({
     test: 0,
     exam: 0,
     totalScore: 0,
@@ -114,42 +115,160 @@ const InputPreNurseryResult = () => {
     grade: "",
     remark: "",
   });
+  const calculateResultTotalAverage = () => {
+    // const average = total / Object.keys(scores).length;
+    // setGrandAverage(average);
+    const GrandTotalAverage = TotalScore / 8;
+    // NumeracyData.test +
+    // NumeracyData.exam +
+    // LiteracyData.test +
+    // LiteracyData.exam / 2;
+
+    setTotalAverage(parseFloat(GrandTotalAverage.toFixed(2)));
+  };
+  const calculateResultTotalScore = () => {
+    const GrandTotal =
+      NumeracyData.test +
+      NumeracyData.exam +
+      LiteracyData.test +
+      LiteracyData.exam +
+      ColouringData.test +
+      ColouringData.exam +
+      HealthHabitData.test +
+      HealthHabitData.exam +
+      PreScienceData.test +
+      PreScienceData.exam +
+      PracticalLifeData.test +
+      PracticalLifeData.exam +
+      RhymesData.test +
+      RhymesData.exam +
+      SensorialActivityData.test +
+      SensorialActivityData.exam;
+    setTotalScore(GrandTotal);
+  };
+  const handleInputChange = (
+    subject:
+      | "NumeracyData"
+      | "LiteracyData"
+      | "ColouringData"
+      | "HealthHabitData"
+      | "PreScienceData"
+      | "PracticalLifeData"
+      | "RhymesData"
+      | "SensorialActivityData",
+    type: "test" | "exam" | "grade" | "remark",
+    value: number
+  ) => {
+    switch (subject) {
+      case "NumeracyData":
+        setNumeracyData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "LiteracyData":
+        setLiteracyData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "ColouringData":
+        setColouringData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "HealthHabitData":
+        setHealthHabitData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "PreScienceData":
+        setPreScienceData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "PracticalLifeData":
+        setPracticalLifeData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "RhymesData":
+        setRhymesData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "SensorialActivityData":
+        setSensorialActivityData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+    }
+  };
+  // const handleInputChangeTotalScore = (e: any) => {
+  //   const { name, value } = e.target;
+  //   setTotalScore({
+  //     ...TotalScore,
+  //     [name]: parseInt(value, 10) || 0,
+  //   });
+  // };
+  const calculateNumeracyTotal = () => {
+    const totalScore = NumeracyData.test + NumeracyData.exam;
+    setNumeracyData({ ...NumeracyData, totalScore });
+  };
 
   const handleInputChangeNumeracy = (e: any) => {
     const { name, value } = e.target;
     setNumeracyData({
       ...NumeracyData,
-      [name]: value,
-      // totalScore: parseFloat(NumeracyData.test) + parseFloat(NumeracyData.exam),
+      [name]: parseInt(value, 10) || 0,
     });
+  };
+  const calculateLiteracyTotal = () => {
+    const totalScore = LiteracyData.test + LiteracyData.exam;
+    setLiteracyData({ ...LiteracyData, totalScore });
   };
   const handleInputChangeLiteracy = (e: any) => {
     const { name, value } = e.target;
-    setLiteracyData({ ...LiteracyData, [name]: value });
+    setLiteracyData({ ...LiteracyData, [name]: parseInt(value, 10) || 0 });
+  };
+  const calculateColouringTotal = () => {
+    const totalScore = ColouringData.test + ColouringData.exam;
+    setColouringData({ ...ColouringData, totalScore });
   };
   const handleInputChangeColouring = (e: any) => {
     const { name, value } = e.target;
-    setColouringData({ ...ColouringData, [name]: value });
+    setColouringData({ ...ColouringData, [name]: parseInt(value, 10) || 0 });
+  };
+  const calculateHealthHabitTotal = () => {
+    const totalScore = HealthHabitData.test + HealthHabitData.exam;
+    setHealthHabitData({ ...HealthHabitData, totalScore });
   };
   const handleInputChangeHealthHabit = (e: any) => {
     const { name, value } = e.target;
-    setHealthHabitData({ ...HealthHabitData, [name]: value });
+    setHealthHabitData({
+      ...HealthHabitData,
+      [name]: parseInt(value, 10) || 0,
+    });
+  };
+  const calculatePreScienceTotal = () => {
+    const totalScore = PreScienceData.test + PreScienceData.exam;
+    setPreScienceData({ ...PreScienceData, totalScore });
   };
   const handleInputChangePreScience = (e: any) => {
     const { name, value } = e.target;
-    setPreScienceData({ ...PreScienceData, [name]: value });
+    setPreScienceData({ ...PreScienceData, [name]: parseInt(value, 10) || 0 });
+  };
+  const calculatePracticalLifeTotal = () => {
+    const totalScore = PracticalLifeData.test + PracticalLifeData.exam;
+    setPracticalLifeData({ ...PracticalLifeData, totalScore });
   };
   const handleInputChangePracticalLife = (e: any) => {
     const { name, value } = e.target;
-    setPracticalLifeData({ ...PracticalLifeData, [name]: value });
+    setPracticalLifeData({
+      ...PracticalLifeData,
+      [name]: parseInt(value, 10) || 0,
+    });
+  };
+  const calculateRhymesTotal = () => {
+    const totalScore = RhymesData.test + RhymesData.exam;
+    setRhymesData({ ...RhymesData, totalScore });
   };
   const handleInputChangeRhymes = (e: any) => {
     const { name, value } = e.target;
-    setRhymesData({ ...RhymesData, [name]: value });
+    setRhymesData({ ...RhymesData, [name]: parseInt(value, 10) || 0 });
+  };
+  const calculateSensorialActivityTotal = () => {
+    const totalScore = SensorialActivityData.test + SensorialActivityData.exam;
+    setSensorialActivityData({ ...SensorialActivityData, totalScore });
   };
   const handleInputChangeSensorialActivity = (e: any) => {
     const { name, value } = e.target;
-    setSensorialActivityData({ ...SensorialActivityData, [name]: value });
+    setSensorialActivityData({
+      ...SensorialActivityData,
+      [name]: parseInt(value, 10) || 0,
+    });
   };
   React.useEffect(() => {
     const fetchPosts = async () => {
@@ -165,6 +284,8 @@ const InputPreNurseryResult = () => {
   const submitHandler = (e: any) => {
     e.preventDefault();
     setLoading(true);
+    // calculateResultTotalScore();
+    // calculateResultTotalAverage();
     const data: any = {
       user: user,
       classes: classes,
@@ -283,12 +404,12 @@ const InputPreNurseryResult = () => {
           setSchoolRegNumber(" ");
           setTotalScore(Number);
           setTotalGrade(" ");
-          setTotalAverage(" ");
+          setTotalAverage(Number);
           setClasses(" ");
           setRemark(" ");
           setNumberInClass(Number);
           console.log(res.data);
-          toast.success("post sucessful");
+          // toast.success("post sucessful");
           navigate("/pre-nurseryResult");
         } else {
           toast.error(res.data.error);
@@ -336,7 +457,7 @@ const InputPreNurseryResult = () => {
                     className="  d-flex justify-content-center"
                     style={{ fontSize: "x-large", fontWeight: "600" }}
                   >
-                    Input Nursery 1 Result of
+                    Input Pre Nursery Result of
                   </h3>
                   <div
                     className="text-center mb-4"
@@ -394,7 +515,15 @@ const InputPreNurseryResult = () => {
                             type="number"
                             name="test"
                             value={NumeracyData.test}
-                            onChange={handleInputChangeNumeracy}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "NumeracyData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                            // onChange={handleInputChangeNumeracy}
+                            onBlur={calculateNumeracyTotal}
                           />
                         </div>
                         <div
@@ -416,7 +545,15 @@ const InputPreNurseryResult = () => {
                             name="exam"
                             type="number"
                             value={NumeracyData.exam}
-                            onChange={handleInputChangeNumeracy}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "NumeracyData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                            // onChange={handleInputChangeNumeracy}
+                            onBlur={calculateNumeracyTotal}
                           />
                         </div>
                         <div
@@ -426,7 +563,6 @@ const InputPreNurseryResult = () => {
                           //   marginRight: "auto",
                           // }}
                         >
-                          {/* {NumeracyData.totalScore} */}
                           <TextField
                             style={{
                               width: "150px",
@@ -439,12 +575,8 @@ const InputPreNurseryResult = () => {
                             type="number"
                             name="totalScore"
                             value={NumeracyData.totalScore}
-                            onChange={handleInputChangeNumeracy}
-                            // onChange={() =>
-                            //   setNumeracyData(
-                            //     NumeracyData.test + NumeracyData.exam
-                            //   )
-                            // }
+                            onBlur={calculateResultTotalScore}
+                            // onChange={handleInputChangeLiteracy}
                           />
                         </div>
                         <div
@@ -466,7 +598,14 @@ const InputPreNurseryResult = () => {
                             name="grade"
                             type="text"
                             value={NumeracyData.grade}
-                            onChange={handleInputChangeNumeracy}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "NumeracyData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
+                            // onChange={handleInputChangeNumeracy}
                           />
                         </div>
                         <div
@@ -488,7 +627,13 @@ const InputPreNurseryResult = () => {
                             label="Remark"
                             type="text"
                             value={NumeracyData.remark}
-                            onChange={handleInputChangeNumeracy}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "NumeracyData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -523,7 +668,15 @@ const InputPreNurseryResult = () => {
                             label="Test/C.A"
                             name="test"
                             value={LiteracyData.test}
-                            onChange={handleInputChangeLiteracy}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "LiteracyData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                            // onChange={handleInputChangeLiteracy}
+                            onBlur={calculateLiteracyTotal}
                           />
                         </div>
                         <div
@@ -545,7 +698,15 @@ const InputPreNurseryResult = () => {
                             name="exam"
                             type="number"
                             value={LiteracyData.exam}
-                            onChange={handleInputChangeLiteracy}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "LiteracyData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                            // onChange={handleInputChangeLiteracy}
+                            onBlur={calculateLiteracyTotal}
                           />
                         </div>
                         <div
@@ -567,7 +728,8 @@ const InputPreNurseryResult = () => {
                             type="number"
                             name="totalScore"
                             value={LiteracyData.totalScore}
-                            onChange={handleInputChangeLiteracy}
+                            onBlur={calculateResultTotalScore}
+                            // onChange={handleInputChangeLiteracy}
                           />
                         </div>
                         <div
@@ -589,7 +751,13 @@ const InputPreNurseryResult = () => {
                             name="grade"
                             type="text"
                             value={LiteracyData.grade}
-                            onChange={handleInputChangeLiteracy}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "LiteracyData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -611,13 +779,18 @@ const InputPreNurseryResult = () => {
                             label="Remark"
                             type="text"
                             value={LiteracyData.remark}
-                            onChange={handleInputChangeLiteracy}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "LiteracyData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
                     </Dropdown>
                     {/* ///maths end input */}
-                    {/* ///HealthSceince */}
                     <Dropdown>
                       <Dropdown.Toggle
                         variant="success"
@@ -647,7 +820,14 @@ const InputPreNurseryResult = () => {
                             type="number"
                             name="test"
                             value={ColouringData.test}
-                            onChange={handleInputChangeColouring}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "ColouringData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateColouringTotal}
                           />
                         </div>
                         <div
@@ -669,7 +849,14 @@ const InputPreNurseryResult = () => {
                             name="exam"
                             type="number"
                             value={ColouringData.exam}
-                            onChange={handleInputChangeColouring}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "ColouringData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateColouringTotal}
                           />
                         </div>
                         <div
@@ -691,7 +878,8 @@ const InputPreNurseryResult = () => {
                             type="number"
                             name="totalScore"
                             value={ColouringData.totalScore}
-                            onChange={handleInputChangeColouring}
+                            onBlur={calculateResultTotalScore}
+                            // onChange={handleInputChangeColouring}
                           />
                         </div>
                         <div
@@ -713,7 +901,13 @@ const InputPreNurseryResult = () => {
                             name="grade"
                             type="text"
                             value={ColouringData.grade}
-                            onChange={handleInputChangeColouring}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "ColouringData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -735,7 +929,13 @@ const InputPreNurseryResult = () => {
                             label="Remark"
                             type="text"
                             value={ColouringData.remark}
-                            onChange={handleInputChangeColouring}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "ColouringData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -771,7 +971,14 @@ const InputPreNurseryResult = () => {
                             type="number"
                             name="test"
                             value={HealthHabitData.test}
-                            onChange={handleInputChangeHealthHabit}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "HealthHabitData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateHealthHabitTotal}
                           />
                         </div>
                         <div
@@ -793,7 +1000,14 @@ const InputPreNurseryResult = () => {
                             name="exam"
                             type="number"
                             value={HealthHabitData.exam}
-                            onChange={handleInputChangeHealthHabit}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "HealthHabitData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateHealthHabitTotal}
                           />
                         </div>
                         <div
@@ -815,7 +1029,8 @@ const InputPreNurseryResult = () => {
                             type="number"
                             name="totalScore"
                             value={HealthHabitData.totalScore}
-                            onChange={handleInputChangeHealthHabit}
+                            onBlur={calculateResultTotalScore}
+                            // onChange={handleInputChangeHealthHabit}
                           />
                         </div>
                         <div
@@ -837,7 +1052,13 @@ const InputPreNurseryResult = () => {
                             name="grade"
                             type="text"
                             value={HealthHabitData.grade}
-                            onChange={handleInputChangeHealthHabit}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "HealthHabitData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -859,7 +1080,13 @@ const InputPreNurseryResult = () => {
                             label="Remark"
                             type="text"
                             value={HealthHabitData.remark}
-                            onChange={handleInputChangeHealthHabit}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "HealthHabitData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -895,7 +1122,14 @@ const InputPreNurseryResult = () => {
                             type="number"
                             name="test"
                             value={PreScienceData.test}
-                            onChange={handleInputChangePreScience}
+                            onBlur={calculatePreScienceTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "PreScienceData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -917,7 +1151,14 @@ const InputPreNurseryResult = () => {
                             name="exam"
                             type="number"
                             value={PreScienceData.exam}
-                            onChange={handleInputChangePreScience}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "PreScienceData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculatePreScienceTotal}
                           />
                         </div>
                         <div
@@ -939,7 +1180,8 @@ const InputPreNurseryResult = () => {
                             type="number"
                             name="totalScore"
                             value={PreScienceData.totalScore}
-                            onChange={handleInputChangePreScience}
+                            onBlur={calculateResultTotalScore}
+                            // onChange={handleInputChangePreScience}
                           />
                         </div>
                         <div
@@ -961,7 +1203,13 @@ const InputPreNurseryResult = () => {
                             name="grade"
                             type="text"
                             value={PreScienceData.grade}
-                            onChange={handleInputChangePreScience}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "PreScienceData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -983,7 +1231,13 @@ const InputPreNurseryResult = () => {
                             label="Remark"
                             type="text"
                             value={PreScienceData.remark}
-                            onChange={handleInputChangePreScience}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "PreScienceData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -1019,7 +1273,14 @@ const InputPreNurseryResult = () => {
                             type="number"
                             name="test"
                             value={PracticalLifeData.test}
-                            onChange={handleInputChangePracticalLife}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "PracticalLifeData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculatePracticalLifeTotal}
                           />
                         </div>
                         <div
@@ -1041,7 +1302,14 @@ const InputPreNurseryResult = () => {
                             name="exam"
                             type="number"
                             value={PracticalLifeData.exam}
-                            onChange={handleInputChangePracticalLife}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "PracticalLifeData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculatePracticalLifeTotal}
                           />
                         </div>
                         <div
@@ -1063,7 +1331,8 @@ const InputPreNurseryResult = () => {
                             type="number"
                             name="totalScore"
                             value={PracticalLifeData.totalScore}
-                            onChange={handleInputChangePracticalLife}
+                            onBlur={calculateResultTotalScore}
+                            // onChange={handleInputChangePracticalLife}
                           />
                         </div>
                         <div
@@ -1085,7 +1354,13 @@ const InputPreNurseryResult = () => {
                             name="grade"
                             type="text"
                             value={PracticalLifeData.grade}
-                            onChange={handleInputChangePracticalLife}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "PracticalLifeData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1107,7 +1382,13 @@ const InputPreNurseryResult = () => {
                             label="Remark"
                             type="text"
                             value={PracticalLifeData.remark}
-                            onChange={handleInputChangePracticalLife}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "PracticalLifeData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -1143,7 +1424,14 @@ const InputPreNurseryResult = () => {
                             type="number"
                             name="test"
                             value={RhymesData.test}
-                            onChange={handleInputChangeRhymes}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "RhymesData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateRhymesTotal}
                           />
                         </div>
                         <div
@@ -1165,7 +1453,14 @@ const InputPreNurseryResult = () => {
                             name="exam"
                             type="number"
                             value={RhymesData.exam}
-                            onChange={handleInputChangeRhymes}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "RhymesData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateRhymesTotal}
                           />
                         </div>
                         <div
@@ -1187,7 +1482,8 @@ const InputPreNurseryResult = () => {
                             type="number"
                             name="totalScore"
                             value={RhymesData.totalScore}
-                            onChange={handleInputChangeRhymes}
+                            onBlur={calculateResultTotalScore}
+                            // onChange={handleInputChangeRhymes}
                           />
                         </div>
                         <div
@@ -1209,7 +1505,13 @@ const InputPreNurseryResult = () => {
                             name="grade"
                             type="text"
                             value={RhymesData.grade}
-                            onChange={handleInputChangeRhymes}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "RhymesData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1231,7 +1533,13 @@ const InputPreNurseryResult = () => {
                             label="Remark"
                             type="text"
                             value={RhymesData.remark}
-                            onChange={handleInputChangeRhymes}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "RhymesData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -1267,7 +1575,14 @@ const InputPreNurseryResult = () => {
                             type="number"
                             name="test"
                             value={SensorialActivityData.test}
-                            onChange={handleInputChangeSensorialActivity}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "SensorialActivityData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateSensorialActivityTotal}
                           />
                         </div>
                         <div
@@ -1289,7 +1604,14 @@ const InputPreNurseryResult = () => {
                             name="exam"
                             type="number"
                             value={SensorialActivityData.exam}
-                            onChange={handleInputChangeSensorialActivity}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "SensorialActivityData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateSensorialActivityTotal}
                           />
                         </div>
                         <div
@@ -1311,7 +1633,8 @@ const InputPreNurseryResult = () => {
                             type="number"
                             name="totalScore"
                             value={SensorialActivityData.totalScore}
-                            onChange={handleInputChangeSensorialActivity}
+                            onBlur={calculateResultTotalScore}
+                            // onChange={handleInputChangeSensorialActivity}
                           />
                         </div>
                         <div
@@ -1333,7 +1656,13 @@ const InputPreNurseryResult = () => {
                             name="grade"
                             type="text"
                             value={SensorialActivityData.grade}
-                            onChange={handleInputChangeSensorialActivity}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "SensorialActivityData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1355,26 +1684,35 @@ const InputPreNurseryResult = () => {
                             label="Remark"
                             type="text"
                             value={SensorialActivityData.remark}
-                            onChange={handleInputChangeSensorialActivity}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "SensorialActivityData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
                     </Dropdown>
-                    {/* ///Writing end input */}
-
+                    {/* ///HealthSceince */}
                     <TextField
                       variant="outlined"
                       margin="normal"
                       required
                       fullWidth
-                      id="TotalScore"
+                      // id="TotalScore"
                       label="Total Score"
-                      type="number"
-                      name="TotalScore"
-                      autoComplete="classes"
-                      autoFocus
+                      // type="number"
+                      // name="TotalScore"
+                      // autoComplete="TotalScore"
+                      // autoFocus
                       value={TotalScore}
-                      onChange={(e) => setTotalScore(parseInt(e.target.value))}
+                      aria-readonly
+                      onBlur={calculateResultTotalAverage}
+                      onChange={(e) =>
+                        setTotalScore(parseInt(e.target.value, 10))
+                      }
                     />
                     <TextField
                       variant="outlined"
@@ -1387,7 +1725,9 @@ const InputPreNurseryResult = () => {
                       autoComplete="TotalAverage"
                       autoFocus
                       value={TotalAverage}
-                      onChange={(e) => setTotalAverage(e.target.value)}
+                      onChange={(e) =>
+                        setTotalAverage(parseInt(e.target.value, 10))
+                      }
                     />
                     <TextField
                       variant="outlined"
@@ -1402,7 +1742,7 @@ const InputPreNurseryResult = () => {
                       value={TotalGrade}
                       onChange={(e) => setTotalGrade(e.target.value)}
                     />
-                    <TextField
+                    {/* <TextField
                       variant="outlined"
                       margin="normal"
                       required
@@ -1414,7 +1754,7 @@ const InputPreNurseryResult = () => {
                       autoFocus
                       value={Position}
                       onChange={(e) => setPosition(e.target.value)}
-                    />
+                    /> */}
                     <TextField
                       variant="outlined"
                       margin="normal"
@@ -1499,7 +1839,7 @@ const InputPreNurseryResult = () => {
                         // input={<OutlinedInput label="Name" />}
                         MenuProps={MenuProps}
                       >
-                        <MenuItem value="Nursery-1">Pre-Nursery</MenuItem>
+                        <MenuItem value="Pre-Nursery">Pre-Nursery</MenuItem>
                       </Select>
                     </FormControl>
                     <FormControl sx={{ m: 1, width: 370 }}>
