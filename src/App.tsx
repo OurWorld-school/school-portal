@@ -97,7 +97,7 @@ function App() {
         <Route path="/Nursery1-result" element={<CheckNursery1result />} />
         <Route path="/online-result" element={<ScratchCard />} />
 
-        <Route path="/Admin-layout" element={<AdminUsers />} />
+        <Route path="/Admin" element={<AdminUsers />} />
         <Route path="/pre-nursery" element={<PreNurserystudents />} />
         <Route path="/nusery1" element={<Nursery1students />} />
         <Route path="/nusery2" element={<Nursery2students />} />

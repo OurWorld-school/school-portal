@@ -50,3 +50,20 @@ export const UpdatePosiionBasic3resultApi =
   "https://ourworldintschool.onrender.com/api/basic3result/updateResultPosition/";
 export const UpdatePosiionBasic4resultApi =
   "https://ourworldintschool.onrender.com/api/basic4result/updateResultPosition/";
+
+export const UpdateBasic4resultApi =
+  "https://ourworldintschool.onrender.com/api/basic4result/update/";
+export const UpdateBasic3resultApi =
+  "https://ourworldintschool.onrender.com/api/basic4result/update/";
+export const UpdateBasic2resultApi =
+  "https://ourworldintschool.onrender.com/api/basic2result/update/";
+export const UpdateBasic1resultApi =
+  "https://ourworldintschool.onrender.com/api/basic1result/update/";
+export const UpdateNursery1resultApi =
+  "https://ourworldintschool.onrender.com/api/nursery1result/update/";
+export const UpdatNursery2resultApi =
+  "https://ourworldintschool.onrender.com/api/nursery2result/update/";
+export const UpdateNursery3resultApi =
+  "https://ourworldintschool.onrender.com/api/nursery3result/update/";
+export const UpdatePreNurseryresultresultApi =
+  "https://ourworldintschool.onrender.com/api/prenurseryresult/update/";

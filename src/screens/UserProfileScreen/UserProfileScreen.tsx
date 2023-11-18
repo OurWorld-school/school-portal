@@ -36,7 +36,7 @@ function UserProfileScreen() {
   const [firstName, setFirstName] = useState("");
   const [passportPhoto, setPassportPhoto] = useState("");
   const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+
   const [phoneNumber, setPhoneNumber] = useState("");
   const [schoolRegNumber, setSchoolRegNumber] = useState("");
   const [contactAdress, setContAdress] = useState("");
@@ -101,7 +101,7 @@ function UserProfileScreen() {
       contactAdress: contactAdress,
       schoolRegNumber: schoolRegNumber,
       passportPhoto: passportPhoto,
-      email: email,
+
       userType: userType,
       currentClass: currentClass,
       password: password,
@@ -129,7 +129,7 @@ function UserProfileScreen() {
           setContAdress("");
           setPassportPhoto("");
           setUserType("");
-          setEmail("");
+
           setPassword("");
           setConfirmPassword("");
           setCurrentClass("");
@@ -292,18 +292,7 @@ function UserProfileScreen() {
                         onChange={(e) => setContAdress(e.target.value)}
                       />
                     </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        variant="outlined"
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                    </Grid>
+
                     <Grid item xs={12}>
                       <FormControl
                         fullWidth

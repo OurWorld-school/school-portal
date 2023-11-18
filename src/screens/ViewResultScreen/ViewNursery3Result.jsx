@@ -578,6 +578,7 @@ export const ViewNursery3Result = React.forwardRef((props, ref) => {
                     <th>POSITION</th>
                     <th>OUT OF</th>
                     <th>FORM TEACHER REMARK</th>
+                    <th>HEAD TEACHE REMARK</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -588,6 +589,7 @@ export const ViewNursery3Result = React.forwardRef((props, ref) => {
                     <td>{viewResult?.Position} </td>
                     <td>{viewResult?.numberInClass} </td>
                     <td>{viewResult?.Remark} </td>
+                    <td>{viewResult?.HmRemark} </td>
                   </tr>
                 </tbody>
               </Table>

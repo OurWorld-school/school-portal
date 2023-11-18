@@ -135,9 +135,9 @@ const StaffLogin = () => {
           toast.success("post sucessful");
           {
             res.data.isAdmin == true
-              ? navigate("/admin-layout")
+              ? navigate("/admin")
               : res.data.roles == "Form-Teacher"
-              ? navigate("/admin-layout")
+              ? navigate("/admin")
               : navigate("/");
           }
         } else {

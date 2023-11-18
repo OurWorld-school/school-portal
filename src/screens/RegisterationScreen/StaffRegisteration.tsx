@@ -256,7 +256,7 @@ const StaffRegisteration: React.FC<Props> = () => {
                 />
               </Grid>
 
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <FormControl
                   fullWidth
                   // sx={{ m: 1 }}
@@ -321,7 +321,7 @@ const StaffRegisteration: React.FC<Props> = () => {
                     label="Password"
                   />
                 </FormControl>
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <FormLabel className="mb-2">*Passport Photograph*</FormLabel>
                 <TextField

@@ -567,6 +567,7 @@ export const AdminUserBasic2Result = () => {
                     <th>POSITION</th>
                     <th>OUT OF</th>
                     <th>FORM TEACHER REMARK</th>
+                    <th>HEAD TEACHER REMARK</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -577,6 +578,7 @@ export const AdminUserBasic2Result = () => {
                     <td>{viewResult?.Position} </td>
                     <td>{viewResult?.numberInClass} </td>
                     <td>{viewResult?.Remark} </td>
+                    <td>{viewResult?.HmRemark} </td>
                   </tr>
                 </tbody>
               </Table>
