@@ -79,7 +79,9 @@ export default function AdminBasic2Result() {
       );
       console.log(data);
       // const foundData = data.find((item) => item.artist === artist);
-      setViewResult(data);
+      setViewResult(
+        data.sort((a: any, b: any) => b.TotalAverage - a.TotalAverage)
+      );
     };
 
     fetchPosts();
@@ -103,7 +105,9 @@ export default function AdminBasic2Result() {
       );
       console.log(data);
       // const foundData = data.find((item) => item.artist === artist);
-      setViewResult2(data);
+      setViewResult2(
+        data.sort((a: any, b: any) => b.TotalAverage - a.TotalAverage)
+      );
     };
 
     fetchPosts();
@@ -128,7 +132,9 @@ export default function AdminBasic2Result() {
       );
       console.log(data);
       // const foundData = data.find((item) => item.artist === artist);
-      setViewResult3(data);
+      setViewResult3(
+        data.sort((a: any, b: any) => b.TotalAverage - a.TotalAverage)
+      );
     };
 
     fetchPosts();

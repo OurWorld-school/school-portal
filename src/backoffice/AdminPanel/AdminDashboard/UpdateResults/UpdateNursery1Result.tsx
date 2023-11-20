@@ -11,7 +11,11 @@ import { Dropdown } from "react-bootstrap";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { TextField, Button } from "@mui/material";
-import { Nursery1resultApi, UserApi } from "../../../../data/Api";
+import {
+  Nursery1resultApi,
+  UpdateNursery1resultApi,
+  UserApi,
+} from "../../../../data/Api";
 import AdminLayout from "../../AdminLayout";
 import CircularIndeterminate from "../../../../components/Loading/Progress";
 const ITEM_HEIGHT = 100;
@@ -32,14 +36,15 @@ const UpdateNursery1result = () => {
   console.log(id);
   const [term, setTerm] = useState("");
   const [year, setYear] = useState("");
-  const [TotalScore, setTotalScore] = useState(Number);
-  const [TotalAverage, setTotalAverage] = useState("");
+  const [TotalScore, setTotalScore] = useState(0);
+  const [TotalAverage, setTotalAverage] = useState(0);
   const [Position, setPosition] = useState("");
   const [numberInClass, setNumberInClass] = useState(Number);
   const [TotalGrade, setTotalGrade] = useState("");
   //  const [Signature, setSignature]=useState('')
   const [classes, setClasses] = useState("");
-  const [remark, setRemark] = useState("");
+  const [Remark, setRemark] = useState("");
+  const [HmRemark, setHmRemark] = useState("");
 
   const [schoolRegNumber, setSchoolRegNumber] = useState("");
   const [loading, setLoading] = useState(false);
@@ -52,6 +57,7 @@ const UpdateNursery1result = () => {
   // const [englishData, setEnglishData] = useState({
   //   English: [],
   // });
+
   const [formData, setFormData] = useState({
     test: 0,
     exam: 0,
@@ -87,14 +93,14 @@ const UpdateNursery1result = () => {
     grade: "",
     remark: "",
   });
-  const [RhymesData, setRhymesData] = useState({
+  const [WritingData, setWritingData] = useState({
     test: 0,
     exam: 0,
     totalScore: 0,
     grade: "",
     remark: "",
   });
-  const [WritingData, setWritingData] = useState({
+  const [RhymesData, setRhymesData] = useState({
     test: 0,
     exam: 0,
     totalScore: 0,
@@ -108,54 +114,140 @@ const UpdateNursery1result = () => {
     grade: "",
     remark: "",
   });
-  const handleInputChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const calculateResultTotalAverage = () => {
+    // const average = total / Object.keys(scores).length;
+    // setGrandAverage(average);
+    const GrandTotalAverage = TotalScore / 8;
+    // NumeracyData.test +
+    // NumeracyData.exam +
+    // LiteracyData.test +
+    // LiteracyData.exam / 2;
+
+    setTotalAverage(parseFloat(GrandTotalAverage.toFixed(2)));
   };
-  const handleInputChangeMaths = (e: any) => {
-    const { name, value } = e.target;
-    setMathsData({ ...mathsData, [name]: value });
+  const calculateResultTotalScore = () => {
+    const GrandTotal =
+      formData.test +
+      formData.exam +
+      mathsData.test +
+      mathsData.exam +
+      HealthScienceData.test +
+      HealthScienceData.exam +
+      WritingData.test +
+      WritingData.exam +
+      AgricScienceData.test +
+      AgricScienceData.exam +
+      BasicScienceData.test +
+      BasicScienceData.exam +
+      RhymesData.test +
+      RhymesData.exam +
+      SocialHabitData.test +
+      SocialHabitData.exam;
+    setTotalScore(GrandTotal);
   };
-  const handleInputChangeHealth = (e: any) => {
-    const { name, value } = e.target;
-    setHealthScienceData({ ...HealthScienceData, [name]: value });
+  const handleInputChange = (
+    subject:
+      | "formData"
+      | "mathsData"
+      | "WritingData"
+      | "BasicScienceData"
+      | "AgricScienceData"
+      | "SocialHabitData"
+      | "RhymesData"
+      | "HealthScienceData",
+    type: "test" | "exam" | "grade" | "remark",
+    value: number
+  ) => {
+    switch (subject) {
+      case "formData":
+        setFormData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "mathsData":
+        setMathsData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "BasicScienceData":
+        setBasicScienceData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "HealthScienceData":
+        setHealthScienceData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "AgricScienceData":
+        setAgricScienceData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "WritingData":
+        setWritingData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "RhymesData":
+        setRhymesData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "SocialHabitData":
+        setSocialHabitData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+    }
   };
-  const handleInputChangeBasic = (e: any) => {
-    const { name, value } = e.target;
-    setBasicScienceData({ ...BasicScienceData, [name]: value });
+  // const handleInputChangeTotalScore = (e: any) => {
+  //   const { name, value } = e.target;
+  //   setTotalScore({
+  //     ...TotalScore,
+  //     [name]: parseInt(value, 10) || 0,
+  //   });
+  // };
+  const calculateformDataTotal = () => {
+    const totalScore = formData.test + formData.exam;
+    setFormData({ ...formData, totalScore });
   };
-  const handleInputChangeAgric = (e: any) => {
-    const { name, value } = e.target;
-    setAgricScienceData({ ...AgricScienceData, [name]: value });
+
+  const calculatemathsDataTotal = () => {
+    const totalScore = mathsData.test + mathsData.exam;
+    setMathsData({ ...mathsData, totalScore });
   };
-  const handleInputChangeRhymes = (e: any) => {
-    const { name, value } = e.target;
-    setRhymesData({ ...RhymesData, [name]: value });
+
+  const calculateBasicScienceDataTotal = () => {
+    const totalScore = BasicScienceData.test + BasicScienceData.exam;
+    setBasicScienceData({ ...BasicScienceData, totalScore });
   };
-  const handleInputChangeWriting = (e: any) => {
-    const { name, value } = e.target;
-    setWritingData({ ...WritingData, [name]: value });
+
+  const calculateHealthScienceDataTotal = () => {
+    const totalScore = HealthScienceData.test + HealthScienceData.exam;
+    setHealthScienceData({ ...HealthScienceData, totalScore });
   };
-  const handleInputChangeSocialHabit = (e: any) => {
-    const { name, value } = e.target;
-    setSocialHabitData({ ...SocialHabitData, [name]: value });
+
+  const calculateSocialHabitDataTotal = () => {
+    const totalScore = SocialHabitData.test + SocialHabitData.exam;
+    setSocialHabitData({ ...SocialHabitData, totalScore });
   };
+  const calculateWritingDataTotal = () => {
+    const totalScore = WritingData.test + WritingData.exam;
+    setWritingData({ ...WritingData, totalScore });
+  };
+
+  const calculateRhymesTotal = () => {
+    const totalScore = RhymesData.test + RhymesData.exam;
+    setRhymesData({ ...RhymesData, totalScore });
+  };
+
+  const calculateAgricScienceDataTotal = () => {
+    const totalScore = AgricScienceData.test + AgricScienceData.exam;
+    setAgricScienceData({ ...AgricScienceData, totalScore });
+  };
+
   React.useEffect(() => {
     const fetchPosts = async () => {
-      const { data } = await axios.get(UserApi);
+      const { data } = await axios.get(Nursery1resultApi + id);
       console.log(data);
       // const foundData = data.find((item) => item.artist === artist);
       setUserDatas(data);
     };
 
     fetchPosts();
-  }, []);
+  }, [id]);
 
   const submitHandler = (e: any) => {
     e.preventDefault();
     setLoading(true);
+    // calculateResultTotalScore();
+    // calculateResultTotalAverage();
     const data: any = {
-      //   user: user,
       classes: classes,
       year: year,
       TotalScore: TotalScore,
@@ -163,7 +255,8 @@ const UpdateNursery1result = () => {
       TotalAverage: TotalAverage,
       Position: Position,
       term: term,
-      remark: remark,
+      Remark: Remark,
+      HmRemark: HmRemark,
       numberInClass: numberInClass,
       schoolRegNumber: schoolRegNumber,
       English: [
@@ -257,7 +350,7 @@ const UpdateNursery1result = () => {
     };
 
     axios
-      .post(Nursery1resultApi, data, headers)
+      .post(UpdateNursery1resultApi, data, headers)
 
       .then((res) => {
         console.log(res.data);
@@ -266,11 +359,12 @@ const UpdateNursery1result = () => {
           //   setUser("");
           setTerm(" ");
           setYear(" ");
+          setHmRemark("");
           setPosition(" ");
           setSchoolRegNumber(" ");
           setTotalScore(Number);
           setTotalGrade(" ");
-          setTotalAverage(" ");
+          setTotalAverage(Number);
           setClasses(" ");
           setRemark(" ");
           setNumberInClass(Number);
@@ -297,11 +391,31 @@ const UpdateNursery1result = () => {
             <div className="col-lg-8 col-xl-6">
               <div className="card rounded-3">
                 <div className="card-body p-4 p-md-5">
+                  <div
+                    style={{
+                      width: "100px",
+                      height: "12vh",
+                      display: "flex",
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    <img
+                      src={userDatas?.user?.passportPhoto}
+                      alt="img"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                    />{" "}
+                  </div>
                   <h3
                     className="  d-flex justify-content-center"
                     style={{ fontSize: "x-large", fontWeight: "600" }}
                   >
-                    Input Nursery 1 Result of
+                    Update/Edit Nursery 1 Result of
                   </h3>
                   <div
                     className="text-center mb-4"
@@ -314,11 +428,17 @@ const UpdateNursery1result = () => {
                         color: "green",
                       }}
                     >
-                      {userDatas?.firstName}{" "}
+                      {userDatas?.user?.firstName}{" "}
                     </span>
                     <span className="ml-3" style={{ color: "green" }}>
-                      {userDatas?.lastName}{" "}
+                      {userDatas?.user?.lastName}{" "}
                     </span>
+                  </div>
+                  <div
+                    className="text-center mb-2"
+                    style={{ color: "green", fontWeight: "600" }}
+                  >
+                    {userDatas?.user?.schoolRegNumber}{" "}
                   </div>
                   <p
                     className="d-flex justify-content-center"
@@ -342,7 +462,7 @@ const UpdateNursery1result = () => {
                         }}
                         className="result-input-elect-nursery1"
                       >
-                        English
+                        English Language
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -359,7 +479,15 @@ const UpdateNursery1result = () => {
                             type="number"
                             name="test"
                             value={formData.test}
-                            onChange={handleInputChange}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "formData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                            // onChange={handleInputChangeNumeracy}
+                            onBlur={calculateformDataTotal}
                           />
                         </div>
                         <div
@@ -381,7 +509,15 @@ const UpdateNursery1result = () => {
                             name="exam"
                             type="number"
                             value={formData.exam}
-                            onChange={handleInputChange}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "formData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                            // onChange={handleInputChangeNumeracy}
+                            onBlur={calculateformDataTotal}
                           />
                         </div>
                         <div
@@ -403,7 +539,8 @@ const UpdateNursery1result = () => {
                             type="number"
                             name="totalScore"
                             value={formData.totalScore}
-                            onChange={handleInputChange}
+                            onBlur={calculateResultTotalScore}
+                            // onChange={handleInputChangeLiteracy}
                           />
                         </div>
                         <div
@@ -425,7 +562,14 @@ const UpdateNursery1result = () => {
                             name="grade"
                             type="text"
                             value={formData.grade}
-                            onChange={handleInputChange}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "formData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
+                            // onChange={handleInputChangeNumeracy}
                           />
                         </div>
                         <div
@@ -447,7 +591,13 @@ const UpdateNursery1result = () => {
                             label="Remark"
                             type="text"
                             value={formData.remark}
-                            onChange={handleInputChange}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "formData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -482,7 +632,15 @@ const UpdateNursery1result = () => {
                             label="Test/C.A"
                             name="test"
                             value={mathsData.test}
-                            onChange={handleInputChangeMaths}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "mathsData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                            // onChange={handleInputChangeLiteracy}
+                            onBlur={calculatemathsDataTotal}
                           />
                         </div>
                         <div
@@ -504,7 +662,15 @@ const UpdateNursery1result = () => {
                             name="exam"
                             type="number"
                             value={mathsData.exam}
-                            onChange={handleInputChangeMaths}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "mathsData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                            // onChange={handleInputChangeLiteracy}
+                            onBlur={calculatemathsDataTotal}
                           />
                         </div>
                         <div
@@ -526,7 +692,8 @@ const UpdateNursery1result = () => {
                             type="number"
                             name="totalScore"
                             value={mathsData.totalScore}
-                            onChange={handleInputChangeMaths}
+                            onBlur={calculateResultTotalScore}
+                            // onChange={handleInputChangeLiteracy}
                           />
                         </div>
                         <div
@@ -548,7 +715,13 @@ const UpdateNursery1result = () => {
                             name="grade"
                             type="text"
                             value={mathsData.grade}
-                            onChange={handleInputChangeMaths}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "mathsData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -570,137 +743,18 @@ const UpdateNursery1result = () => {
                             label="Remark"
                             type="text"
                             value={mathsData.remark}
-                            onChange={handleInputChangeMaths}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "mathsData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
                     </Dropdown>
                     {/* ///maths end input */}
-                    {/* ///HealthSceince */}
-                    <Dropdown>
-                      <Dropdown.Toggle
-                        variant="success"
-                        id="dropdown-basic"
-                        style={{
-                          border: "1px solid green",
-                          backgroundColor: "white",
-                          marginTop: "15px",
-                          color: "black",
-                        }}
-                        className="result-input-elect-nursery1"
-                      >
-                        Health Science
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu>
-                        <div className="col-md-6 mb-2 mt-2 ">
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Test/C.A"
-                            type="number"
-                            name="test"
-                            value={HealthScienceData.test}
-                            onChange={handleInputChangeHealth}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Exam"
-                            name="exam"
-                            type="number"
-                            value={HealthScienceData.exam}
-                            onChange={handleInputChangeHealth}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-2"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Total Score"
-                            type="number"
-                            name="totalScore"
-                            value={HealthScienceData.totalScore}
-                            onChange={handleInputChangeHealth}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Grade"
-                            name="grade"
-                            type="text"
-                            value={HealthScienceData.grade}
-                            onChange={handleInputChangeHealth}
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            name="remark"
-                            label="Remark"
-                            type="text"
-                            value={HealthScienceData.remark}
-                            onChange={handleInputChangeHealth}
-                          />
-                        </div>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                    {/* ///Health science end input */}
-                    {/* ///Basic Sceince */}
                     <Dropdown>
                       <Dropdown.Toggle
                         variant="success"
@@ -730,7 +784,14 @@ const UpdateNursery1result = () => {
                             type="number"
                             name="test"
                             value={BasicScienceData.test}
-                            onChange={handleInputChangeBasic}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "BasicScienceData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateBasicScienceDataTotal}
                           />
                         </div>
                         <div
@@ -752,7 +813,14 @@ const UpdateNursery1result = () => {
                             name="exam"
                             type="number"
                             value={BasicScienceData.exam}
-                            onChange={handleInputChangeBasic}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "BasicScienceData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateBasicScienceDataTotal}
                           />
                         </div>
                         <div
@@ -774,7 +842,8 @@ const UpdateNursery1result = () => {
                             type="number"
                             name="totalScore"
                             value={BasicScienceData.totalScore}
-                            onChange={handleInputChangeBasic}
+                            onBlur={calculateResultTotalScore}
+                            // onChange={handleInputChangeColouring}
                           />
                         </div>
                         <div
@@ -796,7 +865,13 @@ const UpdateNursery1result = () => {
                             name="grade"
                             type="text"
                             value={BasicScienceData.grade}
-                            onChange={handleInputChangeBasic}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "BasicScienceData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -818,13 +893,19 @@ const UpdateNursery1result = () => {
                             label="Remark"
                             type="text"
                             value={BasicScienceData.remark}
-                            onChange={handleInputChangeBasic}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "BasicScienceData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
                     </Dropdown>
-                    {/* ///Basic Science end input */}
-                    {/* ///AgricSceince */}
+                    {/* ///Health science end input */}
+                    {/* ///Basic Sceince */}
                     <Dropdown>
                       <Dropdown.Toggle
                         variant="success"
@@ -837,7 +918,7 @@ const UpdateNursery1result = () => {
                         }}
                         className="result-input-elect-nursery1"
                       >
-                        Agricultural Science
+                        Health Science
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -853,8 +934,15 @@ const UpdateNursery1result = () => {
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={AgricScienceData.test}
-                            onChange={handleInputChangeAgric}
+                            value={HealthScienceData.test}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "HealthScienceData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateHealthScienceDataTotal}
                           />
                         </div>
                         <div
@@ -875,8 +963,15 @@ const UpdateNursery1result = () => {
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={AgricScienceData.exam}
-                            onChange={handleInputChangeAgric}
+                            value={HealthScienceData.exam}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "HealthScienceData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateHealthScienceDataTotal}
                           />
                         </div>
                         <div
@@ -897,8 +992,9 @@ const UpdateNursery1result = () => {
                             label="Total Score"
                             type="number"
                             name="totalScore"
-                            value={AgricScienceData.totalScore}
-                            onChange={handleInputChangeAgric}
+                            value={HealthScienceData.totalScore}
+                            onBlur={calculateResultTotalScore}
+                            // onChange={handleInputChangeHealthHabit}
                           />
                         </div>
                         <div
@@ -919,8 +1015,14 @@ const UpdateNursery1result = () => {
                             label="Grade"
                             name="grade"
                             type="text"
-                            value={AgricScienceData.grade}
-                            onChange={handleInputChangeAgric}
+                            value={HealthScienceData.grade}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "HealthScienceData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -941,14 +1043,20 @@ const UpdateNursery1result = () => {
                             name="remark"
                             label="Remark"
                             type="text"
-                            value={AgricScienceData.remark}
-                            onChange={handleInputChangeAgric}
+                            value={HealthScienceData.remark}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "HealthScienceData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
                     </Dropdown>
-                    {/* /// Agric Sceince end input */}
-                    {/* ///Social Habit */}
+                    {/* ///Basic Science end input */}
+                    {/* ///AgricSceince */}
                     <Dropdown>
                       <Dropdown.Toggle
                         variant="success"
@@ -978,7 +1086,14 @@ const UpdateNursery1result = () => {
                             type="number"
                             name="test"
                             value={SocialHabitData.test}
-                            onChange={handleInputChangeSocialHabit}
+                            onBlur={calculateSocialHabitDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "SocialHabitData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1000,7 +1115,14 @@ const UpdateNursery1result = () => {
                             name="exam"
                             type="number"
                             value={SocialHabitData.exam}
-                            onChange={handleInputChangeSocialHabit}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "SocialHabitData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateSocialHabitDataTotal}
                           />
                         </div>
                         <div
@@ -1022,7 +1144,8 @@ const UpdateNursery1result = () => {
                             type="number"
                             name="totalScore"
                             value={SocialHabitData.totalScore}
-                            onChange={handleInputChangeSocialHabit}
+                            onBlur={calculateResultTotalScore}
+                            // onChange={handleInputChangePreScience}
                           />
                         </div>
                         <div
@@ -1044,7 +1167,13 @@ const UpdateNursery1result = () => {
                             name="grade"
                             type="text"
                             value={SocialHabitData.grade}
-                            onChange={handleInputChangeSocialHabit}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "SocialHabitData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1066,7 +1195,164 @@ const UpdateNursery1result = () => {
                             label="Remark"
                             type="text"
                             value={SocialHabitData.remark}
-                            onChange={handleInputChangeSocialHabit}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "SocialHabitData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    {/* /// Agric Sceince end input */}
+                    {/* ///Social Habit */}
+                    <Dropdown>
+                      <Dropdown.Toggle
+                        variant="success"
+                        id="dropdown-basic"
+                        style={{
+                          border: "1px solid green",
+                          backgroundColor: "white",
+                          marginTop: "15px",
+                          color: "black",
+                        }}
+                        className="result-input-elect-nursery1"
+                      >
+                        Writing
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        <div className="col-md-6 mb-2 mt-2 ">
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Test/C.A"
+                            type="number"
+                            name="test"
+                            value={WritingData.test}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "WritingData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateWritingDataTotal}
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Exam"
+                            name="exam"
+                            type="number"
+                            value={WritingData.exam}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "WritingData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateWritingDataTotal}
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-2"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Total Score"
+                            type="number"
+                            name="totalScore"
+                            value={WritingData.totalScore}
+                            onBlur={calculateResultTotalScore}
+                            // onChange={handleInputChangePracticalLife}
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Grade"
+                            name="grade"
+                            type="text"
+                            value={WritingData.grade}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "WritingData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            name="remark"
+                            label="Remark"
+                            type="text"
+                            value={WritingData.remark}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "WritingData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -1102,7 +1388,14 @@ const UpdateNursery1result = () => {
                             type="number"
                             name="test"
                             value={RhymesData.test}
-                            onChange={handleInputChangeRhymes}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "RhymesData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateRhymesTotal}
                           />
                         </div>
                         <div
@@ -1124,7 +1417,14 @@ const UpdateNursery1result = () => {
                             name="exam"
                             type="number"
                             value={RhymesData.exam}
-                            onChange={handleInputChangeRhymes}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "RhymesData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateRhymesTotal}
                           />
                         </div>
                         <div
@@ -1146,7 +1446,8 @@ const UpdateNursery1result = () => {
                             type="number"
                             name="totalScore"
                             value={RhymesData.totalScore}
-                            onChange={handleInputChangeRhymes}
+                            onBlur={calculateResultTotalScore}
+                            // onChange={handleInputChangeRhymes}
                           />
                         </div>
                         <div
@@ -1168,7 +1469,13 @@ const UpdateNursery1result = () => {
                             name="grade"
                             type="text"
                             value={RhymesData.grade}
-                            onChange={handleInputChangeRhymes}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "RhymesData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1190,7 +1497,13 @@ const UpdateNursery1result = () => {
                             label="Remark"
                             type="text"
                             value={RhymesData.remark}
-                            onChange={handleInputChangeRhymes}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "RhymesData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
@@ -1209,7 +1522,7 @@ const UpdateNursery1result = () => {
                         }}
                         className="result-input-elect-nursery1"
                       >
-                        Writing
+                        Agric Science
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -1225,8 +1538,15 @@ const UpdateNursery1result = () => {
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={WritingData.test}
-                            onChange={handleInputChangeWriting}
+                            value={AgricScienceData.test}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "AgricScienceData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateAgricScienceDataTotal}
                           />
                         </div>
                         <div
@@ -1247,8 +1567,15 @@ const UpdateNursery1result = () => {
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={WritingData.exam}
-                            onChange={handleInputChangeWriting}
+                            value={AgricScienceData.exam}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "AgricScienceData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                            onBlur={calculateAgricScienceDataTotal}
                           />
                         </div>
                         <div
@@ -1269,8 +1596,9 @@ const UpdateNursery1result = () => {
                             label="Total Score"
                             type="number"
                             name="totalScore"
-                            value={WritingData.totalScore}
-                            onChange={handleInputChangeWriting}
+                            value={AgricScienceData.totalScore}
+                            onBlur={calculateResultTotalScore}
+                            // onChange={handleInputChangeSensorialActivity}
                           />
                         </div>
                         <div
@@ -1291,8 +1619,14 @@ const UpdateNursery1result = () => {
                             label="Grade"
                             name="grade"
                             type="text"
-                            value={WritingData.grade}
-                            onChange={handleInputChangeWriting}
+                            value={AgricScienceData.grade}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "AgricScienceData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                         <div
@@ -1313,30 +1647,41 @@ const UpdateNursery1result = () => {
                             name="remark"
                             label="Remark"
                             type="text"
-                            value={WritingData.remark}
-                            onChange={handleInputChangeWriting}
+                            value={AgricScienceData.remark}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "AgricScienceData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
                           />
                         </div>
                       </Dropdown.Menu>
                     </Dropdown>
-                    {/* ///Writing end input */}
-
+                    {/* ///HealthSceince */}
                     <TextField
                       variant="outlined"
                       margin="normal"
+                      required
                       fullWidth
-                      id="TotalScore"
+                      // id="TotalScore"
                       label="Total Score"
-                      type="number"
-                      name="TotalScore"
-                      autoComplete="classes"
-                      autoFocus
+                      // type="number"
+                      // name="TotalScore"
+                      // autoComplete="TotalScore"
+                      // autoFocus
                       value={TotalScore}
-                      onChange={(e) => setTotalScore(parseInt(e.target.value))}
+                      aria-readonly
+                      onBlur={calculateResultTotalAverage}
+                      onChange={(e) =>
+                        setTotalScore(parseInt(e.target.value, 10))
+                      }
                     />
                     <TextField
                       variant="outlined"
                       margin="normal"
+                      required
                       fullWidth
                       id="TotalAverage"
                       label="Total Average"
@@ -1344,11 +1689,14 @@ const UpdateNursery1result = () => {
                       autoComplete="TotalAverage"
                       autoFocus
                       value={TotalAverage}
-                      onChange={(e) => setTotalAverage(e.target.value)}
+                      onChange={(e) =>
+                        setTotalAverage(parseInt(e.target.value, 10))
+                      }
                     />
                     <TextField
                       variant="outlined"
                       margin="normal"
+                      required
                       fullWidth
                       id="TotalGrade"
                       label="Total Grade"
@@ -1358,9 +1706,10 @@ const UpdateNursery1result = () => {
                       value={TotalGrade}
                       onChange={(e) => setTotalGrade(e.target.value)}
                     />
-                    <TextField
+                    {/* <TextField
                       variant="outlined"
                       margin="normal"
+                      required
                       fullWidth
                       id="Position"
                       label="Position"
@@ -1369,10 +1718,11 @@ const UpdateNursery1result = () => {
                       autoFocus
                       value={Position}
                       onChange={(e) => setPosition(e.target.value)}
-                    />
+                    /> */}
                     <TextField
                       variant="outlined"
                       margin="normal"
+                      required
                       fullWidth
                       id="numberInClass"
                       label="Number In Class"
@@ -1388,27 +1738,50 @@ const UpdateNursery1result = () => {
                     <TextField
                       variant="outlined"
                       margin="normal"
+                      required
                       multiline
                       rows={6}
                       fullWidth
                       type="text"
                       id="remark"
-                      label="Result Remark"
+                      label="Form Teacher Remark"
                       name="remark"
                       autoComplete="remark"
                       autoFocus
-                      value={remark}
+                      value={Remark}
                       onChange={(e) => setRemark(e.target.value)}
                     />
                     <TextField
                       variant="outlined"
                       margin="normal"
+                      required
+                      multiline
+                      rows={6}
+                      fullWidth
+                      type="text"
+                      id="remark"
+                      label="Head Teacher Remark"
+                      name="remark"
+                      autoComplete="remark"
+                      autoFocus
+                      value={HmRemark}
+                      onChange={(e) => setHmRemark(e.target.value)}
+                    />
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
                       fullWidth
                       id="schoolRegNumber"
                       label="School Registeration/Admission Number"
                       name="schoolRegNumber"
                       autoComplete="schoolRegNumber"
                       autoFocus
+                      placeholder={
+                        userDatas
+                          ? ` ${userDatas?.schoolRegNumber}`
+                          : "loading..."
+                      }
                       style={{
                         color: "black",
                         fontSize: "x-large",
@@ -1430,7 +1803,7 @@ const UpdateNursery1result = () => {
                         // input={<OutlinedInput label="Name" />}
                         MenuProps={MenuProps}
                       >
-                        <MenuItem value="Nursery-1">Nursery 1</MenuItem>
+                        <MenuItem value="Nursery-1">Nursery-1</MenuItem>
                       </Select>
                     </FormControl>
                     <FormControl sx={{ m: 1, width: 370 }}>

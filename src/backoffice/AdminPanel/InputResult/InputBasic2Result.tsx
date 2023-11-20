@@ -590,6 +590,12 @@ const InputBasic2Result = () => {
                       {userDatas?.lastName}{" "}
                     </span>
                   </div>
+                  <div
+                    className="text-center mb-2"
+                    style={{ color: "green", fontWeight: "600" }}
+                  >
+                    {userDatas?.schoolRegNumber}{" "}
+                  </div>
                   <p
                     className="d-flex justify-content-center"
                     style={{ marginLeft: "15px" }}

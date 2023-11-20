@@ -36,8 +36,7 @@ export const UpdatePosiionPreNurseryresultApi =
   "https://ourworldintschool.onrender.com/api/prenurseryresult/updateResultPosition/";
 export const UpdatePosiionNursery1resultApi =
   "https://ourworldintschool.onrender.com/api/nursery1result/updateResultPosition/";
-export const UpdatePreNurseryresultApi =
-  "https://ourworldintschool.onrender.com/api/prenurseryresult/update/";
+
 export const UpdatePosiionNursery2resultApi =
   "https://ourworldintschool.onrender.com/api/nursery2result/updateResultPosition/";
 export const UpdatePosiionNursery3resultApi =
@@ -65,5 +64,5 @@ export const UpdatNursery2resultApi =
   "https://ourworldintschool.onrender.com/api/nursery2result/update/";
 export const UpdateNursery3resultApi =
   "https://ourworldintschool.onrender.com/api/nursery3result/update/";
-export const UpdatePreNurseryresultresultApi =
+export const UpdatePreNurseryresultApi =
   "https://ourworldintschool.onrender.com/api/prenurseryresult/update/";
