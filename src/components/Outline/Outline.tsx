@@ -48,7 +48,13 @@ const Outline = () => {
           <div className="portal-phase">
             <div className="portal-write">ADMISSION REQUIREMENT</div>
             <div className="portal-btn">
-              <Button className="btn-portal">More Info</Button>
+              <Link
+                to="/admission-portal"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                {" "}
+                <Button className="btn-portal">More Info</Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -88,7 +94,13 @@ const Outline = () => {
           <div className="portal-phase">
             <div className="portal-write">Student Portal</div>
             <div className="portal-btn">
-              <Button className="btn-portal">More Info</Button>
+              <Link
+                to="/online-result"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                {" "}
+                <Button className="btn-portal">More Info</Button>
+              </Link>
             </div>
           </div>
         </div>

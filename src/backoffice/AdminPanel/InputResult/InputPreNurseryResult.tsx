@@ -126,6 +126,16 @@ const InputPreNurseryResult = () => {
 
     setTotalAverage(parseFloat(GrandTotalAverage.toFixed(2)));
   };
+  const calculateTotalGrade = () => {
+    let newGrade = "";
+    if (TotalAverage >= 70 && TotalAverage <= 100) {
+      newGrade = "A";
+    } else if (TotalAverage >= 60 && TotalAverage <= 69) {
+      newGrade = "B";
+    } // Add more conditions as needed for other grades
+
+    setTotalGrade(newGrade);
+  };
   const calculateResultTotalScore = () => {
     const GrandTotal =
       NumeracyData.test +
@@ -144,8 +154,10 @@ const InputPreNurseryResult = () => {
       RhymesData.exam +
       SensorialActivityData.test +
       SensorialActivityData.exam;
+
     setTotalScore(GrandTotal);
   };
+
   const handleInputChange = (
     subject:
       | "NumeracyData"
@@ -195,8 +207,23 @@ const InputPreNurseryResult = () => {
   // };
   const calculateNumeracyTotal = () => {
     const totalScore = NumeracyData.test + NumeracyData.exam;
+
     setNumeracyData({ ...NumeracyData, totalScore });
+
+    // setTotalGrade(newGrade);
   };
+  // const calculateGrade = (totalScore) => {
+  //   const score = parseInt(totalScore, 10);
+
+  //   if (score >= 70 && score <= 100) {
+  //     return 'A';
+  //   } else if (score >= 60 && score <= 69) {
+  //     return 'B';
+  //   } else {
+  //     // Handle other cases or set a default grade
+  //     return '';
+  //   }
+  // };
 
   const handleInputChangeNumeracy = (e: any) => {
     const { name, value } = e.target;
@@ -1731,10 +1758,12 @@ const InputPreNurseryResult = () => {
                       autoComplete="TotalAverage"
                       autoFocus
                       value={TotalAverage}
+                      // onBlur={calculateTotalGrade}
                       onChange={(e) =>
                         setTotalAverage(parseInt(e.target.value, 10))
                       }
                     />
+
                     <TextField
                       variant="outlined"
                       margin="normal"
@@ -1745,6 +1774,7 @@ const InputPreNurseryResult = () => {
                       name="TotalGrade"
                       autoComplete="TotalGrade"
                       autoFocus
+                      aria-readonly
                       value={TotalGrade}
                       onChange={(e) => setTotalGrade(e.target.value)}
                     />

@@ -350,7 +350,7 @@ const UpdateNursery1result = () => {
     };
 
     axios
-      .post(UpdateNursery1resultApi, data, headers)
+      .put(UpdateNursery1resultApi + id, data, headers)
 
       .then((res) => {
         console.log(res.data);
@@ -370,7 +370,7 @@ const UpdateNursery1result = () => {
           setNumberInClass(Number);
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/");
+          navigate("/nusery1Result");
         } else {
           toast.error(res.data.error);
         }

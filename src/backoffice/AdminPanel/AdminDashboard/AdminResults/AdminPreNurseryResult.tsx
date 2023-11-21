@@ -69,7 +69,12 @@ export default function AdminPreNurseryResult() {
   const [Position, setPosition] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [userId, setUseId] = React.useState(null);
+
+  const handleShow = (_id: any) => {
+    setShow(true);
+    setUseId(_id);
+  };
   const handleLoader = () => {
     setLoading(true);
 
@@ -91,12 +96,7 @@ export default function AdminPreNurseryResult() {
     };
 
     axios
-      .put(
-        UpdatePosiionPreNurseryresultApi +
-          viewResult.map((item: any) => item._id),
-        data,
-        headers
-      )
+      .put(UpdatePosiionPreNurseryresultApi + userId, data, headers)
 
       .then((res) => {
         console.log(res.data);
@@ -264,7 +264,10 @@ export default function AdminPreNurseryResult() {
                 <td>{row?.HmRemark}</td>
                 <td>
                   {" "}
-                  <Button className="btn-sm" onClick={handleShow}>
+                  <Button
+                    className="btn-sm"
+                    onClick={() => handleShow(row?._id)}
+                  >
                     <FaEdit />{" "}
                   </Button>
                 </td>
@@ -394,7 +397,10 @@ export default function AdminPreNurseryResult() {
                   <td>{row?.HmRemark}</td>
                   <td>
                     {" "}
-                    <Button className="btn-sm" onClick={handleShow}>
+                    <Button
+                      className="btn-sm"
+                      onClick={() => handleShow(row?._id)}
+                    >
                       <FaEdit />{" "}
                     </Button>
                   </td>
@@ -526,7 +532,10 @@ export default function AdminPreNurseryResult() {
                   <td>{row?.HmRemark}</td>
                   <td>
                     {" "}
-                    <Button className="btn-sm" onClick={handleShow}>
+                    <Button
+                      className="btn-sm"
+                      onClick={() => handleShow(row?._id)}
+                    >
                       <FaEdit />{" "}
                     </Button>
                   </td>

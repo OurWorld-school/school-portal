@@ -64,7 +64,11 @@ export default function AdminUsers() {
       //   return a.name.localeCompare(b.name);
       // });
       // const foundData = data.find((item) => item.artist === artist);
-      setViewUser(sortedData);
+      setViewUser(
+        sortedData.sort((a: any, b: any) =>
+          a.firstName.localeCompare(b.firstName)
+        )
+      );
     };
 
     fetchPosts();

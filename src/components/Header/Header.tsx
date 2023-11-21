@@ -104,7 +104,10 @@ export default function Header(props: Props) {
         >
           <ListItem>
             {" "}
-            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+            <Link
+              to="/admission-portal"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               {" "}
               Admission
             </Link>
@@ -256,7 +259,7 @@ export default function Header(props: Props) {
                 <ListItem>
                   {" "}
                   <Link
-                    to="/"
+                    to="/admission-portal"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
                     Admission

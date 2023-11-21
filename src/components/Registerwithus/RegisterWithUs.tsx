@@ -5,6 +5,7 @@ import nursery from "../../assets/images/nurs.jpeg";
 import secondary from "../../assets/images/secskul.jpeg";
 import primary from "../../assets/images/prim.jpeg";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 const RegisterWithUs = () => {
   return (
     <div className="register-head-div">
@@ -16,26 +17,46 @@ const RegisterWithUs = () => {
           <img src={baby} alt="daycare" className="register-img" />
           <div className="register-border">
             {" "}
-            <Button>CRECHE</Button>
+            <Link
+              to="/admission-portal"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <Button>CRECHE</Button>
+            </Link>
           </div>{" "}
         </div>
 
         <div className="register-div-img">
           <img src={nursery} alt="daycare" className="register-img" />
           <div className="register-border">
-            <Button>Nursery</Button>
+            <Link
+              to="/admission-portal"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <Button>Nursery</Button>
+            </Link>
           </div>{" "}
         </div>
         <div className="register-div-img">
           <img src={primary} alt="daycare" className="register-img" />{" "}
           <div className="register-border">
-            <Button>Primary</Button>
+            <Link
+              to="/admission-portal"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <Button>Primary</Button>
+            </Link>
           </div>
         </div>
         <div className="register-div-img">
           <img src={secondary} alt="daycare" className="register-img" />{" "}
           <div className="register-border">
-            <Button>Secondary</Button>
+            <Link
+              to="/admission-portal"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <Button>Secondary</Button>
+            </Link>
           </div>
         </div>
       </div>

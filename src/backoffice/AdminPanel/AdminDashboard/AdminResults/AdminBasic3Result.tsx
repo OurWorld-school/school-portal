@@ -153,7 +153,12 @@ export default function AdminBasic3Result() {
   const [Position, setPosition] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [userId, setUseId] = React.useState(null);
+
+  const handleShow = (_id: any) => {
+    setShow(true);
+    setUseId(_id);
+  };
   const handleLoader = () => {
     setLoading(true);
 
@@ -175,11 +180,7 @@ export default function AdminBasic3Result() {
     };
 
     axios
-      .put(
-        UpdatePosiionBasic3resultApi + viewResult.map((item: any) => item._id),
-        data,
-        headers
-      )
+      .put(UpdatePosiionBasic3resultApi + userId, data, headers)
 
       .then((res) => {
         console.log(res.data);
@@ -267,7 +268,10 @@ export default function AdminBasic3Result() {
                 <td>{row?.HmRemark}</td>
                 <td>
                   {" "}
-                  <Button className="btn-sm" onClick={handleShow}>
+                  <Button
+                    className="btn-sm"
+                    onClick={() => handleShow(row?._id)}
+                  >
                     <FaEdit />{" "}
                   </Button>
                 </td>
@@ -395,7 +399,10 @@ export default function AdminBasic3Result() {
                   <td>{row?.HmRemark}</td>
                   <td>
                     {" "}
-                    <Button className="btn-sm" onClick={handleShow}>
+                    <Button
+                      className="btn-sm"
+                      onClick={() => handleShow(row?._id)}
+                    >
                       <FaEdit />{" "}
                     </Button>
                   </td>
@@ -525,7 +532,10 @@ export default function AdminBasic3Result() {
                   <td>{row?.HmRemark}</td>
                   <td>
                     {" "}
-                    <Button className="btn-sm" onClick={handleShow}>
+                    <Button
+                      className="btn-sm"
+                      onClick={() => handleShow(row?._id)}
+                    >
                       <FaEdit />{" "}
                     </Button>
                   </td>

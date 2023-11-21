@@ -73,7 +73,9 @@ export default function Basic3students() {
     const filtered = viewUser.filter(
       (item: any) => item.currentClass === "Basic-3"
     );
-    setFilteredData(filtered);
+    setFilteredData(
+      filtered.sort((a: any, b: any) => a.firstName.localeCompare(b.firstName))
+    );
     console.log(filtered);
   }, [viewUser]);
 

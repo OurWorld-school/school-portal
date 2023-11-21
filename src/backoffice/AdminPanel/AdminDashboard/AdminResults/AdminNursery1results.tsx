@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 import {
   Nursery1resultApi,
   UpdatePosiionNursery1resultApi,
+  UpdatePosiionNursery2resultApi,
 } from "../../../../data/Api";
 import AdminLayout from "../../AdminLayout";
 import CircularIndeterminate from "../../../../components/Loading/Progress";
@@ -147,8 +148,14 @@ export default function AdminNursery1Results() {
 
   const [Position, setPosition] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [userId, setUseId] = React.useState(null);
+
+  const handleShow = (_id: any) => {
+    setShow(true);
+    setUseId(_id);
+  };
   const handleLoader = () => {
     setLoading(true);
 
@@ -171,8 +178,8 @@ export default function AdminNursery1Results() {
 
     axios
       .put(
-        UpdatePosiionNursery1resultApi +
-          viewResult.map((item: any) => item._id),
+        UpdatePosiionNursery1resultApi + userId,
+        // viewResult.map((item: any) => item._id),
         data,
         headers
       )
@@ -183,7 +190,7 @@ export default function AdminNursery1Results() {
         if (res.data) {
           //   setUser("");
 
-          setPosition(" ");
+          setPosition("");
 
           console.log(res.data);
           toast.success("post sucessful");
@@ -263,7 +270,10 @@ export default function AdminNursery1Results() {
                 <td>{row?.HmRemark}</td>
                 <td>
                   {" "}
-                  <Button className="btn-sm" onClick={handleShow}>
+                  <Button
+                    className="btn-sm"
+                    onClick={() => handleShow(row?._id)}
+                  >
                     <FaEdit />{" "}
                   </Button>
                 </td>
@@ -391,7 +401,10 @@ export default function AdminNursery1Results() {
                   <td>{row?.HmRemark}</td>
                   <td>
                     {" "}
-                    <Button className="btn-sm" onClick={handleShow}>
+                    <Button
+                      className="btn-sm"
+                      onClick={() => handleShow(row?._id)}
+                    >
                       <FaEdit />{" "}
                     </Button>
                   </td>
@@ -523,7 +536,10 @@ export default function AdminNursery1Results() {
                   <td>{row?.HmRemark}</td>
                   <td>
                     {" "}
-                    <Button className="btn-sm" onClick={handleShow}>
+                    <Button
+                      className="btn-sm"
+                      onClick={() => handleShow(row?._id)}
+                    >
                       <FaEdit />{" "}
                     </Button>
                   </td>

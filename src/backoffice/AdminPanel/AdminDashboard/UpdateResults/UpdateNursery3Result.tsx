@@ -501,7 +501,7 @@ const UpdateNursery3Result = () => {
     };
 
     axios
-      .post(UpdateNursery3resultApi + id, data, headers)
+      .put(UpdateNursery3resultApi + id, data, headers)
 
       .then((res) => {
         console.log(res.data);
@@ -2845,7 +2845,7 @@ const UpdateNursery3Result = () => {
                         // input={<OutlinedInput label="Name" />}
                         MenuProps={MenuProps}
                       >
-                        <MenuItem value="Basic-1">Basic-1</MenuItem>
+                        <MenuItem value="Nursery-3">Nursery-3</MenuItem>
                       </Select>
                     </FormControl>
                     <FormControl sx={{ m: 1, width: 370 }}>

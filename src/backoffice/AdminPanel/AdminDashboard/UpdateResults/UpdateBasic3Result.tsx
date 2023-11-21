@@ -501,7 +501,7 @@ const UpdateBasic3Result = () => {
     };
 
     axios
-      .post(UpdateBasic3resultApi + id, data, headers)
+      .put(UpdateBasic3resultApi + id, data, headers)
 
       .then((res) => {
         console.log(res.data);
@@ -521,7 +521,7 @@ const UpdateBasic3Result = () => {
           setNumberInClass(Number);
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/nusery3Result");
+          navigate("/basic3Result");
         } else {
           toast.error(res.data.error);
         }
@@ -2845,7 +2845,7 @@ const UpdateBasic3Result = () => {
                         // input={<OutlinedInput label="Name" />}
                         MenuProps={MenuProps}
                       >
-                        <MenuItem value="Basic-1">Basic-1</MenuItem>
+                        <MenuItem value="Basic-3">Basic-3</MenuItem>
                       </Select>
                     </FormControl>
                     <FormControl sx={{ m: 1, width: 370 }}>

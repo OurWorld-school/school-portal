@@ -499,7 +499,7 @@ const UpdateBasic1Result = () => {
     };
 
     axios
-      .post(UpdateBasic1resultApi + id, data, headers)
+      .put(UpdateBasic1resultApi + id, data, headers)
 
       .then((res) => {
         console.log(res.data);
@@ -519,7 +519,7 @@ const UpdateBasic1Result = () => {
           setNumberInClass(Number);
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/nusery3Result");
+          navigate("/basic1Result");
         } else {
           toast.error(res.data.error);
         }

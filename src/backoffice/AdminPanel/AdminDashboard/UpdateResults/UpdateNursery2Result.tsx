@@ -475,7 +475,7 @@ const UpdateNursery2Result = () => {
     };
 
     axios
-      .post(UpdatNursery2resultApi + id, data, headers)
+      .put(UpdatNursery2resultApi + id, data, headers)
 
       .then((res) => {
         console.log(res.data);

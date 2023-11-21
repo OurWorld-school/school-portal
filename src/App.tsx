@@ -96,7 +96,7 @@ function App() {
         <Route path="/check-result" element={<CheckResult />} />
         <Route path="/Nursery1-result" element={<CheckNursery1result />} />
         <Route path="/online-result" element={<ScratchCard />} />
-
+        <Route path="/admission-portal" element={<AdmissionPortal />} />
         <Route path="/Admin" element={<AdminUsers />} />
         <Route path="/pre-nursery" element={<PreNurserystudents />} />
         <Route path="/nusery1" element={<Nursery1students />} />
