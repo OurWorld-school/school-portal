@@ -13,6 +13,7 @@ import { UserApi } from "../../../data/Api";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Button from "@mui/material/Button";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
+import { Container } from "react-bootstrap";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -75,59 +76,66 @@ export default function AdminUsers() {
   }, []);
   return (
     <AdminLayout>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Image</StyledTableCell>
-              <StyledTableCell>First Name</StyledTableCell>
-              <StyledTableCell align="right">Last Name</StyledTableCell>
-              <StyledTableCell align="right">Class</StyledTableCell>
-              <StyledTableCell align="right">School Reg No</StyledTableCell>
-              <StyledTableCell align="right">Phone Number</StyledTableCell>
-              <StyledTableCell align="right">Contact Address</StyledTableCell>
-              {/* <StyledTableCell align="right">Edith Profile</StyledTableCell> */}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {viewUser?.map((row: any) => (
-              <StyledTableRow key={row.name}>
-                <StyledTableCell
-                  component="th"
-                  scope="row"
-                  style={{ width: "5%", height: "5%" }}
-                >
-                  <img
-                    src={row?.passportPhoto}
-                    alt="img"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                  />
-                </StyledTableCell>
-                <StyledTableCell component="th" scope="row">
-                  {row?.firstName}
-                </StyledTableCell>
-                <StyledTableCell align="right">{row?.lastName}</StyledTableCell>
-                <StyledTableCell align="right">
-                  {row?.currentClass}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  {row?.schoolRegNumber}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  {row?.phoneNumber}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  {row?.contactAdress}
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <h3 className="text-center mb-4 mt-4">
+        View All {viewUser?.length} Pupils{" "}
+      </h3>
+      <Container>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Image</StyledTableCell>
+                <StyledTableCell>First Name</StyledTableCell>
+                <StyledTableCell align="right">Last Name</StyledTableCell>
+                <StyledTableCell align="right">Class</StyledTableCell>
+                <StyledTableCell align="right">School Reg No</StyledTableCell>
+                <StyledTableCell align="right">Phone Number</StyledTableCell>
+                <StyledTableCell align="right">Contact Address</StyledTableCell>
+                {/* <StyledTableCell align="right">Edith Profile</StyledTableCell> */}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {viewUser?.map((row: any) => (
+                <StyledTableRow key={row.name}>
+                  <StyledTableCell
+                    component="th"
+                    scope="row"
+                    style={{ width: "5%", height: "5%" }}
+                  >
+                    <img
+                      src={row?.passportPhoto}
+                      alt="img"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </StyledTableCell>
+                  <StyledTableCell component="th" scope="row">
+                    {row?.firstName}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {row?.lastName}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {row?.currentClass}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {row?.schoolRegNumber}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {row?.phoneNumber}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {row?.contactAdress}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Container>
     </AdminLayout>
   );
 }

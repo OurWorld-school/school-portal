@@ -81,6 +81,9 @@ export default function Basic4students() {
 
   return (
     <AdminLayout>
+      <h3 className="text-center mb-4 mt-4">
+        View All {filteredData?.length} Pupils{" "}
+      </h3>
       <div style={{ marginLeft: "auto", marginRight: "auto" }}>
         <Table responsive striped bordered>
           <thead

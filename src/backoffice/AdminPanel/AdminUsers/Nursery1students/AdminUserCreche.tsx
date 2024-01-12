@@ -1,13 +1,13 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-
+import Table from "react-bootstrap/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Table from "react-bootstrap/Table";
+
 import axios from "axios";
 
 import { FaEdit, FaTrash } from "react-icons/fa";
@@ -47,7 +47,7 @@ function createData(
   return { name, calories, fat, carbs, protein };
 }
 
-export default function PreNurserystudents() {
+export default function AdminUserCreche() {
   const [viewUser, setViewUser] = React.useState([]);
   const [filteredData, setFilteredData] = React.useState([]);
 
@@ -71,7 +71,7 @@ export default function PreNurserystudents() {
   React.useEffect(() => {
     // Filter the data based on genre "afrobeat"
     const filtered = viewUser.filter(
-      (item: any) => item.currentClass === "Pre-Nursery"
+      (item: any) => item.currentClass === "Creche"
     );
     setFilteredData(
       filtered.sort((a: any, b: any) => a.firstName.localeCompare(b.firstName))
@@ -84,69 +84,62 @@ export default function PreNurserystudents() {
       <h3 className="text-center mb-4 mt-4">
         View All {filteredData?.length} Pupils{" "}
       </h3>
-      <Table responsive="sm" striped bordered>
-        <thead
-          style={{
-            backgroundColor: "#e53238",
-            color: "white",
-            fontSize: "medium",
-            fontWeight: "500",
-          }}
-        >
-          <tr>
-            <th>Image</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Class</th>
-            <th>School Reg No</th>
-            <th>Phone Number</th>
-            <th>Contact Address</th>
-            <th>Email</th>
-            <th>Input Result</th>
-            <th>Update User Current Class</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData?.map((row: any, index) => (
-            <tr key={index}>
-              <td style={{ width: "5%", height: "5%" }}>
-                <img
-                  src={row?.passportPhoto}
-                  alt="img"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                />{" "}
-              </td>
-              <td>{row?.firstName}</td>
-              <td>{row?.lastName}</td>
-              <td>{row?.currentClass}</td>
-              <td>{row?.schoolRegNumber}</td>
-              <td>{row?.phoneNumber}</td>
-              <td>{row?.contactAdress}</td>
-              <td>{row?.email}</td>
-              <td>
-                {" "}
-                <Link to={`/post-prenursery-result/${row?._id}`}>
-                  <Button className="btn-sm">
-                    <BsFillBookmarkCheckFill />{" "}
-                  </Button>
-                </Link>{" "}
-              </td>
-              <td>
-                {" "}
-                <Link to={`/updateusserclassby-admin/${row?._id}`}>
-                  <Button className="btn-sm">
-                    <FaEdit />{" "}
-                  </Button>
-                </Link>{" "}
-              </td>
+      <div style={{ marginLeft: "auto", marginRight: "auto" }}>
+        <Table responsive striped bordered>
+          <thead
+            style={{
+              backgroundColor: "#e53238",
+              color: "white",
+              fontSize: "medium",
+              fontWeight: "500",
+            }}
+          >
+            <tr>
+              <th>Image</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Class</th>
+              <th>School Reg No</th>
+              <th>Phone Number</th>
+              <th>Contact Address</th>
+
+              <th>Update User Current Class</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {filteredData?.map((row: any, index) => (
+              <tr key={index}>
+                <td style={{ width: "5%", height: "5%" }}>
+                  <img
+                    src={row?.passportPhoto}
+                    alt="img"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />{" "}
+                </td>
+                <td>{row?.firstName}</td>
+                <td>{row?.lastName}</td>
+                <td>{row?.currentClass}</td>
+                <td>{row?.schoolRegNumber}</td>
+                <td>{row?.phoneNumber}</td>
+                <td>{row?.contactAdress}</td>
+
+                <td>
+                  {" "}
+                  <Link to={`/updateusserclassby-admin/${row?._id}`}>
+                    <Button className="btn-sm">
+                      <FaEdit />{" "}
+                    </Button>
+                  </Link>{" "}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     </AdminLayout>
   );
 }

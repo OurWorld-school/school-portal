@@ -124,6 +124,21 @@ const UpdatePreNurseryResults = () => {
 
     setTotalAverage(parseFloat(GrandTotalAverage.toFixed(2)));
   };
+  const calculateTotalGrade = () => {
+    let newGrade = "";
+    if (TotalAverage >= 70 && TotalAverage <= 100) {
+      newGrade = "A";
+    } else if (TotalAverage >= 60 && TotalAverage <= 69) {
+      newGrade = "B";
+    } else if (TotalAverage >= 50 && TotalAverage <= 59) {
+      newGrade = "C";
+    } else if (TotalAverage >= 40 && TotalAverage <= 49) {
+      newGrade = "D";
+    } else if (TotalAverage >= 0 && TotalAverage <= 39) {
+      newGrade = "F";
+    }
+    setTotalGrade(newGrade);
+  };
   const calculateResultTotalScore = () => {
     const GrandTotal =
       NumeracyData.test +
@@ -193,7 +208,26 @@ const UpdatePreNurseryResults = () => {
   // };
   const calculateNumeracyTotal = () => {
     const totalScore = NumeracyData.test + NumeracyData.exam;
-    setNumeracyData({ ...NumeracyData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (NumeracyData.totalScore >= 70 && NumeracyData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (NumeracyData.totalScore >= 60 && NumeracyData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (NumeracyData.totalScore >= 50 && NumeracyData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (NumeracyData.totalScore >= 40 && NumeracyData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (NumeracyData.totalScore >= 0 && NumeracyData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+
+    setNumeracyData({ ...NumeracyData, totalScore, grade, remark });
   };
 
   const handleInputChangeNumeracy = (e: any) => {
@@ -205,7 +239,25 @@ const UpdatePreNurseryResults = () => {
   };
   const calculateLiteracyTotal = () => {
     const totalScore = LiteracyData.test + LiteracyData.exam;
-    setLiteracyData({ ...LiteracyData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (LiteracyData.totalScore >= 70 && LiteracyData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (LiteracyData.totalScore >= 60 && LiteracyData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (LiteracyData.totalScore >= 50 && LiteracyData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (LiteracyData.totalScore >= 40 && LiteracyData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (LiteracyData.totalScore >= 0 && LiteracyData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setLiteracyData({ ...LiteracyData, totalScore, grade, remark });
   };
   const handleInputChangeLiteracy = (e: any) => {
     const { name, value } = e.target;
@@ -213,7 +265,37 @@ const UpdatePreNurseryResults = () => {
   };
   const calculateColouringTotal = () => {
     const totalScore = ColouringData.test + ColouringData.exam;
-    setColouringData({ ...ColouringData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (ColouringData.totalScore >= 70 && ColouringData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      ColouringData.totalScore >= 60 &&
+      ColouringData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      ColouringData.totalScore >= 50 &&
+      ColouringData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      ColouringData.totalScore >= 40 &&
+      ColouringData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      ColouringData.totalScore >= 0 &&
+      ColouringData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setColouringData({ ...ColouringData, totalScore, grade, remark });
   };
   const handleInputChangeColouring = (e: any) => {
     const { name, value } = e.target;
@@ -221,7 +303,38 @@ const UpdatePreNurseryResults = () => {
   };
   const calculateHealthHabitTotal = () => {
     const totalScore = HealthHabitData.test + HealthHabitData.exam;
-    setHealthHabitData({ ...HealthHabitData, totalScore });
+
+    let grade = "";
+    let remark = "";
+    if (HealthHabitData.totalScore >= 70 && HealthHabitData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      HealthHabitData.totalScore >= 60 &&
+      HealthHabitData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      HealthHabitData.totalScore >= 50 &&
+      HealthHabitData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      HealthHabitData.totalScore >= 40 &&
+      HealthHabitData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      HealthHabitData.totalScore >= 0 &&
+      HealthHabitData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setHealthHabitData({ ...HealthHabitData, totalScore, grade, remark });
   };
   const handleInputChangeHealthHabit = (e: any) => {
     const { name, value } = e.target;
@@ -232,7 +345,37 @@ const UpdatePreNurseryResults = () => {
   };
   const calculatePreScienceTotal = () => {
     const totalScore = PreScienceData.test + PreScienceData.exam;
-    setPreScienceData({ ...PreScienceData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (PreScienceData.totalScore >= 70 && PreScienceData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      PreScienceData.totalScore >= 60 &&
+      PreScienceData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      PreScienceData.totalScore >= 50 &&
+      PreScienceData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      PreScienceData.totalScore >= 40 &&
+      PreScienceData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      PreScienceData.totalScore >= 0 &&
+      PreScienceData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setPreScienceData({ ...PreScienceData, totalScore, grade, remark });
   };
   const handleInputChangePreScience = (e: any) => {
     const { name, value } = e.target;
@@ -240,7 +383,40 @@ const UpdatePreNurseryResults = () => {
   };
   const calculatePracticalLifeTotal = () => {
     const totalScore = PracticalLifeData.test + PracticalLifeData.exam;
-    setPracticalLifeData({ ...PracticalLifeData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (
+      PracticalLifeData.totalScore >= 70 &&
+      PracticalLifeData.totalScore <= 100
+    ) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      PracticalLifeData.totalScore >= 60 &&
+      PracticalLifeData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      PracticalLifeData.totalScore >= 50 &&
+      PracticalLifeData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      PracticalLifeData.totalScore >= 40 &&
+      PracticalLifeData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      PracticalLifeData.totalScore >= 0 &&
+      PracticalLifeData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setPracticalLifeData({ ...PracticalLifeData, totalScore, grade, remark });
   };
   const handleInputChangePracticalLife = (e: any) => {
     const { name, value } = e.target;
@@ -251,7 +427,25 @@ const UpdatePreNurseryResults = () => {
   };
   const calculateRhymesTotal = () => {
     const totalScore = RhymesData.test + RhymesData.exam;
-    setRhymesData({ ...RhymesData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (RhymesData.totalScore >= 70 && RhymesData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (RhymesData.totalScore >= 60 && RhymesData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (RhymesData.totalScore >= 50 && RhymesData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (RhymesData.totalScore >= 40 && RhymesData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (RhymesData.totalScore >= 0 && RhymesData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setRhymesData({ ...RhymesData, totalScore, grade, remark });
   };
   const handleInputChangeRhymes = (e: any) => {
     const { name, value } = e.target;
@@ -259,13 +453,44 @@ const UpdatePreNurseryResults = () => {
   };
   const calculateSensorialActivityTotal = () => {
     const totalScore = SensorialActivityData.test + SensorialActivityData.exam;
-    setSensorialActivityData({ ...SensorialActivityData, totalScore });
-  };
-  const handleInputChangeSensorialActivity = (e: any) => {
-    const { name, value } = e.target;
+    let grade = "";
+    let remark = "";
+    if (
+      SensorialActivityData.totalScore >= 70 &&
+      SensorialActivityData.totalScore <= 100
+    ) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      SensorialActivityData.totalScore >= 60 &&
+      SensorialActivityData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      SensorialActivityData.totalScore >= 50 &&
+      SensorialActivityData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      SensorialActivityData.totalScore >= 40 &&
+      SensorialActivityData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      SensorialActivityData.totalScore >= 0 &&
+      SensorialActivityData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
     setSensorialActivityData({
       ...SensorialActivityData,
-      [name]: parseInt(value, 10) || 0,
+      totalScore,
+      grade,
+      remark,
     });
   };
   React.useEffect(() => {
@@ -1727,6 +1952,7 @@ const UpdatePreNurseryResults = () => {
                       autoComplete="TotalAverage"
                       autoFocus
                       value={TotalAverage}
+                      onBlur={calculateTotalGrade}
                       onChange={(e) =>
                         setTotalAverage(parseInt(e.target.value, 10))
                       }

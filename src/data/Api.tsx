@@ -3,6 +3,10 @@ export const registerApi =
 export const loginApi = "https://ourworldintschool.onrender.com/api/auth/login";
 export const StudentloginApi =
   "https://ourworldintschool.onrender.com/api/auth/student-login";
+// export const PasswordResetApi =
+//   "https://ourworldintschool.onrender.com/api/auth/reset-password";
+export const PasswordResetApi =
+  "https://ourworldintschool.onrender.com/api/auth/reset-user-password";
 export const UserApi = "https://ourworldintschool.onrender.com/api/users/";
 export const UpdateUserApi =
   "https://ourworldintschool.onrender.com/users/update/";
@@ -18,6 +22,10 @@ export const Nursery1CheckresultApi =
   "https://ourworldintschool.onrender.com/api/nursery1result/results/";
 export const scratchCardApi =
   "https://ourworldintschool.onrender.com/api/scratchcard/";
+// export const scratchCardUsageApi =
+//   "http://localhost:5000/api/scratchGenerate/usageCounts/";
+export const scratchCardUsageApi =
+  "https://ourworldintschool.onrender.com/api/scratchGenerate/usageCounts/";
 export const Nursery2resultApi =
   "https://ourworldintschool.onrender.com/api/nursery2result/";
 export const Nursery3resultApi =
@@ -66,3 +74,8 @@ export const UpdateNursery3resultApi =
   "https://ourworldintschool.onrender.com/api/nursery3result/update/";
 export const UpdatePreNurseryresultApi =
   "https://ourworldintschool.onrender.com/api/prenurseryresult/update/";
+
+export const ScratchCardApi =
+  "https://ourworldintschool.onrender.com/api/scratchGenerate/";
+export const ScratchCardLoginApi =
+  "https://ourworldintschool.onrender.com/api/scratchGenerate/scratchcard-login/";

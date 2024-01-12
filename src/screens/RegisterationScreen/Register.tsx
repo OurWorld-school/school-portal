@@ -273,6 +273,7 @@ export default function SignUp() {
                     onChange={(e) => setCurrentClass(e.target.value)}
                     // input={<OutlinedInput label="Name" />}
                   >
+                    <MenuItem value="Creche">Creche</MenuItem>
                     <MenuItem value="Pre-Nursery">Pre-Nursery</MenuItem>
                     <MenuItem value="Nursery-1">Nursery-1</MenuItem>
                     <MenuItem value="Nursery-2">Nursery-2</MenuItem>

@@ -484,7 +484,7 @@ export const AdminUserNursery2Result = () => {
                       ))}
                     </td>
                   </tr>
-                  <tr>
+                  {/* <tr>
                     <td>Pre Vocational Studies </td>
                     <td>
                       {" "}
@@ -516,7 +516,7 @@ export const AdminUserNursery2Result = () => {
                         <div key={item._id}>{item?.remark}</div>
                       ))}
                     </td>
-                  </tr>
+                  </tr> */}
                   <tr>
                     <td>Computer </td>
                     <td>

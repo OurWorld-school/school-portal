@@ -22,7 +22,12 @@ import {
   Grid,
 } from "@mui/material";
 import CircularIndeterminate from "../../components/Loading/Progress";
-import { UserApi, scratchCardApi } from "../../data/Api";
+import {
+  ScratchCardLoginApi,
+  UserApi,
+  scratchCardApi,
+  scratchCardUsageApi,
+} from "../../data/Api";
 import TopNavBar from "../../components/TopNavBar/TopNavBar";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -50,10 +55,11 @@ const ScratchCard: React.FC<Props> = () => {
   const userId = localStorage.getItem("userId");
   const theme = useTheme();
   // State to store the selected option
-  const [user, setUser] = useState(userId);
-  const [serialNo, setSerialNo] = useState("");
+  // const [user, setUser] = useState(userId);
+  const [serialNumber, setSerialNumber] = useState("");
   const [pin, setPin] = useState<any>([]);
   const [loading, setLoading] = useState(false);
+  const [usageCount, setUsageCount] = useState<any>(0);
   const [showPassword, setShowPassword] = React.useState(false);
   // State to store the API response
   const [apiData, setApiData] = useState(null);
@@ -96,9 +102,9 @@ const ScratchCard: React.FC<Props> = () => {
   const submitHandler = (e: any) => {
     e.preventDefault();
     setLoading(true);
+    handleUsageCount();
     const data: any = {
-      user: user,
-      serialNo: serialNo,
+      serialNumber: serialNumber,
       pin: pin,
     };
 
@@ -110,15 +116,16 @@ const ScratchCard: React.FC<Props> = () => {
     };
 
     axios
-      .post(scratchCardApi, data, headers)
+      .post(ScratchCardLoginApi, data, headers)
 
       .then((res) => {
         console.log(res.data);
         setLoading(false);
+
         if (res.data) {
-          setSerialNo("");
+          setSerialNumber("");
           setPin("");
-          setUser("");
+
           localStorage.setItem("ScratchCardId", res.data._id);
 
           console.log(res.data);
@@ -131,11 +138,57 @@ const ScratchCard: React.FC<Props> = () => {
       .catch((err) => {
         setLoading(false);
         toast.error(
-          "Invalid Scratch Card Details or Exceeded Card 5 times limit"
+          "Invalid Scratch Card Details or Exceeded Card 3 times limit"
         );
       });
   };
+  // const handleUsageCount = () => {
+  //   setLoading(true);
 
+  //   const data: any = {
+  //     usageCount: usageCount,
+  //   };
+
+  //   const headers: any = {
+  //     "Custom-Header": "xxxx-xxxx-xxxx-xxxx",
+  //     "Content-Type": "application/json",
+  //     // Accept: "application/json",
+  //     // body: JSON.stringify(data),
+  //   };
+
+  //   axios
+  //     .put(scratchCardUsageApi + pin, data, headers)
+
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setLoading(false);
+
+  //       if (res.data) {
+  //         // setUsageCount("");
+
+  //         console.log(res.data);
+  //       } else {
+  //         toast.error(res.data.error);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       setLoading(false);
+  //       toast.error(
+  //         "Invalid Scratch Card Details or Exceeded Card 3 times limit"
+  //       );
+  //     });
+  // };
+  const handleUsageCount = async () => {
+    const data: any = {
+      usageCount: usageCount,
+    };
+    await axios
+      .put(scratchCardUsageApi + pin, data)
+      .then((response: any) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+    setUsageCount("");
+  };
   return (
     <>
       <TopNavBar />
@@ -184,8 +237,8 @@ const ScratchCard: React.FC<Props> = () => {
                       <OutlinedInput
                         id="outlined-adornment-password"
                         type={showPassword ? "text" : "password"}
-                        value={serialNo}
-                        onChange={(e) => setSerialNo(e.target.value)}
+                        value={serialNumber}
+                        onChange={(e) => setSerialNumber(e.target.value)}
                         fullWidth
                         required
                         endAdornment={

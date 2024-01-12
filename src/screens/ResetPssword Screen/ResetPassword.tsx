@@ -21,7 +21,7 @@ import {
   InputLabel,
   OutlinedInput,
 } from "@mui/material";
-import { StudentloginApi, loginApi } from "../../data/Api";
+import { PasswordResetApi, StudentloginApi, loginApi } from "../../data/Api";
 import { UserLogin } from "../../data/Data.Type";
 import { useNavigate } from "react-router-dom";
 import Visibility from "@mui/icons-material/Visibility";
@@ -75,14 +75,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginScreen = () => {
+const ResetPassword = () => {
   const classes = useStyles();
   const navigate = useNavigate();
 
   const [schoolRegNumber, setSchoolRegNumber] = useState("");
 
-  const [password, setPassword] = useState("");
-
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = React.useState(false);
   const [loading, setLoading] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -107,7 +107,8 @@ const LoginScreen = () => {
     setLoading(true);
     const data: any = {
       schoolRegNumber: schoolRegNumber,
-      password: password,
+      newPassword: newPassword,
+      confirmPassword: confirmPassword,
     };
 
     const headers: any = {
@@ -118,28 +119,29 @@ const LoginScreen = () => {
     };
 
     axios
-      .post(StudentloginApi, data, headers)
+      .post(PasswordResetApi, data, headers)
 
       .then((res) => {
         console.log(res.data);
         setLoading(false);
         if (res.data) {
           setSchoolRegNumber("");
-          setPassword("");
-
+          setNewPassword("");
+          setConfirmPassword("");
           localStorage.setItem("userId", res.data._id);
           localStorage.setItem("roles", res.data.roles);
 
           localStorage.setItem("isAdmin", res.data.isAdmin);
           console.log(res.data);
           toast.success("post sucessful");
-          {
-            res.data.isAdmin == true
-              ? navigate("/admin-layout")
-              : res.data.roles == "Form-Teacher"
-              ? navigate("/admin-layout")
-              : navigate("/");
-          }
+          navigate("/login");
+          // {
+          //   res.data.isAdmin == true
+          //     ? navigate("/admin-layout")
+          //     : res.data.roles == "Form-Teacher"
+          //     ? navigate("/admin-layout")
+          //     : navigate("/");
+          // }
         } else {
           toast.error(res.data.error);
         }
@@ -162,7 +164,7 @@ const LoginScreen = () => {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Reset Password
             </Typography>
             <form className={classes.form} noValidate onSubmit={submitHandler}>
               <TextField
@@ -181,13 +183,13 @@ const LoginScreen = () => {
               />
               <FormControl variant="outlined" fullWidth>
                 <InputLabel htmlFor="outlined-adornment-password">
-                  Password
+                  New Password
                 </InputLabel>
                 <OutlinedInput
                   id="outlined-adornment-password"
                   type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -203,6 +205,40 @@ const LoginScreen = () => {
                   label="Password"
                 />
               </FormControl>
+              {/* <Grid item xs={12}> */}
+              <FormControl
+                fullWidth
+                className="mt-2"
+                // sx={{ m: 1 }}
+                variant="outlined"
+                // className="input-label-input-divs"
+              >
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Confirm New Password
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type={showPassword ? "text" : "password"}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  fullWidth
+                  required
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Password"
+                />
+              </FormControl>
+              {/* </Grid>  */}
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
@@ -218,7 +254,7 @@ const LoginScreen = () => {
                     // color="primary"
                     className={classes.submit}
                   >
-                    Sign In
+                    Reset Login Details
                   </Button>
                   <ToastContainer />
                 </div>
@@ -231,8 +267,8 @@ const LoginScreen = () => {
                 </Link>
               </Grid> */}
                 <Grid item>
-                  <Link href="/reset-password" variant="body2">
-                    {"Forgotten Password?. Reset Here!"}
+                  <Link href="/login" variant="body2">
+                    {"Login Here"}
                   </Link>
                 </Grid>
               </Grid>
@@ -259,4 +295,4 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default ResetPassword;

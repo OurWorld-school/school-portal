@@ -16,6 +16,7 @@ import { BsFillBookmarkCheckFill } from "react-icons/bs";
 import { UserApi } from "../../../../data/Api";
 import AdminLayout from "../../AdminLayout";
 import { Link } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -81,71 +82,76 @@ export default function Basic1students() {
 
   return (
     <AdminLayout>
-      <div style={{ marginLeft: "auto", marginRight: "auto" }}>
-        <Table responsive striped bordered>
-          <thead
-            style={{
-              backgroundColor: "#e53238",
-              color: "white",
-              fontSize: "medium",
-              fontWeight: "500",
-            }}
-          >
-            <tr>
-              <th>Image</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Class</th>
-              <th>School Reg No</th>
-              <th>Phone Number</th>
-              <th>Contact Address</th>
-              <th>Email</th>
-              <th>Input Result</th>
-              <th>Update User Current Class</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredData?.map((row: any, index) => (
-              <tr key={index}>
-                <td style={{ width: "5%", height: "5%" }}>
-                  <img
-                    src={row?.passportPhoto}
-                    alt="img"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                  />{" "}
-                </td>
-                <td>{row?.firstName}</td>
-                <td>{row?.lastName}</td>
-                <td>{row?.currentClass}</td>
-                <td>{row?.schoolRegNumber}</td>
-                <td>{row?.phoneNumber}</td>
-                <td>{row?.contactAdress}</td>
-                <td>{row?.email}</td>
-                <td>
-                  {" "}
-                  <Link to={`/post-basic1result/${row?._id}`}>
-                    <Button className="btn-sm">
-                      <BsFillBookmarkCheckFill />{" "}
-                    </Button>
-                  </Link>{" "}
-                </td>
-                <td>
-                  {" "}
-                  <Link to={`/updateusserclassby-admin/${row?._id}`}>
-                    <Button className="btn-sm">
-                      <FaEdit />{" "}
-                    </Button>
-                  </Link>{" "}
-                </td>
+      <h3 className="text-center mb-4 mt-4">
+        View All {filteredData?.length} Pupils{" "}
+      </h3>
+      <Container>
+        <div style={{ marginLeft: "auto", marginRight: "auto" }}>
+          <Table responsive striped bordered>
+            <thead
+              style={{
+                backgroundColor: "#e53238",
+                color: "white",
+                fontSize: "medium",
+                fontWeight: "500",
+              }}
+            >
+              <tr>
+                <th>Image</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Class</th>
+                <th>School Reg No</th>
+                <th>Phone Number</th>
+                <th>Contact Address</th>
+                <th>Email</th>
+                <th>Input Result</th>
+                <th>Update User Current Class</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      </div>
+            </thead>
+            <tbody>
+              {filteredData?.map((row: any, index) => (
+                <tr key={index}>
+                  <td style={{ width: "5%", height: "5%" }}>
+                    <img
+                      src={row?.passportPhoto}
+                      alt="img"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                    />{" "}
+                  </td>
+                  <td>{row?.firstName}</td>
+                  <td>{row?.lastName}</td>
+                  <td>{row?.currentClass}</td>
+                  <td>{row?.schoolRegNumber}</td>
+                  <td>{row?.phoneNumber}</td>
+                  <td>{row?.contactAdress}</td>
+                  <td>{row?.email}</td>
+                  <td>
+                    {" "}
+                    <Link to={`/post-basic1result/${row?._id}`}>
+                      <Button className="btn-sm">
+                        <BsFillBookmarkCheckFill />{" "}
+                      </Button>
+                    </Link>{" "}
+                  </td>
+                  <td>
+                    {" "}
+                    <Link to={`/updateusserclassby-admin/${row?._id}`}>
+                      <Button className="btn-sm">
+                        <FaEdit />{" "}
+                      </Button>
+                    </Link>{" "}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+      </Container>
     </AdminLayout>
   );
 }

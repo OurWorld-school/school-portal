@@ -25,6 +25,12 @@ const AdmissionPortal = () => {
             >
               Admission Prospectus for NURSERY AND CRECHE
             </Col>
+            <div className="mb-4">
+              <strong>
+                For More Info & Clarification, Contact: +2349032402902 or
+                +2349077231031
+              </strong>
+            </div>
           </Row>
           <Row>
             <Col>
@@ -234,6 +240,12 @@ const AdmissionPortal = () => {
               </div>
             </Col>
           </Row>
+          <div className="mt-4 bg-green-600">
+            <strong>
+              For More Info & Clarification, Contact: +2349032402902 or
+              +2349077231031
+            </strong>
+          </div>
         </div>
       </Container>
       <Footer />{" "}

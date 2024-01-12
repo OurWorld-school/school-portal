@@ -152,6 +152,13 @@ const InputBasic2Result = () => {
     remark: "",
   });
   const [ComputerData, setComputerData] = useState({
+    test: Number,
+    exam: Number,
+    totalScore: Number,
+    grade: "",
+    remark: "",
+  });
+  const [HandWritingData, setHandWritingData] = useState({
     test: 0,
     exam: 0,
     totalScore: 0,
@@ -187,10 +194,12 @@ const InputBasic2Result = () => {
       PVCData.exam +
       HistoryData.test +
       HistoryData.exam +
+      HandWritingData.test +
+      HandWritingData.exam +
       IgboData.test +
       IgboData.exam +
-      ComputerData.test +
-      ComputerData.exam +
+      // ComputerData.test +
+      // ComputerData.exam +
       NationalValuesData.test +
       NationalValuesData.exam +
       CreativeArtData.test +
@@ -216,7 +225,8 @@ const InputBasic2Result = () => {
       | "PhonicsData"
       | "NationalValuesData"
       | "FrenchData"
-      | "CRKData",
+      | "CRKData"
+      |"HandWritingData",
     type: "test" | "exam" | "grade" | "remark",
     value: number
   ) => {
@@ -245,6 +255,9 @@ const InputBasic2Result = () => {
       case "PhonicsData":
         setPhonicsData((prev: any) => ({ ...prev, [type]: value }));
         break;
+        case "HandWritingData":
+          setHandWritingData((prev: any) => ({ ...prev, [type]: value }));
+          break;
       case "PVCData":
         setPVCData((prev: any) => ({ ...prev, [type]: value }));
         break;
@@ -268,64 +281,434 @@ const InputBasic2Result = () => {
         break;
     }
   };
+  const calculateTotalGrade = () => {
+    let newGrade = "";
+    if (TotalAverage >= 70 && TotalAverage <= 100) {
+      newGrade = "A";
+    } else if (TotalAverage >= 60 && TotalAverage <= 69) {
+      newGrade = "B";
+    } else if (TotalAverage >= 50 && TotalAverage <= 59) {
+      newGrade = "C";
+    } else if (TotalAverage >= 40 && TotalAverage <= 49) {
+      newGrade = "D";
+    } else if (TotalAverage >= 0 && TotalAverage <= 39) {
+      newGrade = "F";
+    }
+    setTotalGrade(newGrade);
+  };
   const calculateEnglishDataTotal = () => {
     const totalScore = EnglishData.test + EnglishData.exam;
-    setEnglishData({ ...EnglishData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (EnglishData.totalScore >= 70 && EnglishData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (EnglishData.totalScore >= 60 && EnglishData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (EnglishData.totalScore >= 50 && EnglishData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (EnglishData.totalScore >= 40 && EnglishData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (EnglishData.totalScore >= 0 && EnglishData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setEnglishData({ ...EnglishData, totalScore, grade, remark });
   };
   const calculateMathsDataTotal = () => {
     const totalScore = MathsData.test + MathsData.exam;
-    setMathsData({ ...MathsData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (MathsData.totalScore >= 70 && MathsData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (MathsData.totalScore >= 60 && MathsData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (MathsData.totalScore >= 50 && MathsData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (MathsData.totalScore >= 40 && MathsData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (MathsData.totalScore >= 0 && MathsData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setMathsData({ ...MathsData, totalScore, grade, remark });
   };
   const calculateVerbalReasoningDataTotal = () => {
     const totalScore = VerbalReasoningData.test + VerbalReasoningData.exam;
-    setVerbalReasoningData({ ...VerbalReasoningData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (
+      VerbalReasoningData.totalScore >= 70 &&
+      VerbalReasoningData.totalScore <= 100
+    ) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      VerbalReasoningData.totalScore >= 60 &&
+      VerbalReasoningData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      VerbalReasoningData.totalScore >= 50 &&
+      VerbalReasoningData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      VerbalReasoningData.totalScore >= 40 &&
+      VerbalReasoningData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      VerbalReasoningData.totalScore >= 0 &&
+      VerbalReasoningData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setVerbalReasoningData({
+      ...VerbalReasoningData,
+      totalScore,
+      grade,
+      remark,
+    });
   };
   const calculateQuantitativeReasoningDataTotal = () => {
     const totalScore =
       QuantitativeReasoningData.test + QuantitativeReasoningData.exam;
-    setQuantitativeReasoningData({ ...QuantitativeReasoningData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (
+      QuantitativeReasoningData.totalScore >= 70 &&
+      QuantitativeReasoningData.totalScore <= 100
+    ) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      QuantitativeReasoningData.totalScore >= 60 &&
+      QuantitativeReasoningData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      QuantitativeReasoningData.totalScore >= 50 &&
+      QuantitativeReasoningData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      QuantitativeReasoningData.totalScore >= 40 &&
+      QuantitativeReasoningData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      QuantitativeReasoningData.totalScore >= 0 &&
+      QuantitativeReasoningData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setQuantitativeReasoningData({
+      ...QuantitativeReasoningData,
+      totalScore,
+      grade,
+      remark,
+    });
   };
   const calculateHistoryDataTotal = () => {
     const totalScore = HistoryData.test + HistoryData.exam;
-    setHistoryData({ ...HistoryData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (HistoryData.totalScore >= 70 && HistoryData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (HistoryData.totalScore >= 60 && HistoryData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (HistoryData.totalScore >= 50 && HistoryData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (HistoryData.totalScore >= 40 && HistoryData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (HistoryData.totalScore >= 0 && HistoryData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setHistoryData({ ...HistoryData, totalScore, grade, remark });
   };
   const calculateNationalValuesDataTotal = () => {
     const totalScore = NationalValuesData.test + NationalValuesData.exam;
-    setNationalValuesData({ ...NationalValuesData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (
+      NationalValuesData.totalScore >= 70 &&
+      NationalValuesData.totalScore <= 100
+    ) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      NationalValuesData.totalScore >= 60 &&
+      NationalValuesData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      NationalValuesData.totalScore >= 50 &&
+      NationalValuesData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      NationalValuesData.totalScore >= 40 &&
+      NationalValuesData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      NationalValuesData.totalScore >= 0 &&
+      NationalValuesData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setNationalValuesData({ ...NationalValuesData, totalScore, remark, grade });
   };
   const calculateCreativeArtDataTotal = () => {
     const totalScore = CreativeArtData.test + CreativeArtData.exam;
-    setCreativeArtData({ ...CreativeArtData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (CreativeArtData.totalScore >= 70 && CreativeArtData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      CreativeArtData.totalScore >= 60 &&
+      CreativeArtData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      CreativeArtData.totalScore >= 50 &&
+      CreativeArtData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      CreativeArtData.totalScore >= 40 &&
+      CreativeArtData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      CreativeArtData.totalScore >= 0 &&
+      CreativeArtData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setCreativeArtData({ ...CreativeArtData, totalScore, grade, remark });
   };
   const calculatePhonicsDataTotal = () => {
     const totalScore = PhonicsData.test + PhonicsData.exam;
-    setPhonicsData({ ...PhonicsData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (PhonicsData.totalScore >= 70 && PhonicsData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (PhonicsData.totalScore >= 60 && PhonicsData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (PhonicsData.totalScore >= 50 && PhonicsData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (PhonicsData.totalScore >= 40 && PhonicsData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (PhonicsData.totalScore >= 0 && PhonicsData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setPhonicsData({ ...PhonicsData, totalScore, grade, remark });
   };
   const calculateBasicScienceDataTotal = () => {
     const totalScore = BasicScienceData.test + BasicScienceData.exam;
-    setBasicScienceData({ ...BasicScienceData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (
+      BasicScienceData.totalScore >= 70 &&
+      BasicScienceData.totalScore <= 100
+    ) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      BasicScienceData.totalScore >= 60 &&
+      BasicScienceData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      BasicScienceData.totalScore >= 50 &&
+      BasicScienceData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      BasicScienceData.totalScore >= 40 &&
+      BasicScienceData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      BasicScienceData.totalScore >= 0 &&
+      BasicScienceData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setBasicScienceData({ ...BasicScienceData, totalScore, grade, remark });
   };
   const calculateFrenchDataTotal = () => {
     const totalScore = FrenchData.test + FrenchData.exam;
-    setFrenchData({ ...FrenchData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (FrenchData.totalScore >= 70 && FrenchData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (FrenchData.totalScore >= 60 && FrenchData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (FrenchData.totalScore >= 50 && FrenchData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (FrenchData.totalScore >= 40 && FrenchData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (FrenchData.totalScore >= 0 && FrenchData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setFrenchData({ ...FrenchData, totalScore, grade, remark });
   };
   const calculateCRKDataTotal = () => {
     const totalScore = CRKData.test + CRKData.exam;
-    setCRKData({ ...CRKData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (CRKData.totalScore >= 70 && CRKData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (CRKData.totalScore >= 60 && CRKData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (CRKData.totalScore >= 50 && CRKData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (CRKData.totalScore >= 40 && CRKData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (CRKData.totalScore >= 0 && CRKData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setCRKData({ ...CRKData, totalScore, grade, remark });
   };
   const calculatePVCDataTotal = () => {
     const totalScore = PVCData.test + PVCData.exam;
-    setPVCData({ ...PVCData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (PVCData.totalScore >= 70 && PVCData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (PVCData.totalScore >= 60 && PVCData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (PVCData.totalScore >= 50 && PVCData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (PVCData.totalScore >= 40 && PVCData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (PVCData.totalScore >= 0 && PVCData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setPVCData({ ...PVCData, totalScore, grade, remark });
+  };
+  const calculateHandWritingDataTotal = () => {
+    const totalScore = HandWritingData.test + HandWritingData.exam;
+    let grade = "";
+    let remark = "";
+    if (HandWritingData.totalScore >= 70 && HandWritingData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (HandWritingData.totalScore >= 60 && HandWritingData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (HandWritingData.totalScore >= 50 && HandWritingData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (HandWritingData.totalScore >= 40 && HandWritingData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (HandWritingData.totalScore >= 0 && HandWritingData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setHandWritingData({ ...HandWritingData, totalScore, grade, remark });
   };
   const calculateIgboDataTotal = () => {
     const totalScore = IgboData.test + IgboData.exam;
-    setIgboData({ ...IgboData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (IgboData.totalScore >= 70 && IgboData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (IgboData.totalScore >= 60 && IgboData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (IgboData.totalScore >= 50 && IgboData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (IgboData.totalScore >= 40 && IgboData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (IgboData.totalScore >= 0 && IgboData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setIgboData({ ...IgboData, totalScore, grade, remark });
   };
-  const calculateComputerDataTotal = () => {
-    const totalScore = ComputerData.test + ComputerData.exam;
-    setComputerData({ ...ComputerData, totalScore });
-  };
-
+  // const calculateComputerDataTotal = () => {
+  //   const totalScore = ComputerData.test + ComputerData.exam;
+  //   let grade = "";
+  //   let remark = "";
+  //   if (ComputerData.totalScore >= 70 && ComputerData.totalScore <= 100) {
+  //     grade = "A";
+  //     remark = "Excellent";
+  //   } else if (ComputerData.totalScore >= 60 && ComputerData.totalScore <= 69) {
+  //     grade = "B";
+  //     remark = "Very Good";
+  //   } else if (ComputerData.totalScore >= 50 && ComputerData.totalScore <= 59) {
+  //     grade = "C";
+  //     remark = "Good";
+  //   } else if (ComputerData.totalScore >= 40 && ComputerData.totalScore <= 49) {
+  //     grade = "D";
+  //     remark = "Pass";
+  //   } else if (ComputerData.totalScore >= 0 && ComputerData.totalScore <= 39) {
+  //     grade = "F";
+  //     remark = "Fail";
+  //   }
+  //   setComputerData({ ...ComputerData, totalScore, grade, remark });
+  // };
   React.useEffect(() => {
     const fetchPosts = async () => {
       const { data } = await axios.get(UserApi + id);
@@ -382,6 +765,16 @@ const InputBasic2Result = () => {
           totalScore: VerbalReasoningData.totalScore,
           grade: VerbalReasoningData.grade,
           remark: VerbalReasoningData.remark,
+        },
+      ],
+      HandWriting: [
+       
+        {
+          test: HandWritingData.test,
+          exam: HandWritingData.exam,
+          totalScore: HandWritingData.totalScore,
+          grade: HandWritingData.grade,
+          remark: HandWritingData.remark,
         },
       ],
       QuantitativeReasoning: [
@@ -2555,8 +2948,156 @@ const InputBasic2Result = () => {
                       </Dropdown.Menu>
                     </Dropdown>
                     {/* ///Writing end input */}
-                    {/* ///Writing */}
                     <Dropdown>
+                      <Dropdown.Toggle
+                        variant="success"
+                        id="dropdown-basic"
+                        style={{
+                          border: "1px solid green",
+                          backgroundColor: "white",
+                          marginTop: "15px",
+                          color: "black",
+                        }}
+                        className="result-input-elect-nursery1"
+                      >
+                       Hand Writing
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        <div className="col-md-6 mb-2 mt-2 ">
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Test/C.A"
+                            type="number"
+                            name="test"
+                            value={HandWritingData.test}
+                            onBlur={calculateHandWritingDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "HandWritingData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Exam"
+                            name="exam"
+                            type="number"
+                            value={HandWritingData.exam}
+                            onBlur={calculateHandWritingDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "HandWritingData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-2"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Total Score"
+                            type="number"
+                            name="totalScore"
+                            value={HandWritingData.totalScore}
+                            onBlur={calculateResultTotalScore}
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Grade"
+                            name="grade"
+                            type="text"
+                            value={HandWritingData.grade}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "HandWritingData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            name="remark"
+                            label="Remark"
+                            type="text"
+                            value={HandWritingData.remark}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "HandWritingData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    {/* ///Writing */}
+                    {/* <Dropdown>
                       <Dropdown.Toggle
                         variant="success"
                         id="dropdown-basic"
@@ -2703,7 +3244,7 @@ const InputBasic2Result = () => {
                           />
                         </div>
                       </Dropdown.Menu>
-                    </Dropdown>
+                    </Dropdown> */}
                     {/* ///Writing end input */}
 
                     <TextField
@@ -2734,6 +3275,7 @@ const InputBasic2Result = () => {
                       autoComplete="TotalAverage"
                       autoFocus
                       value={TotalAverage}
+                      onBlur={calculateTotalGrade}
                       onChange={(e) =>
                         setTotalAverage(parseInt(e.target.value, 10))
                       }

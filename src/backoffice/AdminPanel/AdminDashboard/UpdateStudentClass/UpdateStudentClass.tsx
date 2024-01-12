@@ -80,7 +80,7 @@ function UpdateStudentClass() {
 
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/admin-layout");
+          navigate("/admin");
         } else {
           toast.error(res.data.error);
         }

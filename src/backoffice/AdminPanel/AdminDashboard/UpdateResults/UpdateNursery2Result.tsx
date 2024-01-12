@@ -253,59 +253,391 @@ const UpdateNursery2Result = () => {
         break;
     }
   };
+  const calculateTotalGrade = () => {
+    let newGrade = "";
+    if (TotalAverage >= 70 && TotalAverage <= 100) {
+      newGrade = "A";
+    } else if (TotalAverage >= 60 && TotalAverage <= 69) {
+      newGrade = "B";
+    } else if (TotalAverage >= 50 && TotalAverage <= 59) {
+      newGrade = "C";
+    } else if (TotalAverage >= 40 && TotalAverage <= 49) {
+      newGrade = "D";
+    } else if (TotalAverage >= 0 && TotalAverage <= 39) {
+      newGrade = "F";
+    }
+    setTotalGrade(newGrade);
+  };
   const calculateEnglishDataTotal = () => {
     const totalScore = EnglishData.test + EnglishData.exam;
-    setEnglishData({ ...EnglishData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (EnglishData.totalScore >= 70 && EnglishData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (EnglishData.totalScore >= 60 && EnglishData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (EnglishData.totalScore >= 50 && EnglishData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (EnglishData.totalScore >= 40 && EnglishData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (EnglishData.totalScore >= 0 && EnglishData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setEnglishData({ ...EnglishData, totalScore, grade, remark });
   };
   const calculateMathsDataTotal = () => {
     const totalScore = MathsData.test + MathsData.exam;
-    setMathsData({ ...MathsData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (MathsData.totalScore >= 70 && MathsData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (MathsData.totalScore >= 60 && MathsData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (MathsData.totalScore >= 50 && MathsData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (MathsData.totalScore >= 40 && MathsData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (MathsData.totalScore >= 0 && MathsData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setMathsData({ ...MathsData, totalScore, grade, remark });
   };
   const calculateVerbalReasoningDataTotal = () => {
     const totalScore = VerbalReasoningData.test + VerbalReasoningData.exam;
-    setVerbalReasoningData({ ...VerbalReasoningData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (
+      VerbalReasoningData.totalScore >= 70 &&
+      VerbalReasoningData.totalScore <= 100
+    ) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      VerbalReasoningData.totalScore >= 60 &&
+      VerbalReasoningData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      VerbalReasoningData.totalScore >= 50 &&
+      VerbalReasoningData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      VerbalReasoningData.totalScore >= 40 &&
+      VerbalReasoningData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      VerbalReasoningData.totalScore >= 0 &&
+      VerbalReasoningData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setVerbalReasoningData({
+      ...VerbalReasoningData,
+      totalScore,
+      grade,
+      remark,
+    });
   };
   const calculateQuantitativeReasoningDataTotal = () => {
     const totalScore =
       QuantitativeReasoningData.test + QuantitativeReasoningData.exam;
-    setQuantitativeReasoningData({ ...QuantitativeReasoningData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (
+      QuantitativeReasoningData.totalScore >= 70 &&
+      QuantitativeReasoningData.totalScore <= 100
+    ) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      QuantitativeReasoningData.totalScore >= 60 &&
+      QuantitativeReasoningData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      QuantitativeReasoningData.totalScore >= 50 &&
+      QuantitativeReasoningData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      QuantitativeReasoningData.totalScore >= 40 &&
+      QuantitativeReasoningData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      QuantitativeReasoningData.totalScore >= 0 &&
+      QuantitativeReasoningData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setQuantitativeReasoningData({
+      ...QuantitativeReasoningData,
+      totalScore,
+      grade,
+      remark,
+    });
   };
-  const calculateSocialStudiesDataTotal = () => {
-    const totalScore = SocialStudiesData.test + SocialStudiesData.exam;
-    setSocialStudiesData({ ...SocialStudiesData, totalScore });
-  };
-  const calculateWritingDataTotal = () => {
-    const totalScore = WritingData.test + WritingData.exam;
-    setWritingData({ ...WritingData, totalScore });
-  };
+
   const calculateCreativeArtDataTotal = () => {
     const totalScore = CreativeArtData.test + CreativeArtData.exam;
-    setCreativeArtData({ ...CreativeArtData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (CreativeArtData.totalScore >= 70 && CreativeArtData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      CreativeArtData.totalScore >= 60 &&
+      CreativeArtData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      CreativeArtData.totalScore >= 50 &&
+      CreativeArtData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      CreativeArtData.totalScore >= 40 &&
+      CreativeArtData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      CreativeArtData.totalScore >= 0 &&
+      CreativeArtData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setCreativeArtData({ ...CreativeArtData, totalScore, grade, remark });
   };
   const calculatePhonicsDataTotal = () => {
     const totalScore = PhonicsData.test + PhonicsData.exam;
-    setPhonicsData({ ...PhonicsData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (PhonicsData.totalScore >= 70 && PhonicsData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (PhonicsData.totalScore >= 60 && PhonicsData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (PhonicsData.totalScore >= 50 && PhonicsData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (PhonicsData.totalScore >= 40 && PhonicsData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (PhonicsData.totalScore >= 0 && PhonicsData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setPhonicsData({ ...PhonicsData, totalScore, grade, remark });
   };
   const calculateBasicScienceDataTotal = () => {
     const totalScore = BasicScienceData.test + BasicScienceData.exam;
-    setBasicScienceData({ ...BasicScienceData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (
+      BasicScienceData.totalScore >= 70 &&
+      BasicScienceData.totalScore <= 100
+    ) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      BasicScienceData.totalScore >= 60 &&
+      BasicScienceData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      BasicScienceData.totalScore >= 50 &&
+      BasicScienceData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      BasicScienceData.totalScore >= 40 &&
+      BasicScienceData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      BasicScienceData.totalScore >= 0 &&
+      BasicScienceData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setBasicScienceData({ ...BasicScienceData, totalScore, grade, remark });
   };
   const calculateFrenchDataTotal = () => {
     const totalScore = FrenchData.test + FrenchData.exam;
-    setFrenchData({ ...FrenchData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (FrenchData.totalScore >= 70 && FrenchData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (FrenchData.totalScore >= 60 && FrenchData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (FrenchData.totalScore >= 50 && FrenchData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (FrenchData.totalScore >= 40 && FrenchData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (FrenchData.totalScore >= 0 && FrenchData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setFrenchData({ ...FrenchData, totalScore, grade, remark });
   };
   const calculateCRKDataTotal = () => {
     const totalScore = CRKData.test + CRKData.exam;
-    setCRKData({ ...CRKData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (CRKData.totalScore >= 70 && CRKData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (CRKData.totalScore >= 60 && CRKData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (CRKData.totalScore >= 50 && CRKData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (CRKData.totalScore >= 40 && CRKData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (CRKData.totalScore >= 0 && CRKData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setCRKData({ ...CRKData, totalScore, grade, remark });
   };
 
   const calculateIgboDataTotal = () => {
     const totalScore = IgboData.test + IgboData.exam;
-    setIgboData({ ...IgboData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (IgboData.totalScore >= 70 && IgboData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (IgboData.totalScore >= 60 && IgboData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (IgboData.totalScore >= 50 && IgboData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (IgboData.totalScore >= 40 && IgboData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (IgboData.totalScore >= 0 && IgboData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setIgboData({ ...IgboData, totalScore, grade, remark });
   };
   const calculateComputerDataTotal = () => {
     const totalScore = ComputerData.test + ComputerData.exam;
-    setComputerData({ ...ComputerData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (ComputerData.totalScore >= 70 && ComputerData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (ComputerData.totalScore >= 60 && ComputerData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (ComputerData.totalScore >= 50 && ComputerData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (ComputerData.totalScore >= 40 && ComputerData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (ComputerData.totalScore >= 0 && ComputerData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setComputerData({ ...ComputerData, totalScore, grade, remark });
+  };
+  const calculateSocialStudiesDataTotal = () => {
+    const totalScore = SocialStudiesData.test + SocialStudiesData.exam;
+    let grade = "";
+    let remark = "";
+    if (
+      SocialStudiesData.totalScore >= 70 &&
+      SocialStudiesData.totalScore <= 100
+    ) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      SocialStudiesData.totalScore >= 60 &&
+      SocialStudiesData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      SocialStudiesData.totalScore >= 50 &&
+      SocialStudiesData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      SocialStudiesData.totalScore >= 40 &&
+      SocialStudiesData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      SocialStudiesData.totalScore >= 0 &&
+      SocialStudiesData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setSocialStudiesData({ ...SocialStudiesData, totalScore, grade, remark });
+  };
+  const calculateWritingDataTotal = () => {
+    const totalScore = WritingData.test + WritingData.exam;
+    let grade = "";
+    let remark = "";
+    if (WritingData.totalScore >= 70 && WritingData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (WritingData.totalScore >= 60 && WritingData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (WritingData.totalScore >= 50 && WritingData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (WritingData.totalScore >= 40 && WritingData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (WritingData.totalScore >= 0 && WritingData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setWritingData({ ...WritingData, totalScore, grade, remark });
   };
 
   React.useEffect(() => {
@@ -2556,6 +2888,7 @@ const UpdateNursery2Result = () => {
                       autoComplete="TotalAverage"
                       autoFocus
                       value={TotalAverage}
+                      onBlur={calculateTotalGrade}
                       onChange={(e) =>
                         setTotalAverage(parseInt(e.target.value, 10))
                       }

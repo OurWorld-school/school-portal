@@ -119,10 +119,24 @@ const InputNursery1result = () => {
     grade: "",
     remark: "",
   });
+  const [PhonicsData, setPhonicsData] = useState({
+    test: 0,
+    exam: 0,
+    totalScore: 0,
+    grade: "",
+    remark: "",
+  });
+  const [CreativeArtData, setCreativeArtData] = useState({
+    test: 0,
+    exam: 0,
+    totalScore: 0,
+    grade: "",
+    remark: "",
+  });
   const calculateResultTotalAverage = () => {
     // const average = total / Object.keys(scores).length;
     // setGrandAverage(average);
-    const GrandTotalAverage = TotalScore / 8;
+    const GrandTotalAverage = TotalScore / 10;
     // NumeracyData.test +
     // NumeracyData.exam +
     // LiteracyData.test +
@@ -146,6 +160,10 @@ const InputNursery1result = () => {
       BasicScienceData.exam +
       RhymesData.test +
       RhymesData.exam +
+      CreativeArtData.test +
+      CreativeArtData.exam +
+      PhonicsData.test +
+      PhonicsData.exam +
       SocialHabitData.test +
       SocialHabitData.exam;
     setTotalScore(GrandTotal);
@@ -159,7 +177,9 @@ const InputNursery1result = () => {
       | "AgricScienceData"
       | "SocialHabitData"
       | "RhymesData"
-      | "HealthScienceData",
+      | "HealthScienceData"
+      | "CreativeArtData"
+      | "PhonicsData",
     type: "test" | "exam" | "grade" | "remark",
     value: number
   ) => {
@@ -188,6 +208,12 @@ const InputNursery1result = () => {
       case "SocialHabitData":
         setSocialHabitData((prev: any) => ({ ...prev, [type]: value }));
         break;
+      case "CreativeArtData":
+        setCreativeArtData((prev: any) => ({ ...prev, [type]: value }));
+        break;
+      case "PhonicsData":
+        setPhonicsData((prev: any) => ({ ...prev, [type]: value }));
+        break;
     }
   };
   // const handleInputChangeTotalScore = (e: any) => {
@@ -197,45 +223,316 @@ const InputNursery1result = () => {
   //     [name]: parseInt(value, 10) || 0,
   //   });
   // };
+  const calculateTotalGrade = () => {
+    let newGrade = "";
+    if (TotalAverage >= 70 && TotalAverage <= 100) {
+      newGrade = "A";
+    } else if (TotalAverage >= 60 && TotalAverage <= 69) {
+      newGrade = "B";
+    } else if (TotalAverage >= 50 && TotalAverage <= 59) {
+      newGrade = "C";
+    } else if (TotalAverage >= 40 && TotalAverage <= 49) {
+      newGrade = "D";
+    } else if (TotalAverage >= 0 && TotalAverage <= 39) {
+      newGrade = "F";
+    }
+    setTotalGrade(newGrade);
+  };
   const calculateformDataTotal = () => {
     const totalScore = formData.test + formData.exam;
-    setFormData({ ...formData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (formData.totalScore >= 70 && formData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (formData.totalScore >= 60 && formData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (formData.totalScore >= 50 && formData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (formData.totalScore >= 40 && formData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (formData.totalScore >= 0 && formData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setFormData({ ...formData, totalScore, grade, remark });
   };
 
   const calculatemathsDataTotal = () => {
     const totalScore = mathsData.test + mathsData.exam;
-    setMathsData({ ...mathsData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (mathsData.totalScore >= 70 && mathsData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (mathsData.totalScore >= 60 && mathsData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (mathsData.totalScore >= 50 && mathsData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (mathsData.totalScore >= 40 && mathsData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (mathsData.totalScore >= 0 && mathsData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setMathsData({ ...mathsData, totalScore, grade, remark });
   };
 
   const calculateBasicScienceDataTotal = () => {
     const totalScore = BasicScienceData.test + BasicScienceData.exam;
-    setBasicScienceData({ ...BasicScienceData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (
+      BasicScienceData.totalScore >= 70 &&
+      BasicScienceData.totalScore <= 100
+    ) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      BasicScienceData.totalScore >= 60 &&
+      BasicScienceData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      BasicScienceData.totalScore >= 50 &&
+      BasicScienceData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      BasicScienceData.totalScore >= 40 &&
+      BasicScienceData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      BasicScienceData.totalScore >= 0 &&
+      BasicScienceData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setBasicScienceData({ ...BasicScienceData, totalScore, grade, remark });
   };
 
   const calculateHealthScienceDataTotal = () => {
     const totalScore = HealthScienceData.test + HealthScienceData.exam;
-    setHealthScienceData({ ...HealthScienceData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (
+      HealthScienceData.totalScore >= 70 &&
+      HealthScienceData.totalScore <= 100
+    ) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      HealthScienceData.totalScore >= 60 &&
+      HealthScienceData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      HealthScienceData.totalScore >= 50 &&
+      HealthScienceData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      HealthScienceData.totalScore >= 40 &&
+      HealthScienceData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      HealthScienceData.totalScore >= 0 &&
+      HealthScienceData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setHealthScienceData({ ...HealthScienceData, totalScore, grade, remark });
   };
 
   const calculateSocialHabitDataTotal = () => {
     const totalScore = SocialHabitData.test + SocialHabitData.exam;
-    setSocialHabitData({ ...SocialHabitData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (SocialHabitData.totalScore >= 70 && SocialHabitData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      SocialHabitData.totalScore >= 60 &&
+      SocialHabitData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      SocialHabitData.totalScore >= 50 &&
+      SocialHabitData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      SocialHabitData.totalScore >= 40 &&
+      SocialHabitData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      SocialHabitData.totalScore >= 0 &&
+      SocialHabitData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setSocialHabitData({ ...SocialHabitData, totalScore, grade, remark });
   };
   const calculateWritingDataTotal = () => {
     const totalScore = WritingData.test + WritingData.exam;
-    setWritingData({ ...WritingData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (WritingData.totalScore >= 70 && WritingData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (WritingData.totalScore >= 60 && WritingData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (WritingData.totalScore >= 50 && WritingData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (WritingData.totalScore >= 40 && WritingData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (WritingData.totalScore >= 0 && WritingData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setWritingData({ ...WritingData, totalScore, grade, remark });
   };
 
   const calculateRhymesTotal = () => {
     const totalScore = RhymesData.test + RhymesData.exam;
-    setRhymesData({ ...RhymesData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (RhymesData.totalScore >= 70 && RhymesData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (RhymesData.totalScore >= 60 && RhymesData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (RhymesData.totalScore >= 50 && RhymesData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (RhymesData.totalScore >= 40 && RhymesData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (RhymesData.totalScore >= 0 && RhymesData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setRhymesData({ ...RhymesData, totalScore, grade, remark });
   };
 
   const calculateAgricScienceDataTotal = () => {
     const totalScore = AgricScienceData.test + AgricScienceData.exam;
-    setAgricScienceData({ ...AgricScienceData, totalScore });
+    let grade = "";
+    let remark = "";
+    if (
+      AgricScienceData.totalScore >= 70 &&
+      AgricScienceData.totalScore <= 100
+    ) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      AgricScienceData.totalScore >= 60 &&
+      AgricScienceData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      AgricScienceData.totalScore >= 50 &&
+      AgricScienceData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      AgricScienceData.totalScore >= 40 &&
+      AgricScienceData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      AgricScienceData.totalScore >= 0 &&
+      AgricScienceData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setAgricScienceData({ ...AgricScienceData, totalScore, grade, remark });
   };
-
+  const calculateCreativeArtDataTotal = () => {
+    const totalScore = CreativeArtData.test + CreativeArtData.exam;
+    let grade = "";
+    let remark = "";
+    if (CreativeArtData.totalScore >= 70 && CreativeArtData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (
+      CreativeArtData.totalScore >= 60 &&
+      CreativeArtData.totalScore <= 69
+    ) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (
+      CreativeArtData.totalScore >= 50 &&
+      CreativeArtData.totalScore <= 59
+    ) {
+      grade = "C";
+      remark = "Good";
+    } else if (
+      CreativeArtData.totalScore >= 40 &&
+      CreativeArtData.totalScore <= 49
+    ) {
+      grade = "D";
+      remark = "Pass";
+    } else if (
+      CreativeArtData.totalScore >= 0 &&
+      CreativeArtData.totalScore <= 39
+    ) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setCreativeArtData({ ...CreativeArtData, totalScore, grade, remark });
+  };
+  const calculatePhonicsDataTotal = () => {
+    const totalScore = PhonicsData.test + PhonicsData.exam;
+    let grade = "";
+    let remark = "";
+    if (PhonicsData.totalScore >= 70 && PhonicsData.totalScore <= 100) {
+      grade = "A";
+      remark = "Excellent";
+    } else if (PhonicsData.totalScore >= 60 && PhonicsData.totalScore <= 69) {
+      grade = "B";
+      remark = "Very Good";
+    } else if (PhonicsData.totalScore >= 50 && PhonicsData.totalScore <= 59) {
+      grade = "C";
+      remark = "Good";
+    } else if (PhonicsData.totalScore >= 40 && PhonicsData.totalScore <= 49) {
+      grade = "D";
+      remark = "Pass";
+    } else if (PhonicsData.totalScore >= 0 && PhonicsData.totalScore <= 39) {
+      grade = "F";
+      remark = "Fail";
+    }
+    setPhonicsData({ ...PhonicsData, totalScore, grade, remark });
+  };
   React.useEffect(() => {
     const fetchPosts = async () => {
       const { data } = await axios.get(UserApi + id);
@@ -334,6 +631,26 @@ const InputNursery1result = () => {
           totalScore: RhymesData.totalScore,
           grade: RhymesData.grade,
           remark: RhymesData.remark,
+        },
+      ],
+      CreativeArt: [
+        // ...English,
+        {
+          test: CreativeArtData.test,
+          exam: CreativeArtData.exam,
+          totalScore: CreativeArtData.totalScore,
+          grade: CreativeArtData.grade,
+          remark: CreativeArtData.remark,
+        },
+      ],
+      Phonics: [
+        // ...English,
+        {
+          test: PhonicsData.test,
+          exam: PhonicsData.exam,
+          totalScore: PhonicsData.totalScore,
+          grade: PhonicsData.grade,
+          remark: PhonicsData.remark,
         },
       ],
       Writing: [
@@ -1667,6 +1984,304 @@ const InputNursery1result = () => {
                         </div>
                       </Dropdown.Menu>
                     </Dropdown>
+                    <Dropdown>
+                      <Dropdown.Toggle
+                        variant="success"
+                        id="dropdown-basic"
+                        style={{
+                          border: "1px solid green",
+                          backgroundColor: "white",
+                          marginTop: "15px",
+                          color: "black",
+                        }}
+                        className="result-input-elect-nursery1"
+                      >
+                        Phonics
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        <div className="col-md-6 mb-2 mt-2 ">
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Test/C.A"
+                            type="number"
+                            name="test"
+                            value={PhonicsData.test}
+                            onBlur={calculatePhonicsDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "PhonicsData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Exam"
+                            name="exam"
+                            type="number"
+                            value={PhonicsData.exam}
+                            onBlur={calculatePhonicsDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "PhonicsData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-2"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Total Score"
+                            type="number"
+                            name="totalScore"
+                            value={PhonicsData.totalScore}
+                            onBlur={calculateResultTotalScore}
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Grade"
+                            name="grade"
+                            type="text"
+                            value={PhonicsData.grade}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "PhonicsData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            name="remark"
+                            label="Remark"
+                            type="text"
+                            value={PhonicsData.remark}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "PhonicsData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    {/* ///Writing end input */}
+                    {/* ///Writing */}
+                    <Dropdown>
+                      <Dropdown.Toggle
+                        variant="success"
+                        id="dropdown-basic"
+                        style={{
+                          border: "1px solid green",
+                          backgroundColor: "white",
+                          marginTop: "15px",
+                          color: "black",
+                        }}
+                        className="result-input-elect-nursery1"
+                      >
+                        Creative Art
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        <div className="col-md-6 mb-2 mt-2 ">
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Test/C.A"
+                            type="number"
+                            name="test"
+                            value={CreativeArtData.test}
+                            onBlur={calculateCreativeArtDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "CreativeArtData",
+                                "test",
+                                +e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Exam"
+                            name="exam"
+                            type="number"
+                            value={CreativeArtData.exam}
+                            onBlur={calculateCreativeArtDataTotal}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "CreativeArtData",
+                                "exam",
+                                +e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-2"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Total Score"
+                            type="number"
+                            name="totalScore"
+                            value={CreativeArtData.totalScore}
+                            onBlur={calculateResultTotalScore}
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            label="Grade"
+                            name="grade"
+                            type="text"
+                            value={CreativeArtData.grade}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "CreativeArtData",
+                                "grade",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div
+                          className="col-md-6 mb-2 mt-1"
+                          // style={{
+                          //   marginLeft: "auto",
+                          //   marginRight: "auto",
+                          // }}
+                        >
+                          <TextField
+                            style={{
+                              width: "150px",
+                              marginLeft: "4px",
+                            }}
+                            required
+                            rows={4}
+                            id="outlined-required"
+                            name="remark"
+                            label="Remark"
+                            type="text"
+                            value={CreativeArtData.remark}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                "CreativeArtData",
+                                "remark",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                      </Dropdown.Menu>
+                    </Dropdown>
                     {/* ///HealthSceince */}
                     <TextField
                       variant="outlined"
@@ -1697,6 +2312,7 @@ const InputNursery1result = () => {
                       autoComplete="TotalAverage"
                       autoFocus
                       value={TotalAverage}
+                      onBlur={calculateTotalGrade}
                       onChange={(e) =>
                         setTotalAverage(parseInt(e.target.value, 10))
                       }

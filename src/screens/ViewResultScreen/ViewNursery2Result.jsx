@@ -499,7 +499,7 @@ export const ViewNursery2Result = React.forwardRef((props, ref) => {
                       ))}
                     </td>
                   </tr>
-                  <tr>
+                  {/* <tr>
                     <td>Pre Vocational Studies </td>
                     <td>
                       {" "}
@@ -531,7 +531,7 @@ export const ViewNursery2Result = React.forwardRef((props, ref) => {
                         <div key={item._id}>{item?.remark}</div>
                       ))}
                     </td>
-                  </tr>
+                  </tr> */}
                   <tr>
                     <td>Computer </td>
                     <td>

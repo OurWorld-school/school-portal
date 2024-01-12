@@ -10,6 +10,7 @@ import { Basic1resultApi, Nursery3resultApi } from "../../../../data/Api";
 import AdminLayout from "../../AdminLayout";
 
 export const AdminUserBasic1Result = () => {
+  let classes = "";
   const { id } = useParams();
   const [viewResult, setViewResult] = useState({});
   useEffect(() => {
@@ -518,6 +519,39 @@ export const AdminUserBasic1Result = () => {
                     </td>
                   </tr>
                   <tr>
+                    <td>Hand Writing </td>
+                    <td>
+                      {" "}
+                      {viewResult?.HandWriting?.map((item) => (
+                        <div key={item._id}>{item?.test}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.HandWriting?.map((item) => (
+                        <div key={item._id}>{item?.exam}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.HandWriting?.map((item) => (
+                        <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.HandWriting?.map((item) => (
+                        <div key={item._id}>{item?.grade}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.HandWriting?.map((item) => (
+                        <div key={item._id}>{item?.remark}</div>
+                      ))}
+                    </td>
+                  </tr>
+                  {/* <tr>
                     <td>Computer </td>
                     <td>
                       {" "}
@@ -549,7 +583,7 @@ export const AdminUserBasic1Result = () => {
                         <div key={item._id}>{item?.remark}</div>
                       ))}
                     </td>
-                  </tr>
+                  </tr> */}
                 </tbody>
               </Table>
             </div>

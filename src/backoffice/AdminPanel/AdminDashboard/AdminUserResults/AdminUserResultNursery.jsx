@@ -354,6 +354,72 @@ export const AdminUserResultNursery1 = () => {
                       ))}
                     </td>
                   </tr>
+                  <tr>
+                    <td>Phonics </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Phonics?.map((item) => (
+                        <div key={item._id}>{item?.test}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Phonics?.map((item) => (
+                        <div key={item._id}>{item?.exam}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Phonics?.map((item) => (
+                        <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Phonics?.map((item) => (
+                        <div key={item._id}>{item?.grade}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Phonics?.map((item) => (
+                        <div key={item._id}>{item?.remark}</div>
+                      ))}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>CreativeArt </td>
+                    <td>
+                      {" "}
+                      {viewResult?.CreativeArt?.map((item) => (
+                        <div key={item._id}>{item?.test}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.CreativeArt?.map((item) => (
+                        <div key={item._id}>{item?.exam}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.CreativeArt?.map((item) => (
+                        <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.CreativeArt?.map((item) => (
+                        <div key={item._id}>{item?.grade}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.CreativeArt?.map((item) => (
+                        <div key={item._id}>{item?.remark}</div>
+                      ))}
+                    </td>
+                  </tr>
                 </tbody>
               </Table>
             </div>

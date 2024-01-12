@@ -534,6 +534,39 @@ export const ViewBasic4Result = React.forwardRef((props, ref) => {
                     </td>
                   </tr>
                   <tr>
+                    <td>Hand Writing </td>
+                    <td>
+                      {" "}
+                      {viewResult?.HandWriting?.map((item) => (
+                        <div key={item._id}>{item?.test}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.HandWriting?.map((item) => (
+                        <div key={item._id}>{item?.exam}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.HandWriting?.map((item) => (
+                        <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.HandWriting?.map((item) => (
+                        <div key={item._id}>{item?.grade}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.HandWriting?.map((item) => (
+                        <div key={item._id}>{item?.remark}</div>
+                      ))}
+                    </td>
+                  </tr>
+                  {/* <tr>
                     <td>Computer </td>
                     <td>
                       {" "}
@@ -565,7 +598,7 @@ export const ViewBasic4Result = React.forwardRef((props, ref) => {
                         <div key={item._id}>{item?.remark}</div>
                       ))}
                     </td>
-                  </tr>
+                  </tr> */}
                 </tbody>
               </Table>
             </div>

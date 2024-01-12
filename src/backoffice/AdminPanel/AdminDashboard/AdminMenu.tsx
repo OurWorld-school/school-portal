@@ -26,6 +26,9 @@ export default function AdminMenu() {
 
               <Dropdown.Menu>
                 <Dropdown.Item href="#/action-1">
+                  <Link to="/Creche">Creche</Link>
+                </Dropdown.Item>
+                <Dropdown.Item href="#/action-1">
                   <Link to="/pre-nursery">Pre Nursery</Link>
                 </Dropdown.Item>
                 <Dropdown.Item href="#/action-1">
@@ -111,6 +114,25 @@ export default function AdminMenu() {
                 </Dropdown.Item>
                 <Dropdown.Item href="#/action-3">
                   <Link to="/basic4Result">Basic 4</Link>
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </li>
+          <li className="mt-4">
+            <Dropdown>
+              <Dropdown.Toggle
+                variant="success"
+                id="dropdown-basic"
+                style={{ border: "1px solid transparent" }}
+              >
+                Result Scratch Card
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href="#/action-1">
+                  <Link to="/Admin-view-scratchCard">
+                    View/Genrate Scratch Card
+                  </Link>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

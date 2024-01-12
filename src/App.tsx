@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import TopNavBar from "./components/TopNavBar/TopNavBar";
 import Header from "./components/Header/Header";
@@ -79,8 +79,17 @@ import UpdateStudentClass from "./backoffice/AdminPanel/AdminDashboard/UpdateStu
 import AssignRoles from "./backoffice/AdminPanel/AdminUsers/AdminStaffs/AssignRoles";
 import AssignAdmin from "./backoffice/AdminPanel/AdminUsers/AdminStaffs/AssignAdmin";
 import StaffLogin from "./screens/LoginScreen/StaffLogin";
+import AdminScratchCard from "./backoffice/AdminPanel/AdminDashboard/ScratchCard/AdminScratchCard";
+import ScratchCardView from "./backoffice/AdminPanel/AdminDashboard/ScratchCard/ScratchCardView";
+import AdminUserCreche from "./backoffice/AdminPanel/AdminUsers/Nursery1students/AdminUserCreche";
+import ResetPassword from "./screens/ResetPssword Screen/ResetPassword";
 
 function App() {
+  const { pathname } = useLocation();
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <div>
       {/* <TopNavBar /> */}
@@ -90,6 +99,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/update-user-profile" element={<UserProfileScreen />} />
         <Route path="/login" element={<LoginScreen />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/staff-login" element={<StaffLogin />} />
         <Route path="/admission" element={<AdmissionPortal />} />
         <Route path="/staff-registeration" element={<StaffRegisteration />} />
@@ -264,6 +274,7 @@ function App() {
           path="/update-user-roles-by-admin/:id"
           element={<AssignRoles />}
         />
+        <Route path="/Creche" element={<AdminUserCreche />} />
         {/* Assign User Roles */}
         {/* Assign User Admin */}
         <Route
@@ -271,6 +282,10 @@ function App() {
           element={<AssignAdmin />}
         />
         {/* Assign User Admin */}
+        {/* scratch Cards */}
+        <Route path="/Admin-view-scratchCard" element={<AdminScratchCard />} />
+        <Route path="/scratchcard" element={<ScratchCardView />} />
+        {/* Scratch card */}
       </Routes>
       {/* <Footer /> */}
     </div>
