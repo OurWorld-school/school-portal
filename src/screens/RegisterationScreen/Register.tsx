@@ -37,6 +37,7 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import TopNavBar from "../../components/TopNavBar/TopNavBar";
 import "./Register.css";
+import AdminLayout from "../../backoffice/AdminPanel/AdminLayout";
 function MadeWithLove() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -199,9 +200,9 @@ export default function SignUp() {
       });
   };
   return (
-    <>
-      <TopNavBar />
-      <Header />
+    <AdminLayout>
+      {/* <TopNavBar />
+      <Header /> */}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -282,6 +283,8 @@ export default function SignUp() {
                     <MenuItem value="Basic-2">Basic-2</MenuItem>
                     <MenuItem value="Basic-3">Basic-3</MenuItem>
                     <MenuItem value="Basic-4">Basic-4</MenuItem>
+                    <MenuItem value="Basic-5">Basic-5</MenuItem>
+                    <MenuItem value="Basic-6">Basic-6</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -448,7 +451,7 @@ export default function SignUp() {
           </form>
         </div>
       </Container>
-      <Footer />
-    </>
+      {/* <Footer /> */}
+    </AdminLayout>
   );
 }

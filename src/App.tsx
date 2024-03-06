@@ -12,18 +12,18 @@ import CheckResult from "./screens/CheckResult/CheckResult";
 import CheckNursery1result from "./screens/CheckResult/CheckNursery1result/CheckNursery1result";
 // import ViewResult from "./screens/ViewResultScreen/ViewResult";
 import AdminUsers from "./backoffice/AdminPanel/AdminUsers/AdminUsers";
-import Nursery1students from "./backoffice/AdminPanel/AdminUsers/Nursery1students/Nursery1students";
+import Nursery1students from "./backoffice/AdminPanel/AdminUsers/StudentsByClasses/Nursery1students";
 import InputNursery1result from "./backoffice/AdminPanel/InputResult/InputNursery1result";
 import AdmissionPortal from "./screens/AdminsionPortal/AdminssionPortal";
 import { ViewResult } from "./screens/ViewResultScreen/ViewResult";
 import ScratchCard from "./screens/ScratchCard/ScratchCard";
-import Nursery2students from "./backoffice/AdminPanel/AdminUsers/Nursery1students/Nursery2students";
-import PreNurserystudents from "./backoffice/AdminPanel/AdminUsers/Nursery1students/PreNurseryStudents";
-import Nursery3students from "./backoffice/AdminPanel/AdminUsers/Nursery1students/Nursery3students";
-import Basic1students from "./backoffice/AdminPanel/AdminUsers/Nursery1students/Basic1students";
-import Basic2students from "./backoffice/AdminPanel/AdminUsers/Nursery1students/Basic2students";
-import Basic3students from "./backoffice/AdminPanel/AdminUsers/Nursery1students/Basic3students";
-import Basic4students from "./backoffice/AdminPanel/AdminUsers/Nursery1students/Basic4students";
+import Nursery2students from "./backoffice/AdminPanel/AdminUsers/StudentsByClasses/Nursery2students";
+import PreNurserystudents from "./backoffice/AdminPanel/AdminUsers/StudentsByClasses/PreNurseryStudents";
+import Nursery3students from "./backoffice/AdminPanel/AdminUsers/StudentsByClasses/Nursery3students";
+import Basic1students from "./backoffice/AdminPanel/AdminUsers/StudentsByClasses/Basic1students";
+import Basic2students from "./backoffice/AdminPanel/AdminUsers/StudentsByClasses/Basic2students";
+import Basic3students from "./backoffice/AdminPanel/AdminUsers/StudentsByClasses/Basic3students";
+import Basic4students from "./backoffice/AdminPanel/AdminUsers/StudentsByClasses/Basic4students";
 import AdminViewStaffs from "./backoffice/AdminPanel/AdminUsers/AdminStaffs/AdminViewStaffs";
 import AdminViewRoles from "./backoffice/AdminPanel/AdminUsers/AdminStaffs/AdminViewRoles";
 import AdminViewAdmin from "./backoffice/AdminPanel/AdminUsers/AdminStaffs/AdminViewAdmins";
@@ -81,8 +81,22 @@ import AssignAdmin from "./backoffice/AdminPanel/AdminUsers/AdminStaffs/AssignAd
 import StaffLogin from "./screens/LoginScreen/StaffLogin";
 import AdminScratchCard from "./backoffice/AdminPanel/AdminDashboard/ScratchCard/AdminScratchCard";
 import ScratchCardView from "./backoffice/AdminPanel/AdminDashboard/ScratchCard/ScratchCardView";
-import AdminUserCreche from "./backoffice/AdminPanel/AdminUsers/Nursery1students/AdminUserCreche";
+import AdminUserCreche from "./backoffice/AdminPanel/AdminUsers/StudentsByClasses/AdminUserCreche";
 import ResetPassword from "./screens/ResetPssword Screen/ResetPassword";
+import Basic5students from "./backoffice/AdminPanel/AdminUsers/StudentsByClasses/Basic5students";
+import Basic6students from "./backoffice/AdminPanel/AdminUsers/StudentsByClasses/Basic6students";
+import InputBasic5Result from "./backoffice/AdminPanel/InputResult/InputBasic5Result";
+import InputBasic6Result from "./backoffice/AdminPanel/InputResult/InputBasic6Result";
+import CheckBasic5Result from "./screens/CheckResult/CheckNursery1result/CheckBasic5Result";
+import CheckBasic6Result from "./screens/CheckResult/CheckNursery1result/CheckBasic6Result";
+import { ViewBasic5Result } from "./screens/ViewResultScreen/ViewBasic5Result";
+import AdminBasic5Result from "./backoffice/AdminPanel/AdminDashboard/AdminResults/AdminBasic5Result";
+import UpdateBasic5Result from "./backoffice/AdminPanel/AdminDashboard/UpdateResults/UpdateBasic5Result";
+import UpdateBasic6Result from "./backoffice/AdminPanel/AdminDashboard/UpdateResults/UpdateBasic6Result";
+import { AdminUserBasic5Result } from "./backoffice/AdminPanel/AdminDashboard/AdminUserResults/AdminUserBasic5Result";
+import { AdminUserBasic6Result } from "./backoffice/AdminPanel/AdminDashboard/AdminUserResults/AdminBasic6Result";
+import { ViewBasic6Result } from "./screens/ViewResultScreen/ViewBasic6Result";
+import AdminBasic6Result from "./backoffice/AdminPanel/AdminDashboard/AdminResults/AdminBasic6Result";
 
 function App() {
   const { pathname } = useLocation();
@@ -116,6 +130,8 @@ function App() {
         <Route path="/basic2" element={<Basic2students />} />
         <Route path="/basic3" element={<Basic3students />} />
         <Route path="/basic4" element={<Basic4students />} />
+        <Route path="/basic5" element={<Basic5students />} />
+        <Route path="/basic6" element={<Basic6students />} />
         {/* ///////// Input results*/}
         <Route path="/staffs" element={<AdminViewStaffs />} />
         <Route path="/viewroles" element={<AdminViewRoles />} />
@@ -128,12 +144,13 @@ function App() {
         <Route path="/basic2Result" element={<AdminBasic2Result />} />
         <Route path="/basic3Result" element={<AdminBasic3Result />} />
         <Route path="/basic4Result" element={<AdminBasic4Result />} />
+        <Route path="/basic5Result" element={<AdminBasic5Result />} />
+        <Route path="/basic6Result" element={<AdminBasic6Result />} />
+        {/* /////// */}
         <Route
           path="/post-nursery1result/:id"
           element={<InputNursery1result />}
         />
-
-        {/* /////// */}
         <Route
           path="/post-prenursery-result/:id"
           element={<InputPreNurseryResult />}
@@ -150,6 +167,8 @@ function App() {
         <Route path="/post-basic2result/:id" element={<InputBasic2Result />} />
         <Route path="/post-basic3result/:id" element={<InputBasic3Result />} />
         <Route path="/post-basic4result/:id" element={<InputBasic4Result />} />
+        <Route path="/post-basic5result/:id" element={<InputBasic5Result />} />
+        <Route path="/post-basic6result/:id" element={<InputBasic6Result />} />
         {/* result checker routes */}
         <Route path="/PreNursery-result" element={<CheckPreNursery />} />
         <Route path="/Nursery2-result" element={<CheckNursery2Result />} />
@@ -158,6 +177,8 @@ function App() {
         <Route path="/Basic2-result" element={<CheckBasic2Result />} />
         <Route path="/Basic3-result" element={<CheckBasic3Result />} />
         <Route path="/Basic4-result" element={<CheckBasic4Result />} />
+        <Route path="/Basic5-result" element={<CheckBasic5Result />} />
+        <Route path="/Basic6-result" element={<CheckBasic6Result />} />
         {/* Result Checker Routes */}
         {/* View student result */}
         <Route
@@ -191,6 +212,22 @@ function App() {
         <Route
           path="/my-results-basic4/:selectedYear/:userId/:selectedTerm"
           element={<ViewBasic4Result />}
+        />{" "}
+        <Route
+          path="/my-results-basic5/:selectedYear/:userId/:selectedTerm"
+          element={
+            <div>
+              <ViewBasic5Result />
+            </div>
+          }
+        />
+        <Route
+          path="/my-results-basic6/:selectedYear/:userId/:selectedTerm"
+          element={
+            <div>
+              <ViewBasic6Result />
+            </div>
+          }
         />
         {/* view student result */}
         {/* Update result by admin */}
@@ -226,6 +263,14 @@ function App() {
           path="/view-basic4-student-result-update/:id"
           element={<UpdateBasic4Result />}
         />
+        <Route
+          path="/view-basic5-student-result-update/:id"
+          element={<UpdateBasic5Result />}
+        />
+        <Route
+          path="/view-basic6-student-result-update/:id"
+          element={<UpdateBasic6Result />}
+        />
         {/* Update result by admin */}
         {/* View User Result by admin */}
         <Route
@@ -236,7 +281,6 @@ function App() {
           path="/view-nursery1-student-result/:id"
           element={<AdminUserResultNursery1 />}
         />
-
         <Route
           path="/view-nursery2-student-result/:id"
           element={<AdminUserNursery2Result />}
@@ -245,7 +289,6 @@ function App() {
           path="/view-nursery3-student-result/:id"
           element={<AdminUserNursery3Result />}
         />
-
         <Route
           path="/view-basic1-student-result/:id"
           element={<AdminUserBasic1Result />}
@@ -261,6 +304,14 @@ function App() {
         <Route
           path="/view-basic4-student-result/:id"
           element={<AdminUserBasic4Result />}
+        />
+        <Route
+          path="/view-basic5-student-result/:id"
+          element={<AdminUserBasic5Result />}
+        />
+        <Route
+          path="/view-basic6-student-result/:id"
+          element={<AdminUserBasic6Result />}
         />
         {/* View User Result by admin */}
         {/* Admin update student current class */}

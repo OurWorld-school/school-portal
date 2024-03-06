@@ -18,28 +18,11 @@ import Button from "@mui/material/Button";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 import {
   Basic1resultApi,
-  Basic2resultApi,
-  Basic3resultApi,
-  Basic4resultApi,
   Basic5resultApi,
-  DeActivateBasic2resultApi,
-  DeActivateBasic3resultApi,
-  DeActivateBasic4resultApi,
   DeActivateBasic5resultApi,
-  DeActivateNursery2resultApi,
-  DeActivateNursery3resultApi,
-  DeActivatePreNurseryresultApi,
-  Nursery2resultApi,
-  Nursery3resultApi,
-  PreNurseryresultApi,
   UpdatePosiionBasic1resultApi,
-  UpdatePosiionBasic3resultApi,
-  UpdatePosiionBasic4resultApi,
   UpdatePosiionBasic5resultApi,
   UpdatePosiionBasic6resultApi,
-  UpdatePosiionNursery2resultApi,
-  UpdatePosiionNursery3resultApi,
-  UpdatePosiionPreNurseryresultApi,
 } from "../../../../data/Api";
 import AdminLayout from "../../AdminLayout";
 import CircularIndeterminate from "../../../../components/Loading/Progress";
@@ -56,7 +39,7 @@ interface Filter {
   term: string | null;
 }
 
-const AdminNursery2Result: React.FC = () => {
+const AdminBasic5Result: React.FC = () => {
   const [selectedYear, setSelectedYear] = React.useState("");
   const [selectedTerm, setSelectedTerm] = React.useState("");
   const [filteredresultData, setFilteredResultData] = React.useState([]);
@@ -90,7 +73,7 @@ const AdminNursery2Result: React.FC = () => {
     try {
       const fetchData = async () => {
         // Fetch data from your API
-        const response = await fetch(Nursery2resultApi);
+        const response = await fetch(Basic5resultApi);
         const data = await response.json();
 
         // Set the fetched data to the state
@@ -176,7 +159,7 @@ const AdminNursery2Result: React.FC = () => {
     };
 
     axios
-      .put(UpdatePosiionNursery2resultApi + userId, data, headers)
+      .put(UpdatePosiionBasic5resultApi + userId, data, headers)
 
       .then((res) => {
         console.log(res.data);
@@ -209,7 +192,7 @@ const AdminNursery2Result: React.FC = () => {
   const [term, setTerm] = React.useState("");
   const [year, setYear] = React.useState("");
 
-  const [classes, setClasses] = React.useState("Nursery-2");
+  const [classes, setClasses] = React.useState("Basic-5");
   const handleShowUp = () => {
     setShowUp(true);
   };
@@ -233,7 +216,7 @@ const AdminNursery2Result: React.FC = () => {
     };
 
     axios
-      .put(DeActivateNursery2resultApi, data, headers)
+      .put(DeActivateBasic5resultApi, data, headers)
 
       .then((res) => {
         console.log(res.data);
@@ -428,7 +411,7 @@ const AdminNursery2Result: React.FC = () => {
                     {/* modal */}
                     <td>
                       {" "}
-                      <Link to={`/view-nursery2-student-result/${item?._id}`}>
+                      <Link to={`/view-basic5-student-result/${item?._id}`}>
                         <Button className="btn-sm">
                           <BsFillBookmarkCheckFill />{" "}
                         </Button>
@@ -446,7 +429,7 @@ const AdminNursery2Result: React.FC = () => {
                       ) : (
                         <>
                           <Link
-                            to={`/view-nursery2-student-result-update/${item?._id}`}
+                            to={`/view-basic5-student-result-update/${item?._id}`}
                           >
                             <Button className="btn-sm">
                               <FaEdit />
@@ -528,4 +511,4 @@ const AdminNursery2Result: React.FC = () => {
   );
 };
 
-export default AdminNursery2Result;
+export default AdminBasic5Result;

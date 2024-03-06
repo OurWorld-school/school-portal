@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import "../../../../css/Input.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
@@ -116,31 +116,38 @@ function UpdateStudentClass() {
                   role="form"
                   onSubmit={submitHandler}
                 >
-                  <FormControl sx={{ m: 1, width: 370 }}>
-                    <InputLabel id="demo-multiple-name-label">
-                      Student Current Class
-                    </InputLabel>
-                    <Select
-                      labelId="demo-multiple-name-label"
-                      id="demo-multiple-name"
-                      fullWidth
-                      // multiple
-                      value={currentClass}
-                      onChange={(e) => setCurrentClass(e.target.value)}
-                      // input={<OutlinedInput label="Name" />}
-                      MenuProps={MenuProps}
+                  <div className="col-md-6 mb-4">
+                    <FormControl
+                      className="input-label-input-divs"
+                      sx={{ m: 1, width: 370 }}
                     >
-                      <MenuItem value="Pre-Nursery">Pre-Nursery</MenuItem>
-                      <MenuItem value="Nursery-1">Nursery-1</MenuItem>
-                      <MenuItem value="Nursery-2">Nursery-2</MenuItem>
-                      <MenuItem value="Nursery-3">Nursery-3</MenuItem>
-                      <MenuItem value="Basic-1">Basic-1</MenuItem>
-                      <MenuItem value="Basic-2">Basic-2</MenuItem>
-                      <MenuItem value="Basic-3">Basic-3</MenuItem>
-                      <MenuItem value="Basic-4">Basic-4</MenuItem>
-                    </Select>
-                  </FormControl>
-
+                      <InputLabel id="demo-multiple-name-label">
+                        Student Current Class
+                      </InputLabel>
+                      <Select
+                        labelId="demo-multiple-name-label"
+                        id="demo-multiple-name"
+                        className="input-label-input-divs-select"
+                        fullWidth
+                        // multiple
+                        value={currentClass}
+                        onChange={(e) => setCurrentClass(e.target.value)}
+                        // input={<OutlinedInput label="Name" />}
+                        MenuProps={MenuProps}
+                      >
+                        <MenuItem value="Pre-Nursery">Pre-Nursery</MenuItem>
+                        <MenuItem value="Nursery-1">Nursery-1</MenuItem>
+                        <MenuItem value="Nursery-2">Nursery-2</MenuItem>
+                        <MenuItem value="Nursery-3">Nursery-3</MenuItem>
+                        <MenuItem value="Basic-1">Basic-1</MenuItem>
+                        <MenuItem value="Basic-2">Basic-2</MenuItem>
+                        <MenuItem value="Basic-3">Basic-3</MenuItem>
+                        <MenuItem value="Basic-4">Basic-4</MenuItem>
+                        <MenuItem value="Basic-5">Basic-5</MenuItem>
+                        <MenuItem value="Basic-6">Basic-6</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </div>
                   <Grid item xs={12}>
                     <FormControlLabel
                       control={

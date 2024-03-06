@@ -38,6 +38,10 @@ export const Basic3resultApi =
   "https://ourworldintschool.onrender.com/api/basic3result/";
 export const Basic4resultApi =
   "https://ourworldintschool.onrender.com/api/basic4result/";
+export const Basic5resultApi =
+  "https://ourworldintschool.onrender.com/api/basic5result/";
+export const Basic6resultApi =
+  "https://ourworldintschool.onrender.com/api/basic6result/";
 export const PreNurseryresultApi =
   "https://ourworldintschool.onrender.com/api/prenurseryresult/";
 export const UpdatePosiionPreNurseryresultApi =
@@ -57,7 +61,15 @@ export const UpdatePosiionBasic3resultApi =
   "https://ourworldintschool.onrender.com/api/basic3result/updateResultPosition/";
 export const UpdatePosiionBasic4resultApi =
   "https://ourworldintschool.onrender.com/api/basic4result/updateResultPosition/";
-
+export const UpdatePosiionBasic5resultApi =
+  "https://ourworldintschool.onrender.com/api/basic5result/updateResultPosition/";
+export const UpdatePosiionBasic6resultApi =
+  "https://ourworldintschool.onrender.com/api/basic6result/updateResultPosition/";
+/////update result
+export const UpdateBasic6resultApi =
+  "https://ourworldintschool.onrender.com/api/basic6result/update/";
+export const UpdateBasic5resultApi =
+  "https://ourworldintschool.onrender.com/api/basic5result/update/";
 export const UpdateBasic4resultApi =
   "https://ourworldintschool.onrender.com/api/basic4result/update/";
 export const UpdateBasic3resultApi =
@@ -79,3 +91,26 @@ export const ScratchCardApi =
   "https://ourworldintschool.onrender.com/api/scratchGenerate/";
 export const ScratchCardLoginApi =
   "https://ourworldintschool.onrender.com/api/scratchGenerate/scratchcard-login/";
+
+/////deactivate editing of result
+export const DeActivatePreNurseryresultApi =
+  "https://ourworldintschool.onrender.com/api/prenurseryresult/deactivateResultEdit/";
+export const DeActivateNursery1resultApi =
+  "https://ourworldintschool.onrender.com/api/nursery1result/deactivateResultEdit/";
+export const DeActivateNursery2resultApi =
+  "https://ourworldintschool.onrender.com/api/nursery2result/deactivateResultEdit/";
+export const DeActivateNursery3resultApi =
+  "https://ourworldintschool.onrender.com/api/nursery3result/deactivateResultEdit/";
+export const DeActivateBasic1resultApi =
+  "https://ourworldintschool.onrender.com/api/basic1result/deactivateResultEdit/";
+export const DeActivateBasic2resultApi =
+  "https://ourworldintschool.onrender.com/api/basic2result/deactivateResultEdit/";
+export const DeActivateBasic3resultApi =
+  "https://ourworldintschool.onrender.com/api/basic3result/deactivateResultEdit/";
+export const DeActivateBasic4resultApi =
+  "https://ourworldintschool.onrender.com/api/basic4result/deactivateResultEdit/";
+export const DeActivateBasic5resultApi =
+  "https://ourworldintschool.onrender.com/api/basic5result/deactivateResultEdit/";
+
+export const DeActivateBasic6resultApi =
+  "https://ourworldintschool.onrender.com/api/basic6result/deactivateResultEdit/";

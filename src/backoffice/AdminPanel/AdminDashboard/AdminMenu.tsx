@@ -21,6 +21,25 @@ export default function AdminMenu() {
                 id="dropdown-basic"
                 style={{ border: "1px solid transparent" }}
               >
+                <Link to="/register"> Register A Student</Link>
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                {/* <Dropdown.Item href="#/action-1">
+                  <Link to="/Admin-view-scratchCard">
+                    View/Genrate Scratch Card
+                  </Link>
+                </Dropdown.Item> */}
+              </Dropdown.Menu>
+            </Dropdown>
+          </li>
+          <li style={{ marginBottom: "20px" }}>
+            <Dropdown>
+              <Dropdown.Toggle
+                variant="success"
+                id="dropdown-basic"
+                style={{ border: "1px solid transparent" }}
+              >
                 Students
               </Dropdown.Toggle>
 
@@ -51,6 +70,12 @@ export default function AdminMenu() {
                 </Dropdown.Item>
                 <Dropdown.Item href="#/action-3">
                   <Link to="/basic4">Basic 4</Link>
+                </Dropdown.Item>
+                <Dropdown.Item href="#/action-3">
+                  <Link to="/basic5">Basic 5</Link>
+                </Dropdown.Item>
+                <Dropdown.Item href="#/action-3">
+                  <Link to="/basic6">Basic 6</Link>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
@@ -115,6 +140,12 @@ export default function AdminMenu() {
                 <Dropdown.Item href="#/action-3">
                   <Link to="/basic4Result">Basic 4</Link>
                 </Dropdown.Item>
+                <Dropdown.Item href="#/action-3">
+                  <Link to="/basic5Result">Basic 5</Link>
+                </Dropdown.Item>
+                <Dropdown.Item href="#/action-3">
+                  <Link to="/basic6Result">Basic 6</Link>
+                </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </li>
@@ -134,6 +165,25 @@ export default function AdminMenu() {
                     View/Genrate Scratch Card
                   </Link>
                 </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </li>
+          <li className="mt-4">
+            <Dropdown>
+              <Dropdown.Toggle
+                variant="success"
+                id="dropdown-basic"
+                style={{ border: "1px solid transparent" }}
+              >
+                Commutative Result
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                {/* <Dropdown.Item href="#/action-1">
+                  <Link to="/Admin-view-scratchCard">
+                    View/Genrate Scratch Card
+                  </Link>
+                </Dropdown.Item> */}
               </Dropdown.Menu>
             </Dropdown>
           </li>

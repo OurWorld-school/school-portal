@@ -1,3 +1,342 @@
+// import * as React from "react";
+// import { styled } from "@mui/material/styles";
+// import Table from "react-bootstrap/Table";
+// import TableBody from "@mui/material/TableBody";
+// import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+// import TableContainer from "@mui/material/TableContainer";
+// import TableHead from "@mui/material/TableHead";
+// import TableRow from "@mui/material/TableRow";
+// import Paper from "@mui/material/Paper";
+// import { TextField } from "@mui/material";
+// import axios from "axios";
+// import Modal from "react-bootstrap/Modal";
+
+// import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer, toast } from "react-toastify";
+// import { FaEdit, FaTrash } from "react-icons/fa";
+// import Button from "@mui/material/Button";
+// import { BsFillBookmarkCheckFill } from "react-icons/bs";
+// import {
+//   Basic5resultApi,
+//   UpdatePosiionBasic1resultApi,
+//   UpdatePosiionBasic4resultApi,
+//   UpdatePosiionBasic5resultApi,
+//   UpdatePosiionBasic6resultApi,
+// } from "../../../../data/Api";
+// import AdminLayout from "../../AdminLayout";
+// import CircularIndeterminate from "../../../../components/Loading/Progress";
+
+// import { Link } from "react-router-dom";
+// interface Data {
+//   // Define your data structure here
+//   // Example: { id: number, name: string, year: number, term: string }
+// }
+
+// interface Filter {
+//   year: number | null;
+//   term: string | null;
+// }
+
+// const AdminBasic4Result: React.FC = () => {
+//   const [selectedYear, setSelectedYear] = React.useState("");
+//   const [selectedTerm, setSelectedTerm] = React.useState("");
+//   const [resultData, setResultData] = React.useState<any[]>([]);
+//   const [loading, setLoading] = React.useState(false);
+
+//   // State to store the API response
+//   const [apiData, setApiData] = React.useState<any>({});
+//   //   const DisplayData = apiData;
+//   // Function to handle the select input change
+//   const handleSelectChange = (e: any) => {
+//     setSelectedYear(e.target.value);
+//   };
+//   const handleSelectTermChange = (e: any) => {
+//     setSelectedTerm(e.target.value);
+//   };
+//   // Function to make the API GET request
+
+//   const fetchApiData = () => {
+//     setLoading(true);
+//     // Make your API GET request here using a library like Axios or the built-in fetch API
+//     // Replace 'YOUR_API_ENDPOINT' with the actual API URL
+//     fetch(
+//       `https://ourworldintschool.onrender.com/api/basic4result/${selectedYear}/${selectedTerm}/`
+//     )
+//       .then((response) => response.json())
+//       .then((data) => {
+//         setApiData(
+//           data.sort((a: any, b: any) => b.TotalAverage - a.TotalAverage)
+//         );
+//         setLoading(false);
+//         // window.location.reload();
+//         console.log(data);
+//         toast.success("Result sucessful");
+//       })
+//       .catch((error) => {
+//         // console.error("Error fetching data:", error);
+//         setLoading(false);
+//         // navigate("/Basic2-result");
+//         toast.error("No result found");
+//       });
+//   };
+//   //   React.useEffect(() => {
+//   //     const fetchPosts = async () => {
+//   //       const { data } = await axios.get(Basic5resultApi);
+//   //       console.log(data);
+//   //       // const foundData = data.find((item) => item.artist === artist);
+//   //       setResultData(data);
+//   //     };
+
+//   //     fetchPosts();
+//   //   }, []);
+//   const [show, setShow] = React.useState(false);
+
+//   const [Position, setPosition] = React.useState("");
+
+//   const handleClose = () => setShow(false);
+//   const [userId, setUseId] = React.useState(null);
+
+//   const handleShow = (_id: any) => {
+//     setShow(true);
+//     setUseId(_id);
+//   };
+//   const handleLoader = () => {
+//     setLoading(true);
+
+//     // Perform any other actions that need to be done when the button is clicked
+//   };
+//   const submitHandler = (e: any) => {
+//     e.preventDefault();
+//     setLoading(true);
+//     const data: any = {
+//       //   user: user,
+//       Position: Position,
+//     };
+
+//     const headers: any = {
+//       "Custom-Header": "xxxx-xxxx-xxxx-xxxx",
+//       "Content-Type": "application/json",
+//       // Accept: "application/json",
+//       // body: JSON.stringify(data),
+//     };
+
+//     axios
+//       .put(UpdatePosiionBasic4resultApi + userId, data, headers)
+
+//       .then((res) => {
+//         console.log(res.data);
+//         setLoading(false);
+//         if (res.data) {
+//           //   setUser("");
+
+//           setPosition(" ");
+
+//           console.log(res.data);
+//           toast.success("post sucessful");
+//           // navigate("/pre-nurseryResult");
+//           handleClose();
+//           window.location.reload();
+//         } else {
+//           toast.error(res.data.error);
+//         }
+//       })
+//       .catch((err) => {
+//         setLoading(false);
+//         toast.error(
+//           "Failed to create a post, check your network connection or input the correct textfields"
+//         );
+//       });
+//   };
+//   return (
+//     <>
+//       <AdminLayout>
+//         <div>
+//           {" "}
+//           <select value={selectedYear} onChange={handleSelectChange}>
+//             <option value="2022">2022</option>
+//             <option value="2023">2023</option>
+//             <option value="2024">2024</option>
+//             <option value="2025">2025</option>
+//             <option value="2026">2026</option>
+//             <option value="2027">2027</option>
+//             {/* Add more years as needed */}
+//           </select>
+//           <select value={selectedTerm} onChange={handleSelectTermChange}>
+//             <option value="1st-Term">1st Term</option>
+//             <option value="2nd-Term">2nd Term</option>
+//             <option value="3rd-Term">3rd Term</option>
+
+//             {/* Add more terms as needed */}
+//           </select>
+//           {loading ? (
+//             <CircularIndeterminate />
+//           ) : (
+//             <>
+//               <button
+//                 style={{
+//                   border: "1px solid red",
+//                   width: "150px",
+//                   height: "50px",
+//                   borderRadius: "6px",
+//                   marginLeft: "5px",
+//                 }}
+//                 onClick={fetchApiData}
+//               >
+//                 Fetch Result
+//               </button>
+//               {/* <ToastContainer /> */}
+//             </>
+//           )}
+//         </div>
+//         <div
+//           style={{ marginLeft: "auto", marginRight: "auto", marginTop: "30px" }}
+//         >
+//           <Table responsive striped bordered>
+//             <thead
+//               style={{
+//                 backgroundColor: "#e53238",
+//                 color: "white",
+//                 fontSize: "medium",
+//                 fontWeight: "500",
+//               }}
+//             >
+//               <tr>
+//                 <th>Image</th>
+//                 <th>First Name</th>
+//                 <th>Last Name</th>
+//                 <th>Class</th>
+//                 <th>School Reg No</th>
+//                 <th>Term</th>
+//                 <th>Year</th>
+//                 <th>Total Score</th>
+//                 <th>Total Average</th>
+//                 <th>Total Grade</th>
+//                 <th>Position</th>
+//                 <th>Number In Class</th>
+//                 <th>Form Teacher Remark</th>
+//                 <th>Head Teacher</th>
+//                 <th>Assign Position</th>
+//                 <th>View Result Details</th>
+//                 <th>Update Result</th>
+//               </tr>
+//             </thead>
+
+//             {/* Display fetched data */}
+//             <tbody>
+//               <tr>
+//                 <td style={{ width: "5%", height: "5%" }}>
+//                   {apiData?.length < 0 ? (
+//                     <></>
+//                   ) : (
+//                     <>
+//                       <img
+//                         src={apiData?.user?.passportPhoto}
+//                         alt="img"
+//                         style={{
+//                           width: "100%",
+//                           height: "100%",
+//                           objectFit: "cover",
+//                         }}
+//                       />{" "}
+//                     </>
+//                   )}
+//                 </td>
+//                 <td>{apiData?.user?.firstName}</td>
+//                 <td>{apiData?.user?.lastName}</td>
+//                 <td>{apiData?.classes}</td>
+//                 <td>{apiData?.schoolRegNumber}</td>
+//                 <td>{apiData?.term}</td>
+//                 <td>{apiData?.year}</td>
+//                 <td>{apiData?.TotalScore}</td>
+//                 <td>{apiData?.TotalAverage}</td>
+//                 <td>{apiData?.TotalGrade}</td>
+
+//                 <td>{apiData?.Position}</td>
+//                 <td>{apiData?.numberInClass} </td>
+//                 <td>{apiData?.Remark}</td>
+//                 <td>{apiData?.HmRemark}</td>
+//                 <td>
+//                   {" "}
+//                   <Button
+//                     className="btn-sm"
+//                     onClick={() => handleShow(apiData?._id)}
+//                   >
+//                     <FaEdit />{" "}
+//                   </Button>
+//                 </td>
+//                 {/* modal */}
+//                 <Modal show={show} onHide={handleClose} centered>
+//                   <Modal.Header closeButton>
+//                     <Modal.Title>Student Position</Modal.Title>
+//                   </Modal.Header>
+//                   <form onSubmit={submitHandler}>
+//                     <Modal.Body>
+//                       <TextField
+//                         variant="outlined"
+//                         margin="normal"
+//                         fullWidth
+//                         id="Position"
+//                         label="Position"
+//                         name="Position"
+//                         autoComplete="Position"
+//                         autoFocus
+//                         value={Position}
+//                         onChange={(e) => setPosition(e.target.value)}
+//                       />
+//                     </Modal.Body>
+//                     <Modal.Footer>
+//                       <Button onClick={handleClose}>Close</Button>
+//                       {loading ? (
+//                         <CircularIndeterminate />
+//                       ) : (
+//                         <div
+//                           className="d-flex justify-content-center"
+
+//                           // onClick={handleLoader}
+//                         >
+//                           <Button
+//                             fullWidth
+//                             onSubmit={handleLoader}
+//                             type="submit"
+//                           >
+//                             Assign Position
+//                           </Button>
+//                           <ToastContainer />
+//                         </div>
+//                       )}
+//                     </Modal.Footer>
+//                   </form>
+//                 </Modal>
+//                 {/* modal */}
+//                 <td>
+//                   {" "}
+//                   <Link to={`/view-basic4-student-result/${apiData?._id}`}>
+//                     <Button className="btn-sm">
+//                       <BsFillBookmarkCheckFill />{" "}
+//                     </Button>
+//                   </Link>{" "}
+//                 </td>
+//                 <td>
+//                   {" "}
+//                   <Link
+//                     to={`/view-basic4-student-result-update/${apiData?._id}`}
+//                   >
+//                     <Button className="btn-sm">
+//                       <FaEdit />
+//                     </Button>
+//                   </Link>{" "}
+//                 </td>
+//               </tr>
+//             </tbody>
+//           </Table>
+//         </div>
+//       </AdminLayout>
+//     </>
+//   );
+// };
+
+// export default AdminBasic4Result;
+
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Table from "react-bootstrap/Table";
@@ -7,151 +346,136 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
+import { TextField } from "@mui/material";
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
-import { TextField } from "@mui/material";
+
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaLock, FaTrash } from "react-icons/fa";
 import Button from "@mui/material/Button";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
-
-import { Link } from "react-router-dom";
-
-import AdminLayout from "../../AdminLayout";
 import {
   Basic1resultApi,
-  Basic2resultApi,
   Basic3resultApi,
-  Nursery2resultApi,
-  Nursery3resultApi,
+  Basic4resultApi,
+  Basic5resultApi,
+  DeActivateBasic3resultApi,
+  DeActivateBasic4resultApi,
+  DeActivateBasic5resultApi,
+  UpdatePosiionBasic1resultApi,
   UpdatePosiionBasic3resultApi,
+  UpdatePosiionBasic4resultApi,
+  UpdatePosiionBasic5resultApi,
+  UpdatePosiionBasic6resultApi,
 } from "../../../../data/Api";
+import AdminLayout from "../../AdminLayout";
 import CircularIndeterminate from "../../../../components/Loading/Progress";
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
-
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
-) {
-  return { name, calories, fat, carbs, protein };
+import { Link } from "react-router-dom";
+import Message from "../../../../components/MessageHandling/Message";
+interface Data {
+  // Define your data structure here
+  // Example: { id: number, name: string, year: number, term: string }
 }
 
-export default function AdminBasic3Result() {
-  const [viewResult, setViewResult] = React.useState([]);
-  const [viewResult2, setViewResult2] = React.useState([]);
-  const [viewResult3, setViewResult3] = React.useState([]);
-  const [filteredData, setFilteredData] = React.useState([]);
-  const [filteredData2, setFilteredData2] = React.useState([]);
-  const [filteredData3, setFilteredData3] = React.useState([]);
+interface Filter {
+  year: number | null;
+  term: string | null;
+}
 
+const AdminBasic3Result: React.FC = () => {
+  const [selectedYear, setSelectedYear] = React.useState("");
+  const [selectedTerm, setSelectedTerm] = React.useState("");
+  const [filteredresultData, setFilteredResultData] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+  const [loader, setLoader] = React.useState(false);
+  const [message, setMessage] = React.useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
+  const [showSuccess, setShowSuccess] = React.useState(false);
+  const [showError, setShowError] = React.useState(false);
+
+  // State to store the API response
+  const [apiData, setApiData] = React.useState<any>([]);
+
+  // Function to handle the select input change
+  const handleSelectChange = (e: any) => {
+    setSelectedYear(e.target.value);
+  };
+  const handleSelectTermChange = (e: any) => {
+    setSelectedTerm(e.target.value);
+  };
+
+  const [initialFetch, setInitialFetch] = React.useState(true);
+
+  // Fetch data from API
   React.useEffect(() => {
-    const fetchPosts = async () => {
-      const { data } = await axios.get(
-        Basic3resultApi
-        //     {
-        //     params: {
-        //       currentClass: "Basic-1",
-        //     },
-        //   }
-      );
-      console.log(data);
-      // const foundData = data.find((item) => item.artist === artist);
-      setViewResult(
-        data.sort((a: any, b: any) => b.TotalAverage - a.TotalAverage)
-      );
-    };
+    setLoader(true);
+    setShowSuccess(true);
+    setShowError(true);
+    try {
+      const fetchData = async () => {
+        // Fetch data from your API
+        const response = await fetch(Basic3resultApi);
+        const data = await response.json();
 
-    fetchPosts();
+        // Set the fetched data to the state
+        setApiData(
+          data
+            .sort((a: any, b: any) => b.TotalAverage - a.TotalAverage)
+            .filter(
+              (item: any) =>
+                item.year === selectedYear && item.term === selectedTerm
+            )
+        );
+        setLoader(false);
+        setTimeout(() => {
+          setShowSuccess(false);
+        }, 3000);
+
+        // After the initial fetch, setInitialFetch to false
+        setInitialFetch(false);
+      };
+
+      // Fetch data only if it's the initial fetch or when the year and term are selected
+      if (initialFetch || (selectedYear && selectedTerm)) {
+        fetchData();
+      }
+    } catch (error) {
+      setLoader(false);
+      // navigate("/Basic2-result");
+      setTimeout(() => {
+        setShowError(false);
+      }, 3000);
+
+      console.error("Error fetching data:", error);
+    }
+  }, [initialFetch]);
+  React.useEffect(() => {
+    // Retrieve selectedYear and selectedTerm from storage
+    const storedYear = localStorage.getItem("selectedYear");
+    const storedTerm = localStorage.getItem("selectedTerm");
+
+    if (storedYear) {
+      setSelectedYear(storedYear);
+    }
+
+    if (storedTerm) {
+      setSelectedTerm(storedTerm);
+    }
   }, []);
-  React.useEffect(() => {
-    // Filter the data based on genre "afrobeat"
-    const filtered = viewResult.filter((item: any) => item.term === "1st-Term");
-    setFilteredData(filtered);
-    console.log(filtered);
-  }, [viewResult]);
 
   React.useEffect(() => {
-    const fetchPosts = async () => {
-      const { data } = await axios.get(
-        Basic3resultApi
-        //     {
-        //     params: {
-        //       currentClass: "Basic-1",
-        //     },
-        //   }
-      );
-      console.log(data);
-      // const foundData = data.find((item) => item.artist === artist);
-      setViewResult2(
-        data.sort((a: any, b: any) => b.TotalAverage - a.TotalAverage)
-      );
-    };
-
-    fetchPosts();
-  }, []);
-  React.useEffect(() => {
-    // Filter the data based on genre "afrobeat"
-    const filtered2 = viewResult.filter(
-      (item: any) => item.term === "2nd-Term"
-    );
-    setFilteredData2(filtered2);
-    console.log(filtered2);
-  }, [viewResult2]);
-  React.useEffect(() => {
-    const fetchPosts = async () => {
-      const { data } = await axios.get(
-        Basic3resultApi
-        //     {
-        //     params: {
-        //       currentClass: "Basic-1",
-        //     },
-        //   }
-      );
-      console.log(data);
-      // const foundData = data.find((item) => item.artist === artist);
-      setViewResult3(
-        data.sort((a: any, b: any) => b.TotalAverage - a.TotalAverage)
-      );
-    };
-
-    fetchPosts();
-  }, []);
-  React.useEffect(() => {
-    // Filter the data based on genre "afrobeat"
-    const filtered3 = viewResult.filter(
-      (item: any) => item.term === "3rd-Term"
-    );
-    setFilteredData3(filtered3);
-    console.log(filtered3);
-  }, [viewResult3]);
+    // Save selectedYear and selectedTerm to storage
+    localStorage.setItem("selectedYear", selectedYear);
+    localStorage.setItem("selectedTerm", selectedTerm);
+  }, [selectedYear, selectedTerm]);
   const [show, setShow] = React.useState(false);
 
   const [Position, setPosition] = React.useState("");
-  const [loading, setLoading] = React.useState(false);
+
   const handleClose = () => setShow(false);
   const [userId, setUseId] = React.useState(null);
 
@@ -206,140 +530,109 @@ export default function AdminBasic3Result() {
         );
       });
   };
+  /////to lock result edit
+  const [showUp, setShowUp] = React.useState(false);
+  const [deActivateResultEdith, setDeActivateResultEdith] =
+    React.useState(true);
+  const [term, setTerm] = React.useState("");
+  const [year, setYear] = React.useState("");
+
+  const [classes, setClasses] = React.useState("Basic-3");
+  const handleShowUp = () => {
+    setShowUp(true);
+  };
+  const handleCloseShowUp = () => setShowUp(false);
+  const lockResultHandler = (e: any) => {
+    e.preventDefault();
+    setLoading(true);
+    const data: any = {
+      //   user: user,
+      term: term,
+      classes: classes,
+      year: year,
+      deActivateResultEdith: deActivateResultEdith,
+    };
+
+    const headers: any = {
+      "Custom-Header": "xxxx-xxxx-xxxx-xxxx",
+      "Content-Type": "application/json",
+      // Accept: "application/json",
+      // body: JSON.stringify(data),
+    };
+
+    axios
+      .put(DeActivateBasic3resultApi, data, headers)
+
+      .then((res) => {
+        console.log(res.data);
+        setLoading(false);
+        if (res.data) {
+          //   setUser("");
+
+          setDeActivateResultEdith(true);
+          setYear("");
+          setTerm("");
+          setClasses("");
+          console.log(res.data);
+          toast.success("post sucessful");
+          // navigate("/pre-nurseryResult");
+          handleClose();
+          window.location.reload();
+        } else {
+          toast.error(res.data.error);
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        toast.error(
+          "Failed to create a post, check your network connection or input the correct textfields"
+        );
+      });
+  };
   return (
-    <AdminLayout>
-      <div style={{ marginLeft: "auto", marginRight: "auto" }}>
-        <Table responsive striped bordered>
-          <thead
-            style={{
-              backgroundColor: "#e53238",
-              color: "white",
-              fontSize: "medium",
-              fontWeight: "500",
-            }}
-          >
-            <tr>
-              <th>Image</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Class</th>
-              <th>School Reg No</th>
-              <th>Term</th>
-              <th>Year</th>
-              <th>Total Score</th>
-              <th>Total Average</th>
-              <th>Total Grade</th>
-              <th>Position</th>
-              <th>Number In Class</th>
-              <th>Form Teacher Remark</th>
-              <th>Head Teacher</th>
-              <th>Assign Position</th>
-              <th>View Result Details</th>
-              <th>Update Result</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredData?.map((row: any, index) => (
-              <tr key={index}>
-                <td style={{ width: "5%", height: "5%" }}>
-                  <img
-                    src={row?.user?.passportPhoto}
-                    alt="img"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                  />{" "}
-                </td>
-                <td>{row?.user?.firstName}</td>
-                <td>{row?.user?.lastName}</td>
-                <td>{row?.classes}</td>
-                <td>{row?.schoolRegNumber}</td>
-                <td>{row?.term}</td>
-                <td>{row?.year}</td>
-                <td>{row?.TotalScore}</td>
-                <td>{row?.TotalAverage}</td>
-                <td>{row?.TotalGrade}</td>
+    <>
+      <AdminLayout>
+        <div>
+          {" "}
+          <select value={selectedYear} onChange={handleSelectChange}>
+            <option value="">Select Result Year</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+            {/* Add more years as needed */}
+          </select>
+          <select value={selectedTerm} onChange={handleSelectTermChange}>
+            <option value="">Select Result Term</option>
+            <option value="1st-Term">1st Term</option>
+            <option value="2nd-Term">2nd Term</option>
+            <option value="3rd-Term">3rd Term</option>
 
-                <td>{row?.Position}</td>
-                <td>{row?.numberInClass} </td>
-                <td>{row?.Remark}</td>
-                <td>{row?.HmRemark}</td>
-                <td>
-                  {" "}
-                  <Button
-                    className="btn-sm"
-                    onClick={() => handleShow(row?._id)}
-                  >
-                    <FaEdit />{" "}
-                  </Button>
-                </td>
-                {/* modal */}
-                <Modal show={show} onHide={handleClose} centered>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Student Position</Modal.Title>
-                  </Modal.Header>
-                  <form onSubmit={submitHandler}>
-                    <Modal.Body>
-                      <TextField
-                        variant="outlined"
-                        margin="normal"
-                        fullWidth
-                        id="Position"
-                        label="Position"
-                        name="Position"
-                        autoComplete="Position"
-                        autoFocus
-                        value={Position}
-                        onChange={(e) => setPosition(e.target.value)}
-                      />
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button onClick={handleClose}>Close</Button>
-                      {loading ? (
-                        <CircularIndeterminate />
-                      ) : (
-                        <div
-                          className="d-flex justify-content-center"
-
-                          // onClick={handleLoader}
-                        >
-                          <Button
-                            fullWidth
-                            onSubmit={handleLoader}
-                            type="submit"
-                          >
-                            Assign Position
-                          </Button>
-                          <ToastContainer />
-                        </div>
-                      )}
-                    </Modal.Footer>
-                  </form>
-                </Modal>
-                {/* modal */}
-                <td>
-                  {" "}
-                  <Link to={`/view-basic3-student-result/${row?._id}`}>
-                    <Button className="btn-sm">
-                      <BsFillBookmarkCheckFill />{" "}
-                    </Button>
-                  </Link>{" "}
-                </td>
-                <td>
-                  {" "}
-                  <Link to={`/view-basic3-student-result-update/${row?._id}`}>
-                    <Button className="btn-sm">
-                      <FaEdit />
-                    </Button>
-                  </Link>{" "}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-        <div className="mt-5">
+            {/* Add more terms as needed */}
+          </select>
+          <>
+            <button
+              style={{
+                border: "1px solid red",
+                width: "150px",
+                height: "50px",
+                borderRadius: "6px",
+                marginLeft: "5px",
+              }}
+              onClick={() => setInitialFetch(true)}
+            >
+              Fetch Result
+            </button>
+            {loader && <CircularIndeterminate />}
+            <Message type="success" message="Success! Result Found" />
+            <Message type="error" message="Error! No Result" />
+          </>
+        </div>
+        <div
+          style={{ marginLeft: "auto", marginRight: "auto", marginTop: "30px" }}
+        >
           <Table responsive striped bordered>
             <thead
               style={{
@@ -366,245 +659,201 @@ export default function AdminBasic3Result() {
                 <th>Head Teacher</th>
                 <th>Assign Position</th>
                 <th>View Result Details</th>
+
                 <th>Update Result</th>
+                <th>Lock Edit Result</th>
               </tr>
             </thead>
+
+            {/* Display fetched data */}
             <tbody>
-              {filteredData2?.map((row: any, index) => (
-                <tr key={index}>
-                  <td style={{ width: "5%", height: "5%" }}>
-                    <img
-                      src={row?.user?.passportPhoto}
-                      alt="img"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
-                    />{" "}
-                  </td>
-                  <td>{row?.user?.firstName}</td>
-                  <td>{row?.user?.lastName}</td>
-                  <td>{row?.classes}</td>
-                  <td>{row?.schoolRegNumber}</td>
-                  <td>{row?.term}</td>
-                  <td>{row?.year}</td>
-                  <td>{row?.TotalScore}</td>
-                  <td>{row?.TotalAverage}</td>
-                  <td>{row?.TotalGrade}</td>
+              {apiData?.map((item: any, index: any) => (
+                <>
+                  <tr>
+                    <td style={{ width: "5%", height: "5%" }} key={index}>
+                      {item?.length < 0 ? (
+                        <></>
+                      ) : (
+                        <>
+                          <img
+                            src={item?.user?.passportPhoto}
+                            alt="img"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "cover",
+                            }}
+                          />{" "}
+                        </>
+                      )}
+                    </td>
+                    <td>{item?.user?.firstName}</td>
+                    <td>{item?.user?.lastName}</td>
+                    <td>{item?.classes}</td>
+                    <td>{item?.schoolRegNumber}</td>
+                    <td>{item?.term}</td>
+                    <td>{item?.year}</td>
+                    <td>{item?.TotalScore}</td>
+                    <td>{item?.TotalAverage}</td>
+                    <td>{item?.TotalGrade}</td>
 
-                  <td>{row?.Position}</td>
-                  <td>{row?.numberInClass} </td>
-                  <td>{row?.Remark}</td>
-                  <td>{row?.HmRemark}</td>
-                  <td>
-                    {" "}
-                    <Button
-                      className="btn-sm"
-                      onClick={() => handleShow(row?._id)}
-                    >
-                      <FaEdit />{" "}
-                    </Button>
-                  </td>
-                  {/* modal */}
-                  <Modal show={show} onHide={handleClose} centered>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Student Position</Modal.Title>
-                    </Modal.Header>
-                    <form onSubmit={submitHandler}>
-                      <Modal.Body>
-                        <TextField
-                          variant="outlined"
-                          margin="normal"
-                          fullWidth
-                          id="Position"
-                          label="Position"
-                          name="Position"
-                          autoComplete="Position"
-                          autoFocus
-                          value={Position}
-                          onChange={(e) => setPosition(e.target.value)}
-                        />
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button onClick={handleClose}>Close</Button>
-                        {loading ? (
-                          <CircularIndeterminate />
-                        ) : (
-                          <div
-                            className="d-flex justify-content-center"
+                    <td>{item?.Position}</td>
+                    <td>{item?.numberInClass} </td>
+                    <td>{item?.Remark}</td>
+                    <td>{item?.HmRemark}</td>
+                    <td>
+                      {" "}
+                      <Button
+                        className="btn-sm"
+                        onClick={() => handleShow(item?._id)}
+                      >
+                        <FaEdit />{" "}
+                      </Button>
+                    </td>
+                    {/* modal */}
+                    <Modal show={show} onHide={handleClose} centered>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Student Position</Modal.Title>
+                      </Modal.Header>
+                      <form onSubmit={submitHandler}>
+                        <Modal.Body>
+                          <TextField
+                            variant="outlined"
+                            margin="normal"
+                            fullWidth
+                            id="Position"
+                            label="Position"
+                            name="Position"
+                            autoComplete="Position"
+                            autoFocus
+                            value={Position}
+                            onChange={(e) => setPosition(e.target.value)}
+                          />
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button onClick={handleClose}>Close</Button>
+                          {loading ? (
+                            <CircularIndeterminate />
+                          ) : (
+                            <div
+                              className="d-flex justify-content-center"
 
-                            // onClick={handleLoader}
-                          >
-                            <Button
-                              fullWidth
-                              onSubmit={handleLoader}
-                              type="submit"
+                              // onClick={handleLoader}
                             >
-                              Assign Position
+                              <Button
+                                fullWidth
+                                onSubmit={handleLoader}
+                                type="submit"
+                              >
+                                Assign Position
+                              </Button>
+                              <ToastContainer />
+                            </div>
+                          )}
+                        </Modal.Footer>
+                      </form>
+                    </Modal>
+                    {/* modal */}
+                    <td>
+                      {" "}
+                      <Link to={`/view-basic3-student-result/${item?._id}`}>
+                        <Button className="btn-sm">
+                          <BsFillBookmarkCheckFill />{" "}
+                        </Button>
+                      </Link>{" "}
+                    </td>
+                    <td
+                      style={{
+                        textAlign: "center",
+                        color: "red",
+                        fontSize: "small",
+                      }}
+                    >
+                      {item?.deActivateResultEdith === true ? (
+                        <> Result Editing is locked by admin</>
+                      ) : (
+                        <>
+                          <Link
+                            to={`/view-basic3-student-result-update/${item?._id}`}
+                          >
+                            <Button className="btn-sm">
+                              <FaEdit />
                             </Button>
-                            <ToastContainer />
-                          </div>
-                        )}
-                      </Modal.Footer>
-                    </form>
-                  </Modal>
-                  {/* modal */}
-                  <td>
-                    {" "}
-                    <Link to={`/view-basic3-student-result/${row?._id}`}>
-                      <Button className="btn-sm">
-                        <BsFillBookmarkCheckFill />{" "}
+                          </Link>
+                        </>
+                      )}{" "}
+                    </td>
+                    <td>
+                      <Button className="btn-sm" onClick={() => handleShowUp()}>
+                        <FaLock />
                       </Button>
-                    </Link>{" "}
-                  </td>
-                  <td>
-                    {" "}
-                    <Link to={`/view-basic3-student-result-update/${row?._id}`}>
-                      <Button className="btn-sm">
-                        <FaEdit />
-                      </Button>
-                    </Link>{" "}
-                  </td>
-                </tr>
+                    </td>
+
+                    {/* modal */}
+                    <Modal show={showUp} onHide={handleCloseShowUp} centered>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Lock Editing of result</Modal.Title>
+                      </Modal.Header>
+                      <form onSubmit={lockResultHandler}>
+                        <Modal.Body>
+                          <select
+                            value={year}
+                            onChange={(e) => setYear(e.target.value)}
+                          >
+                            <option value="">Select Result Year</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            {/* Add more years as needed */}
+                          </select>
+                          <select
+                            value={term}
+                            onChange={(e) => setTerm(e.target.value)}
+                          >
+                            <option value="">Select Result Term</option>
+                            <option value="1st-Term">1st Term</option>
+                            <option value="2nd-Term">2nd Term</option>
+                            <option value="3rd-Term">3rd Term</option>
+
+                            {/* Add more terms as needed */}
+                          </select>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button onClick={handleCloseShowUp}>Close</Button>
+                          {loading ? (
+                            <CircularIndeterminate />
+                          ) : (
+                            <div
+                              className="d-flex justify-content-center"
+
+                              // onClick={handleLoader}
+                            >
+                              <Button
+                                fullWidth
+                                onSubmit={handleLoader}
+                                type="submit"
+                              >
+                                Lock Result
+                              </Button>
+                              <ToastContainer />
+                            </div>
+                          )}
+                        </Modal.Footer>
+                      </form>
+                    </Modal>
+                    {/* modal */}
+                  </tr>
+                </>
               ))}
             </tbody>
           </Table>
         </div>
-        <div className="mt-5">
-          {" "}
-          <Table responsive striped bordered>
-            <thead
-              style={{
-                backgroundColor: "#e53238",
-                color: "white",
-                fontSize: "medium",
-                fontWeight: "500",
-              }}
-            >
-              <tr>
-                <th>Image</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Class</th>
-                <th>School Reg No</th>
-                <th>Term</th>
-                <th>Year</th>
-                <th>Total Score</th>
-                <th>Total Average</th>
-                <th>Total Grade</th>
-                <th>Position</th>
-                <th>Number In Class</th>
-                <th>Form Teacher Remark</th>
-                <th>Head Teacher</th>
-                <th>Assign Poition</th>
-                <th>View Result Details</th>
-                <th>Update Result</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredData3?.map((row: any, index) => (
-                <tr key={index}>
-                  <td style={{ width: "5%", height: "5%" }}>
-                    <img
-                      src={row?.user?.passportPhoto}
-                      alt="img"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
-                    />{" "}
-                  </td>
-                  <td>{row?.user?.firstName}</td>
-                  <td>{row?.user?.lastName}</td>
-                  <td>{row?.classes}</td>
-                  <td>{row?.schoolRegNumber}</td>
-                  <td>{row?.term}</td>
-                  <td>{row?.year}</td>
-                  <td>{row?.TotalScore}</td>
-                  <td>{row?.TotalAverage}</td>
-                  <td>{row?.TotalGrade}</td>
-
-                  <td>{row?.Position}</td>
-                  <td>{row?.numberInClass} </td>
-                  <td>{row?.Remark}</td>
-                  <td>{row?.HmRemark}</td>
-                  <td>
-                    {" "}
-                    <Button
-                      className="btn-sm"
-                      onClick={() => handleShow(row?._id)}
-                    >
-                      <FaEdit />{" "}
-                    </Button>
-                  </td>
-                  {/* modal */}
-                  <Modal show={show} onHide={handleClose} centered>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Student Position</Modal.Title>
-                    </Modal.Header>
-                    <form onSubmit={submitHandler}>
-                      <Modal.Body>
-                        <TextField
-                          variant="outlined"
-                          margin="normal"
-                          fullWidth
-                          id="Position"
-                          label="Position"
-                          name="Position"
-                          autoComplete="Position"
-                          autoFocus
-                          value={Position}
-                          onChange={(e) => setPosition(e.target.value)}
-                        />
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button onClick={handleClose}>Close</Button>
-                        {loading ? (
-                          <CircularIndeterminate />
-                        ) : (
-                          <div
-                            className="d-flex justify-content-center"
-
-                            // onClick={handleLoader}
-                          >
-                            <Button
-                              fullWidth
-                              onSubmit={handleLoader}
-                              type="submit"
-                            >
-                              Assign Position
-                            </Button>
-                            <ToastContainer />
-                          </div>
-                        )}
-                      </Modal.Footer>
-                    </form>
-                  </Modal>
-                  {/* modal */}
-                  <td>
-                    {" "}
-                    <Link to={`/view-basic3-student-result/${row?._id}`}>
-                      <Button className="btn-sm">
-                        <BsFillBookmarkCheckFill />{" "}
-                      </Button>
-                    </Link>{" "}
-                  </td>
-                  <td>
-                    {" "}
-                    <Link to={`/view-basic3-student-result-update/${row?._id}`}>
-                      <Button className="btn-sm">
-                        <FaEdit />
-                      </Button>
-                    </Link>{" "}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
-      </div>
-    </AdminLayout>
+      </AdminLayout>
+    </>
   );
-}
+};
+
+export default AdminBasic3Result;

@@ -2,17 +2,23 @@
   border: 1px solid green;
   background-color: white;
   width: auto;
-  height: auto;
+  height: max-content;
 }
+/* .result-content-print {
+  height: fit-content;
+} */
 .display-content-head-result {
   display: flex;
   justify-content: space-evenly;
   margin-top: 20px;
+
   /* align-items: center; */
 }
 .logo-result-div {
-  width: 70px;
-  height: 10vh;
+  width: 50px;
+  height: 50px;
+  /* width: 70px;
+  height: 10vh; */
   margin-left: 40px;
 }
 .logo-result {
@@ -21,8 +27,8 @@
   object-fit: contain;
 }
 .img-passport-result-div {
-  width: 70px;
-  height: 10vh;
+  width: 50px;
+  height: 50px;
   margin-right: 40px;
 }
 .img-passport-result {
@@ -68,7 +74,7 @@
   width: 70%;
   margin-left: auto;
   margin-right: auto;
-  padding-bottom: 120px;
+  padding-bottom: 20px;
 }
 .user-result-detail-display {
   display: grid;
@@ -89,9 +95,13 @@
   height: 10vh;
 }
 .school-stamp {
-  margin-top: -10px;
+  padding-top: 0px;
   display: block;
   float: right;
+  /* position: relative;
+  bottom: 260px;
+  display: block;
+  right: -200px; */
 }
 .stamp-img-div hr {
   border: 1px solid black;

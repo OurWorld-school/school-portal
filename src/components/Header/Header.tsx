@@ -144,7 +144,7 @@ export default function Header(props: Props) {
               Login
             </Link>
           </ListItem>
-          <ListItem>
+          {/* <ListItem>
             {" "}
             <Link
               to="/register
@@ -153,7 +153,7 @@ export default function Header(props: Props) {
             >
               Sign Up
             </Link>
-          </ListItem>
+          </ListItem> */}
           {userData ? (
             <div>
               <ListItem>
@@ -188,7 +188,7 @@ export default function Header(props: Props) {
                   Login
                 </Link>
               </ListItem>
-              <ListItem>
+              {/* <ListItem>
                 {" "}
                 <Link
                   to="/register
@@ -197,7 +197,7 @@ export default function Header(props: Props) {
                 >
                   Sign Up
                 </Link>
-              </ListItem>
+              </ListItem> */}
             </>
           )}
         </ul>
@@ -304,7 +304,7 @@ export default function Header(props: Props) {
                   </Link>
                 </ListItem>
 
-                <ListItem>
+                {/* <ListItem>
                   <Link
                     to="/register"
                     style={{ textDecoration: "none", color: "inherit" }}
@@ -313,7 +313,7 @@ export default function Header(props: Props) {
                     <span>Sign</span>
                   </Link>
                   <span style={{ marginLeft: "5px" }}>Up</span>
-                </ListItem>
+                </ListItem> */}
                 {userData ? (
                   <div>
                     <Dropdown>
