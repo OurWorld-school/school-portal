@@ -2,7 +2,8 @@
   border: 1px solid green;
   background-color: white;
   width: auto;
-  height: max-content;
+  height: auto;
+  /* height: max-content; */
 }
 /* .result-content-print {
   height: fit-content;
@@ -91,13 +92,15 @@
   /* border: 1px solid black; */
 }
 .stamp-img-div {
-  width: 120px;
-  height: 10vh;
+  width: 80px;
+  height: 80px;
 }
 .school-stamp {
   padding-top: 0px;
-  display: block;
-  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* float: right; */
   /* position: relative;
   bottom: 260px;
   display: block;

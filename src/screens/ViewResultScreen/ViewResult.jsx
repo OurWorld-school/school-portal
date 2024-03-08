@@ -61,6 +61,11 @@ export const ViewResult = React.forwardRef((props, ref) => {
                     {viewResult?.classes} SCHOOL TERMINAL RESULT SHEET
                   </div>
                 </div>
+                <div className="school-stamp">
+                  <div className="stamp-img-div">
+                    <img src={stamp} alt="stamp" className="stamp-img" />
+                  </div>
+                </div>
               </div>
               <div className="img-passport-result-div">
                 <img
@@ -462,22 +467,6 @@ export const ViewResult = React.forwardRef((props, ref) => {
                   </tr>
                 </tbody>
               </Table>
-              <div className="school-stamp">
-                <div className="stamp-img-div">
-                  <img src={stamp} alt="stamp" className="stamp-img" />
-                  <hr />
-                </div>
-                <div
-                  style={{
-                    fontWeight: "600",
-                    marginTop: "6px",
-                    fontSize: "small",
-                    marginLeft: "10px",
-                  }}
-                >
-                  SCHOOL STAMP
-                </div>
-              </div>
             </div>
           </div>
           <Button variant="contained" onClick={handlePrint}>

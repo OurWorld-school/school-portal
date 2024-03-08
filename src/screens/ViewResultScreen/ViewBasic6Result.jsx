@@ -62,6 +62,11 @@ export const ViewBasic6Result = React.forwardRef((props, ref) => {
                       {viewResult?.classes} SCHOOL TERMINAL RESULT SHEET
                     </div>
                   </div>
+                  <div className="school-stamp">
+                    <div className="stamp-img-div">
+                      <img src={stamp} alt="stamp" className="stamp-img" />
+                    </div>
+                  </div>
                 </div>
                 <div className="img-passport-result-div">
                   <img
@@ -628,11 +633,6 @@ export const ViewBasic6Result = React.forwardRef((props, ref) => {
                     </tr>
                   </tbody>
                 </Table>
-                <div className="school-stamp">
-                  <div className="stamp-img-div">
-                    <img src={stamp} alt="stamp" className="stamp-img" />
-                  </div>
-                </div>
               </div>
             </div>
           </div>
