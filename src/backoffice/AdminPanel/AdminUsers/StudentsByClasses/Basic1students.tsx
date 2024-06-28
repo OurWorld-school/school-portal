@@ -106,6 +106,7 @@ export default function Basic1students() {
                 <th>Contact Address</th>
                 <th>Email</th>
                 <th>Input Result</th>
+                <th>Input Commulatives Result</th>
                 <th>Update User Current Class</th>
               </tr>
             </thead>
@@ -133,6 +134,14 @@ export default function Basic1students() {
                   <td>
                     {" "}
                     <Link to={`/post-basic1result/${row?._id}`}>
+                      <Button className="btn-sm">
+                        <BsFillBookmarkCheckFill />{" "}
+                      </Button>
+                    </Link>{" "}
+                  </td>
+                  <td>
+                    {" "}
+                    <Link to={`/post-basic1commulative/${row?._id}`}>
                       <Button className="btn-sm">
                         <BsFillBookmarkCheckFill />{" "}
                       </Button>

@@ -25,10 +25,10 @@ export const AdminUserPreNurseryResult = () => {
 
   return (
     <AdminLayout>
-      <div className="mt-2 mb-2">
+      <div className="mt-2 mb-2 container ">
         <Container>
-          <div className="result-main-div-section">
-            <div className="display-content-head-result">
+          <div className="result-main-div-section ">
+            <div className="display-content-head-result ">
               <div className="logo-result-div">
                 <img src={logo} alt="logo" className="logo-result" />{" "}
               </div>{" "}

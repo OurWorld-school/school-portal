@@ -103,6 +103,7 @@ export default function PreNurserystudents() {
             <th>Contact Address</th>
             <th>Email</th>
             <th>Input Result</th>
+            <th>Input Commulatives Result</th>
             <th>Update User Current Class</th>
           </tr>
         </thead>
@@ -130,6 +131,14 @@ export default function PreNurserystudents() {
               <td>
                 {" "}
                 <Link to={`/post-prenursery-result/${row?._id}`}>
+                  <Button className="btn-sm">
+                    <BsFillBookmarkCheckFill />{" "}
+                  </Button>
+                </Link>{" "}
+              </td>
+              <td>
+                {" "}
+                <Link to={`/post-prenursery-commulative/${row?._id}`}>
                   <Button className="btn-sm">
                     <BsFillBookmarkCheckFill />{" "}
                   </Button>

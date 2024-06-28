@@ -97,6 +97,18 @@ import { AdminUserBasic5Result } from "./backoffice/AdminPanel/AdminDashboard/Ad
 import { AdminUserBasic6Result } from "./backoffice/AdminPanel/AdminDashboard/AdminUserResults/AdminBasic6Result";
 import { ViewBasic6Result } from "./screens/ViewResultScreen/ViewBasic6Result";
 import AdminBasic6Result from "./backoffice/AdminPanel/AdminDashboard/AdminResults/AdminBasic6Result";
+import UpdatePreNurseryResultField from "./backoffice/AdminPanel/AdminDashboard/UpdateResultFields/UpdatePreNurseryResultField";
+import UpdateNursery1ResultField from "./backoffice/AdminPanel/AdminDashboard/UpdateResultFields/UpdateNursery1ResultField";
+import UpdateNursery2ResultField from "./backoffice/AdminPanel/AdminDashboard/UpdateResultFields/UpdateNursery2ResultField";
+import UpdateNursery3ResultField from "./backoffice/AdminPanel/AdminDashboard/UpdateResultFields/UpdateNursery3ResultField";
+import UpdateBasic1ResultField from "./backoffice/AdminPanel/AdminDashboard/UpdateResultFields/UpdateBasic1ResultField";
+import UpdateBasic2ResultField from "./backoffice/AdminPanel/AdminDashboard/UpdateResultFields/UpdateBasic2ResultField";
+import UpdateBasic3ResultField from "./backoffice/AdminPanel/AdminDashboard/UpdateResultFields/UpdateBasic3ResultField";
+import UpdateBasic4ResultField from "./backoffice/AdminPanel/AdminDashboard/UpdateResultFields/UpdateBasic4ResultField";
+import UpdateBasic5ResultField from "./backoffice/AdminPanel/AdminDashboard/UpdateResultFields/UpdateBasic5ResultFied";
+import UpdateBasic6ResultField from "./backoffice/AdminPanel/AdminDashboard/UpdateResultFields/UpdateBasic6ReultField";
+import Test from "./components/Test/Test";
+import InputBasic1Commulative from "./backoffice/AdminPanel/InputCommulative/InputBasic1Commulative";
 
 function App() {
   const { pathname } = useLocation();
@@ -337,6 +349,54 @@ function App() {
         <Route path="/Admin-view-scratchCard" element={<AdminScratchCard />} />
         <Route path="/scratchcard" element={<ScratchCardView />} />
         {/* Scratch card */}
+        {/* Update result field by admin */}
+        <Route
+          path="/view-prenursery-student-result-update-field/:id"
+          element={<UpdatePreNurseryResultField />}
+        />
+        <Route
+          path="/view-nursery1-student-result-update-field/:id"
+          element={<UpdateNursery1ResultField />}
+        />
+        <Route
+          path="/view-nursery2-student-result-update-field/:id"
+          element={<UpdateNursery2ResultField />}
+        />
+        <Route
+          path="/view-nursery3-student-result-update-field/:id"
+          element={<UpdateNursery3ResultField />}
+        />
+        <Route
+          path="/view-basic1-student-result-update-field/:id"
+          element={<UpdateBasic1ResultField />}
+        />
+        <Route
+          path="/view-basic2-student-result-update-field/:id"
+          element={<UpdateBasic2ResultField />}
+        />
+        <Route
+          path="/view-basic3-student-result-update-field/:id"
+          element={<UpdateBasic3ResultField />}
+        />
+        <Route
+          path="/view-basic4-student-result-update-field/:id"
+          element={<UpdateBasic4ResultField />}
+        />
+        <Route
+          path="/view-basic5-student-result-update-field/:id"
+          element={<UpdateBasic5ResultField />}
+        />
+        <Route
+          path="/view-basic6-student-result-update-field/:id"
+          element={<UpdateBasic6ResultField />}
+        />
+        {/* Update result by admin */}
+        {/* commulative result */}
+        <Route
+          path="/post-basic1commulative/:id"
+          element={<InputBasic1Commulative />}
+        />
+        {/* Commulative result */}
       </Routes>
       {/* <Footer /> */}
     </div>

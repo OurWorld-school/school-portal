@@ -175,15 +175,40 @@ export default function AdminMenu() {
                 id="dropdown-basic"
                 style={{ border: "1px solid transparent" }}
               >
-                Commutative Result
+                View Commutative Result
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                {/* <Dropdown.Item href="#/action-1">
-                  <Link to="/Admin-view-scratchCard">
-                    View/Genrate Scratch Card
-                  </Link>
-                </Dropdown.Item> */}
+                <Dropdown.Item>
+                  <Link to="/pre-nursery-view-commulative">Pre Nursery</Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link to="/nusery1-view-commulative">Nursery 1</Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link to="/nusery2-view-commulative">Nursery 2</Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link to="/nusery3-view-commulative">Nursery 3</Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link to="/basic1-view-commulative">Basic 1</Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link to="/basic2-view-commulative">Basic 2</Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link to="/basic3-view-commulative">Basic 3</Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link to="/basic4-view-commulative">Basic 4</Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link to="/basic5-view-commulative">Basic 5</Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link to="/basic6-view-commulative">Basic 6</Link>
+                </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </li>

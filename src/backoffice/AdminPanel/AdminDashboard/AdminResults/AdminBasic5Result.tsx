@@ -315,7 +315,8 @@ const AdminBasic5Result: React.FC = () => {
                 <th>Assign Position</th>
                 <th>View Result Details</th>
 
-                <th>Update Result</th>
+                <th>Update/Edit Result Subjects</th>
+                <th>Update/Edit Result Field</th>
                 <th>Lock Edit Result</th>
               </tr>
             </thead>
@@ -430,6 +431,27 @@ const AdminBasic5Result: React.FC = () => {
                         <>
                           <Link
                             to={`/view-basic5-student-result-update/${item?._id}`}
+                          >
+                            <Button className="btn-sm">
+                              <FaEdit />
+                            </Button>
+                          </Link>
+                        </>
+                      )}{" "}
+                    </td>
+                    <td
+                      style={{
+                        textAlign: "center",
+                        color: "red",
+                        fontSize: "small",
+                      }}
+                    >
+                      {item?.deActivateResultEdith === true ? (
+                        <> Result Editing is locked by admin</>
+                      ) : (
+                        <>
+                          <Link
+                            to={`/view-basic5-student-result-update-field/${item?._id}`}
                           >
                             <Button className="btn-sm">
                               <FaEdit />

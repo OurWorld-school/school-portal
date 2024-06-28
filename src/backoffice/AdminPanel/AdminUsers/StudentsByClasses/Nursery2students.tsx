@@ -105,6 +105,7 @@ export default function Nursery2students() {
               <th>Contact Address</th>
               <th>Email</th>
               <th>Input Result</th>
+              <th>Input Commulatives Result</th>
               <th>Update User Current Class</th>
             </tr>
           </thead>
@@ -132,6 +133,14 @@ export default function Nursery2students() {
                 <td>
                   {" "}
                   <Link to={`/post-nursery2result/${row?._id}`}>
+                    <Button className="btn-sm">
+                      <BsFillBookmarkCheckFill />{" "}
+                    </Button>
+                  </Link>{" "}
+                </td>
+                <td>
+                  {" "}
+                  <Link to={`/post-nursery2commulative/${row?._id}`}>
                     <Button className="btn-sm">
                       <BsFillBookmarkCheckFill />{" "}
                     </Button>

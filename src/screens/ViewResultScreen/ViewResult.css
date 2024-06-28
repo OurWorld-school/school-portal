@@ -67,11 +67,20 @@
 .table-div {
   margin-top: 30px;
   width: 70%;
+  /* display: flex;
+  justify-content: left;
+  margin-left: 20px;
+  align-items: center; */
   margin-left: auto;
   margin-right: auto;
 }
 .table-div-2 {
   margin-top: 20px;
+  /* width: 70%;
+  display: flex;
+  justify-content: left;
+  margin-left: 20px;
+  align-items: center; */
   width: 70%;
   margin-left: auto;
   margin-right: auto;

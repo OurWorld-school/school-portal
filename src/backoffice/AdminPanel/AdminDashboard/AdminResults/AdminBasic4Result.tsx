@@ -318,7 +318,8 @@ const AdminBasic4Result: React.FC = () => {
                 <th>Assign Position</th>
                 <th>View Result Details</th>
 
-                <th>Update Result</th>
+                <th>Update/Edit Result Subjects</th>
+                <th>Update/Edit Result Field</th>
                 <th>Lock Edit Result</th>
               </tr>
             </thead>
@@ -414,7 +415,7 @@ const AdminBasic4Result: React.FC = () => {
                     {/* modal */}
                     <td>
                       {" "}
-                      <Link to={`/view-basic6-student-result/${item?._id}`}>
+                      <Link to={`/view-basic4-student-result/${item?._id}`}>
                         <Button className="btn-sm">
                           <BsFillBookmarkCheckFill />{" "}
                         </Button>
@@ -432,7 +433,28 @@ const AdminBasic4Result: React.FC = () => {
                       ) : (
                         <>
                           <Link
-                            to={`/view-basic6-student-result-update/${item?._id}`}
+                            to={`/view-basic4-student-result-update/${item?._id}`}
+                          >
+                            <Button className="btn-sm">
+                              <FaEdit />
+                            </Button>
+                          </Link>
+                        </>
+                      )}{" "}
+                    </td>
+                    <td
+                      style={{
+                        textAlign: "center",
+                        color: "red",
+                        fontSize: "small",
+                      }}
+                    >
+                      {item?.deActivateResultEdith === true ? (
+                        <> Result Editing is locked by admin</>
+                      ) : (
+                        <>
+                          <Link
+                            to={`/view-basic4-student-result-update-field/${item?._id}`}
                           >
                             <Button className="btn-sm">
                               <FaEdit />
