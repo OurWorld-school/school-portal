@@ -109,6 +109,14 @@ import UpdateBasic5ResultField from "./backoffice/AdminPanel/AdminDashboard/Upda
 import UpdateBasic6ResultField from "./backoffice/AdminPanel/AdminDashboard/UpdateResultFields/UpdateBasic6ReultField";
 import Test from "./components/Test/Test";
 import InputBasic1Commulative from "./backoffice/AdminPanel/InputCommulative/InputBasic1Commulative";
+import InputPreNurseryCommulative from "./backoffice/AdminPanel/InputCommulative/InputPreNurseryCommulative";
+import InputNursery2Commulative from "./backoffice/AdminPanel/InputCommulative/InputNursery2Commulative";
+import InputBasic2Commulative from "./backoffice/AdminPanel/InputCommulative/InputBasic2Commulative";
+import InputBasic3Commulative from "./backoffice/AdminPanel/InputCommulative/InputBasic3Commulative";
+import InputBasic4Commulative from "./backoffice/AdminPanel/InputCommulative/InputBasic4Commulative";
+import InputBasic5Commulative from "./backoffice/AdminPanel/InputCommulative/InputBasic5Commulative";
+import InputNursery3Commulative from "./backoffice/AdminPanel/InputCommulative/InputNursery3Commulative";
+import InputNursery1Commulative from "./backoffice/AdminPanel/InputCommulative/InputNursery1Commulative";
 
 function App() {
   const { pathname } = useLocation();
@@ -395,6 +403,38 @@ function App() {
         <Route
           path="/post-basic1commulative/:id"
           element={<InputBasic1Commulative />}
+        />
+        <Route
+          path="/post-basic2commulative/:id"
+          element={<InputBasic2Commulative />}
+        />
+        <Route
+          path="/post-basic3commulative/:id"
+          element={<InputBasic3Commulative />}
+        />
+        <Route
+          path="/post-basic4commulative/:id"
+          element={<InputBasic4Commulative />}
+        />
+        <Route
+          path="/post-basic5commulative/:id"
+          element={<InputBasic5Commulative />}
+        />
+        <Route
+          path="/post-prenursery-commulative/:id"
+          element={<InputPreNurseryCommulative />}
+        />
+        <Route
+          path="/post-nursery1commulative/:id"
+          element={<InputNursery1Commulative />}
+        />
+        <Route
+          path="/post-nursery2commulative/:id"
+          element={<InputNursery2Commulative />}
+        />
+        <Route
+          path="/post-nursery3commulative/:id"
+          element={<InputNursery3Commulative />}
         />
         {/* Commulative result */}
       </Routes>

@@ -1,13 +1,10 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
-  Basic1CommulativeApi,
-  Basic1resultApi,
-  Basic2CommulativeApi,
-  Basic2resultApi,
   Nursery1resultApi,
-  Nursery3CommulativeApi,
+  Nursery2CommulativeApi,
+  Nursery2resultApi,
   Nursery3resultApi,
   PreNurseryresultApi,
   UserApi,
@@ -34,7 +31,7 @@ const MenuProps = {
     },
   },
 };
-const InputNursery3Commulative = () => {
+const InputNursery2Commulative = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -108,7 +105,7 @@ const InputNursery3Commulative = () => {
     grade: "",
     remark: "",
   });
-  const [NationalValuesData, setNationalValuesData] = useState({
+  const [SocialStudiesData, setSocialStudiesData] = useState({
     total1stTermScore: 0,
     total2ndTermScore: 0,
     total3rdTermScore: 0,
@@ -135,7 +132,7 @@ const InputNursery3Commulative = () => {
     grade: "",
     remark: "",
   });
-  const [HistoryData, setHistoryData] = useState({
+  const [WritingData, setWritingData] = useState({
     total1stTermScore: 0,
     total2ndTermScore: 0,
     total3rdTermScore: 0,
@@ -171,13 +168,7 @@ const InputNursery3Commulative = () => {
     grade: "",
     remark: "",
   });
-  const [PVCData, setPVCData] = useState({
-    test: 0,
-    exam: 0,
-    totalScore: 0,
-    grade: "",
-    remark: "",
-  });
+
   const [ComputerData, setComputerData] = useState({
     total1stTermScore: 0,
     total2ndTermScore: 0,
@@ -187,15 +178,7 @@ const InputNursery3Commulative = () => {
     grade: "",
     remark: "",
   });
-  const [HandWritingData, setHandWritingData] = useState({
-    total1stTermScore: 0,
-    total2ndTermScore: 0,
-    total3rdTermScore: 0,
-    totalScore: 0,
-    totalAverage: 0,
-    grade: "",
-    remark: "",
-  });
+
   useEffect(() => {
     calculateResultTotalScore();
     calculateTotalGrade();
@@ -240,8 +223,8 @@ const InputNursery3Commulative = () => {
         );
         count += 1;
       }
-      if (subject.NationalValues) {
-        GrandTotal += subject.NationalValues.reduce(
+      if (subject.SocialStudies) {
+        GrandTotal += subject.SocialStudies.reduce(
           (sum: any, item: any) => sum + item.totalScore,
           0
         );
@@ -276,16 +259,23 @@ const InputNursery3Commulative = () => {
         );
         count += 1;
       }
-      if (subject.PVC) {
-        GrandTotal += subject.PVC.reduce(
+      if (subject.Computer) {
+        GrandTotal += subject.Computer.reduce(
           (sum: any, item: any) => sum + item.totalScore,
           0
         );
         count += 1;
       }
 
-      if (subject.HandWriting) {
-        GrandTotal += subject.HandWriting.reduce(
+      if (subject.CreativeArt) {
+        GrandTotal += subject.CreativeArt.reduce(
+          (sum: any, item: any) => sum + item.totalScore,
+          0
+        );
+        count += 1;
+      }
+      if (subject.Writing) {
+        GrandTotal += subject.Writing.reduce(
           (sum: any, item: any) => sum + item.totalScore,
           0
         );
@@ -304,15 +294,13 @@ const InputNursery3Commulative = () => {
       | "BasicScienceData"
       | "VerbalReasoningData"
       | "QuantitativeReasoningData"
-      | "PVCData"
       | "IgboData"
       | "ComputerData"
       | "CreativeArtData"
-      | "HistoryData"
+      | "WritingData"
       | "PhonicsData"
-      | "NationalValuesData"
+      | "SocialStudiesData"
       | "FrenchData"
-      | "HandWritingData"
       | "CRKData",
     type: "test" | "exam" | "grade" | "remark",
     value: number
@@ -336,21 +324,16 @@ const InputNursery3Commulative = () => {
       case "BasicScienceData":
         setBasicScienceData((prev: any) => ({ ...prev, [type]: value }));
         break;
-      case "NationalValuesData":
-        setNationalValuesData((prev: any) => ({ ...prev, [type]: value }));
+      case "SocialStudiesData":
+        setSocialStudiesData((prev: any) => ({ ...prev, [type]: value }));
         break;
       case "PhonicsData":
         setPhonicsData((prev: any) => ({ ...prev, [type]: value }));
         break;
-      case "PVCData":
-        setPVCData((prev: any) => ({ ...prev, [type]: value }));
+      case "WritingData":
+        setWritingData((prev: any) => ({ ...prev, [type]: value }));
         break;
-      case "HandWritingData":
-        setHandWritingData((prev: any) => ({ ...prev, [type]: value }));
-        break;
-      case "HistoryData":
-        setHistoryData((prev: any) => ({ ...prev, [type]: value }));
-        break;
+
       case "IgboData":
         setIgboData((prev: any) => ({ ...prev, [type]: value }));
         break;
@@ -383,6 +366,7 @@ const InputNursery3Commulative = () => {
     }
     setTotalGrade(newGrade);
   };
+
   const [EnglishAverage, setEnglishAverage] = useState<number>(0);
   const [MathsAverage, setMathsAverage] = useState<number>(0);
   const [BasicScienceAverage, setBasicScienceAverage] = useState<number>(0);
@@ -390,15 +374,15 @@ const InputNursery3Commulative = () => {
     useState<number>(0);
   const [QuantitativeReasoningAverage, setQuantitativeReasoningAverage] =
     useState<number>(0);
-  const [NationalValuesAverage, setNationalValuesAverage] = useState<number>(0);
+  const [SocialStudiesAverage, setSocialStudiesAverage] = useState<number>(0);
   const [CRKAverage, setCRKAverage] = useState<number>(0);
-  const [HistoryAverage, setHistoryAverage] = useState<number>(0);
+
   const [PhonicsAverage, setPhonicsAverage] = useState<number>(0);
   const [IgboAverage, setIgboAverage] = useState<number>(0);
-  const [PVCAverage, setPVCAverage] = useState<number>(0);
+  const [ComputerAverage, setComputerAverage] = useState<number>(0);
   const [FrenchAverage, setFrenchAverage] = useState<number>(0);
   const [CreativeArtAverage, setCreativeArtAverage] = useState<number>(0);
-  const [HandWritingAverage, setHandWritingAverage] = useState<number>(0);
+  const [WritingAverage, setWritingAverage] = useState<number>(0);
   const calculateEnglishDataTotal = () => {
     let totalScore = 0;
     let count = 0;
@@ -544,95 +528,66 @@ const InputNursery3Commulative = () => {
     });
     setQuantitativeReasoningAverage(count > 0 ? totalScore / count : 0);
   };
-  const calculateHistoryDataTotal = () => {
+
+  const calculateComputerDataTotal = () => {
     let totalScore = 0;
     let count = 0;
     subjectMarks.forEach((item: any) => {
-      item.History.forEach((englishMark: any) => {
+      item.Computer.forEach((englishMark: any) => {
         totalScore += englishMark.totalScore;
         count += 1;
       });
     });
     let grade = "";
     let remark = "";
-    if (HistoryAverage >= 70 && HistoryAverage <= 100) {
+    if (ComputerAverage >= 70 && ComputerAverage <= 100) {
       grade = "A";
       remark = "Excellent";
-    } else if (HistoryAverage >= 60 && HistoryAverage <= 69) {
+    } else if (ComputerAverage >= 60 && ComputerAverage <= 69) {
       grade = "B";
       remark = "Very Good";
-    } else if (HistoryAverage >= 50 && HistoryAverage <= 59) {
+    } else if (ComputerAverage >= 50 && ComputerAverage <= 59) {
       grade = "C";
       remark = "Good";
-    } else if (HistoryAverage >= 40 && HistoryAverage <= 49) {
+    } else if (ComputerAverage >= 40 && ComputerAverage <= 49) {
       grade = "D";
       remark = "Pass";
-    } else if (HistoryAverage >= 0 && HistoryAverage <= 39) {
+    } else if (ComputerAverage >= 0 && ComputerAverage <= 39) {
       grade = "F";
       remark = "Fail";
     }
-    setHistoryData({ ...HistoryData, totalScore, grade, remark });
-    setHistoryAverage(count > 0 ? totalScore / count : 0);
+    setComputerData({ ...ComputerData, totalScore, remark, grade });
+    setComputerAverage(count > 0 ? totalScore / count : 0);
   };
-  const calculateNationalValuesDataTotal = () => {
+  const calculateWritingDataTotal = () => {
     let totalScore = 0;
     let count = 0;
     subjectMarks.forEach((item: any) => {
-      item.NationalValues.forEach((englishMark: any) => {
+      item.Writing.forEach((englishMark: any) => {
         totalScore += englishMark.totalScore;
         count += 1;
       });
     });
     let grade = "";
     let remark = "";
-    if (NationalValuesAverage >= 70 && NationalValuesAverage <= 100) {
+    if (WritingAverage >= 70 && WritingAverage <= 100) {
       grade = "A";
       remark = "Excellent";
-    } else if (NationalValuesAverage >= 60 && NationalValuesAverage <= 69) {
+    } else if (WritingAverage >= 60 && WritingAverage <= 69) {
       grade = "B";
       remark = "Very Good";
-    } else if (NationalValuesAverage >= 50 && NationalValuesAverage <= 59) {
+    } else if (WritingAverage >= 50 && WritingAverage <= 59) {
       grade = "C";
       remark = "Good";
-    } else if (NationalValuesAverage >= 40 && NationalValuesAverage <= 49) {
+    } else if (WritingAverage >= 40 && WritingAverage <= 49) {
       grade = "D";
       remark = "Pass";
-    } else if (NationalValuesAverage >= 0 && NationalValuesAverage <= 39) {
+    } else if (WritingAverage >= 0 && WritingAverage <= 39) {
       grade = "F";
       remark = "Fail";
     }
-    setNationalValuesData({ ...NationalValuesData, totalScore, remark, grade });
-    setNationalValuesAverage(count > 0 ? totalScore / count : 0);
-  };
-  const calculateCreativeArtDataTotal = () => {
-    let totalScore = 0;
-    let count = 0;
-    subjectMarks.forEach((item: any) => {
-      item.CreativeArt.forEach((englishMark: any) => {
-        totalScore += englishMark.totalScore;
-        count += 1;
-      });
-    });
-    let grade = "";
-    let remark = "";
-    if (CreativeArtAverage >= 70 && CreativeArtAverage <= 100) {
-      grade = "A";
-      remark = "Excellent";
-    } else if (CreativeArtAverage >= 60 && CreativeArtAverage <= 69) {
-      grade = "B";
-      remark = "Very Good";
-    } else if (CreativeArtAverage >= 50 && CreativeArtAverage <= 59) {
-      grade = "C";
-      remark = "Good";
-    } else if (CreativeArtAverage >= 40 && CreativeArtAverage <= 49) {
-      grade = "D";
-      remark = "Pass";
-    } else if (CreativeArtAverage >= 0 && CreativeArtAverage <= 39) {
-      grade = "F";
-      remark = "Fail";
-    }
-    setCreativeArtData({ ...CreativeArtData, totalScore, grade, remark });
-    setCreativeArtAverage(count > 0 ? totalScore / count : 0);
+    setWritingData({ ...WritingData, totalScore, grade, remark });
+    setWritingAverage(count > 0 ? totalScore / count : 0);
   };
   const calculatePhonicsDataTotal = () => {
     let totalScore = 0;
@@ -664,35 +619,35 @@ const InputNursery3Commulative = () => {
     setPhonicsData({ ...PhonicsData, totalScore, grade, remark });
     setPhonicsAverage(count > 0 ? totalScore / count : 0);
   };
-  const calculateHandWritingDataTotal = () => {
+  const calculateCreativeArtDataTotal = () => {
     let totalScore = 0;
     let count = 0;
     subjectMarks.forEach((item: any) => {
-      item.HandWriting.forEach((englishMark: any) => {
+      item.CreativeArt.forEach((englishMark: any) => {
         totalScore += englishMark.totalScore;
         count += 1;
       });
     });
     let grade = "";
     let remark = "";
-    if (HandWritingAverage >= 70 && HandWritingAverage <= 100) {
+    if (CreativeArtAverage >= 70 && CreativeArtAverage <= 100) {
       grade = "A";
       remark = "Excellent";
-    } else if (HandWritingAverage >= 60 && HandWritingAverage <= 69) {
+    } else if (CreativeArtAverage >= 60 && CreativeArtAverage <= 69) {
       grade = "B";
       remark = "Very Good";
-    } else if (HandWritingAverage >= 50 && HandWritingAverage <= 59) {
+    } else if (CreativeArtAverage >= 50 && CreativeArtAverage <= 59) {
       grade = "C";
       remark = "Good";
-    } else if (HandWritingAverage >= 40 && HandWritingAverage <= 49) {
+    } else if (CreativeArtAverage >= 40 && CreativeArtAverage <= 49) {
       grade = "D";
       remark = "Pass";
-    } else if (HandWritingAverage >= 0 && HandWritingAverage <= 39) {
+    } else if (CreativeArtAverage >= 0 && CreativeArtAverage <= 39) {
       grade = "F";
       remark = "Fail";
     }
-    setHandWritingData({ ...HandWritingData, totalScore, grade, remark });
-    setHandWritingAverage(count > 0 ? totalScore / count : 0);
+    setCreativeArtData({ ...CreativeArtData, totalScore, grade, remark });
+    setCreativeArtAverage(count > 0 ? totalScore / count : 0);
   };
   const calculateBasicScienceDataTotal = () => {
     let totalScore = 0;
@@ -784,35 +739,35 @@ const InputNursery3Commulative = () => {
     setCRKData({ ...CRKData, totalScore, grade, remark });
     setCRKAverage(count > 0 ? totalScore / count : 0);
   };
-  const calculatePVCDataTotal = () => {
+  const calculateSocialStudiesDataTotal = () => {
     let totalScore = 0;
     let count = 0;
     subjectMarks.forEach((item: any) => {
-      item.PVC.forEach((englishMark: any) => {
+      item.SocialStudies.forEach((englishMark: any) => {
         totalScore += englishMark.totalScore;
         count += 1;
       });
     });
     let grade = "";
     let remark = "";
-    if (PVCAverage >= 70 && PVCAverage <= 100) {
+    if (SocialStudiesAverage >= 70 && SocialStudiesAverage <= 100) {
       grade = "A";
       remark = "Excellent";
-    } else if (PVCAverage >= 60 && PVCAverage <= 69) {
+    } else if (SocialStudiesAverage >= 60 && SocialStudiesAverage <= 69) {
       grade = "B";
       remark = "Very Good";
-    } else if (PVCAverage >= 50 && PVCAverage <= 59) {
+    } else if (SocialStudiesAverage >= 50 && SocialStudiesAverage <= 59) {
       grade = "C";
       remark = "Good";
-    } else if (PVCAverage >= 40 && PVCAverage <= 49) {
+    } else if (SocialStudiesAverage >= 40 && SocialStudiesAverage <= 49) {
       grade = "D";
       remark = "Pass";
-    } else if (PVCAverage >= 0 && PVCAverage <= 39) {
+    } else if (SocialStudiesAverage >= 0 && SocialStudiesAverage <= 39) {
       grade = "F";
       remark = "Fail";
     }
-    setPVCData({ ...PVCData, totalScore, grade, remark });
-    setPVCAverage(count > 0 ? totalScore / count : 0);
+    setSocialStudiesData({ ...SocialStudiesData, totalScore, grade, remark });
+    setSocialStudiesAverage(count > 0 ? totalScore / count : 0);
   };
   const calculateIgboDataTotal = () => {
     let totalScore = 0;
@@ -936,23 +891,23 @@ const InputNursery3Commulative = () => {
     const total1stTermBasicScience = extractTotalScoresBasicScience("1st-Term");
     const total2ndTermBasicScience = extractTotalScoresBasicScience("2nd-Term");
     const total3rdTermBasicScience = extractTotalScoresBasicScience("3rd-Term");
-    const extractTotalScoresNationalValues = (term: string) => {
+    const extractTotalScoresSocialStudies = (term: string) => {
       const termData = subjectMarks?.filter((item: any) => item?.term === term);
       let totalScore = 0;
       termData?.forEach((item: any) => {
-        item?.NationalValues?.forEach((subject: any) => {
+        item?.SocialStudies?.forEach((subject: any) => {
           totalScore += subject?.totalScore || 0;
         });
       });
       return totalScore;
     };
 
-    const total1stTermNationalValues =
-      extractTotalScoresNationalValues("1st-Term");
-    const total2ndTermNationalValues =
-      extractTotalScoresNationalValues("2nd-Term");
-    const total3rdTermNationalValues =
-      extractTotalScoresNationalValues("3rd-Term");
+    const total1stTermSocialStudies =
+      extractTotalScoresSocialStudies("1st-Term");
+    const total2ndTermSocialStudies =
+      extractTotalScoresSocialStudies("2nd-Term");
+    const total3rdTermSocialStudies =
+      extractTotalScoresSocialStudies("3rd-Term");
     const extractTotalScoresCRK = (term: string) => {
       const termData = subjectMarks?.filter((item: any) => item?.term === term);
       let totalScore = 0;
@@ -1023,48 +978,35 @@ const InputNursery3Commulative = () => {
     const total1stTermCreativeArt = extractTotalScoresCreativeArt("1st-Term");
     const total2ndTermCreativeArt = extractTotalScoresCreativeArt("2nd-Term");
     const total3rdTermCreativeArt = extractTotalScoresCreativeArt("3rd-Term");
-    const extractTotalScoresPVC = (term: string) => {
+    const extractTotalScoresComputer = (term: string) => {
       const termData = subjectMarks?.filter((item: any) => item?.term === term);
       let totalScore = 0;
       termData?.forEach((item: any) => {
-        item?.PVC?.forEach((subject: any) => {
+        item?.Computer?.forEach((subject: any) => {
           totalScore += subject?.totalScore || 0;
         });
       });
       return totalScore;
     };
 
-    const total1stTermPVC = extractTotalScoresPVC("1st-Term");
-    const total2ndTermPVC = extractTotalScoresPVC("2nd-Term");
-    const total3rdTermPVC = extractTotalScoresPVC("3rd-Term");
-    const extractTotalScoresHandWriting = (term: string) => {
+    const total1stTermComputer = extractTotalScoresComputer("1st-Term");
+    const total2ndTermComputer = extractTotalScoresComputer("2nd-Term");
+    const total3rdTermComputer = extractTotalScoresComputer("3rd-Term");
+    const extractTotalScoresWriting = (term: string) => {
       const termData = subjectMarks?.filter((item: any) => item?.term === term);
       let totalScore = 0;
       termData?.forEach((item: any) => {
-        item?.HandWriting?.forEach((subject: any) => {
+        item?.Writing?.forEach((subject: any) => {
           totalScore += subject?.totalScore || 0;
         });
       });
       return totalScore;
     };
 
-    const total1stTermHandWriting = extractTotalScoresHandWriting("1st-Term");
-    const total2ndTermHandWriting = extractTotalScoresHandWriting("2nd-Term");
-    const total3rdTermHandWriting = extractTotalScoresHandWriting("3rd-Term");
-    const extractTotalScoresHistory = (term: string) => {
-      const termData = subjectMarks?.filter((item: any) => item?.term === term);
-      let totalScore = 0;
-      termData?.forEach((item: any) => {
-        item?.History?.forEach((subject: any) => {
-          totalScore += subject?.totalScore || 0;
-        });
-      });
-      return totalScore;
-    };
+    const total1stTermWriting = extractTotalScoresWriting("1st-Term");
+    const total2ndTermWriting = extractTotalScoresWriting("2nd-Term");
+    const total3rdTermWriting = extractTotalScoresWriting("3rd-Term");
 
-    const total1stTermHistory = extractTotalScoresHistory("1st-Term");
-    const total2ndTermHistory = extractTotalScoresHistory("2nd-Term");
-    const total3rdTermHistory = extractTotalScoresHistory("3rd-Term");
     const data: any = {
       user: user,
       classes: classes,
@@ -1131,16 +1073,16 @@ const InputNursery3Commulative = () => {
           remark: QuantitativeReasoningData.remark,
         },
       ],
-      HandWriting: [
+      Writing: [
         {
-          total1stTermScore: total1stTermHandWriting,
-          total2ndTermScore: total2ndTermHandWriting,
-          total3rdTermScore: total3rdTermHandWriting,
+          total1stTermScore: total1stTermWriting,
+          total2ndTermScore: total2ndTermWriting,
+          total3rdTermScore: total3rdTermWriting,
 
-          totalScore: HandWritingData.totalScore,
-          totalAverage: HandWritingAverage,
-          grade: HandWritingData.grade,
-          remark: HandWritingData.remark,
+          totalScore: WritingData.totalScore,
+          totalAverage: WritingAverage,
+          grade: WritingData.grade,
+          remark: WritingData.remark,
         },
       ],
       CreativeArt: [
@@ -1195,17 +1137,17 @@ const InputNursery3Commulative = () => {
           remark: IgboData.remark,
         },
       ],
-      PVC: [
+      SocialStudies: [
         // ...English,
         {
-          total1stTermScore: total1stTermPVC,
-          total2ndTermScore: total2ndTermPVC,
-          total3rdTermScore: total3rdTermPVC,
+          total1stTermScore: total1stTermSocialStudies,
+          total2ndTermScore: total2ndTermSocialStudies,
+          total3rdTermScore: total3rdTermSocialStudies,
 
-          totalScore: PVCData.totalScore,
-          totalAverage: PVCAverage,
-          grade: PVCData.grade,
-          remark: PVCData.remark,
+          totalScore: SocialStudiesData.totalScore,
+          totalAverage: SocialStudiesAverage,
+          grade: SocialStudiesData.grade,
+          remark: SocialStudiesData.remark,
         },
       ],
       French: [
@@ -1221,19 +1163,7 @@ const InputNursery3Commulative = () => {
           remark: FrenchData.remark,
         },
       ],
-      History: [
-        // ...English,
-        {
-          total1stTermScore: total1stTermHistory,
-          total2ndTermScore: total2ndTermHistory,
-          total3rdTermScore: total3rdTermHistory,
 
-          totalScore: HistoryData.totalScore,
-          totalAverage: HistoryAverage,
-          grade: HistoryData.grade,
-          remark: HistoryData.remark,
-        },
-      ],
       BasicScience: [
         // ...English,
         {
@@ -1248,17 +1178,17 @@ const InputNursery3Commulative = () => {
         },
       ],
 
-      NationalValues: [
+      Computer: [
         // ...English,
         {
-          total1stTermScore: total1stTermNationalValues,
-          total2ndTermScore: total2ndTermNationalValues,
-          total3rdTermScore: total3rdTermNationalValues,
+          total1stTermScore: total1stTermComputer,
+          total2ndTermScore: total2ndTermComputer,
+          total3rdTermScore: total3rdTermComputer,
 
-          totalScore: NationalValuesData.totalScore,
-          totalAverage: NationalValuesAverage,
-          grade: NationalValuesData.grade,
-          remark: NationalValuesData.remark,
+          totalScore: ComputerData.totalScore,
+          totalAverage: ComputerAverage,
+          grade: ComputerData.grade,
+          remark: ComputerData.remark,
         },
       ],
     };
@@ -1271,7 +1201,7 @@ const InputNursery3Commulative = () => {
     };
 
     axios
-      .post(Nursery3CommulativeApi, data, headers)
+      .post(Nursery2CommulativeApi, data, headers)
 
       .then((res) => {
         console.log(res.data);
@@ -1291,7 +1221,7 @@ const InputNursery3Commulative = () => {
           setNumberInClass(Number);
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/nursery3CommulativeResult");
+          navigate("/nursery2CommulativeResult");
         } else {
           toast.error(res.data.error);
         }
@@ -1314,14 +1244,14 @@ const InputNursery3Commulative = () => {
   console.log(subjectMarks);
   useEffect(() => {
     try {
-      axios.get(Nursery3resultApi).then((response) => {
+      axios.get(Nursery2resultApi).then((response) => {
         // Calculate total scores for each term
         // setLoader(false);
 
         setSubjectMarks(
           response.data.filter(
             (item: any) =>
-              item?.classes === "Nursery-3" &&
+              item?.classes === "Nursery-2" &&
               item.year >= startYear &&
               item.year <= endYear &&
               item?.user?._id === id
@@ -1342,13 +1272,13 @@ const InputNursery3Commulative = () => {
     calculateCreativeArtDataTotal();
     calculateIgboDataTotal();
     calculateFrenchDataTotal();
-    calculateHandWritingDataTotal();
+    calculateWritingDataTotal();
     calculateMathsDataTotal();
-    calculateNationalValuesDataTotal();
-    calculateHistoryDataTotal();
+    calculateSocialStudiesDataTotal();
+
     calculateQuantitativeReasoningDataTotal();
     calculateResultTotalScore();
-    calculatePVCDataTotal();
+    calculateComputerDataTotal();
     calculateVerbalReasoningDataTotal();
     calculatePhonicsDataTotal();
   }, [subjectMarks]);
@@ -1384,7 +1314,7 @@ const InputNursery3Commulative = () => {
                     className="  d-flex justify-content-center"
                     style={{ fontSize: "x-large", fontWeight: "600" }}
                   >
-                    Input Basic 1 Result of
+                    Input Nursery 2 Result of
                   </h3>
                   <div
                     className="text-center mb-4"
@@ -1413,12 +1343,11 @@ const InputNursery3Commulative = () => {
                     className="d-flex justify-content-center"
                     style={{ marginLeft: "15px" }}
                   >
-                    *pls select your subject and input Commulative result*
+                    *pls select your subject and input result*
                   </p>
                   <div className="mt-5">
                     <h3>Subjects</h3>
                   </div>
-
                   <form onSubmit={submitHandler}>
                     <Dropdown>
                       <Dropdown.Toggle
@@ -2489,208 +2418,7 @@ const InputNursery3Commulative = () => {
                       </Dropdown.Menu>
                     </Dropdown>
                     {/* /// Agric Sceince end input */}
-                    {/* ///Social Habit */}
-                    <Dropdown>
-                      <Dropdown.Toggle
-                        variant="success"
-                        id="dropdown-basic"
-                        style={{
-                          border: "1px solid green",
-                          backgroundColor: "white",
-                          marginTop: "15px",
-                          color: "black",
-                        }}
-                        className="result-input-elect-nursery1"
-                      >
-                        National Values
-                      </Dropdown.Toggle>
 
-                      <Dropdown.Menu>
-                        {subjectMarks
-                          ?.filter((item: any) => item?.term === "1st-Term")
-                          .map((item: any) => (
-                            <>
-                              {item?.NationalValues?.map(
-                                (item: any, index: any) => (
-                                  <>
-                                    <div className="col-md-6 mb-2 mt-2 ">
-                                      <TextField
-                                        style={{
-                                          width: "150px",
-                                          marginLeft: "4px",
-                                        }}
-                                        required
-                                        rows={4}
-                                        id={`outlined-required-${index}`}
-                                        label="1st Term Total "
-                                        // label={`Term ${index + 1} TotalScore`}
-                                        type="number"
-                                        name={`test-${index}`}
-                                        value={item?.totalScore}
-                                        onBlur={
-                                          calculateNationalValuesDataTotal
-                                        }
-                                      />
-                                    </div>
-                                  </>
-                                )
-                              )}
-                            </>
-                          ))}
-                        {subjectMarks
-                          ?.filter((item: any) => item?.term === "2nd-Term")
-                          .map((item: any) => (
-                            <>
-                              {item?.NationalValues?.map(
-                                (item: any, index: any) => (
-                                  <>
-                                    <div className="col-md-6 mb-2 mt-2 ">
-                                      <TextField
-                                        style={{
-                                          width: "150px",
-                                          marginLeft: "4px",
-                                        }}
-                                        required
-                                        rows={4}
-                                        id={`outlined-required-${index}`}
-                                        label="2nd Term Total "
-                                        // label={`Term ${index + 1} TotalScore`}
-                                        type="number"
-                                        name={`test-${index}`}
-                                        value={item?.totalScore}
-                                        onBlur={
-                                          calculateNationalValuesDataTotal
-                                        }
-                                      />
-                                    </div>
-                                  </>
-                                )
-                              )}
-                            </>
-                          ))}
-                        {subjectMarks
-                          ?.filter((item: any) => item?.term === "3rd-Term")
-                          .map((item: any) => (
-                            <>
-                              {item?.NationalValues?.map(
-                                (item: any, index: any) => (
-                                  <>
-                                    <div className="col-md-6 mb-2 mt-2 ">
-                                      <TextField
-                                        style={{
-                                          width: "150px",
-                                          marginLeft: "4px",
-                                        }}
-                                        required
-                                        rows={4}
-                                        id={`outlined-required-${index}`}
-                                        label="1st Term Total "
-                                        // label={`Term ${index + 1} TotalScore`}
-                                        type="number"
-                                        name={`test-${index}`}
-                                        value={item?.totalScore}
-                                        onBlur={
-                                          calculateNationalValuesDataTotal
-                                        }
-                                      />
-                                    </div>
-                                  </>
-                                )
-                              )}
-                            </>
-                          ))}
-                        <div className="col-md-6 mb-2 mt-2">
-                          <Button
-                            variant="contained"
-                            onClick={calculateNationalValuesDataTotal}
-                          >
-                            Generate Subject TotalScore
-                          </Button>
-                        </div>
-                        <div className="col-md-6 mb-2 mt-2">
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Total Score"
-                            type="number"
-                            name="totalScore"
-                            value={NationalValuesData.totalScore}
-                            onBlur={calculateResultTotalScore}
-                          />
-                        </div>
-                        <div className="col-md-6 mb-2 mt-2">
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Total Average"
-                            type="number"
-                            name="totalScore"
-                            value={NationalValuesAverage.toFixed(2)}
-                          />
-                        </div>
-                        <div className="col-md-6 mb-2 mt-1">
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            label="Grade"
-                            name="grade"
-                            type="text"
-                            value={NationalValuesData.grade}
-                            onChange={(e: any) =>
-                              handleInputChange(
-                                "NationalValuesData",
-                                "grade",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
-                        <div
-                          className="col-md-6 mb-2 mt-1"
-                          // style={{
-                          //   marginLeft: "auto",
-                          //   marginRight: "auto",
-                          // }}
-                        >
-                          <TextField
-                            style={{
-                              width: "150px",
-                              marginLeft: "4px",
-                            }}
-                            required
-                            rows={4}
-                            id="outlined-required"
-                            name="remark"
-                            label="Remark"
-                            type="text"
-                            value={NationalValuesData.remark}
-                            onChange={(e: any) =>
-                              handleInputChange(
-                                "NationalValuesData",
-                                "remark",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                    {/* ///Social Habit end input */}
                     {/* ///Rhymes */}
                     <Dropdown>
                       <Dropdown.Toggle
@@ -2704,7 +2432,7 @@ const InputNursery3Commulative = () => {
                         }}
                         className="result-input-elect-nursery1"
                       >
-                        History
+                        Computer
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -2712,7 +2440,7 @@ const InputNursery3Commulative = () => {
                           ?.filter((item: any) => item?.term === "1st-Term")
                           .map((item: any) => (
                             <>
-                              {item?.History?.map((item: any, index: any) => (
+                              {item?.Computer?.map((item: any, index: any) => (
                                 <>
                                   <div className="col-md-6 mb-2 mt-2 ">
                                     <TextField
@@ -2728,7 +2456,7 @@ const InputNursery3Commulative = () => {
                                       type="number"
                                       name={`test-${index}`}
                                       value={item?.totalScore}
-                                      onBlur={calculateHistoryDataTotal}
+                                      onBlur={calculateComputerDataTotal}
                                     />
                                   </div>
                                 </>
@@ -2739,7 +2467,7 @@ const InputNursery3Commulative = () => {
                           ?.filter((item: any) => item?.term === "2nd-Term")
                           .map((item: any) => (
                             <>
-                              {item?.History?.map((item: any, index: any) => (
+                              {item?.Computer?.map((item: any, index: any) => (
                                 <>
                                   <div className="col-md-6 mb-2 mt-2 ">
                                     <TextField
@@ -2755,7 +2483,7 @@ const InputNursery3Commulative = () => {
                                       type="number"
                                       name={`test-${index}`}
                                       value={item?.totalScore}
-                                      onBlur={calculateHistoryDataTotal}
+                                      onBlur={calculateComputerDataTotal}
                                     />
                                   </div>
                                 </>
@@ -2766,7 +2494,7 @@ const InputNursery3Commulative = () => {
                           ?.filter((item: any) => item?.term === "3rd-Term")
                           .map((item: any) => (
                             <>
-                              {item?.History?.map((item: any, index: any) => (
+                              {item?.Computer?.map((item: any, index: any) => (
                                 <>
                                   <div className="col-md-6 mb-2 mt-2 ">
                                     <TextField
@@ -2782,7 +2510,7 @@ const InputNursery3Commulative = () => {
                                       type="number"
                                       name={`test-${index}`}
                                       value={item?.totalScore}
-                                      onBlur={calculateHistoryDataTotal}
+                                      onBlur={calculateComputerDataTotal}
                                     />
                                   </div>
                                 </>
@@ -2792,7 +2520,7 @@ const InputNursery3Commulative = () => {
                         <div className="col-md-6 mb-2 mt-2">
                           <Button
                             variant="contained"
-                            onClick={calculateHistoryDataTotal}
+                            onClick={calculateComputerDataTotal}
                           >
                             Generate Subject TotalScore
                           </Button>
@@ -2809,7 +2537,7 @@ const InputNursery3Commulative = () => {
                             label="Total Score"
                             type="number"
                             name="totalScore"
-                            value={HistoryData.totalScore}
+                            value={ComputerData.totalScore}
                             onBlur={calculateResultTotalScore}
                           />
                         </div>
@@ -2825,7 +2553,7 @@ const InputNursery3Commulative = () => {
                             label="Total Average"
                             type="number"
                             name="totalScore"
-                            value={HistoryAverage.toFixed(2)}
+                            value={ComputerAverage.toFixed(2)}
                           />
                         </div>
                         <div
@@ -2846,10 +2574,10 @@ const InputNursery3Commulative = () => {
                             label="Grade"
                             name="grade"
                             type="text"
-                            value={HistoryData.grade}
+                            value={ComputerData.grade}
                             onChange={(e: any) =>
                               handleInputChange(
-                                "HistoryData",
+                                "ComputerData",
                                 "grade",
                                 e.target.value
                               )
@@ -2874,10 +2602,10 @@ const InputNursery3Commulative = () => {
                             name="remark"
                             label="Remark"
                             type="text"
-                            value={HistoryData.remark}
+                            value={ComputerData.remark}
                             onChange={(e: any) =>
                               handleInputChange(
-                                "HistoryData",
+                                "ComputerData",
                                 "remark",
                                 e.target.value
                               )
@@ -3507,7 +3235,7 @@ const InputNursery3Commulative = () => {
                         }}
                         className="result-input-elect-nursery1"
                       >
-                        P V S (Pre Vocational Studies)
+                        Social Studies
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -3515,87 +3243,93 @@ const InputNursery3Commulative = () => {
                           ?.filter((item: any) => item?.term === "1st-Term")
                           .map((item: any) => (
                             <>
-                              {item?.PVC?.map((item: any, index: any) => (
-                                <>
-                                  <div className="col-md-6 mb-2 mt-2 ">
-                                    <TextField
-                                      style={{
-                                        width: "150px",
-                                        marginLeft: "4px",
-                                      }}
-                                      required
-                                      rows={4}
-                                      id={`outlined-required-${index}`}
-                                      label="1st Term Total "
-                                      // label={`Term ${index + 1} TotalScore`}
-                                      type="number"
-                                      name={`test-${index}`}
-                                      value={item?.totalScore}
-                                      onBlur={calculatePVCDataTotal}
-                                    />
-                                  </div>
-                                </>
-                              ))}
+                              {item?.SocialStudies?.map(
+                                (item: any, index: any) => (
+                                  <>
+                                    <div className="col-md-6 mb-2 mt-2 ">
+                                      <TextField
+                                        style={{
+                                          width: "150px",
+                                          marginLeft: "4px",
+                                        }}
+                                        required
+                                        rows={4}
+                                        id={`outlined-required-${index}`}
+                                        label="1st Term Total "
+                                        // label={`Term ${index + 1} TotalScore`}
+                                        type="number"
+                                        name={`test-${index}`}
+                                        value={item?.totalScore}
+                                        onBlur={calculateSocialStudiesDataTotal}
+                                      />
+                                    </div>
+                                  </>
+                                )
+                              )}
                             </>
                           ))}
                         {subjectMarks
                           ?.filter((item: any) => item?.term === "2nd-Term")
                           .map((item: any) => (
                             <>
-                              {item?.PVC?.map((item: any, index: any) => (
-                                <>
-                                  <div className="col-md-6 mb-2 mt-2 ">
-                                    <TextField
-                                      style={{
-                                        width: "150px",
-                                        marginLeft: "4px",
-                                      }}
-                                      required
-                                      rows={4}
-                                      id={`outlined-required-${index}`}
-                                      label="2nd Term Total "
-                                      // label={`Term ${index + 1} TotalScore`}
-                                      type="number"
-                                      name={`test-${index}`}
-                                      value={item?.totalScore}
-                                      onBlur={calculatePVCDataTotal}
-                                    />
-                                  </div>
-                                </>
-                              ))}
+                              {item?.SocialStudies?.map(
+                                (item: any, index: any) => (
+                                  <>
+                                    <div className="col-md-6 mb-2 mt-2 ">
+                                      <TextField
+                                        style={{
+                                          width: "150px",
+                                          marginLeft: "4px",
+                                        }}
+                                        required
+                                        rows={4}
+                                        id={`outlined-required-${index}`}
+                                        label="2nd Term Total "
+                                        // label={`Term ${index + 1} TotalScore`}
+                                        type="number"
+                                        name={`test-${index}`}
+                                        value={item?.totalScore}
+                                        onBlur={calculateSocialStudiesDataTotal}
+                                      />
+                                    </div>
+                                  </>
+                                )
+                              )}
                             </>
                           ))}
                         {subjectMarks
                           ?.filter((item: any) => item?.term === "3rd-Term")
                           .map((item: any) => (
                             <>
-                              {item?.PVC?.map((item: any, index: any) => (
-                                <>
-                                  <div className="col-md-6 mb-2 mt-2 ">
-                                    <TextField
-                                      style={{
-                                        width: "150px",
-                                        marginLeft: "4px",
-                                      }}
-                                      required
-                                      rows={4}
-                                      id={`outlined-required-${index}`}
-                                      label="1st Term Total "
-                                      // label={`Term ${index + 1} TotalScore`}
-                                      type="number"
-                                      name={`test-${index}`}
-                                      value={item?.totalScore}
-                                      onBlur={calculatePVCDataTotal}
-                                    />
-                                  </div>
-                                </>
-                              ))}
+                              {item?.SocialStudies?.map(
+                                (item: any, index: any) => (
+                                  <>
+                                    <div className="col-md-6 mb-2 mt-2 ">
+                                      <TextField
+                                        style={{
+                                          width: "150px",
+                                          marginLeft: "4px",
+                                        }}
+                                        required
+                                        rows={4}
+                                        id={`outlined-required-${index}`}
+                                        label="1st Term Total "
+                                        // label={`Term ${index + 1} TotalScore`}
+                                        type="number"
+                                        name={`test-${index}`}
+                                        value={item?.totalScore}
+                                        onBlur={calculateSocialStudiesDataTotal}
+                                      />
+                                    </div>
+                                  </>
+                                )
+                              )}
                             </>
                           ))}
                         <div className="col-md-6 mb-2 mt-2">
                           <Button
                             variant="contained"
-                            onClick={calculatePVCDataTotal}
+                            onClick={calculateSocialStudiesDataTotal}
                           >
                             Generate Subject TotalScore
                           </Button>
@@ -3618,7 +3352,7 @@ const InputNursery3Commulative = () => {
                             label="Total Score"
                             type="number"
                             name="totalScore"
-                            value={PVCData.totalScore}
+                            value={SocialStudiesData.totalScore}
                             onBlur={calculateResultTotalScore}
                           />
                         </div>
@@ -3634,7 +3368,7 @@ const InputNursery3Commulative = () => {
                             label="Total Average"
                             type="number"
                             name="totalScore"
-                            value={PVCAverage.toFixed(2)}
+                            value={SocialStudiesAverage.toFixed(2)}
                           />
                         </div>
                         <div
@@ -3655,10 +3389,10 @@ const InputNursery3Commulative = () => {
                             label="Grade"
                             name="grade"
                             type="text"
-                            value={PVCData.grade}
+                            value={SocialStudiesData.grade}
                             onChange={(e: any) =>
                               handleInputChange(
-                                "PVCData",
+                                "SocialStudiesData",
                                 "grade",
                                 e.target.value
                               )
@@ -3683,10 +3417,10 @@ const InputNursery3Commulative = () => {
                             name="remark"
                             label="Remark"
                             type="text"
-                            value={PVCData.remark}
+                            value={SocialStudiesData.remark}
                             onChange={(e: any) =>
                               handleInputChange(
-                                "PVCData",
+                                "SocialStudiesData",
                                 "remark",
                                 e.target.value
                               )
@@ -4114,29 +3848,27 @@ const InputNursery3Commulative = () => {
                           ?.filter((item: any) => item?.term === "1st-Term")
                           .map((item: any) => (
                             <>
-                              {item?.HandWriting?.map(
-                                (item: any, index: any) => (
-                                  <>
-                                    <div className="col-md-6 mb-2 mt-2 ">
-                                      <TextField
-                                        style={{
-                                          width: "150px",
-                                          marginLeft: "4px",
-                                        }}
-                                        required
-                                        rows={4}
-                                        id={`outlined-required-${index}`}
-                                        label="1st Term Total "
-                                        // label={`Term ${index + 1} TotalScore`}
-                                        type="number"
-                                        name={`test-${index}`}
-                                        value={item?.totalScore}
-                                        onBlur={calculateHandWritingDataTotal}
-                                      />
-                                    </div>
-                                  </>
-                                )
-                              )}
+                              {item?.Writing?.map((item: any, index: any) => (
+                                <>
+                                  <div className="col-md-6 mb-2 mt-2 ">
+                                    <TextField
+                                      style={{
+                                        width: "150px",
+                                        marginLeft: "4px",
+                                      }}
+                                      required
+                                      rows={4}
+                                      id={`outlined-required-${index}`}
+                                      label="1st Term Total "
+                                      // label={`Term ${index + 1} TotalScore`}
+                                      type="number"
+                                      name={`test-${index}`}
+                                      value={item?.totalScore}
+                                      onBlur={calculateWritingDataTotal}
+                                    />
+                                  </div>
+                                </>
+                              ))}
                             </>
                           ))}
                         {subjectMarks
@@ -4160,7 +3892,7 @@ const InputNursery3Commulative = () => {
                                         type="number"
                                         name={`test-${index}`}
                                         value={item?.totalScore}
-                                        onBlur={calculateHandWritingDataTotal}
+                                        onBlur={calculateWritingDataTotal}
                                       />
                                     </div>
                                   </>
@@ -4172,42 +3904,40 @@ const InputNursery3Commulative = () => {
                           ?.filter((item: any) => item?.term === "3rd-Term")
                           .map((item: any) => (
                             <>
-                              {item?.HandWriting?.map(
-                                (item: any, index: any) => (
-                                  <>
-                                    <div className="col-md-6 mb-2 mt-2 ">
-                                      <TextField
-                                        style={{
-                                          width: "150px",
-                                          marginLeft: "4px",
-                                        }}
-                                        required
-                                        rows={4}
-                                        id={`outlined-required-${index}`}
-                                        label="1st Term Total "
-                                        // label={`Term ${index + 1} TotalScore`}
-                                        type="number"
-                                        name={`test-${index}`}
-                                        value={item?.totalScore}
-                                        onChange={(e) =>
-                                          handleInputChange(
-                                            "EnglishData",
-                                            "test",
-                                            +e.target.value
-                                          )
-                                        }
-                                        onBlur={calculateHandWritingDataTotal}
-                                      />
-                                    </div>
-                                  </>
-                                )
-                              )}
+                              {item?.Writing?.map((item: any, index: any) => (
+                                <>
+                                  <div className="col-md-6 mb-2 mt-2 ">
+                                    <TextField
+                                      style={{
+                                        width: "150px",
+                                        marginLeft: "4px",
+                                      }}
+                                      required
+                                      rows={4}
+                                      id={`outlined-required-${index}`}
+                                      label="1st Term Total "
+                                      // label={`Term ${index + 1} TotalScore`}
+                                      type="number"
+                                      name={`test-${index}`}
+                                      value={item?.totalScore}
+                                      onChange={(e) =>
+                                        handleInputChange(
+                                          "EnglishData",
+                                          "test",
+                                          +e.target.value
+                                        )
+                                      }
+                                      onBlur={calculateWritingDataTotal}
+                                    />
+                                  </div>
+                                </>
+                              ))}
                             </>
                           ))}
                         <div className="col-md-6 mb-2 mt-2">
                           <Button
                             variant="contained"
-                            onClick={calculateHandWritingDataTotal}
+                            onClick={calculateWritingDataTotal}
                           >
                             Generate Subject TotalScore
                           </Button>
@@ -4230,7 +3960,7 @@ const InputNursery3Commulative = () => {
                             label="Total Score"
                             type="number"
                             name="totalScore"
-                            value={HandWritingData.totalScore}
+                            value={WritingData.totalScore}
                             onBlur={calculateResultTotalScore}
                           />
                         </div>
@@ -4246,7 +3976,7 @@ const InputNursery3Commulative = () => {
                             label="Total Average"
                             type="number"
                             name="totalScore"
-                            value={HandWritingAverage.toFixed(2)}
+                            value={WritingAverage.toFixed(2)}
                           />
                         </div>
                         <div
@@ -4267,10 +3997,10 @@ const InputNursery3Commulative = () => {
                             label="Grade"
                             name="grade"
                             type="text"
-                            value={HandWritingData.grade}
+                            value={WritingData.grade}
                             onChange={(e: any) =>
                               handleInputChange(
-                                "HandWritingData",
+                                "WritingData",
                                 "grade",
                                 e.target.value
                               )
@@ -4295,10 +4025,10 @@ const InputNursery3Commulative = () => {
                             name="remark"
                             label="Remark"
                             type="text"
-                            value={HandWritingData.remark}
+                            value={WritingData.remark}
                             onChange={(e: any) =>
                               handleInputChange(
-                                "HandWritingData",
+                                "WritingData",
                                 "remark",
                                 e.target.value
                               )
@@ -4456,7 +4186,7 @@ const InputNursery3Commulative = () => {
                         // input={<OutlinedInput label="Name" />}
                         MenuProps={MenuProps}
                       >
-                        <MenuItem value="Nursery-3">Nursery-3</MenuItem>
+                        <MenuItem value="Nursery-2">Nursery 2</MenuItem>
                       </Select>
                     </FormControl>
                     <FormControl sx={{ m: 1, width: 370 }}>
@@ -4489,7 +4219,6 @@ const InputNursery3Commulative = () => {
                         // input={<OutlinedInput label="Name" />}
                         MenuProps={MenuProps}
                       >
-                        <MenuItem value="2023">2023</MenuItem>
                         <MenuItem value="2024">2024</MenuItem>
                         <MenuItem value="2025">2025</MenuItem>
                         <MenuItem value="2026">2026</MenuItem>
@@ -4529,4 +4258,4 @@ const InputNursery3Commulative = () => {
   );
 };
 
-export default InputNursery3Commulative;
+export default InputNursery2Commulative;

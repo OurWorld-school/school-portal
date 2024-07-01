@@ -952,7 +952,8 @@ const InputBasic3Commulative = () => {
       extractTotalScoresNationalValues("1st-Term");
     const total2ndTermNationalValues =
       extractTotalScoresNationalValues("2nd-Term");
-    const total3rdTermNationalValues = extractTotalScores("3rd-Term");
+    const total3rdTermNationalValues =
+      extractTotalScoresNationalValues("3rd-Term");
     const extractTotalScoresCRK = (term: string) => {
       const termData = subjectMarks?.filter((item: any) => item?.term === term);
       let totalScore = 0;

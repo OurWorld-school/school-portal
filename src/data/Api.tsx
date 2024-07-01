@@ -127,6 +127,15 @@ export const Basic4CommulativeApi =
 export const Basic5CommulativeApi =
   "https://ourworldintschool.onrender.com/api/basic5Commulative/";
 export const Nursery3CommulativeApi =
-  "https://ourworldintschool.onrender.com/api/nursery3/";
+  "https://ourworldintschool.onrender.com/api/nursery3Commulative/";
+export const Nursery2CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/nursery2Commulative/";
+export const Nursery1CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/nursery1Commulative/";
+export const PreNurseryCommulativeApi =
+  "https://ourworldintschool.onrender.com/api/prenurseryCommulative/";
+export const PreNurseryCommulativeApis =
+  "http://localhost:5000/api/prenurseryresult/";
+
 export const Basic1CommulativeApis =
   "http://localhost:5000/api/basic1Commulative/";
