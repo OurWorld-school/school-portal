@@ -12,24 +12,7 @@ import TopNavBar from "../../components/TopNavBar/TopNavBar";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 
-const ITEM_HEIGHT = 100;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-// function getStyles( personName: string[], theme: Theme) {
-//   return {
-//     fontWeight:
-
-//   };
-// }
-const CheckCommulative = () => {
-  const theme = useTheme();
+const SelectResultType = () => {
   const [personName, setPersonName] = React.useState<string[]>([]);
   const [selectedValue, setSelectedValue] = React.useState<string>("");
 
@@ -49,7 +32,7 @@ const CheckCommulative = () => {
   const userId = localStorage.getItem("userId");
   useEffect(() => {
     if (userId) {
-      navigate("/check-commulative");
+      navigate("/select-result-type");
     } else {
       navigate("/login");
     }
@@ -57,33 +40,17 @@ const CheckCommulative = () => {
   const ScratchCardId = localStorage.getItem("ScratchCardId");
   useEffect(() => {
     if (ScratchCardId) {
-      navigate("/check-commulative");
+      navigate("/select-result-type");
     } else {
       navigate("/online-result");
     }
   }, [userId]);
   const handleButtonClick = () => {
     // You can define your navigation logic based on the selectedValue here
-    if (selectedValue === "Nursery1-commulative") {
-      navigate("/Nursery1-commulative"); // Navigate to a specific route based on the selected value
-    } else if (selectedValue === "Nursery2-commulative") {
-      navigate("/Nursery2-commulative");
-    } else if (selectedValue === "PreNursery-commulative") {
-      navigate("/PreNursery-commulative");
-    } else if (selectedValue === "Nursery3-commulative") {
-      navigate("/Nursery3-commulative");
-    } else if (selectedValue === "Basic1-commulative") {
-      navigate("/Basic1-commulative");
-    } else if (selectedValue === "Basic2-commulative") {
-      navigate("/Basic2-commulative");
-    } else if (selectedValue === "Basic3-commulative") {
-      navigate("/Basic3-commulative");
-    } else if (selectedValue === "Basic4-commulative") {
-      navigate("/Basic4-commulative");
-    } else if (selectedValue === "Basic5-commulative") {
-      navigate("/Basic5-commulative");
-    } else if (selectedValue === "Basic6-commulative") {
-      navigate("/Basic6-commulative");
+    if (selectedValue === "Result") {
+      navigate("/check-result"); // Navigate to a specific route based on the selected value
+    } else if (selectedValue === "Commulative-Result") {
+      navigate("/check-commulative");
     }
   };
   return (
@@ -116,32 +83,33 @@ const CheckCommulative = () => {
           </div>
           <div className="select-check-div">
             <div>
-              <h2>Select Your Class</h2>
+              <h2>Select Result Type</h2>
               <div className="form-control-div">
+                {/* <div className="input-box">
                 {" "}
+                <select
+                   onChange={handleSelectChange}
+                >
+                  <option value="Result">Result</option>
+                 
+                      <option value="commutative-Result">
+                        {" "}
+                        Commulative Result
+                      </option>
+                   
+                </select>
+              </div> */}{" "}
                 <FormControl sx={{ m: 1, width: 300 }}>
                   <InputLabel id="demo-multiple-name-label">Select</InputLabel>
                   <Select
-                    labelId="demo-multiple-name-label"
-                    id="demo-multiple-name"
-                    // multiple
-                    // value={personName}
+                    // labelId="demo-multiple-name-label"
+                    // id="demo-multiple-name"
                     onChange={handleSelectChange}
-                    // input={<OutlinedInput label="Name" />}
-                    MenuProps={MenuProps}
                   >
-                    <MenuItem value="PreNursery-commulative">
-                      Pre Nursery
+                    <MenuItem value="Result">Result</MenuItem>
+                    <MenuItem value="Commulative-Result">
+                      Commulative Result
                     </MenuItem>
-                    <MenuItem value="Nursery1-commulative">Nursery 1</MenuItem>
-                    <MenuItem value="Nursery2-commulative">Nursery 2</MenuItem>
-                    <MenuItem value="Nursery3-commulative">Nursery 3</MenuItem>
-                    <MenuItem value="Basic1-commulative">Basic 1</MenuItem>
-                    <MenuItem value="Basic2-commulative">Basic 2</MenuItem>
-                    <MenuItem value="Basic3-commulative">Basic 3</MenuItem>
-                    <MenuItem value="Basic4-commulative">Basic 4</MenuItem>
-                    <MenuItem value="Basic5-commulative">Basic 5</MenuItem>
-                    <MenuItem value="Basic6-commulative">Basic 6</MenuItem>
                   </Select>
                 </FormControl>
               </div>
@@ -172,4 +140,4 @@ const CheckCommulative = () => {
   );
 };
 
-export default CheckCommulative;
+export default SelectResultType;

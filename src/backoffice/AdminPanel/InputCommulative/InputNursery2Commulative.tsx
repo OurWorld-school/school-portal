@@ -282,8 +282,11 @@ const InputNursery2Commulative = () => {
         count += 1;
       }
     });
-    setTotalAverage(count > 0 ? GrandTotal / count : 0);
-    // setTotalAverage(parseFloat(GrandTotalAverage.toFixed(2)));
+    let totalAverageScore = count > 0 ? GrandTotal / count : 0;
+    if (totalAverageScore > 0.5) {
+      totalAverageScore = Math.round(totalAverageScore); // Round the average
+    }
+    setTotalAverage(parseFloat(totalAverageScore.toFixed(2)));
     setTotalScore(GrandTotal);
     calculateTotalGrade();
   };
@@ -1221,7 +1224,7 @@ const InputNursery2Commulative = () => {
           setNumberInClass(Number);
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/nursery2CommulativeResult");
+          navigate("/nusery2-view-commulative");
         } else {
           toast.error(res.data.error);
         }

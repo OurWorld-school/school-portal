@@ -25,11 +25,14 @@ import {
   DeActivateBasic3resultApi,
   DeActivateBasic4resultApi,
   DeActivateBasic5resultApi,
+  DeActivateNursery2CommulativeApi,
+  Nursery2CommulativeApi,
   UpdatePosiionBasic1resultApi,
   UpdatePosiionBasic3resultApi,
   UpdatePosiionBasic4resultApi,
   UpdatePosiionBasic5resultApi,
   UpdatePosiionBasic6resultApi,
+  UpdatePosiionNursery2CommulativeApi,
 } from "../../../../data/Api";
 import AdminLayout from "../../AdminLayout";
 import CircularIndeterminate from "../../../../components/Loading/Progress";
@@ -80,7 +83,7 @@ const Nursery2ViewCommulative: React.FC = () => {
     try {
       const fetchData = async () => {
         // Fetch data from your API
-        const response = await fetch(Basic1resultApi);
+        const response = await fetch(Nursery2CommulativeApi);
         const data = await response.json();
 
         // Set the fetched data to the state
@@ -166,7 +169,7 @@ const Nursery2ViewCommulative: React.FC = () => {
     };
 
     axios
-      .put(UpdatePosiionBasic1resultApi + userId, data, headers)
+      .put(UpdatePosiionNursery2CommulativeApi + userId, data, headers)
 
       .then((res) => {
         console.log(res.data);
@@ -223,7 +226,7 @@ const Nursery2ViewCommulative: React.FC = () => {
     };
 
     axios
-      .put(DeActivateBasic1resultApi, data, headers)
+      .put(DeActivateNursery2CommulativeApi, data, headers)
 
       .then((res) => {
         console.log(res.data);
@@ -258,8 +261,7 @@ const Nursery2ViewCommulative: React.FC = () => {
           {" "}
           <select value={selectedYear} onChange={handleSelectChange}>
             <option value="">Select Result Year</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
+
             <option value="2024">2024</option>
             <option value="2025">2025</option>
             <option value="2026">2026</option>
@@ -268,8 +270,7 @@ const Nursery2ViewCommulative: React.FC = () => {
           </select>
           <select value={selectedTerm} onChange={handleSelectTermChange}>
             <option value="">Select Result Term</option>
-            <option value="1st-Term">1st Term</option>
-            <option value="2nd-Term">2nd Term</option>
+
             <option value="3rd-Term">3rd Term</option>
 
             {/* Add more terms as needed */}
@@ -419,7 +420,9 @@ const Nursery2ViewCommulative: React.FC = () => {
                     {/* modal */}
                     <td>
                       {" "}
-                      <Link to={`/view-basic1-student-result/${item?._id}`}>
+                      <Link
+                        to={`/view-nursery2-student-commulative/${item?._id}`}
+                      >
                         <Button className="btn-sm">
                           <BsFillBookmarkCheckFill />{" "}
                         </Button>

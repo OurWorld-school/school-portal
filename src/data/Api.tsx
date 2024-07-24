@@ -1,3 +1,5 @@
+import { BaseUrl, BaseUrl2 } from "./BaseUrl";
+
 export const registerApi =
   "https://ourworldintschool.onrender.com/api/auth/registers";
 export const loginApi = "https://ourworldintschool.onrender.com/api/auth/login";
@@ -116,26 +118,62 @@ export const DeActivateBasic6resultApi =
   "https://ourworldintschool.onrender.com/api/basic6result/deactivateResultEdit/";
 
 ////commulative
-export const Basic1CommulativeApi =
-  "https://ourworldintschool.onrender.com/api/basic1Commulative/";
-export const Basic2CommulativeApi =
-  "https://ourworldintschool.onrender.com/api/basic2Commulative/";
-export const Basic3CommulativeApi =
-  "https://ourworldintschool.onrender.com/api/basic3Commulative/";
-export const Basic4CommulativeApi =
-  "https://ourworldintschool.onrender.com/api/basic4Commulative/";
-export const Basic5CommulativeApi =
-  "https://ourworldintschool.onrender.com/api/basic5Commulative/";
-export const Nursery3CommulativeApi =
-  "https://ourworldintschool.onrender.com/api/nursery3Commulative/";
+export const Basic1CommulativeApi = `${BaseUrl}/api/basic1Commulative/`;
+export const Basic2CommulativeApi = `${BaseUrl}/api/basic2Commulative/`;
+export const Basic3CommulativeApi = `${BaseUrl}/api/basic3Commulative/`;
+export const Basic4CommulativeApi = `${BaseUrl}/api/basic4Commulative/`;
+export const Basic5CommulativeApi = `${BaseUrl}/api/basic5Commulative/`;
+export const Nursery3CommulativeApi = `${BaseUrl}/api/nursery3Commulative/`;
 export const Nursery2CommulativeApi =
   "https://ourworldintschool.onrender.com/api/nursery2Commulative/";
 export const Nursery1CommulativeApi =
   "https://ourworldintschool.onrender.com/api/nursery1Commulative/";
 export const PreNurseryCommulativeApi =
   "https://ourworldintschool.onrender.com/api/prenurseryCommulative/";
-export const PreNurseryCommulativeApis =
-  "http://localhost:5000/api/prenurseryresult/";
 
-export const Basic1CommulativeApis =
-  "http://localhost:5000/api/basic1Commulative/";
+//////uppdate posiition
+export const UpdatePosiionPreNurseryCommulativeApi =
+  "https://ourworldintschool.onrender.com/api/prenurseryCommulative/updateResultPosition/";
+export const UpdatePosiionNursery1CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/nursery1Commulative/updateResultPosition/";
+
+export const UpdatePosiionNursery2CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/nursery2Commulative/updateResultPosition/";
+export const UpdatePosiionNursery3CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/nursery3Commulative/updateResultPosition/";
+
+export const UpdatePosiionBasic2CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/basic2Commulative/updateResultPosition/";
+export const UpdatePosiionBasic3CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/basic3Commulative/updateResultPosition/";
+export const UpdatePosiionBasic4CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/basic4Commulative/updateResultPosition/";
+export const UpdatePosiionBasic5CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/basic5Commulative/updateResultPosition/";
+export const UpdatePosiionBasic6CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/basic6Commulative/updateResultPosition/";
+export const UpdatePositionBasic1CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/basic1Commulative/updateResultPosition/";
+
+/////deactivate editing of commulative
+export const DeActivatePreNurseryCommulativeApi =
+  "https://ourworldintschool.onrender.com/api/prenurseryCommulative/deactivateResultEdit/";
+export const DeActivateNursery1CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/nursery1Commulative/deactivateResultEdit/";
+export const DeActivateNursery2CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/nursery2Commulative/deactivateResultEdit/";
+export const DeActivateNursery3CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/nursery3Commulative/deactivateResultEdit/";
+export const DeActivateBasic1CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/basic1Commulative/deactivateResultEdit/";
+export const DeActivateBasic2CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/basic2Commulative/deactivateResultEdit/";
+export const DeActivateBasic3CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/basic3Commulative/deactivateResultEdit/";
+export const DeActivateBasic4CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/basic4Commulative/deactivateResultEdit/";
+export const DeActivateBasic5CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/basic5Commulative/deactivateResultEdit/";
+
+export const DeActivateBasic6CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/basic6Commulative/deactivateResultEdit/";

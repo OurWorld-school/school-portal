@@ -117,6 +117,44 @@ import InputBasic4Commulative from "./backoffice/AdminPanel/InputCommulative/Inp
 import InputBasic5Commulative from "./backoffice/AdminPanel/InputCommulative/InputBasic5Commulative";
 import InputNursery3Commulative from "./backoffice/AdminPanel/InputCommulative/InputNursery3Commulative";
 import InputNursery1Commulative from "./backoffice/AdminPanel/InputCommulative/InputNursery1Commulative";
+import Basic1ViewCommulative from "./backoffice/AdminPanel/AdminDashboard/AdminCommulative/Basic1ViewCommulative";
+import Basic2ViewCommulative from "./backoffice/AdminPanel/AdminDashboard/AdminCommulative/Basic2ViewCommulative";
+import Basic3ViewCommulative from "./backoffice/AdminPanel/AdminDashboard/AdminCommulative/Basic3ViewCommulative";
+import Basic4ViewCommulative from "./backoffice/AdminPanel/AdminDashboard/AdminCommulative/Basic4ViewCommulative";
+import Basic5ViewCommulative from "./backoffice/AdminPanel/AdminDashboard/AdminCommulative/Basic5ViewCommulative";
+import Nursery1ViewCommulative from "./backoffice/AdminPanel/AdminDashboard/AdminCommulative/Nursery1ViewCommulative";
+import Nursery2ViewCommulative from "./backoffice/AdminPanel/AdminDashboard/AdminCommulative/Nursery2ViewCommulative";
+import Nursery3ViewCommulative from "./backoffice/AdminPanel/AdminDashboard/AdminCommulative/Nursery3ViewCommulative";
+import PreNurseryViewCommulative from "./backoffice/AdminPanel/AdminDashboard/AdminCommulative/PreNurseryViewCommulative";
+import { AdminUserPreNurseryCommulative } from "./backoffice/AdminPanel/AdminDashboard/AdminUserCommulative/AdminUserPresNurseryCommulative";
+import { AdminUserNursery1Commulative } from "./backoffice/AdminPanel/AdminDashboard/AdminUserCommulative/AdminUserNursery1Commulative";
+import { AdminUserNursery2Commulative } from "./backoffice/AdminPanel/AdminDashboard/AdminUserCommulative/AdminUserNursery2";
+import { AdminUserNursery3Commulative } from "./backoffice/AdminPanel/AdminDashboard/AdminUserCommulative/AdminUserNursery3Commulative";
+import { AdminUserBasic1Commulative } from "./backoffice/AdminPanel/AdminDashboard/AdminUserCommulative/AdminUserBasic1Commulative";
+import { AdminUserBasic2Commulative } from "./backoffice/AdminPanel/AdminDashboard/AdminUserCommulative/AdminUserBasic2Commulative";
+import { AdminUserBasic3Commulative } from "./backoffice/AdminPanel/AdminDashboard/AdminUserCommulative/AdminUserBasic3Commulative";
+import { AdminUserBasic4Commulative } from "./backoffice/AdminPanel/AdminDashboard/AdminUserCommulative/AdminUserBasic4Commulative";
+import { AdminUserBasic5Commulative } from "./backoffice/AdminPanel/AdminDashboard/AdminUserCommulative/AdminUserBasic5Commulative";
+import SelectResultType from "./screens/CheckResult/SelectResultType";
+import CheckCommulative from "./screens/CheckResult/CheckCommulative";
+import CheckNursery1Commulative from "./screens/CheckResult/CheckCommulativeClasses/CheckNursery1Commulative";
+import CheckNursery2Commulative from "./screens/CheckResult/CheckCommulativeClasses/CheckNursery2Commulative";
+import CheckNursery3Commulative from "./screens/CheckResult/CheckCommulativeClasses/CheckNursery3Commulative";
+import CheckPreNurseryCommulative from "./screens/CheckResult/CheckCommulativeClasses/CheckPreNurseryCommulative";
+import CheckBasic1Commulative from "./screens/CheckResult/CheckCommulativeClasses/CheckBasic1Commulative";
+import CheckBasic2Commulative from "./screens/CheckResult/CheckCommulativeClasses/CheckBasic2Commulative";
+import CheckBasic3Commulative from "./screens/CheckResult/CheckCommulativeClasses/CheckBasic3Commulative";
+import CheckBasic4Commulative from "./screens/CheckResult/CheckCommulativeClasses/CheckBasic4Commulative";
+import CheckBasic5Commulative from "./screens/CheckResult/CheckCommulativeClasses/CheckBasic5Commulative";
+import { ViewPreNurseryCommulative } from "./screens/ViewCommulative/ViewPreNurseryCommulative";
+import { ViewNursery1Commulative } from "./screens/ViewCommulative/ViewNursery1Commulative";
+import { ViewNursery2Commulative } from "./screens/ViewCommulative/ViewNursery2Commulative";
+import { ViewNursery3Commulative } from "./screens/ViewCommulative/ViewNursery3Commulative";
+import { ViewBasic1Commulative } from "./screens/ViewCommulative/ViewBasic1Commulative";
+import { ViewBasic2Commulative } from "./screens/ViewCommulative/ViewBasic2Commulative";
+import { ViewBasic3Commulative } from "./screens/ViewCommulative/ViewBasic3Commulative";
+import { ViewBasic4Commulative } from "./screens/ViewCommulative/ViewBasic4Commulative";
+import { ViewBasic5Commulative } from "./screens/ViewCommulative/ViewBasic5Commulative";
 
 function App() {
   const { pathname } = useLocation();
@@ -138,6 +176,7 @@ function App() {
         <Route path="/admission" element={<AdmissionPortal />} />
         <Route path="/staff-registeration" element={<StaffRegisteration />} />
         <Route path="/check-result" element={<CheckResult />} />
+        <Route path="/select-result-type" element={<SelectResultType />} />
         <Route path="/Nursery1-result" element={<CheckNursery1result />} />
         <Route path="/online-result" element={<ScratchCard />} />
         <Route path="/admission-portal" element={<AdmissionPortal />} />
@@ -436,7 +475,156 @@ function App() {
           path="/post-nursery3commulative/:id"
           element={<InputNursery3Commulative />}
         />
+        {/* view commulative */}
+        <Route
+          path="/pre-nursery-view-commulative"
+          element={<PreNurseryViewCommulative />}
+        />
+        <Route
+          path="/nusery1-view-commulative"
+          element={<Nursery1ViewCommulative />}
+        />
+        <Route
+          path="/nusery2-view-commulative"
+          element={<Nursery2ViewCommulative />}
+        />
+        <Route
+          path="/nusery3-view-commulative"
+          element={<Nursery3ViewCommulative />}
+        />
+        <Route
+          path="/basic1-view-commulative"
+          element={<Basic1ViewCommulative />}
+        />
+        <Route
+          path="/basic2-view-commulative"
+          element={<Basic2ViewCommulative />}
+        />
+        <Route
+          path="/basic3-view-commulative"
+          element={<Basic3ViewCommulative />}
+        />
+        <Route
+          path="/basic4-view-commulative"
+          element={<Basic4ViewCommulative />}
+        />
+        <Route
+          path="/basic5-view-commulative"
+          element={<Basic5ViewCommulative />}
+        />
+        {/* ////comulative student result admin */}
+        <Route
+          path="/view-prenursery-student-commulative/:id"
+          element={<AdminUserPreNurseryCommulative />}
+        />
+        <Route
+          path="/view-nursery1-student-commulative/:id"
+          element={<AdminUserNursery1Commulative />}
+        />
+        <Route
+          path="/view-nursery2-student-commulative/:id"
+          element={<AdminUserNursery2Commulative />}
+        />
+        <Route
+          path="/view-nursery3-student-commulative/:id"
+          element={<AdminUserNursery3Commulative />}
+        />
+        <Route
+          path="/view-basic1-student-commulative/:id"
+          element={<AdminUserBasic1Commulative />}
+        />
+        <Route
+          path="/view-basic2-student-commulative/:id"
+          element={<AdminUserBasic2Commulative />}
+        />
+        <Route
+          path="/view-basic3-student-commulative/:id"
+          element={<AdminUserBasic3Commulative />}
+        />
+        <Route
+          path="/view-basic4-student-commulative/:id"
+          element={<AdminUserBasic4Commulative />}
+        />
+        <Route
+          path="/view-basic5-student-commulative/:id"
+          element={<AdminUserBasic5Commulative />}
+        />
         {/* Commulative result */}
+        {/* user side  commulative */}
+        <Route path="/check-commulative" element={<CheckCommulative />} />
+        <Route
+          path="/Nursery1-commulative"
+          element={<CheckNursery1Commulative />}
+        />
+        <Route
+          path="/Nursery2-commulative"
+          element={<CheckNursery2Commulative />}
+        />
+        <Route
+          path="/Nursery3-commulative"
+          element={<CheckNursery3Commulative />}
+        />
+        <Route
+          path="/PreNursery-commulative"
+          element={<CheckPreNurseryCommulative />}
+        />
+        <Route
+          path="/Basic1-commulative"
+          element={<CheckBasic1Commulative />}
+        />
+        <Route
+          path="/Basic2-commulative"
+          element={<CheckBasic2Commulative />}
+        />
+        <Route
+          path="/Basic3-commulative"
+          element={<CheckBasic3Commulative />}
+        />
+        <Route
+          path="/Basic4-commulative"
+          element={<CheckBasic4Commulative />}
+        />
+        <Route
+          path="/Basic5-commulative"
+          element={<CheckBasic5Commulative />}
+        />
+        {/* ////user main commulative result view */}
+        <Route
+          path="/my-results-prenurseryCommulative/:selectedYear/:userId/:selectedTerm"
+          element={<ViewPreNurseryCommulative />}
+        />
+        <Route
+          path="/my-results-nursery1Commulative/:selectedYear/:userId/:selectedTerm"
+          element={<ViewNursery1Commulative />}
+        />
+        <Route
+          path="/my-results-nursery2Commulative/:selectedYear/:userId/:selectedTerm"
+          element={<ViewNursery2Commulative />}
+        />
+        <Route
+          path="/my-results-nursery3Commulative/:selectedYear/:userId/:selectedTerm"
+          element={<ViewNursery3Commulative />}
+        />
+        <Route
+          path="/my-results-basic1Commulative/:selectedYear/:userId/:selectedTerm"
+          element={<ViewBasic1Commulative />}
+        />
+        <Route
+          path="/my-results-basic2Commulative/:selectedYear/:userId/:selectedTerm"
+          element={<ViewBasic2Commulative />}
+        />
+        <Route
+          path="/my-results-basic3Commulative/:selectedYear/:userId/:selectedTerm"
+          element={<ViewBasic3Commulative />}
+        />
+        <Route
+          path="/my-results-basic4Commulative/:selectedYear/:userId/:selectedTerm"
+          element={<ViewBasic4Commulative />}
+        />
+        <Route
+          path="/my-results-basic5Commulative/:selectedYear/:userId/:selectedTerm"
+          element={<ViewBasic5Commulative />}
+        />
       </Routes>
       {/* <Footer /> */}
     </div>

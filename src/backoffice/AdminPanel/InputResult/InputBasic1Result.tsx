@@ -224,7 +224,7 @@ const InputBasic1Result = () => {
       | "PhonicsData"
       | "NationalValuesData"
       | "FrenchData"
-      |"HandWritingData"
+      | "HandWritingData"
       | "CRKData",
     type: "test" | "exam" | "grade" | "remark",
     value: number
@@ -257,9 +257,9 @@ const InputBasic1Result = () => {
       case "PVCData":
         setPVCData((prev: any) => ({ ...prev, [type]: value }));
         break;
-        case "HandWritingData":
-          setHandWritingData((prev: any) => ({ ...prev, [type]: value }));
-          break;
+      case "HandWritingData":
+        setHandWritingData((prev: any) => ({ ...prev, [type]: value }));
+        break;
       case "HistoryData":
         setHistoryData((prev: any) => ({ ...prev, [type]: value }));
         break;
@@ -546,16 +546,28 @@ const InputBasic1Result = () => {
     if (HandWritingData.totalScore >= 70 && HandWritingData.totalScore <= 100) {
       grade = "A";
       remark = "Excellent";
-    } else if (HandWritingData.totalScore >= 60 && HandWritingData.totalScore <= 69) {
+    } else if (
+      HandWritingData.totalScore >= 60 &&
+      HandWritingData.totalScore <= 69
+    ) {
       grade = "B";
       remark = "Very Good";
-    } else if (HandWritingData.totalScore >= 50 && HandWritingData.totalScore <= 59) {
+    } else if (
+      HandWritingData.totalScore >= 50 &&
+      HandWritingData.totalScore <= 59
+    ) {
       grade = "C";
       remark = "Good";
-    } else if (HandWritingData.totalScore >= 40 && HandWritingData.totalScore <= 49) {
+    } else if (
+      HandWritingData.totalScore >= 40 &&
+      HandWritingData.totalScore <= 49
+    ) {
       grade = "D";
       remark = "Pass";
-    } else if (HandWritingData.totalScore >= 0 && HandWritingData.totalScore <= 39) {
+    } else if (
+      HandWritingData.totalScore >= 0 &&
+      HandWritingData.totalScore <= 39
+    ) {
       grade = "F";
       remark = "Fail";
     }
@@ -778,7 +790,6 @@ const InputBasic1Result = () => {
         },
       ],
       HandWriting: [
-       
         {
           test: HandWritingData.test,
           exam: HandWritingData.exam,
@@ -1027,7 +1038,7 @@ const InputBasic1Result = () => {
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={EnglishData.test}
+                            value={EnglishData.test || ""}
                             onChange={(e) =>
                               handleInputChange(
                                 "EnglishData",
@@ -1056,7 +1067,7 @@ const InputBasic1Result = () => {
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={EnglishData.exam}
+                            value={EnglishData.exam || ""}
                             onBlur={calculateEnglishDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -1177,7 +1188,7 @@ const InputBasic1Result = () => {
                             type="number"
                             label="Test/C.A"
                             name="test"
-                            value={MathsData.test}
+                            value={MathsData.test || ""}
                             onBlur={calculateMathsDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -1206,7 +1217,7 @@ const InputBasic1Result = () => {
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={MathsData.exam}
+                            value={MathsData.exam || ""}
                             onBlur={calculateMathsDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -1327,7 +1338,7 @@ const InputBasic1Result = () => {
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={BasicScienceData.test}
+                            value={BasicScienceData.test || ""}
                             onBlur={calculateBasicScienceDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -1356,7 +1367,7 @@ const InputBasic1Result = () => {
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={BasicScienceData.exam}
+                            value={BasicScienceData.exam || ""}
                             onBlur={calculateBasicScienceDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -1477,7 +1488,7 @@ const InputBasic1Result = () => {
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={VerbalReasoningData.test}
+                            value={VerbalReasoningData.test || ""}
                             onBlur={calculateVerbalReasoningDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -1506,7 +1517,7 @@ const InputBasic1Result = () => {
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={VerbalReasoningData.exam}
+                            value={VerbalReasoningData.exam || ""}
                             onBlur={calculateVerbalReasoningDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -1627,7 +1638,7 @@ const InputBasic1Result = () => {
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={QuantitativeReasoningData.test}
+                            value={QuantitativeReasoningData.test || ""}
                             onBlur={calculateQuantitativeReasoningDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -1656,7 +1667,7 @@ const InputBasic1Result = () => {
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={QuantitativeReasoningData.exam}
+                            value={QuantitativeReasoningData.exam || ""}
                             onBlur={calculateQuantitativeReasoningDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -1777,7 +1788,7 @@ const InputBasic1Result = () => {
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={NationalValuesData.test}
+                            value={NationalValuesData.test || ""}
                             onBlur={calculateNationalValuesDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -1806,7 +1817,7 @@ const InputBasic1Result = () => {
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={NationalValuesData.exam}
+                            value={NationalValuesData.exam || ""}
                             onBlur={calculateNationalValuesDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -1927,7 +1938,7 @@ const InputBasic1Result = () => {
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={HistoryData.test}
+                            value={HistoryData.test || ""}
                             onBlur={calculateHistoryDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -1956,7 +1967,7 @@ const InputBasic1Result = () => {
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={HistoryData.exam}
+                            value={HistoryData.exam || ""}
                             onBlur={calculateHistoryDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -2077,7 +2088,7 @@ const InputBasic1Result = () => {
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={PhonicsData.test}
+                            value={PhonicsData.test || ""}
                             onBlur={calculatePhonicsDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -2106,7 +2117,7 @@ const InputBasic1Result = () => {
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={PhonicsData.exam}
+                            value={PhonicsData.exam || ""}
                             onBlur={calculatePhonicsDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -2227,7 +2238,7 @@ const InputBasic1Result = () => {
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={CreativeArtData.test}
+                            value={CreativeArtData.test || ""}
                             onBlur={calculateCreativeArtDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -2256,7 +2267,7 @@ const InputBasic1Result = () => {
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={CreativeArtData.exam}
+                            value={CreativeArtData.exam || ""}
                             onBlur={calculateCreativeArtDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -2377,7 +2388,7 @@ const InputBasic1Result = () => {
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={CRKData.test}
+                            value={CRKData.test || ""}
                             onBlur={calculateCRKDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -2406,7 +2417,7 @@ const InputBasic1Result = () => {
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={CRKData.exam}
+                            value={CRKData.exam || ""}
                             onBlur={calculateCRKDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -2527,7 +2538,7 @@ const InputBasic1Result = () => {
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={PVCData.test}
+                            value={PVCData.test || ""}
                             onBlur={calculatePVCDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -2556,7 +2567,7 @@ const InputBasic1Result = () => {
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={PVCData.exam}
+                            value={PVCData.exam || ""}
                             onBlur={calculatePVCDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -2677,7 +2688,7 @@ const InputBasic1Result = () => {
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={IgboData.test}
+                            value={IgboData.test || ""}
                             onBlur={calculateIgboDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -2706,7 +2717,7 @@ const InputBasic1Result = () => {
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={IgboData.exam}
+                            value={IgboData.exam || ""}
                             onBlur={calculateIgboDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -2827,7 +2838,7 @@ const InputBasic1Result = () => {
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={FrenchData.test}
+                            value={FrenchData.test || ""}
                             onBlur={calculateFrenchDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -2856,7 +2867,7 @@ const InputBasic1Result = () => {
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={FrenchData.exam}
+                            value={FrenchData.exam || ""}
                             onBlur={calculateFrenchDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -2960,7 +2971,7 @@ const InputBasic1Result = () => {
                         }}
                         className="result-input-elect-nursery1"
                       >
-                       Hand Writing
+                        Hand Writing
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -2976,7 +2987,7 @@ const InputBasic1Result = () => {
                             label="Test/C.A"
                             type="number"
                             name="test"
-                            value={HandWritingData.test}
+                            value={HandWritingData.test || ""}
                             onBlur={calculateHandWritingDataTotal}
                             onChange={(e) =>
                               handleInputChange(
@@ -3005,7 +3016,7 @@ const InputBasic1Result = () => {
                             label="Exam"
                             name="exam"
                             type="number"
-                            value={HandWritingData.exam}
+                            value={HandWritingData.exam || ""}
                             onBlur={calculateHandWritingDataTotal}
                             onChange={(e) =>
                               handleInputChange(

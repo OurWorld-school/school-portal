@@ -289,8 +289,11 @@ const InputBasic1Commulative = () => {
         count += 1;
       }
     });
-    setTotalAverage(count > 0 ? GrandTotal / count : 0);
-    // setTotalAverage(parseFloat(GrandTotalAverage.toFixed(2)));
+    let totalAverageScore = count > 0 ? GrandTotal / count : 0;
+    if (totalAverageScore > 0.5) {
+      totalAverageScore = Math.round(totalAverageScore); // Round the average
+    }
+    setTotalAverage(parseFloat(totalAverageScore.toFixed(2)));
     setTotalScore(GrandTotal);
     calculateTotalGrade();
   };
@@ -948,7 +951,8 @@ const InputBasic1Commulative = () => {
       extractTotalScoresNationalValues("1st-Term");
     const total2ndTermNationalValues =
       extractTotalScoresNationalValues("2nd-Term");
-    const total3rdTermNationalValues = extractTotalScoresNationalValues("3rd-Term");
+    const total3rdTermNationalValues =
+      extractTotalScoresNationalValues("3rd-Term");
     const extractTotalScoresCRK = (term: string) => {
       const termData = subjectMarks?.filter((item: any) => item?.term === term);
       let totalScore = 0;
@@ -1287,7 +1291,7 @@ const InputBasic1Commulative = () => {
           setNumberInClass(Number);
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/basic1CommulativeResult");
+          navigate("/basic1-view-commulative");
         } else {
           toast.error(res.data.error);
         }
@@ -4485,7 +4489,6 @@ const InputBasic1Commulative = () => {
                         // input={<OutlinedInput label="Name" />}
                         MenuProps={MenuProps}
                       >
-                        <MenuItem value="2023">2023</MenuItem>
                         <MenuItem value="2024">2024</MenuItem>
                         <MenuItem value="2025">2025</MenuItem>
                         <MenuItem value="2026">2026</MenuItem>

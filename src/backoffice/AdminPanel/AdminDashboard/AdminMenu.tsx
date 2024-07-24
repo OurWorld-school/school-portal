@@ -175,7 +175,7 @@ export default function AdminMenu() {
                 id="dropdown-basic"
                 style={{ border: "1px solid transparent" }}
               >
-                View Commutative Result
+                View Cumulative Result
               </Dropdown.Toggle>
 
               <Dropdown.Menu>

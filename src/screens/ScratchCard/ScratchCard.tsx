@@ -130,7 +130,7 @@ const ScratchCard: React.FC<Props> = () => {
 
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/check-result");
+          navigate("/select-result-type");
         } else {
           toast.error(res.data.error);
         }

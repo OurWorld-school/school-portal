@@ -18,14 +18,18 @@ import Button from "@mui/material/Button";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 import {
   Basic1resultApi,
+  Basic2CommulativeApi,
   Basic3resultApi,
   Basic4resultApi,
   Basic5resultApi,
   DeActivateBasic1resultApi,
+  DeActivateBasic2CommulativeApi,
   DeActivateBasic3resultApi,
   DeActivateBasic4resultApi,
   DeActivateBasic5resultApi,
+  DeActivateNursery2CommulativeApi,
   UpdatePosiionBasic1resultApi,
+  UpdatePosiionBasic2CommulativeApi,
   UpdatePosiionBasic3resultApi,
   UpdatePosiionBasic4resultApi,
   UpdatePosiionBasic5resultApi,
@@ -80,7 +84,7 @@ const Basic2ViewCommulative: React.FC = () => {
     try {
       const fetchData = async () => {
         // Fetch data from your API
-        const response = await fetch(Basic1resultApi);
+        const response = await fetch(Basic2CommulativeApi);
         const data = await response.json();
 
         // Set the fetched data to the state
@@ -166,7 +170,7 @@ const Basic2ViewCommulative: React.FC = () => {
     };
 
     axios
-      .put(UpdatePosiionBasic1resultApi + userId, data, headers)
+      .put(UpdatePosiionBasic2CommulativeApi + userId, data, headers)
 
       .then((res) => {
         console.log(res.data);
@@ -223,7 +227,7 @@ const Basic2ViewCommulative: React.FC = () => {
     };
 
     axios
-      .put(DeActivateBasic1resultApi, data, headers)
+      .put(DeActivateNursery2CommulativeApi, data, headers)
 
       .then((res) => {
         console.log(res.data);
@@ -258,8 +262,7 @@ const Basic2ViewCommulative: React.FC = () => {
           {" "}
           <select value={selectedYear} onChange={handleSelectChange}>
             <option value="">Select Result Year</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
+
             <option value="2024">2024</option>
             <option value="2025">2025</option>
             <option value="2026">2026</option>
@@ -268,8 +271,7 @@ const Basic2ViewCommulative: React.FC = () => {
           </select>
           <select value={selectedTerm} onChange={handleSelectTermChange}>
             <option value="">Select Result Term</option>
-            <option value="1st-Term">1st Term</option>
-            <option value="2nd-Term">2nd Term</option>
+
             <option value="3rd-Term">3rd Term</option>
 
             {/* Add more terms as needed */}
@@ -419,7 +421,9 @@ const Basic2ViewCommulative: React.FC = () => {
                     {/* modal */}
                     <td>
                       {" "}
-                      <Link to={`/view-basic1-student-result/${item?._id}`}>
+                      <Link
+                        to={`/view-basic2-student-commulative/${item?._id}`}
+                      >
                         <Button className="btn-sm">
                           <BsFillBookmarkCheckFill />{" "}
                         </Button>

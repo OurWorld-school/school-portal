@@ -18,14 +18,17 @@ import Button from "@mui/material/Button";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 import {
   Basic1resultApi,
+  Basic3CommulativeApi,
   Basic3resultApi,
   Basic4resultApi,
   Basic5resultApi,
   DeActivateBasic1resultApi,
+  DeActivateBasic3CommulativeApi,
   DeActivateBasic3resultApi,
   DeActivateBasic4resultApi,
   DeActivateBasic5resultApi,
   UpdatePosiionBasic1resultApi,
+  UpdatePosiionBasic3CommulativeApi,
   UpdatePosiionBasic3resultApi,
   UpdatePosiionBasic4resultApi,
   UpdatePosiionBasic5resultApi,
@@ -80,7 +83,7 @@ const Basic3ViewCommulative: React.FC = () => {
     try {
       const fetchData = async () => {
         // Fetch data from your API
-        const response = await fetch(Basic1resultApi);
+        const response = await fetch(Basic3CommulativeApi);
         const data = await response.json();
 
         // Set the fetched data to the state
@@ -166,7 +169,7 @@ const Basic3ViewCommulative: React.FC = () => {
     };
 
     axios
-      .put(UpdatePosiionBasic1resultApi + userId, data, headers)
+      .put(UpdatePosiionBasic3CommulativeApi + userId, data, headers)
 
       .then((res) => {
         console.log(res.data);
@@ -223,7 +226,7 @@ const Basic3ViewCommulative: React.FC = () => {
     };
 
     axios
-      .put(DeActivateBasic1resultApi, data, headers)
+      .put(DeActivateBasic3CommulativeApi, data, headers)
 
       .then((res) => {
         console.log(res.data);
@@ -419,7 +422,9 @@ const Basic3ViewCommulative: React.FC = () => {
                     {/* modal */}
                     <td>
                       {" "}
-                      <Link to={`/view-basic1-student-result/${item?._id}`}>
+                      <Link
+                        to={`/view-basic3-student-commulative/${item?._id}`}
+                      >
                         <Button className="btn-sm">
                           <BsFillBookmarkCheckFill />{" "}
                         </Button>

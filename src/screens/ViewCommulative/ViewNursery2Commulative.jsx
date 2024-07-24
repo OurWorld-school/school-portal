@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Container } from "@material-ui/core";
-import "./ViewResult.css";
+import "../ViewResultScreen/ViewResult.css";
 import logo from "../../assets/images/logo.jpeg";
 import Table from "react-bootstrap/Table";
 import stamp from "../../assets/images/stamp.png";
@@ -10,7 +10,7 @@ import ReactToPrint, { useReactToPrint } from "react-to-print";
 import TopNavBar from "../../components/TopNavBar/TopNavBar";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-export const ViewBasic1Result = React.forwardRef((props, ref) => {
+export const ViewNursery2Commulative = React.forwardRef((props, ref) => {
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -22,18 +22,17 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
     const fetchPosts = async () => {
       try {
         const { data } = await axios.get(
-          `https://ourworldintschool.onrender.com/api/basic1result/results/${userId}/${selectedYear}/${selectedTerm}`
+          `https://ourworldintschool.onrender.com/api/nursery2Commulative/results/${userId}/${selectedYear}/${selectedTerm}`
         );
         console.log(data);
         // const foundData = data.find((item) => item.artist === artist);
         setViewResult(data);
       } catch (error) {
         // Handle the error here
-        navigate("/Basic1-result");
+        navigate("/Nursery2-commulative");
         console.error("Result not Found:", error);
       }
     };
-
     fetchPosts();
   }, []);
 
@@ -58,7 +57,7 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                 </div>
                 <div className="sheet-div">
                   <div style={{ textTransform: "uppercase" }}>
-                    {viewResult?.classes} SCHOOL TERMINAL RESULT SHEET
+                    Nursery 2 SCHOOL TERMINAL CUMULATIVE RESULT SHEET
                   </div>
                 </div>
                 <div className="school-stamp">
@@ -82,7 +81,7 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                 <hr />
               </div>
               <div className="user-d-class">
-                <span> CLASS:</span> {viewResult?.classes}
+                <span> CLASS:</span> Nursery 2
                 <hr />
               </div>
               <div className="mt-4">
@@ -100,33 +99,69 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                   <tr>
                     {/* <th>#</th> */}
                     <th>SUBJECT</th>
-                    <th>CA</th>
-                    <th>EXAM</th>
-                    <th>TOTAL</th>
+                    <th>1st Term TotalScore</th>
+                    <th>2nd Term TotalScore</th>
+                    <th>3rd Term TotalScore</th>
+                    <th>TOTAL Score</th>
+                    <th>TOTAL Average</th>
                     <th>GRADE</th>
                     <th>REMARK</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    {/* <td>1</td> */}
                     <td>English Language </td>
                     <td>
                       {" "}
                       {viewResult?.English?.map((item) => (
-                        <div key={item._id}>{item?.test}</div>
+                        <div key={item._id}>
+                          {" "}
+                          {item?.total1stTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total1stTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.English?.map((item) => (
-                        <div key={item._id}>{item?.exam}</div>
+                        <div key={item._id}>
+                          {" "}
+                          {item?.total2ndTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total2ndTermScore}</>
+                          )}
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.English?.map((item) => (
+                        <div key={item._id}>
+                          {" "}
+                          {item?.total3rdTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total3rdTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.English?.map((item) => (
                         <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.English?.map((item) => (
+                        <div key={item._id}>
+                          {item?.totalAverage?.toFixed(1)}
+                        </div>
                       ))}
                     </td>
                     <td>
@@ -147,19 +182,51 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                     <td>
                       {" "}
                       {viewResult?.Mathematics?.map((item) => (
-                        <div key={item._id}>{item?.test}</div>
+                        <div key={item._id}>
+                          {item?.total1stTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total1stTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.Mathematics?.map((item) => (
-                        <div key={item._id}>{item?.exam}</div>
+                        <div key={item._id}>
+                          {item?.total2ndTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total2ndTermScore}</>
+                          )}
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Mathematics?.map((item) => (
+                        <div key={item._id}>
+                          {item?.total3rdTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total3rdTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.Mathematics?.map((item) => (
                         <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Mathematics?.map((item) => (
+                        <div key={item._id}>
+                          {item?.totalAverage?.toFixed(1)}
+                        </div>
                       ))}
                     </td>
                     <td>
@@ -180,19 +247,51 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                     <td>
                       {" "}
                       {viewResult?.VerbalReasoning?.map((item) => (
-                        <div key={item._id}>{item?.test}</div>
+                        <div key={item._id}>
+                          {item?.total1stTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total1stTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.VerbalReasoning?.map((item) => (
-                        <div key={item._id}>{item?.exam}</div>
+                        <div key={item._id}>
+                          {item?.total2ndTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total2ndTermScore}</>
+                          )}
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.VerbalReasoning?.map((item) => (
+                        <div key={item._id}>
+                          {item?.total3rdTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total3rdTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.VerbalReasoning?.map((item) => (
                         <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.VerbalReasoning?.map((item) => (
+                        <div key={item._id}>
+                          {item?.totalAverage?.toFixed(1)}
+                        </div>
                       ))}
                     </td>
                     <td>
@@ -213,19 +312,51 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                     <td>
                       {" "}
                       {viewResult?.QuantitativeReasoning?.map((item) => (
-                        <div key={item._id}>{item?.test}</div>
+                        <div key={item._id}>
+                          {item?.total1stTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total1stTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.QuantitativeReasoning?.map((item) => (
-                        <div key={item._id}>{item?.exam}</div>
+                        <div key={item._id}>
+                          {item?.total2ndTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total2ndTermScore}</>
+                          )}
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.QuantitativeReasoning?.map((item) => (
+                        <div key={item._id}>
+                          {item?.total3rdTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total3rdTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.QuantitativeReasoning?.map((item) => (
                         <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.QuantitativeReasoning?.map((item) => (
+                        <div key={item._id}>
+                          {item?.totalAverage?.toFixed(1)}
+                        </div>
                       ))}
                     </td>
                     <td>
@@ -246,19 +377,51 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                     <td>
                       {" "}
                       {viewResult?.BasicScience?.map((item) => (
-                        <div key={item._id}>{item?.test}</div>
+                        <div key={item._id}>
+                          {item?.total1stTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total1stTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.BasicScience?.map((item) => (
-                        <div key={item._id}>{item?.exam}</div>
+                        <div key={item._id}>
+                          {item?.total2ndTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total2ndTermScore}</>
+                          )}
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.BasicScience?.map((item) => (
+                        <div key={item._id}>
+                          {item?.total3rdTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total3rdTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.BasicScience?.map((item) => (
                         <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.BasicScience?.map((item) => (
+                        <div key={item._id}>
+                          {item?.totalAverage?.toFixed(1)}
+                        </div>
                       ))}
                     </td>
                     <td>
@@ -275,34 +438,67 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                     </td>
                   </tr>
                   <tr>
-                    <td> National Values </td>
+                    <td>Social Studies</td>
                     <td>
                       {" "}
-                      {viewResult?.NationalValues?.map((item) => (
-                        <div key={item._id}>{item?.test}</div>
+                      {viewResult?.SocialStudies?.map((item) => (
+                        <div key={item._id}>
+                          {item?.total1stTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total1stTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.NationalValues?.map((item) => (
-                        <div key={item._id}>{item?.exam}</div>
+                      {viewResult?.SocialStudies?.map((item) => (
+                        <div key={item._id}>
+                          {item?.total2ndTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total2ndTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.NationalValues?.map((item) => (
+                      {viewResult?.SocialStudies?.map((item) => (
+                        <div key={item._id}>
+                          {item?.total3rdTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total3rdTermScore}</>
+                          )}
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.SocialStudies?.map((item) => (
                         <div key={item._id}>{item?.totalScore}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.NationalValues?.map((item) => (
+                      {viewResult?.SocialStudies?.map((item) => (
+                        <div key={item._id}>
+                          {item?.totalAverage?.toFixed(1)}
+                        </div>
+                      ))}
+                    </td>
+
+                    <td>
+                      {" "}
+                      {viewResult?.SocialStudies?.map((item) => (
                         <div key={item._id}>{item?.grade}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.NationalValues?.map((item) => (
+                      {viewResult?.SocialStudies?.map((item) => (
                         <div key={item._id}>{item?.remark}</div>
                       ))}
                     </td>
@@ -312,19 +508,51 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                     <td>
                       {" "}
                       {viewResult?.CRK?.map((item) => (
-                        <div key={item._id}>{item?.test}</div>
+                        <div key={item._id}>
+                          {item?.total1stTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total1stTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.CRK?.map((item) => (
-                        <div key={item._id}>{item?.exam}</div>
+                        <div key={item._id}>
+                          {item?.total2ndTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total2ndTermScore}</>
+                          )}
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.CRK?.map((item) => (
+                        <div key={item._id}>
+                          {item?.total3rdTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total3rdTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.CRK?.map((item) => (
                         <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.CRK?.map((item) => (
+                        <div key={item._id}>
+                          {item?.totalAverage?.toFixed(1)}
+                        </div>
                       ))}
                     </td>
                     <td>
@@ -345,19 +573,51 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                     <td>
                       {" "}
                       {viewResult?.CreativeArt?.map((item) => (
-                        <div key={item._id}>{item?.test}</div>
+                        <div key={item._id}>
+                          {item?.total1stTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total1stTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.CreativeArt?.map((item) => (
-                        <div key={item._id}>{item?.exam}</div>
+                        <div key={item._id}>
+                          {item?.total2ndTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total2ndTermScore}</>
+                          )}
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.CreativeArt?.map((item) => (
+                        <div key={item._id}>
+                          {item?.total3rdTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total3rdTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.CreativeArt?.map((item) => (
                         <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.CreativeArt?.map((item) => (
+                        <div key={item._id}>
+                          {item?.totalAverage?.toFixed(1)}
+                        </div>
                       ))}
                     </td>
                     <td>
@@ -374,34 +634,66 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                     </td>
                   </tr>
                   <tr>
-                    <td>History </td>
+                    <td>Writing </td>
                     <td>
                       {" "}
-                      {viewResult?.History?.map((item) => (
-                        <div key={item._id}>{item?.test}</div>
+                      {viewResult?.Writing?.map((item) => (
+                        <div key={item._id}>
+                          {item?.total1stTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total1stTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.History?.map((item) => (
-                        <div key={item._id}>{item?.exam}</div>
+                      {viewResult?.Writing?.map((item) => (
+                        <div key={item._id}>
+                          {item?.total2ndTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total2ndTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.History?.map((item) => (
+                      {viewResult?.Writing?.map((item) => (
+                        <div key={item._id}>
+                          {item?.total3rdTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total3rdTermScore}</>
+                          )}
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Writing?.map((item) => (
                         <div key={item._id}>{item?.totalScore}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.History?.map((item) => (
+                      {viewResult?.Writing?.map((item) => (
+                        <div key={item._id}>
+                          {item?.totalAverage?.toFixed(1)}
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Writing?.map((item) => (
                         <div key={item._id}>{item?.grade}</div>
                       ))}
                     </td>
                     <td>
                       {" "}
-                      {viewResult?.History?.map((item) => (
+                      {viewResult?.Writing?.map((item) => (
                         <div key={item._id}>{item?.remark}</div>
                       ))}
                     </td>
@@ -411,19 +703,51 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                     <td>
                       {" "}
                       {viewResult?.Phonics?.map((item) => (
-                        <div key={item._id}>{item?.test}</div>
+                        <div key={item._id}>
+                          {item?.total1stTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total1stTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.Phonics?.map((item) => (
-                        <div key={item._id}>{item?.exam}</div>
+                        <div key={item._id}>
+                          {item?.total2ndTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total2ndTermScore}</>
+                          )}
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Phonics?.map((item) => (
+                        <div key={item._id}>
+                          {item?.total3rdTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total3rdTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.Phonics?.map((item) => (
                         <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Phonics?.map((item) => (
+                        <div key={item._id}>
+                          {item?.totalAverage?.toFixed(1)}
+                        </div>
                       ))}
                     </td>
                     <td>
@@ -444,19 +768,51 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                     <td>
                       {" "}
                       {viewResult?.French?.map((item) => (
-                        <div key={item._id}>{item?.test}</div>
+                        <div key={item._id}>
+                          {item?.total1stTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total1stTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.French?.map((item) => (
-                        <div key={item._id}>{item?.exam}</div>
+                        <div key={item._id}>
+                          {item?.total2ndTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total2ndTermScore}</>
+                          )}
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.French?.map((item) => (
+                        <div key={item._id}>
+                          {item?.total3rdTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total3rdTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.French?.map((item) => (
                         <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.French?.map((item) => (
+                        <div key={item._id}>
+                          {item?.totalAverage?.toFixed(1)}
+                        </div>
                       ))}
                     </td>
                     <td>
@@ -477,19 +833,51 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                     <td>
                       {" "}
                       {viewResult?.Igbo?.map((item) => (
-                        <div key={item._id}>{item?.test}</div>
+                        <div key={item._id}>
+                          {item?.total1stTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total1stTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.Igbo?.map((item) => (
-                        <div key={item._id}>{item?.exam}</div>
+                        <div key={item._id}>
+                          {item?.total2ndTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total2ndTermScore}</>
+                          )}
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Igbo?.map((item) => (
+                        <div key={item._id}>
+                          {item?.total3rdTermScore === 0 ? (
+                            <></>
+                          ) : (
+                            <>{item?.total3rdTermScore}</>
+                          )}
+                        </div>
                       ))}
                     </td>
                     <td>
                       {" "}
                       {viewResult?.Igbo?.map((item) => (
                         <div key={item._id}>{item?.totalScore}</div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Igbo?.map((item) => (
+                        <div key={item._id}>
+                          {item?.totalAverage?.toFixed(1)}
+                        </div>
                       ))}
                     </td>
                     <td>
@@ -505,7 +893,7 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                       ))}
                     </td>
                   </tr>
-                  <tr>
+                  {/* <tr>
                     <td>Pre Vocational Studies </td>
                     <td>
                       {" "}
@@ -537,41 +925,8 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                         <div key={item._id}>{item?.remark}</div>
                       ))}
                     </td>
-                  </tr>
+                  </tr> */}
                   <tr>
-                    <td>Hand Writing </td>
-                    <td>
-                      {" "}
-                      {viewResult?.HandWriting?.map((item) => (
-                        <div key={item._id}>{item?.test}</div>
-                      ))}
-                    </td>
-                    <td>
-                      {" "}
-                      {viewResult?.HandWriting?.map((item) => (
-                        <div key={item._id}>{item?.exam}</div>
-                      ))}
-                    </td>
-                    <td>
-                      {" "}
-                      {viewResult?.HandWriting?.map((item) => (
-                        <div key={item._id}>{item?.totalScore}</div>
-                      ))}
-                    </td>
-                    <td>
-                      {" "}
-                      {viewResult?.HandWriting?.map((item) => (
-                        <div key={item._id}>{item?.grade}</div>
-                      ))}
-                    </td>
-                    <td>
-                      {" "}
-                      {viewResult?.HandWriting?.map((item) => (
-                        <div key={item._id}>{item?.remark}</div>
-                      ))}
-                    </td>
-                  </tr>
-                  {/* <tr>
                     <td>Computer </td>
                     <td>
                       {" "}
@@ -594,6 +949,14 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                     <td>
                       {" "}
                       {viewResult?.Computer?.map((item) => (
+                        <div key={item._id}>
+                          {item?.totalAverage?.toFixed(1)}
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {" "}
+                      {viewResult?.Computer?.map((item) => (
                         <div key={item._id}>{item?.grade}</div>
                       ))}
                     </td>
@@ -603,7 +966,7 @@ export const ViewBasic1Result = React.forwardRef((props, ref) => {
                         <div key={item._id}>{item?.remark}</div>
                       ))}
                     </td>
-                  </tr> */}
+                  </tr>
                 </tbody>
               </Table>
             </div>
