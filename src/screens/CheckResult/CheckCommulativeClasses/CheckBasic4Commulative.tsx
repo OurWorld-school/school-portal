@@ -103,6 +103,19 @@ const CheckBasic4Commulative: React.FC<Props> = () => {
 
     fetchPosts();
   }, []);
+  const [hasReloaded, setHasReloaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    const hasReloadedFromStorage = sessionStorage.getItem("hasReloaded");
+    if (!hasReloadedFromStorage) {
+      // Perform the reload
+      sessionStorage.setItem("hasReloaded", "true");
+      window.location.reload();
+    } else {
+      // Update the state to avoid further reloads
+      setHasReloaded(true);
+    }
+  }, []);
   return (
     <>
       <TopNavBar />

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CheckResult.css";
 import { Theme, useTheme } from "@mui/material/styles";
@@ -53,6 +53,19 @@ const SelectResultType = () => {
       navigate("/check-commulative");
     }
   };
+  const [hasReloaded, setHasReloaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    const hasReloadedFromStorage = sessionStorage.getItem("hasReloaded");
+    if (!hasReloadedFromStorage) {
+      // Perform the reload
+      sessionStorage.setItem("hasReloaded", "true");
+      window.location.reload();
+    } else {
+      // Update the state to avoid further reloads
+      setHasReloaded(true);
+    }
+  }, []);
   return (
     <>
       <TopNavBar />

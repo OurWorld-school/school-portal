@@ -91,6 +91,19 @@ const CheckBasic2Commulative: React.FC<Props> = () => {
         toast.error("No result found");
       });
   };
+  const [hasReloaded, setHasReloaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    const hasReloadedFromStorage = sessionStorage.getItem("hasReloaded");
+    if (!hasReloadedFromStorage) {
+      // Perform the reload
+      sessionStorage.setItem("hasReloaded", "true");
+      window.location.reload();
+    } else {
+      // Update the state to avoid further reloads
+      setHasReloaded(true);
+    }
+  }, []);
   useEffect(() => {
     const fetchPosts = async () => {
       const { data } = await axios.get(Basic2CommulativeApi);
