@@ -283,7 +283,7 @@ const InputNursery2Result = () => {
       remark = "Very Good";
     } else if (EnglishData.totalScore >= 50 && EnglishData.totalScore <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (EnglishData.totalScore >= 40 && EnglishData.totalScore <= 49) {
       grade = "D";
       remark = "Pass";
@@ -305,7 +305,7 @@ const InputNursery2Result = () => {
       remark = "Very Good";
     } else if (MathsData.totalScore >= 50 && MathsData.totalScore <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (MathsData.totalScore >= 40 && MathsData.totalScore <= 49) {
       grade = "D";
       remark = "Pass";
@@ -336,7 +336,7 @@ const InputNursery2Result = () => {
       VerbalReasoningData.totalScore <= 59
     ) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (
       VerbalReasoningData.totalScore >= 40 &&
       VerbalReasoningData.totalScore <= 49
@@ -379,7 +379,7 @@ const InputNursery2Result = () => {
       QuantitativeReasoningData.totalScore <= 59
     ) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (
       QuantitativeReasoningData.totalScore >= 40 &&
       QuantitativeReasoningData.totalScore <= 49
@@ -419,7 +419,7 @@ const InputNursery2Result = () => {
       CreativeArtData.totalScore <= 59
     ) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (
       CreativeArtData.totalScore >= 40 &&
       CreativeArtData.totalScore <= 49
@@ -447,7 +447,7 @@ const InputNursery2Result = () => {
       remark = "Very Good";
     } else if (PhonicsData.totalScore >= 50 && PhonicsData.totalScore <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (PhonicsData.totalScore >= 40 && PhonicsData.totalScore <= 49) {
       grade = "D";
       remark = "Pass";
@@ -478,7 +478,7 @@ const InputNursery2Result = () => {
       BasicScienceData.totalScore <= 59
     ) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (
       BasicScienceData.totalScore >= 40 &&
       BasicScienceData.totalScore <= 49
@@ -506,7 +506,7 @@ const InputNursery2Result = () => {
       remark = "Very Good";
     } else if (FrenchData.totalScore >= 50 && FrenchData.totalScore <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (FrenchData.totalScore >= 40 && FrenchData.totalScore <= 49) {
       grade = "D";
       remark = "Pass";
@@ -528,7 +528,7 @@ const InputNursery2Result = () => {
       remark = "Very Good";
     } else if (CRKData.totalScore >= 50 && CRKData.totalScore <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (CRKData.totalScore >= 40 && CRKData.totalScore <= 49) {
       grade = "D";
       remark = "Pass";
@@ -551,7 +551,7 @@ const InputNursery2Result = () => {
       remark = "Very Good";
     } else if (IgboData.totalScore >= 50 && IgboData.totalScore <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (IgboData.totalScore >= 40 && IgboData.totalScore <= 49) {
       grade = "D";
       remark = "Pass";
@@ -573,7 +573,7 @@ const InputNursery2Result = () => {
       remark = "Very Good";
     } else if (ComputerData.totalScore >= 50 && ComputerData.totalScore <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (ComputerData.totalScore >= 40 && ComputerData.totalScore <= 49) {
       grade = "D";
       remark = "Pass";
@@ -604,7 +604,7 @@ const InputNursery2Result = () => {
       SocialStudiesData.totalScore <= 59
     ) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (
       SocialStudiesData.totalScore >= 40 &&
       SocialStudiesData.totalScore <= 49
@@ -632,7 +632,7 @@ const InputNursery2Result = () => {
       remark = "Very Good";
     } else if (WritingData.totalScore >= 50 && WritingData.totalScore <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (WritingData.totalScore >= 40 && WritingData.totalScore <= 49) {
       grade = "D";
       remark = "Pass";

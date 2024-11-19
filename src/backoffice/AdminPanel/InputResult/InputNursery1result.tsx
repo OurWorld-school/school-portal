@@ -250,7 +250,7 @@ const InputNursery1result = () => {
       remark = "Very Good";
     } else if (formData.totalScore >= 50 && formData.totalScore <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (formData.totalScore >= 40 && formData.totalScore <= 49) {
       grade = "D";
       remark = "Pass";
@@ -273,7 +273,7 @@ const InputNursery1result = () => {
       remark = "Very Good";
     } else if (mathsData.totalScore >= 50 && mathsData.totalScore <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (mathsData.totalScore >= 40 && mathsData.totalScore <= 49) {
       grade = "D";
       remark = "Pass";
@@ -305,7 +305,7 @@ const InputNursery1result = () => {
       BasicScienceData.totalScore <= 59
     ) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (
       BasicScienceData.totalScore >= 40 &&
       BasicScienceData.totalScore <= 49
@@ -343,7 +343,7 @@ const InputNursery1result = () => {
       HealthScienceData.totalScore <= 59
     ) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (
       HealthScienceData.totalScore >= 40 &&
       HealthScienceData.totalScore <= 49
@@ -378,7 +378,7 @@ const InputNursery1result = () => {
       SocialHabitData.totalScore <= 59
     ) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (
       SocialHabitData.totalScore >= 40 &&
       SocialHabitData.totalScore <= 49
@@ -406,7 +406,7 @@ const InputNursery1result = () => {
       remark = "Very Good";
     } else if (WritingData.totalScore >= 50 && WritingData.totalScore <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (WritingData.totalScore >= 40 && WritingData.totalScore <= 49) {
       grade = "D";
       remark = "Pass";
@@ -429,7 +429,7 @@ const InputNursery1result = () => {
       remark = "Very Good";
     } else if (RhymesData.totalScore >= 50 && RhymesData.totalScore <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (RhymesData.totalScore >= 40 && RhymesData.totalScore <= 49) {
       grade = "D";
       remark = "Pass";
@@ -461,7 +461,7 @@ const InputNursery1result = () => {
       AgricScienceData.totalScore <= 59
     ) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (
       AgricScienceData.totalScore >= 40 &&
       AgricScienceData.totalScore <= 49
@@ -495,7 +495,7 @@ const InputNursery1result = () => {
       CreativeArtData.totalScore <= 59
     ) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (
       CreativeArtData.totalScore >= 40 &&
       CreativeArtData.totalScore <= 49
@@ -523,7 +523,7 @@ const InputNursery1result = () => {
       remark = "Very Good";
     } else if (PhonicsData.totalScore >= 50 && PhonicsData.totalScore <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (PhonicsData.totalScore >= 40 && PhonicsData.totalScore <= 49) {
       grade = "D";
       remark = "Pass";

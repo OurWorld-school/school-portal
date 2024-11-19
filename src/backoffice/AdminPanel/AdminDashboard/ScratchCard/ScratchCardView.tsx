@@ -61,7 +61,10 @@ export default function ScratchCardView() {
   const [loading, setLoading] = React.useState(false);
   React.useEffect(() => {
     const fetchPosts = async () => {
-      const { data } = await axios.get(ScratchCardApi);
+      const { data } = await axios.get(
+        ScratchCardApi
+        // "http://localhost:5000/api/scratchGenerate/"
+      );
       console.log(data);
       // const foundData = data.find((item) => item.artist === artist);
       setViewScratchCards(data);

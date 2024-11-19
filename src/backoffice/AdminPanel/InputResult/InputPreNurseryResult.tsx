@@ -222,7 +222,7 @@ const InputPreNurseryResult = () => {
       remark = "Very Good";
     } else if (NumeracyData.totalScore >= 50 && NumeracyData.totalScore <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (NumeracyData.totalScore >= 40 && NumeracyData.totalScore <= 49) {
       grade = "D";
       remark = "Pass";
@@ -253,7 +253,7 @@ const InputPreNurseryResult = () => {
       remark = "Very Good";
     } else if (LiteracyData.totalScore >= 50 && LiteracyData.totalScore <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (LiteracyData.totalScore >= 40 && LiteracyData.totalScore <= 49) {
       grade = "D";
       remark = "Pass";
@@ -285,7 +285,7 @@ const InputPreNurseryResult = () => {
       ColouringData.totalScore <= 59
     ) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (
       ColouringData.totalScore >= 40 &&
       ColouringData.totalScore <= 49
@@ -324,7 +324,7 @@ const InputPreNurseryResult = () => {
       HealthHabitData.totalScore <= 59
     ) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (
       HealthHabitData.totalScore >= 40 &&
       HealthHabitData.totalScore <= 49
@@ -365,7 +365,7 @@ const InputPreNurseryResult = () => {
       PreScienceData.totalScore <= 59
     ) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (
       PreScienceData.totalScore >= 40 &&
       PreScienceData.totalScore <= 49
@@ -406,7 +406,7 @@ const InputPreNurseryResult = () => {
       PracticalLifeData.totalScore <= 59
     ) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (
       PracticalLifeData.totalScore >= 40 &&
       PracticalLifeData.totalScore <= 49
@@ -441,7 +441,7 @@ const InputPreNurseryResult = () => {
       remark = "Very Good";
     } else if (RhymesData.totalScore >= 50 && RhymesData.totalScore <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (RhymesData.totalScore >= 40 && RhymesData.totalScore <= 49) {
       grade = "D";
       remark = "Pass";
@@ -476,7 +476,7 @@ const InputPreNurseryResult = () => {
       SensorialActivityData.totalScore <= 59
     ) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (
       SensorialActivityData.totalScore >= 40 &&
       SensorialActivityData.totalScore <= 49
