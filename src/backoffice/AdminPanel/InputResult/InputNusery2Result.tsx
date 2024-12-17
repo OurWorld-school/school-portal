@@ -129,13 +129,13 @@ const InputNursery2Result = () => {
     grade: "",
     remark: "",
   });
-  const [FrenchData, setFrenchData] = useState({
-    test: 0,
-    exam: 0,
-    totalScore: 0,
-    grade: "",
-    remark: "",
-  });
+  // const [FrenchData, setFrenchData] = useState({
+  //   test: 0,
+  //   exam: 0,
+  //   totalScore: 0,
+  //   grade: "",
+  //   remark: "",
+  // });
   const [IgboData, setIgboData] = useState({
     test: 0,
     exam: 0,
@@ -154,7 +154,7 @@ const InputNursery2Result = () => {
   const calculateResultTotalAverage = () => {
     // const average = total / Object.keys(scores).length;
     // setGrandAverage(average);
-    const GrandTotalAverage = TotalScore / 13;
+    const GrandTotalAverage = TotalScore / 12;
     // NumeracyData.test +
     // NumeracyData.exam +
     // LiteracyData.test +
@@ -186,8 +186,8 @@ const InputNursery2Result = () => {
       ComputerData.exam +
       CreativeArtData.test +
       CreativeArtData.exam +
-      FrenchData.test +
-      FrenchData.exam +
+      // FrenchData.test +
+      // FrenchData.exam +
       CRKData.test +
       CRKData.exam;
     setTotalScore(GrandTotal);
@@ -248,9 +248,9 @@ const InputNursery2Result = () => {
       case "CRKData":
         setCRKData((prev: any) => ({ ...prev, [type]: value }));
         break;
-      case "FrenchData":
-        setFrenchData((prev: any) => ({ ...prev, [type]: value }));
-        break;
+      // case "FrenchData":
+      //   setFrenchData((prev: any) => ({ ...prev, [type]: value }));
+      //   break;
       case "CreativeArtData":
         setCreativeArtData((prev: any) => ({ ...prev, [type]: value }));
         break;
@@ -494,28 +494,28 @@ const InputNursery2Result = () => {
     }
     setBasicScienceData({ ...BasicScienceData, totalScore, grade, remark });
   };
-  const calculateFrenchDataTotal = () => {
-    const totalScore = FrenchData.test + FrenchData.exam;
-    let grade = "";
-    let remark = "";
-    if (FrenchData.totalScore >= 70 && FrenchData.totalScore <= 100) {
-      grade = "A";
-      remark = "Excellent";
-    } else if (FrenchData.totalScore >= 60 && FrenchData.totalScore <= 69) {
-      grade = "B";
-      remark = "Very Good";
-    } else if (FrenchData.totalScore >= 50 && FrenchData.totalScore <= 59) {
-      grade = "C";
-      remark = "Credit";
-    } else if (FrenchData.totalScore >= 40 && FrenchData.totalScore <= 49) {
-      grade = "D";
-      remark = "Pass";
-    } else if (FrenchData.totalScore >= 0 && FrenchData.totalScore <= 39) {
-      grade = "F";
-      remark = "Fail";
-    }
-    setFrenchData({ ...FrenchData, totalScore, grade, remark });
-  };
+  // const calculateFrenchDataTotal = () => {
+  //   const totalScore = FrenchData.test + FrenchData.exam;
+  //   let grade = "";
+  //   let remark = "";
+  //   if (FrenchData.totalScore >= 70 && FrenchData.totalScore <= 100) {
+  //     grade = "A";
+  //     remark = "Excellent";
+  //   } else if (FrenchData.totalScore >= 60 && FrenchData.totalScore <= 69) {
+  //     grade = "B";
+  //     remark = "Very Good";
+  //   } else if (FrenchData.totalScore >= 50 && FrenchData.totalScore <= 59) {
+  //     grade = "C";
+  //     remark = "Credit";
+  //   } else if (FrenchData.totalScore >= 40 && FrenchData.totalScore <= 49) {
+  //     grade = "D";
+  //     remark = "Pass";
+  //   } else if (FrenchData.totalScore >= 0 && FrenchData.totalScore <= 39) {
+  //     grade = "F";
+  //     remark = "Fail";
+  //   }
+  //   setFrenchData({ ...FrenchData, totalScore, grade, remark });
+  // };
   const calculateCRKDataTotal = () => {
     const totalScore = CRKData.test + CRKData.exam;
     let grade = "";
@@ -761,16 +761,16 @@ const InputNursery2Result = () => {
           remark: SocialStudiesData.remark,
         },
       ],
-      French: [
-        // ...English,
-        {
-          test: FrenchData.test,
-          exam: FrenchData.exam,
-          totalScore: FrenchData.totalScore,
-          grade: FrenchData.grade,
-          remark: FrenchData.remark,
-        },
-      ],
+      // French: [
+      //   // ...English,
+      //   {
+      //     test: FrenchData.test,
+      //     exam: FrenchData.exam,
+      //     totalScore: FrenchData.totalScore,
+      //     grade: FrenchData.grade,
+      //     remark: FrenchData.remark,
+      //   },
+      // ],
       Writing: [
         // ...English,
         {
@@ -2564,7 +2564,7 @@ const InputNursery2Result = () => {
                     </Dropdown>
                     {/* ///Writing end input */}
                     {/* ///Writing */}
-                    <Dropdown>
+                    {/* <Dropdown>
                       <Dropdown.Toggle
                         variant="success"
                         id="dropdown-basic"
@@ -2711,7 +2711,7 @@ const InputNursery2Result = () => {
                           />
                         </div>
                       </Dropdown.Menu>
-                    </Dropdown>
+                    </Dropdown> */}
                     {/* ///Writing end input */}
                     {/* ///Writing */}
                     <Dropdown>
