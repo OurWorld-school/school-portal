@@ -145,6 +145,7 @@ function UpdateStudentClass() {
                         <MenuItem value="Basic-4">Basic-4</MenuItem>
                         <MenuItem value="Basic-5">Basic-5</MenuItem>
                         <MenuItem value="Basic-6">Basic-6</MenuItem>
+                        <MenuItem value="Basic-6">Past Student</MenuItem>
                       </Select>
                     </FormControl>
                   </div>
