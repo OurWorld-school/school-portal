@@ -16,7 +16,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { registerApi } from "../../data/Api";
+import { createClassApi, registerApi } from "../../data/Api";
 
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -96,6 +96,7 @@ export default function SignUp() {
   const [lastName, setLastName] = useState("");
   // const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [viewData, setViewData] = useState([]);
   const [schoolRegNumber, setSchoolRegNumber] = useState("");
   const [contactAdress, setContAdress] = useState("");
   const [currentClass, setCurrentClass] = useState("");
@@ -137,7 +138,16 @@ export default function SignUp() {
     });
   };
   //////
+  React.useEffect(() => {
+    const fetchPosts = async () => {
+      const { data } = await axios.get(createClassApi);
+      console.log(data);
+      // const foundData = data.find((item) => item.artist === artist);
+      setViewData(data);
+    };
 
+    fetchPosts();
+  }, []);
   /////
   const submitHandler = (e: any) => {
     e.preventDefault();
@@ -274,17 +284,11 @@ export default function SignUp() {
                     onChange={(e) => setCurrentClass(e.target.value)}
                     // input={<OutlinedInput label="Name" />}
                   >
-                    <MenuItem value="Creche">Creche</MenuItem>
-                    <MenuItem value="Pre-Nursery">Pre-Nursery</MenuItem>
-                    <MenuItem value="Nursery-1">Nursery-1</MenuItem>
-                    <MenuItem value="Nursery-2">Nursery-2</MenuItem>
-                    <MenuItem value="Nursery-3">Nursery-3</MenuItem>
-                    <MenuItem value="Basic-1">Basic-1</MenuItem>
-                    <MenuItem value="Basic-2">Basic-2</MenuItem>
-                    <MenuItem value="Basic-3">Basic-3</MenuItem>
-                    <MenuItem value="Basic-4">Basic-4</MenuItem>
-                    <MenuItem value="Basic-5">Basic-5</MenuItem>
-                    <MenuItem value="Basic-6">Basic-6</MenuItem>
+                    {viewData?.map((item: any, index: number) => (
+                      <MenuItem key={index} value={item.name}>
+                        {item.name}
+                      </MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
               </Grid>

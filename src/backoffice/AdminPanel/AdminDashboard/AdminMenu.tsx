@@ -24,12 +24,26 @@ export default function AdminMenu() {
                 <Link to="/register"> Register A Student</Link>
               </Dropdown.Toggle>
 
+              <Dropdown.Menu></Dropdown.Menu>
+            </Dropdown>
+          </li>
+          <li style={{ marginBottom: "20px" }}>
+            <Dropdown>
+              <Dropdown.Toggle
+                variant="success"
+                id="dropdown-basic"
+                style={{ border: "1px solid transparent" }}
+              >
+                Classes
+              </Dropdown.Toggle>
+
               <Dropdown.Menu>
-                {/* <Dropdown.Item href="#/action-1">
-                  <Link to="/Admin-view-scratchCard">
-                    View/Genrate Scratch Card
-                  </Link>
-                </Dropdown.Item> */}
+                <Dropdown.Item href="#/action-1">
+                  <Link to="/createClass">Create Class</Link>
+                </Dropdown.Item>
+                <Dropdown.Item href="#/action-1">
+                  <Link to="/getClasses">Fetch Classes</Link>
+                </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </li>

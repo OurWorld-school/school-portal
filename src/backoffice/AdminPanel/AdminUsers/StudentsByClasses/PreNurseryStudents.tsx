@@ -13,9 +13,11 @@ import axios from "axios";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Button from "@mui/material/Button";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
-import { UserApi } from "../../../../data/Api";
+import { createClassApi, UserApi } from "../../../../data/Api";
 import AdminLayout from "../../AdminLayout";
 import { Link } from "react-router-dom";
+import CircularIndeterminate from "../../../../components/Loading/Progress";
+import Message from "../../../../components/MessageHandling/Message";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -48,39 +50,116 @@ function createData(
 }
 
 export default function PreNurserystudents() {
-  const [viewUser, setViewUser] = React.useState([]);
   const [filteredData, setFilteredData] = React.useState([]);
+  const [selectedClass, setSelectedClass] = React.useState("");
+  const [loader, setLoader] = React.useState(false);
 
+  const [viewData, setViewData] = React.useState([]);
+  const [showSuccess, setShowSuccess] = React.useState(false);
+  const [showError, setShowError] = React.useState(false);
   React.useEffect(() => {
     const fetchPosts = async () => {
-      const { data } = await axios.get(
-        UserApi
-        //     {
-        //     params: {
-        //       currentClass: "Basic-1",
-        //     },
-        //   }
-      );
+      const { data } = await axios.get(createClassApi);
       console.log(data);
-      // const foundData = data.find((item) => item.artist === artist);
-      setViewUser(data);
+
+      setViewData(data);
     };
 
     fetchPosts();
   }, []);
-  React.useEffect(() => {
-    // Filter the data based on genre "afrobeat"
-    const filtered = viewUser.filter(
-      (item: any) => item.currentClass === "Pre-Nursery"
-    );
-    setFilteredData(
-      filtered.sort((a: any, b: any) => a.firstName.localeCompare(b.firstName))
-    );
-    console.log(filtered);
-  }, [viewUser]);
+  const handleSelectChange = (e: any) => {
+    setSelectedClass(e.target.value);
+  };
 
+  const [initialFetch, setInitialFetch] = React.useState(true);
+  React.useEffect(() => {
+    setLoader(true);
+    setShowSuccess(true);
+    setShowError(true);
+    try {
+      const fetchData = async () => {
+        // Fetch data from your API
+        const response = await fetch(UserApi);
+        const data = await response.json();
+
+        // Set the fetched data to the state
+        setFilteredData(
+          data
+            .sort((a: any, b: any) => b.TotalAverage - a.TotalAverage)
+            .filter(
+              (item: any) =>
+                item.currentClass === selectedClass ||
+                item.currentClass === "Pre-Nursery"
+            )
+        );
+        setLoader(false);
+        setTimeout(() => {
+          setShowSuccess(false);
+        }, 3000);
+
+        // After the initial fetch, setInitialFetch to false
+        setInitialFetch(false);
+      };
+
+      // Fetch data only if it's the initial fetch or when the year and term are selected
+      if (initialFetch || selectedClass) {
+        fetchData();
+      }
+    } catch (error) {
+      setLoader(false);
+      // navigate("/Basic2-result");
+      setTimeout(() => {
+        setShowError(false);
+      }, 3000);
+
+      console.error("Error fetching data:", error);
+    }
+  }, [initialFetch]);
+  React.useEffect(() => {
+    // Retrieve selectedYear and selectedTerm from storage
+    const storedClass = localStorage.getItem("selectedClass");
+
+    if (storedClass) {
+      setSelectedClass(storedClass);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    // Save selectedYear and selectedTerm to storage
+    localStorage.setItem("selectedClass", selectedClass);
+  }, [selectedClass]);
   return (
     <AdminLayout>
+      <div>
+        {" "}
+        <select value={selectedClass} onChange={handleSelectChange}>
+          <option value="">Select Student Class</option>
+          {viewData?.map((item: any, index: number) => (
+            <option key={index} value={item.name}>
+              {item.name}
+            </option>
+          ))}
+
+          {/* Add more years as needed */}
+        </select>
+        <>
+          <button
+            style={{
+              border: "1px solid red",
+              width: "150px",
+              height: "50px",
+              borderRadius: "6px",
+              marginLeft: "5px",
+            }}
+            onClick={() => setInitialFetch(true)}
+          >
+            Fetch Result
+          </button>
+          {loader && <CircularIndeterminate />}
+          <Message type="success" message="Success! Result Found" />
+          <Message type="error" message="Error! No Result" />
+        </>
+      </div>
       <h3 className="text-center mb-4 mt-4">
         View All {filteredData?.length} Pupils{" "}
       </h3>

@@ -2,6 +2,13 @@ import { BaseUrl, BaseUrl2 } from "./BaseUrl";
 
 export const registerApi =
   "https://ourworldintschool.onrender.com/api/auth/registers";
+export const createClassApi =
+  "https://ourworldintschool.onrender.com/api/Class/";
+export const deleteClassApi =
+  "https://ourworldintschool.onrender.com/api/Class/delete";
+export const updateClassApi =
+  "https://ourworldintschool.onrender.com/api/Class/update/";
+
 export const loginApi = "https://ourworldintschool.onrender.com/api/auth/login";
 export const StudentloginApi =
   "https://ourworldintschool.onrender.com/api/auth/student-login";

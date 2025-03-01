@@ -25,7 +25,11 @@ import Grid from "@material-ui/core/Grid";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 import AdminLayout from "../../AdminLayout";
-import { UpdateUserApi, UpdateUserCurrentClassApi } from "../../../../data/Api";
+import {
+  createClassApi,
+  UpdateUserApi,
+  UpdateUserCurrentClassApi,
+} from "../../../../data/Api";
 import CircularIndeterminate from "../../../../components/Loading/Progress";
 
 const ITEM_HEIGHT = 100;
@@ -43,7 +47,7 @@ function UpdateStudentClass() {
   const { id } = useParams();
 
   const [currentClass, setCurrentClass] = useState("");
-
+  const [viewData, setViewData] = React.useState([]);
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState<any>({});
 
@@ -52,6 +56,16 @@ function UpdateStudentClass() {
 
     // Perform any other actions that need to be done when the button is clicked
   };
+  React.useEffect(() => {
+    const fetchPosts = async () => {
+      const { data } = await axios.get(createClassApi);
+      console.log(data);
+      // const foundData = data.find((item) => item.artist === artist);
+      setViewData(data);
+    };
+
+    fetchPosts();
+  }, []);
 
   /////
   const submitHandler = (e: any) => {
@@ -124,27 +138,21 @@ function UpdateStudentClass() {
                       <InputLabel id="demo-multiple-name-label">
                         Student Current Class
                       </InputLabel>
+
                       <Select
                         labelId="demo-multiple-name-label"
                         id="demo-multiple-name"
                         className="input-label-input-divs-select"
                         fullWidth
-                        // multiple
                         value={currentClass}
                         onChange={(e) => setCurrentClass(e.target.value)}
-                        // input={<OutlinedInput label="Name" />}
                         MenuProps={MenuProps}
                       >
-                        <MenuItem value="Pre-Nursery">Pre-Nursery</MenuItem>
-                        <MenuItem value="Nursery-1">Nursery-1</MenuItem>
-                        <MenuItem value="Nursery-2">Nursery-2</MenuItem>
-                        <MenuItem value="Nursery-3">Nursery-3</MenuItem>
-                        <MenuItem value="Basic-1">Basic-1</MenuItem>
-                        <MenuItem value="Basic-2">Basic-2</MenuItem>
-                        <MenuItem value="Basic-3">Basic-3</MenuItem>
-                        <MenuItem value="Basic-4">Basic-4</MenuItem>
-                        <MenuItem value="Basic-5">Basic-5</MenuItem>
-                        <MenuItem value="Basic-6">Basic-6</MenuItem>
+                        {viewData?.map((item: any, index: number) => (
+                          <MenuItem key={index} value={item.name}>
+                            {item.name}
+                          </MenuItem>
+                        ))}
                         <MenuItem value="Basic-6">Past Student</MenuItem>
                       </Select>
                     </FormControl>

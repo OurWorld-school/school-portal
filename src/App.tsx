@@ -155,6 +155,9 @@ import { ViewBasic2Commulative } from "./screens/ViewCommulative/ViewBasic2Commu
 import { ViewBasic3Commulative } from "./screens/ViewCommulative/ViewBasic3Commulative";
 import { ViewBasic4Commulative } from "./screens/ViewCommulative/ViewBasic4Commulative";
 import { ViewBasic5Commulative } from "./screens/ViewCommulative/ViewBasic5Commulative";
+import CreateClasses from "./backoffice/AdminPanel/AdminClasses/CreateClasses/CreateClasses";
+import GetClasses from "./backoffice/AdminPanel/AdminClasses/GetClasses/GetClasses";
+import UpdateClasses from "./backoffice/AdminPanel/AdminClasses/UpdateClasses/UpdateClass";
 
 function App() {
   const { pathname } = useLocation();
@@ -191,6 +194,11 @@ function App() {
         <Route path="/basic4" element={<Basic4students />} />
         <Route path="/basic5" element={<Basic5students />} />
         <Route path="/basic6" element={<Basic6students />} />
+        {/* Classes */}
+        <Route path="/createClass" element={<CreateClasses />} />
+        <Route path="/getClasses" element={<GetClasses />} />
+        <Route path="/update-class/:id" element={<UpdateClasses />} />
+        {/* classes */}
         {/* ///////// Input results*/}
         <Route path="/staffs" element={<AdminViewStaffs />} />
         <Route path="/viewroles" element={<AdminViewRoles />} />
