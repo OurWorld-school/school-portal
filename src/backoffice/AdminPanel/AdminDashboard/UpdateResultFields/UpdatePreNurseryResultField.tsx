@@ -87,7 +87,12 @@ const UpdatePreNurseryResultField = () => {
     };
 
     axios
-      .put(UpdatePreNurseryresultApi + id, data, headers)
+      .put(
+        `https://ourworldintschool.onrender.com/api/prenurseryresult/update/otherFields/${id}`,
+        // UpdatePreNurseryresultApi + id,
+        data,
+        headers
+      )
 
       .then((res) => {
         console.log(res.data);

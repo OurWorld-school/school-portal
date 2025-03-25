@@ -96,7 +96,12 @@ const UpdateNursery1ResultField = () => {
     };
 
     axios
-      .put(UpdateNursery1resultApi + id, data, headers)
+      .put(
+        `https://ourworldintschool.onrender.com/api/nursery1result/update/otherFields/${id}`,
+        // UpdateNursery1resultApi + id,
+        data,
+        headers
+      )
 
       .then((res) => {
         console.log(res.data);

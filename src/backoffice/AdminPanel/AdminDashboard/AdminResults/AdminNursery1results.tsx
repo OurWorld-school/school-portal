@@ -22,6 +22,7 @@ import {
   Basic3resultApi,
   Basic4resultApi,
   Basic5resultApi,
+  createClassApi,
   DeActivateBasic2resultApi,
   DeActivateBasic3resultApi,
   DeActivateBasic4resultApi,
@@ -62,9 +63,11 @@ interface Filter {
 const AdminNursery1Result: React.FC = () => {
   const [selectedYear, setSelectedYear] = React.useState("");
   const [selectedTerm, setSelectedTerm] = React.useState("");
+  const [selectedClass, setSelectedClass] = React.useState("");
   const [filteredresultData, setFilteredResultData] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
+  const [viewData, setViewData] = React.useState([]);
   const [message, setMessage] = React.useState<{
     type: "success" | "error";
     text: string;
@@ -74,6 +77,16 @@ const AdminNursery1Result: React.FC = () => {
 
   // State to store the API response
   const [apiData, setApiData] = React.useState<any>([]);
+  React.useEffect(() => {
+    const fetchPosts = async () => {
+      const { data } = await axios.get(createClassApi);
+      console.log(data);
+
+      setViewData(data);
+    };
+
+    fetchPosts();
+  }, []);
 
   // Function to handle the select input change
   const handleSelectChange = (e: any) => {
@@ -82,7 +95,9 @@ const AdminNursery1Result: React.FC = () => {
   const handleSelectTermChange = (e: any) => {
     setSelectedTerm(e.target.value);
   };
-
+  const handleSelectClassChange = (e: any) => {
+    setSelectedClass(e.target.value);
+  };
   const [initialFetch, setInitialFetch] = React.useState(true);
 
   // Fetch data from API
@@ -102,7 +117,12 @@ const AdminNursery1Result: React.FC = () => {
             .sort((a: any, b: any) => b.TotalAverage - a.TotalAverage)
             .filter(
               (item: any) =>
-                item.year === selectedYear && item.term === selectedTerm
+                (item.year === selectedYear &&
+                  item.term === selectedTerm &&
+                  item.classes === selectedClass) ||
+                (item.year === selectedYear &&
+                  item.term === selectedTerm &&
+                  item.classes === "Nursery-1")
             )
         );
         setLoader(false);
@@ -115,7 +135,7 @@ const AdminNursery1Result: React.FC = () => {
       };
 
       // Fetch data only if it's the initial fetch or when the year and term are selected
-      if (initialFetch || (selectedYear && selectedTerm)) {
+      if (initialFetch || (selectedYear && selectedTerm && selectedClass)) {
         fetchData();
       }
     } catch (error) {
@@ -132,7 +152,7 @@ const AdminNursery1Result: React.FC = () => {
     // Retrieve selectedYear and selectedTerm from storage
     const storedYear = localStorage.getItem("selectedYear");
     const storedTerm = localStorage.getItem("selectedTerm");
-
+    const storedClass = localStorage.getItem("selectedClass");
     if (storedYear) {
       setSelectedYear(storedYear);
     }
@@ -140,13 +160,17 @@ const AdminNursery1Result: React.FC = () => {
     if (storedTerm) {
       setSelectedTerm(storedTerm);
     }
+    if (storedClass) {
+      setSelectedClass(storedClass);
+    }
   }, []);
 
   React.useEffect(() => {
     // Save selectedYear and selectedTerm to storage
     localStorage.setItem("selectedYear", selectedYear);
     localStorage.setItem("selectedTerm", selectedTerm);
-  }, [selectedYear, selectedTerm]);
+    localStorage.setItem("selectedClass", selectedClass);
+  }, [selectedYear, selectedTerm, selectedClass]);
   const [show, setShow] = React.useState(false);
 
   const [Position, setPosition] = React.useState("");
@@ -283,6 +307,16 @@ const AdminNursery1Result: React.FC = () => {
             <option value="1st-Term">1st Term</option>
             <option value="2nd-Term">2nd Term</option>
             <option value="3rd-Term">3rd Term</option>
+
+            {/* Add more terms as needed */}
+          </select>
+          <select value={selectedClass} onChange={handleSelectClassChange}>
+            <option value="">Select Class</option>
+            {viewData?.map((item: any, index: number) => (
+              <option key={index} value={item.name}>
+                {item.name}
+              </option>
+            ))}
 
             {/* Add more terms as needed */}
           </select>

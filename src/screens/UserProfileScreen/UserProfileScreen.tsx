@@ -88,9 +88,7 @@ function UserProfileScreen() {
       };
     });
   };
-  //////
 
-  /////
   const submitHandler = (e: any) => {
     e.preventDefault();
     setLoading(true);
@@ -203,7 +201,7 @@ function UserProfileScreen() {
                         variant="outlined"
                         fullWidth
                         id="firstName"
-                        value={firstName}
+                        value={firstName || userData?.firstName || ""}
                         onChange={(e) => setFirstName(e.target.value)}
                         label="Surname"
                         autoFocus
@@ -217,7 +215,7 @@ function UserProfileScreen() {
                         label="Last Name"
                         name="lastName"
                         autoComplete="lname"
-                        value={lastName}
+                        value={userData?.lastName || lastName}
                         onChange={(e) => setLastName(e.target.value)}
                       />
                     </Grid>
@@ -229,7 +227,7 @@ function UserProfileScreen() {
                         label="School Reg Number"
                         name=""
                         autoComplete="phoneNumber"
-                        value={schoolRegNumber}
+                        value={userData?.schoolRegNumber || schoolRegNumber}
                         onChange={(e) => setSchoolRegNumber(e.target.value)}
                       />
                     </Grid>
@@ -253,7 +251,7 @@ function UserProfileScreen() {
                           fullWidth
                           // MenuProps={MenuProps}
                           // multiple
-                          value={currentClass}
+                          value={userData?.currentClass || currentClass}
                           onChange={(e) => setCurrentClass(e.target.value)}
                           // input={<OutlinedInput label="Name" />}
                         >
@@ -265,6 +263,7 @@ function UserProfileScreen() {
                           <MenuItem value="Basic-2">Basic-2</MenuItem>
                           <MenuItem value="Basic-3">Basic-3</MenuItem>
                           <MenuItem value="Basic-4">Basic-4</MenuItem>
+                          <MenuItem value="Basic-5">Basic-5</MenuItem>
                         </Select>
                       </FormControl>
                     </Grid>
@@ -276,7 +275,7 @@ function UserProfileScreen() {
                         label="Contact Phone Number"
                         name="phoneNumber"
                         autoComplete="phoneNumber"
-                        value={phoneNumber}
+                        value={userData?.phoneNumber || phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
                       />
                     </Grid>
@@ -288,7 +287,7 @@ function UserProfileScreen() {
                         label="Contact Adress"
                         name="contact adress"
                         autoComplete="contact adress"
-                        value={contactAdress}
+                        value={userData?.contactAdress || contactAdress}
                         onChange={(e) => setContAdress(e.target.value)}
                       />
                     </Grid>
@@ -304,8 +303,8 @@ function UserProfileScreen() {
                           Password
                         </InputLabel>
                         <OutlinedInput
-                          id="outlined-adornment-password"
-                          type={showPassword ? "text" : "password"}
+                          // id="outlined-adornment-password"
+                          // type={showPassword ? "text" : "password"}
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           fullWidth

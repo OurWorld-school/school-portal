@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -100,9 +100,9 @@ export default function SignUp() {
   const [schoolRegNumber, setSchoolRegNumber] = useState("");
   const [contactAdress, setContAdress] = useState("");
   const [currentClass, setCurrentClass] = useState("");
-  const [password, setPassword] = useState("");
+  // const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("Student");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = React.useState(false);
   const [loading, setLoading] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -137,6 +137,18 @@ export default function SignUp() {
       };
     });
   };
+  const [hasReloaded, setHasReloaded] = useState<boolean>(false);
+  useEffect(() => {
+    const hasReloadedFromStorage = sessionStorage.getItem("hasReloaded");
+    if (!hasReloadedFromStorage) {
+      // Perform the reload
+      sessionStorage.setItem("hasReloaded", "true");
+      window.location.reload();
+    } else {
+      // Update the state to avoid further reloads
+      setHasReloaded(true);
+    }
+  }, []);
   //////
   React.useEffect(() => {
     const fetchPosts = async () => {
@@ -162,8 +174,8 @@ export default function SignUp() {
       // email: email,
       userType: userType,
       currentClass: currentClass,
-      password: password,
-      confirmPassword: confirmPassword,
+      // password: password,
+      // confirmPassword: confirmPassword,
     };
 
     const headers: any = {
@@ -174,7 +186,13 @@ export default function SignUp() {
     };
 
     axios
-      .post(registerApi, data, headers)
+      .post(
+        // "http://localhost:5000/api/auth/registers",
+        registerApi,
+
+        data,
+        { headers }
+      )
 
       .then((res) => {
         console.log(res.data);
@@ -188,8 +206,8 @@ export default function SignUp() {
           setPassportPhoto("");
           setUserType("");
           // setEmail("");
-          setPassword("");
-          setConfirmPassword("");
+          // setPassword("");
+          // setConfirmPassword("");
           setCurrentClass("");
           localStorage.setItem("userId", res.data._id);
           localStorage.setItem("roles", res.data.roles);

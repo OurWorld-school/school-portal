@@ -59,14 +59,20 @@ export default function GetClasses() {
     setShowUp(true);
   };
   const handleCloseShowUp = () => setShowUp(false);
-  const handleDelete = async (id: any) => {
+  const handleDelete = async (_id: string) => {
+    console.log(_id);
     setLoading(true);
-    await axios.delete(`${deleteClassApi}/${id}/`);
+    try {
+      await axios.delete(`${deleteClassApi}/${_id}`);
+      setViewData(viewData.filter((item: any) => item._id !== _id));
 
-    setDeleteItem(deleteItem.filter((p: any, row: any) => p._id !== row._id));
-    setLoading(false);
-    navigate("/getClasses");
-    window.location.reload();
+      navigate("/getClasses");
+      window.location.reload();
+    } catch (error) {
+      console.error("Error deleting class:", error);
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <AdminLayout>
@@ -92,7 +98,7 @@ export default function GetClasses() {
             </thead>
             <tbody>
               {viewData?.map((row: any, index) => (
-                <tr key={index}>
+                <tr key={row._id}>
                   <td>{row?.name}</td>
 
                   <td>

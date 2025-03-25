@@ -18,7 +18,7 @@ export const PasswordResetApi =
   "https://ourworldintschool.onrender.com/api/auth/reset-user-password";
 export const UserApi = "https://ourworldintschool.onrender.com/api/users/";
 export const UpdateUserApi =
-  "https://ourworldintschool.onrender.com/users/update/";
+  "https://ourworldintschool.onrender.com/api/users/update/";
 export const UpdateUserCurrentClassApi =
   "https://ourworldintschool.onrender.com/api/users/currentclasses/";
 export const AssignUserRolesApi =

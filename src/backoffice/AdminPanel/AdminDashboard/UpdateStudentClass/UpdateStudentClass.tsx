@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../../css/Input.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -50,7 +50,18 @@ function UpdateStudentClass() {
   const [viewData, setViewData] = React.useState([]);
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState<any>({});
-
+  const [hasReloaded, setHasReloaded] = useState<boolean>(false);
+  useEffect(() => {
+    const hasReloadedFromStorage = sessionStorage.getItem("hasReloaded");
+    if (!hasReloadedFromStorage) {
+      // Perform the reload
+      sessionStorage.setItem("hasReloaded", "true");
+      window.location.reload();
+    } else {
+      // Update the state to avoid further reloads
+      setHasReloaded(true);
+    }
+  }, []);
   const handleLoader = () => {
     setLoading(true);
 
@@ -130,33 +141,34 @@ function UpdateStudentClass() {
                   role="form"
                   onSubmit={submitHandler}
                 >
-                  <div className="col-md-6 mb-4">
-                    <FormControl
-                      className="input-label-input-divs"
-                      sx={{ m: 1, width: 370 }}
+                  <FormControl
+                    sx={{ m: 1, width: 370 }}
+                    className="text-texfield-input"
+                  >
+                    <InputLabel
+                      id="demo-multiple-name-label"
+                      className="text-texfield-input"
                     >
-                      <InputLabel id="demo-multiple-name-label">
-                        Student Current Class
-                      </InputLabel>
+                      Student Current Class
+                    </InputLabel>
+                    <Select
+                      labelId="demo-multiple-name-label"
+                      id="demo-multiple-name"
+                      className="input-label-input-divs-select"
+                      fullWidth
+                      value={currentClass}
+                      onChange={(e) => setCurrentClass(e.target.value)}
+                      MenuProps={MenuProps}
+                    >
+                      {viewData?.map((item: any, index: number) => (
+                        <MenuItem key={index} value={item.name}>
+                          {item.name}
+                        </MenuItem>
+                      ))}
+                      <MenuItem value="Basic-6">Past Student</MenuItem>
+                    </Select>
+                  </FormControl>
 
-                      <Select
-                        labelId="demo-multiple-name-label"
-                        id="demo-multiple-name"
-                        className="input-label-input-divs-select"
-                        fullWidth
-                        value={currentClass}
-                        onChange={(e) => setCurrentClass(e.target.value)}
-                        MenuProps={MenuProps}
-                      >
-                        {viewData?.map((item: any, index: number) => (
-                          <MenuItem key={index} value={item.name}>
-                            {item.name}
-                          </MenuItem>
-                        ))}
-                        <MenuItem value="Basic-6">Past Student</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </div>
                   <Grid item xs={12}>
                     <FormControlLabel
                       control={

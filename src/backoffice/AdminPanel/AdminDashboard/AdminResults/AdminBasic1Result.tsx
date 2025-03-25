@@ -64,7 +64,18 @@ const AdminBasic1Result: React.FC = () => {
   // State to store the API response
   const [apiData, setApiData] = React.useState<any>([]);
   const [viewData, setViewData] = React.useState([]);
-
+  const [hasReloaded, setHasReloaded] = React.useState<boolean>(false);
+  React.useEffect(() => {
+    const hasReloadedFromStorage = sessionStorage.getItem("hasReloaded");
+    if (!hasReloadedFromStorage) {
+      // Perform the reload
+      sessionStorage.setItem("hasReloaded", "true");
+      window.location.reload();
+    } else {
+      // Update the state to avoid further reloads
+      setHasReloaded(true);
+    }
+  }, []);
   React.useEffect(() => {
     const fetchPosts = async () => {
       const { data } = await axios.get(createClassApi);
@@ -108,7 +119,7 @@ const AdminBasic1Result: React.FC = () => {
                 (item.year === selectedYear &&
                   item.term === selectedTerm &&
                   item.classes === selectedClass) ||
-                (selectedYear &&
+                (item.year === selectedYear &&
                   item.term === selectedTerm &&
                   item.classes === "Basic-1")
             )

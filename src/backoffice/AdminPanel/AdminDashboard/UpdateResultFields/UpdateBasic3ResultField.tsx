@@ -88,7 +88,12 @@ const UpdateBasic3ResultField = () => {
     };
 
     axios
-      .put(UpdateBasic3resultApi + id, data, headers)
+      .put(
+        `https://ourworldintschool.onrender.com/api/basic3result/update/otherFields/${id}`,
+        // UpdateBasic3resultApi + id,
+        data,
+        headers
+      )
 
       .then((res) => {
         console.log(res.data);

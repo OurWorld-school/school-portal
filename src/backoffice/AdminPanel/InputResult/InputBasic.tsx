@@ -11,15 +11,13 @@ import { Dropdown } from "react-bootstrap";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { TextField, Button } from "@mui/material";
-
-import AdminLayout from "../AdminLayout";
-import CircularIndeterminate from "../../../components/Loading/Progress";
 import {
   Basic1resultApi,
-  Basic2resultApi,
-  Nursery1resultApi,
+  UpdateBasic1resultApi,
   UserApi,
 } from "../../../data/Api";
+import AdminLayout from "../AdminLayout";
+import CircularIndeterminate from "../../../components/Loading/Progress";
 const ITEM_HEIGHT = 100;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -38,39 +36,30 @@ interface SubjectScore {
   remark?: string;
 }
 
-interface SubjectData {
+interface ResultData {
   English?: SubjectScore[];
   Mathematics?: SubjectScore[];
-  SocialHabit?: SubjectScore[];
-  HealthScience: SubjectScore[];
+  History?: SubjectScore[];
+  CRK?: SubjectScore[];
+  VerbalReasoning?: SubjectScore[];
+  QuantitativeReasoning?: SubjectScore[];
   BasicScience?: SubjectScore[];
-  AgricScience?: SubjectScore[];
-  Rhymes?: SubjectScore[];
-  CreativeArt?: SubjectScore[];
   Phonics?: SubjectScore[];
-  Writing?: SubjectScore[];
+  French?: SubjectScore[];
+  Computer?: SubjectScore[];
+  NationalValues?: SubjectScore[];
+  PVC?: SubjectScore[];
+  CreativeArt?: SubjectScore[];
+  HandWriting?: SubjectScore[];
+  Igbo?: SubjectScore[];
 }
-const InputNursery1result = () => {
+const UpdateBasic1Results = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
   //   const [user, setUser] = useState(id);
   console.log(id);
-  // const [resultData, setResultData] = useState<SubjectData>({});
-  const [resultData, setResultData] = useState<SubjectData>({
-    English: [{ test: 0, exam: 0 }],
-    Mathematics: [{ test: 0, exam: 0 }],
-    SocialHabit: [{ test: 0, exam: 0 }],
-    HealthScience: [{ test: 0, exam: 0 }],
-    BasicScience: [{ test: 0, exam: 0 }],
-    AgricScience: [{ test: 0, exam: 0 }],
-    Rhymes: [{ test: 0, exam: 0 }],
-    CreativeArt: [{ test: 0, exam: 0 }],
-    Phonics: [{ test: 0, exam: 0 }],
-    Writing: [{ test: 0, exam: 0 }],
-  });
-  const [user, setUser] = useState(id);
-  console.log("singleUser", user);
+  const [resultData, setResultData] = useState<ResultData>({});
   const [term, setTerm] = useState("");
   const [year, setYear] = useState("");
   const [TotalScore, setTotalScore] = useState(0);
@@ -87,7 +76,6 @@ const InputNursery1result = () => {
   const [loading, setLoading] = useState(false);
   const [userDatas, setUserDatas] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const currentYear = new Date().getFullYear();
   const handleLoader = () => {
     setLoading(true);
   };
@@ -128,6 +116,21 @@ const InputNursery1result = () => {
     }
   }, [resultData]);
 
+  useEffect(() => {
+    // Fetch existing result data
+    const fetchResult = async () => {
+      try {
+        const response = await axios.get(Basic1resultApi + id);
+        setResultData(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError("Failed to load result data");
+        setLoading(false);
+      }
+    };
+
+    fetchResult();
+  }, [id]);
   const handleInputChange = (
     subject: string,
     index: number,
@@ -136,7 +139,7 @@ const InputNursery1result = () => {
   ) => {
     setResultData((prevData) => {
       const updatedSubject =
-        prevData[subject as keyof SubjectData]?.map((item, i) => {
+        prevData[subject as keyof ResultData]?.map((item, i) => {
           if (i === index) {
             const updatedItem = { ...item, [field]: value };
 
@@ -180,9 +183,10 @@ const InputNursery1result = () => {
       return { ...prevData, [subject]: updatedSubject };
     });
   };
+
   React.useEffect(() => {
     const fetchPosts = async () => {
-      const { data } = await axios.get(UserApi + id);
+      const { data } = await axios.get(Basic1resultApi + id);
       console.log(data);
       // const foundData = data.find((item) => item.artist === artist);
       setUserDatas(data);
@@ -190,7 +194,6 @@ const InputNursery1result = () => {
 
     fetchPosts();
   }, [id]);
-
   const submitHandler = (e: any) => {
     e.preventDefault();
     setLoading(true);
@@ -202,61 +205,11 @@ const InputNursery1result = () => {
       // body: JSON.stringify(data),
     };
 
-    const data: any = {
-      user: user,
-      classes: classes,
-      year: year,
-      TotalScore: TotalScore,
-      TotalGrade: TotalGrade,
-      TotalAverage: TotalAverage,
-      Position: Position,
-      term: term,
-      Remark: Remark,
-      HmRemark: HmRemark,
-      numberInClass: numberInClass,
-      schoolRegNumber: userDatas?.schoolRegNumber || schoolRegNumber,
-
-      // resultData,
-    };
-
     axios
-      .post(
-        // "https://ourworldintschool.onrender.com/api/basic1result/",
-        // "http://localhost:5000/api/basic1result/",
-        Nursery1resultApi,
-
-        Object.entries(resultData).reduce(
-          (acc: any, [subject, scores]) => {
-            if (Array.isArray(scores)) {
-              acc[subject] = scores.map(
-                ({ test, exam, totalScore, grade, remark }) => ({
-                  test: Number(test),
-                  exam: Number(exam),
-                  totalScore:
-                    totalScore !== undefined ? Number(totalScore) : undefined,
-                  grade,
-                  remark,
-                })
-              );
-            }
-            return acc;
-          },
-          {
-            user: user,
-            classes: classes,
-            year: year,
-            TotalScore: TotalScore,
-            TotalGrade: TotalGrade,
-            TotalAverage: TotalAverage,
-            Position: Position,
-            term: term,
-            Remark: Remark,
-            HmRemark: HmRemark,
-            numberInClass: numberInClass,
-            schoolRegNumber: userDatas?.schoolRegNumber || schoolRegNumber,
-          }
-        ),
-
+      .put(
+        UpdateBasic1resultApi + id,
+        resultData,
+        // data,
         headers
       )
 
@@ -300,7 +253,7 @@ const InputNursery1result = () => {
                     }}
                   >
                     <img
-                      src={userDatas?.passportPhoto}
+                      src={userDatas?.user?.passportPhoto}
                       alt="img"
                       style={{
                         width: "100%",
@@ -313,7 +266,7 @@ const InputNursery1result = () => {
                     className="  d-flex justify-content-center"
                     style={{ fontSize: "x-large", fontWeight: "600" }}
                   >
-                    Input {userDatas?.currentClass} Result of
+                    Update/Edit Basic 1 Result of
                   </h3>
                   <div
                     className="text-center mb-4"
@@ -326,17 +279,17 @@ const InputNursery1result = () => {
                         color: "green",
                       }}
                     >
-                      {userDatas?.firstName}{" "}
+                      {userDatas?.user?.firstName}{" "}
                     </span>
                     <span className="ml-3" style={{ color: "green" }}>
-                      {userDatas?.lastName}{" "}
+                      {userDatas?.user?.lastName}{" "}
                     </span>
                   </div>
                   <div
                     className="text-center mb-2"
                     style={{ color: "green", fontWeight: "600" }}
                   >
-                    {userDatas?.schoolRegNumber}{" "}
+                    {userDatas?.user?.schoolRegNumber}{" "}
                   </div>
                   <p
                     className="d-flex justify-content-center"
@@ -534,130 +487,7 @@ const InputNursery1result = () => {
                       value={TotalGrade || ""}
                       onChange={(e) => setTotalGrade(e.target.value)}
                     />
-                    <TextField
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="numberInClass"
-                      label="Number In Class"
-                      name="numberInClass"
-                      autoComplete="numberInClass"
-                      type="number"
-                      autoFocus
-                      value={numberInClass || ""}
-                      onChange={(e) =>
-                        setNumberInClass(parseInt(e.target.value))
-                      }
-                    />
-                    <TextField
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      multiline
-                      rows={6}
-                      fullWidth
-                      type="text"
-                      id="remark"
-                      label="Form Teacher Remark"
-                      name="remark"
-                      autoComplete="remark"
-                      autoFocus
-                      value={Remark}
-                      onChange={(e) => setRemark(e.target.value)}
-                    />
-                    <TextField
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      multiline
-                      rows={6}
-                      fullWidth
-                      type="text"
-                      id="remark"
-                      label="Head Teacher Remark"
-                      name="remark"
-                      autoComplete="remark"
-                      autoFocus
-                      value={HmRemark}
-                      onChange={(e) => setHmRemark(e.target.value)}
-                    />
-                    <TextField
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="schoolRegNumber"
-                      label="School Registeration/Admission Number"
-                      name="schoolRegNumber"
-                      autoComplete="schoolRegNumber"
-                      autoFocus
-                      placeholder={
-                        userDatas
-                          ? ` ${userDatas?.schoolRegNumber}`
-                          : "loading..."
-                      }
-                      style={{
-                        color: "black",
-                        fontSize: "x-large",
-                        fontWeight: "500",
-                      }}
-                      value={userDatas?.schoolRegNumber || schoolRegNumber}
-                      onChange={(e) => setSchoolRegNumber(e.target.value)}
-                    />
-                    <FormControl sx={{ m: 1, width: 370 }}>
-                      <InputLabel id="demo-multiple-name-label">
-                        Class
-                      </InputLabel>
-                      <Select
-                        labelId="demo-multiple-name-label"
-                        id="demo-multiple-name"
-                        // multiple
-                        value={classes}
-                        onChange={(e) => setClasses(e.target.value)}
-                        // input={<OutlinedInput label="Name" />}
-                        MenuProps={MenuProps}
-                      >
-                        <MenuItem value={userDatas?.currentClass}>
-                          {userDatas?.currentClass}{" "}
-                        </MenuItem>
-                      </Select>
-                    </FormControl>
-                    <FormControl sx={{ m: 1, width: 370 }}>
-                      <InputLabel id="demo-multiple-name-label">
-                        Term
-                      </InputLabel>
-                      <Select
-                        labelId="demo-multiple-name-label"
-                        id="demo-multiple-name"
-                        // multiple
-                        value={term}
-                        onChange={(e) => setTerm(e.target.value)}
-                        // input={<OutlinedInput label="Name" />}
-                        MenuProps={MenuProps}
-                      >
-                        <MenuItem value="1st-Term">1st Term</MenuItem>
-                        <MenuItem value="2nd-Term">2nd Term</MenuItem>
-                        <MenuItem value="3rd-Term">3rd Term</MenuItem>
-                      </Select>
-                    </FormControl>
-                    <FormControl sx={{ m: 1, width: 370 }}>
-                      <InputLabel id="demo-multiple-name-label">
-                        Year
-                      </InputLabel>
-                      <Select
-                        labelId="demo-multiple-name-label"
-                        id="demo-multiple-name"
-                        // multiple
-                        fullWidth
-                        value={year}
-                        onChange={(e) => setYear(e.target.value)}
-                        // input={<OutlinedInput label="Name" />}
-                        MenuProps={MenuProps}
-                      >
-                        <MenuItem value={currentYear}> {currentYear} </MenuItem>
-                      </Select>
-                    </FormControl>
+
                     {loading ? (
                       <CircularIndeterminate />
                     ) : (
@@ -688,4 +518,4 @@ const InputNursery1result = () => {
   );
 };
 
-export default InputNursery1result;
+export default UpdateBasic1Results;

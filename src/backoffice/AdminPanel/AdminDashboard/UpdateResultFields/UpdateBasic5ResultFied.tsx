@@ -92,7 +92,12 @@ const UpdateBasic5ResultField = () => {
     };
 
     axios
-      .put(UpdateBasic5resultApi + id, data, headers)
+      .put(
+        `https://ourworldintschool.onrender.com/api/basic5result/update/otherFields/${id}`,
+        // UpdateBasic5resultApi + id,
+        data,
+        headers
+      )
 
       .then((res) => {
         console.log(res.data);

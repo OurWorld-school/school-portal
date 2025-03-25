@@ -86,10 +86,10 @@ export default function Basic1students() {
         // Set the fetched data to the state
         setFilteredData(
           data
-            .sort((a: any, b: any) => b.TotalAverage - a.TotalAverage)
+            .sort((a: any, b: any) => b.firstName - a.firstName)
             .filter(
               (item: any) =>
-                item.currentClass === selectedClass ||
+                // item.currentClass === selectedClass ||
                 item.currentClass === "Basic-1"
             )
         );
