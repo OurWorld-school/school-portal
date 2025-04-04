@@ -273,7 +273,7 @@ const InputBasic2Result = () => {
 
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/basic1Result");
+          navigate("/basic2Result");
         } else {
           toast.error(res.data.error);
         }

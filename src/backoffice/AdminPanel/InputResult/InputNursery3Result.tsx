@@ -279,7 +279,7 @@ const InputNursery3Result = () => {
 
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/basic1Result");
+          navigate("/nusery3Result");
         } else {
           toast.error(res.data.error);
         }

@@ -39,7 +39,7 @@ function UserProfileScreen() {
 
   const [phoneNumber, setPhoneNumber] = useState("");
   const [schoolRegNumber, setSchoolRegNumber] = useState("");
-  const [contactAdress, setContAdress] = useState("");
+  const [contactAdress, setContactAdress] = useState("");
   const [currentClass, setCurrentClass] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("Student");
@@ -59,6 +59,12 @@ function UserProfileScreen() {
       console.log(data);
       // const foundData = data.find((item) => item.artist === artist);
       setUserData(data);
+      setFirstName(data?.firstName || "");
+      setContactAdress(data?.contactAdress);
+      setLastName(data?.lastName || "");
+
+      setPhoneNumber(data?.phoneNumber || "");
+      setCurrentClass(data?.currentClass || "");
     };
 
     fetchPosts();
@@ -97,11 +103,7 @@ function UserProfileScreen() {
       lastName: lastName,
       phoneNumber: phoneNumber,
       contactAdress: contactAdress,
-      schoolRegNumber: schoolRegNumber,
-      passportPhoto: passportPhoto,
 
-      userType: userType,
-      currentClass: currentClass,
       password: password,
       confirmPassword: confirmPassword,
     };
@@ -124,7 +126,7 @@ function UserProfileScreen() {
           setSchoolRegNumber("");
           setLastName("");
           setPhoneNumber("");
-          setContAdress("");
+          setContactAdress("");
           setPassportPhoto("");
           setUserType("");
 
@@ -201,7 +203,7 @@ function UserProfileScreen() {
                         variant="outlined"
                         fullWidth
                         id="firstName"
-                        value={firstName || userData?.firstName || ""}
+                        value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         label="Surname"
                         autoFocus
@@ -215,7 +217,7 @@ function UserProfileScreen() {
                         label="Last Name"
                         name="lastName"
                         autoComplete="lname"
-                        value={userData?.lastName || lastName}
+                        value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                       />
                     </Grid>
@@ -227,7 +229,7 @@ function UserProfileScreen() {
                         label="School Reg Number"
                         name=""
                         autoComplete="phoneNumber"
-                        value={userData?.schoolRegNumber || schoolRegNumber}
+                        value={userData?.schoolRegNumber}
                         onChange={(e) => setSchoolRegNumber(e.target.value)}
                       />
                     </Grid>
@@ -255,15 +257,9 @@ function UserProfileScreen() {
                           onChange={(e) => setCurrentClass(e.target.value)}
                           // input={<OutlinedInput label="Name" />}
                         >
-                          <MenuItem value="Pre-Nursery">Pre-Nursery</MenuItem>
-                          <MenuItem value="Nursery-1">Nursery-1</MenuItem>
-                          <MenuItem value="Nursery-2">Nursery-2</MenuItem>
-                          <MenuItem value="Nursery-3">Nursery-3</MenuItem>
-                          <MenuItem value="Basic-1">Basic-1</MenuItem>
-                          <MenuItem value="Basic-2">Basic-2</MenuItem>
-                          <MenuItem value="Basic-3">Basic-3</MenuItem>
-                          <MenuItem value="Basic-4">Basic-4</MenuItem>
-                          <MenuItem value="Basic-5">Basic-5</MenuItem>
+                          <MenuItem value={currentClass}>
+                            {currentClass}{" "}
+                          </MenuItem>
                         </Select>
                       </FormControl>
                     </Grid>
@@ -275,7 +271,7 @@ function UserProfileScreen() {
                         label="Contact Phone Number"
                         name="phoneNumber"
                         autoComplete="phoneNumber"
-                        value={userData?.phoneNumber || phoneNumber}
+                        value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
                       />
                     </Grid>
@@ -287,8 +283,8 @@ function UserProfileScreen() {
                         label="Contact Adress"
                         name="contact adress"
                         autoComplete="contact adress"
-                        value={userData?.contactAdress || contactAdress}
-                        onChange={(e) => setContAdress(e.target.value)}
+                        value={contactAdress}
+                        onChange={(e) => setContactAdress(e.target.value)}
                       />
                     </Grid>
 
@@ -340,7 +336,7 @@ function UserProfileScreen() {
                         </InputLabel>
                         <OutlinedInput
                           id="outlined-adornment-password"
-                          type={showPassword ? "text" : "password"}
+                          // type={showPassword ? "text" : "password"}
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
                           fullWidth

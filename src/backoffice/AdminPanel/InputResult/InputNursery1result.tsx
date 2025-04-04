@@ -268,7 +268,7 @@ const InputNursery1result = () => {
 
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/basic1Result");
+          navigate("/nusery1Result");
         } else {
           toast.error(res.data.error);
         }

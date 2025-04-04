@@ -278,7 +278,7 @@ const InputBasic3Result = () => {
 
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/basic1Result");
+          navigate("/basic3Result");
         } else {
           toast.error(res.data.error);
         }

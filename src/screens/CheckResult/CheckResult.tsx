@@ -152,7 +152,7 @@ const CheckResult = () => {
                     <MenuItem value="Basic3-result">Basic 3</MenuItem>
                     <MenuItem value="Basic4-result">Basic 4</MenuItem>
                     <MenuItem value="Basic5-result">Basic 5</MenuItem>
-                    <MenuItem value="Basic6-result">Basic 6</MenuItem>
+                    {/* <MenuItem value="Basic6-result">Basic 6</MenuItem> */}
                   </Select>
                 </FormControl>
               </div>
