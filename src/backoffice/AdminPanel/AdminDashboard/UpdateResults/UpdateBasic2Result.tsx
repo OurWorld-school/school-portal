@@ -209,6 +209,7 @@ const UpdateBasic2Result = () => {
 
     axios
       .put(
+        // `https://ourworldintschool.onrender.com/api/basic2result/update/${id}`,
         UpdateBasic2resultApi + id,
         resultData,
         // data,

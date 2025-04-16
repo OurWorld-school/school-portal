@@ -119,7 +119,7 @@ const UpdateNursery1ResultField = () => {
           setNumberInClass(Number);
           console.log(res.data);
           toast.success("post sucessful");
-          navigate("/nursery1Result");
+          navigate("/nusery1Result");
         } else {
           toast.error(res.data.error);
         }

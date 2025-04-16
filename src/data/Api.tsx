@@ -82,7 +82,7 @@ export const UpdateBasic5resultApi =
 export const UpdateBasic4resultApi =
   "https://ourworldintschool.onrender.com/api/basic4result/update/";
 export const UpdateBasic3resultApi =
-  "https://ourworldintschool.onrender.com/api/basic4result/update/";
+  "https://ourworldintschool.onrender.com/api/basic3result/update/";
 export const UpdateBasic2resultApi =
   "https://ourworldintschool.onrender.com/api/basic2result/update/";
 
