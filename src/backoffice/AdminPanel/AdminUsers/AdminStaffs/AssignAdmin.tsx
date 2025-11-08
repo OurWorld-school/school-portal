@@ -24,7 +24,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Grid from "@material-ui/core/Grid";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-import AdminLayout from "../../AdminLayout";
+import AdminLayout from "../../../../admin/AdminDashboard/AdminLayout";
 import {
   AssignUserAdminApi,
   AssignUserRolesApi,

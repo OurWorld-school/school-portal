@@ -519,18 +519,7 @@ export const AdminUserNursery1Commulative = () => {
                         </div>
                       ))}
                     </td>
-                    <td>
-                      {" "}
-                      {viewResult?.Writing?.map((item) => (
-                        <div key={item._id}>
-                          {item?.total2ndTermScore === 0 ? (
-                            <></>
-                          ) : (
-                            <>{item?.total2ndTermScore}</>
-                          )}
-                        </div>
-                      ))}
-                    </td>
+
                     <td>
                       {" "}
                       {viewResult?.Writing?.map((item) => (

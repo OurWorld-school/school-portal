@@ -7,13 +7,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import AdminLayout from "../AdminLayout";
+
 import axios from "axios";
 import { UserApi } from "../../../data/Api";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Button from "@mui/material/Button";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 import { Container } from "react-bootstrap";
+import AdminLayout from "../../../admin/AdminDashboard/AdminLayout";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -119,7 +120,7 @@ export default function AdminUsers() {
                     {row?.lastName}
                   </StyledTableCell>
                   <StyledTableCell align="right">
-                    {row?.currentClass}
+                    {row?.currentClass?.name?.replace(/_/g, " ")}
                   </StyledTableCell>
                   <StyledTableCell align="right">
                     {row?.schoolRegNumber}

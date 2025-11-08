@@ -15,7 +15,8 @@ import Button from "@mui/material/Button";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { UserApi } from "../../../../data/Api";
-import AdminLayout from "../../AdminLayout";
+import AdminLayout from "../../../../admin/AdminDashboard/AdminLayout";
+// import AdminLayout from "../../AdminLayout";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {

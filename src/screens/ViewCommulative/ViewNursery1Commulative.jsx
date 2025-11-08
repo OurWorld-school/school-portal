@@ -530,7 +530,7 @@ export const ViewNursery1Commulative = React.forwardRef((props, ref) => {
                         </div>
                       ))}
                     </td>
-                    <td>
+                    {/* <td>
                       {" "}
                       {viewResult?.Writing?.map((item) => (
                         <div key={item._id}>
@@ -541,7 +541,7 @@ export const ViewNursery1Commulative = React.forwardRef((props, ref) => {
                           )}
                         </div>
                       ))}
-                    </td>
+                    </td> */}
                     <td>
                       {" "}
                       {viewResult?.Writing?.map((item) => (

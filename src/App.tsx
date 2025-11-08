@@ -79,7 +79,7 @@ import UpdateStudentClass from "./backoffice/AdminPanel/AdminDashboard/UpdateStu
 import AssignRoles from "./backoffice/AdminPanel/AdminUsers/AdminStaffs/AssignRoles";
 import AssignAdmin from "./backoffice/AdminPanel/AdminUsers/AdminStaffs/AssignAdmin";
 import StaffLogin from "./screens/LoginScreen/StaffLogin";
-import AdminScratchCard from "./backoffice/AdminPanel/AdminDashboard/ScratchCard/AdminScratchCard";
+
 import ScratchCardView from "./backoffice/AdminPanel/AdminDashboard/ScratchCard/ScratchCardView";
 import AdminUserCreche from "./backoffice/AdminPanel/AdminUsers/StudentsByClasses/AdminUserCreche";
 import ResetPassword from "./screens/ResetPssword Screen/ResetPassword";
@@ -158,6 +158,38 @@ import { ViewBasic5Commulative } from "./screens/ViewCommulative/ViewBasic5Commu
 import CreateClasses from "./backoffice/AdminPanel/AdminClasses/CreateClasses/CreateClasses";
 import GetClasses from "./backoffice/AdminPanel/AdminClasses/GetClasses/GetClasses";
 import UpdateClasses from "./backoffice/AdminPanel/AdminClasses/UpdateClasses/UpdateClass";
+import UpdateBasic1CumulativeResult from "./backoffice/AdminPanel/UpdateCommulativeResult/UpdateBasic1Commulative";
+import AdminDashboard from "./admin/AdminDashboard/AdminDashboard";
+import AdminViewStudents from "./admin/AdminStudents/AdminViewStudents";
+import AdminCreateClass from "./admin/AdminClasses/AdminCreateClass";
+import AdminViewClasses from "./admin/AdminClasses/AdminViewClasses";
+import RegisterStudent from "./admin/AdminStudents/RegisterStudent";
+import AdminCreateSubject from "./admin/AdminSubjects/AdminCreateSubject";
+import UpdateSubjects from "./admin/AdminSubjects/UpdateSubjects";
+import AdminSubjectScore from "./admin/AdminSubjectScore/AdminSubjectScore";
+import AdminViewAllStudents from "./admin/AdminStudents/ViewAllStudents";
+import UpdateClass from "./admin/AdminClasses/UpdateClass";
+import AdminUpdateStudentClass from "./admin/AdminStudents/AdminUpdateStudentClass";
+import AdminViewSubjects from "./admin/AdminSubjects/AdminViewSubjects";
+import AdminViewDirectorsRemark from "./admin/AdminDirectorsRemark/AdminViewDirectorsRemark";
+import AdminCreateMark from "./admin/AdminCutOffMark/AdminCreateMark";
+import AdminCutOffMark from "./admin/AdminCutOffMark/AdminCutOffMark";
+import AdminViewGrades from "./admin/AdminGrade/AdminViewGrade";
+import AdminCreateGrade from "./admin/AdminGrade/AdminCreateGrade";
+import UpdateCutOffMark from "./admin/AdminCutOffMark/UpdateCutOffMark";
+import AdminUpdateGrade from "./admin/AdminGrade/UpdateGrade";
+import AdminDirectorsRemark from "./admin/AdminDirectorsRemark/AdminDirectorsRemark";
+import UpdateAdminDirectorsRemark from "./admin/AdminDirectorsRemark/UpdateDirectorsRemark";
+import StudentSubjectScores from "./admin/AdminSubjectScore/StudentSubjectScores";
+import AdminViewSelectedScores from "./admin/AdminSubjectScore/AdminViewSelectedScores";
+import UpdateSubjectScores from "./admin/AdminSubjectScore/UpdateSubjectScores";
+import AdminScratchCard from "./admin/ScratchCard/AdminScratchCard";
+import AdminCreateResult from "./admin/AdminResult/AdminCreateResult";
+import CreateStudentResult from "./admin/AdminResult/CreateStudentResult";
+import AdminViewResult from "./admin/AdminResult/AdminViewResult";
+import AdminStudentResult from "./admin/AdminStudentResult/AdminStudentResult";
+import UpdateResult from "./admin/AdminResult/UpdateResult";
+import AdminUpdateSchoolProfile from "./admin/AdminSchool/AdminUpdateSchoolProfile";
 
 function App() {
   const { pathname } = useLocation();
@@ -184,6 +216,69 @@ function App() {
         <Route path="/online-result" element={<ScratchCard />} />
         <Route path="/admission-portal" element={<AdmissionPortal />} />
         <Route path="/Admin" element={<AdminUsers />} />
+        {/* <Route path="/Admin" element={<AdminDashboard />} /> */}
+        <Route path="/view-student" element={<AdminViewStudents />} />
+        <Route path="/all-students" element={<AdminViewAllStudents />} />
+        <Route path="/register-student" element={<RegisterStudent />} />
+        <Route path="/create-class" element={<AdminCreateClass />} />
+        <Route
+          path="/updateuserclassby-admin/:id"
+          element={<AdminUpdateStudentClass />}
+        />
+        <Route path="/view-class" element={<AdminViewClasses />} />
+        <Route path="/update-class/:id" element={<UpdateClass />} />
+        <Route path="/create-subject" element={<AdminCreateSubject />} />
+        <Route path="/view-subjects" element={<AdminViewSubjects />} />
+        <Route path="/update-subject/:id" element={<UpdateSubjects />} />
+        <Route path="/subject-score" element={<AdminSubjectScore />} />
+        <Route path="/create-grade" element={<AdminCreateGrade />} />
+        <Route path="/view-grade" element={<AdminViewGrades />} />
+        <Route path="/view-marks" element={<AdminCutOffMark />} />
+        <Route path="/create-marks" element={<AdminCreateMark />} />
+        <Route path="/update-cutoffmark/:id" element={<UpdateCutOffMark />} />
+        <Route path="/update-grade/:id" element={<AdminUpdateGrade />} />
+        <Route
+          path="/create-result-remark"
+          element={<AdminDirectorsRemark />}
+        />
+        <Route
+          path="/view-directors-remark"
+          element={<AdminViewDirectorsRemark />}
+        />
+        <Route
+          path="/update-directors-remark/:id"
+          element={<UpdateAdminDirectorsRemark />}
+        />
+        <Route
+          path="/student-subject-score/:id/:selectedClass/:selectedSchool"
+          element={<StudentSubjectScores />}
+        />
+        <Route
+          path="/view-selected-subject-marks"
+          element={<AdminViewSelectedScores />}
+        />
+        <Route
+          path="/view-subject-marks"
+          element={<AdminViewSelectedScores />}
+        />
+        <Route
+          path="/update-subject-scores/:id"
+          element={<UpdateSubjectScores />}
+        />
+        <Route path="/Admin-view-scratchCard" element={<AdminScratchCard />} />
+        <Route path="/create-result" element={<AdminCreateResult />} />
+        <Route
+          path="/student-result-create/:id/:selectedClass/:selectedSchool"
+          element={<CreateStudentResult />}
+        />
+        <Route path="/viewResult" element={<AdminViewResult />} />
+        <Route
+          path="/view-student-result/:id"
+          element={<AdminStudentResult />}
+        />
+        <Route path="/update-student-result/:id" element={<UpdateResult />} />
+        <Route path="/updateSchool/" element={<AdminUpdateSchoolProfile />} />
+        {/* ///// */}
         <Route path="/pre-nursery" element={<PreNurserystudents />} />
         <Route path="/nusery1" element={<Nursery1students />} />
         <Route path="/nusery2" element={<Nursery2students />} />
@@ -401,7 +496,6 @@ function App() {
         />
         {/* Assign User Admin */}
         {/* scratch Cards */}
-        <Route path="/Admin-view-scratchCard" element={<AdminScratchCard />} />
         <Route path="/scratchcard" element={<ScratchCardView />} />
         {/* Scratch card */}
         {/* Update result field by admin */}
@@ -632,6 +726,11 @@ function App() {
         <Route
           path="/my-results-basic5Commulative/:selectedYear/:userId/:selectedTerm"
           element={<ViewBasic5Commulative />}
+        />
+        {/* ////update basic1result */}
+        <Route
+          path="/view-basic1-student-commulative-update/:id"
+          element={<UpdateBasic1CumulativeResult />}
         />
       </Routes>
       {/* <Footer /> */}

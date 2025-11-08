@@ -21,6 +21,7 @@ import {
   Basic3resultApi,
   Basic4resultApi,
   Basic5resultApi,
+  createClassApi,
   DeActivateBasic1resultApi,
   DeActivateBasic3resultApi,
   DeActivateBasic4resultApi,
@@ -54,6 +55,7 @@ const PreNurseryViewCommulative: React.FC = () => {
   const [selectedTerm, setSelectedTerm] = React.useState("");
   const [filteredresultData, setFilteredResultData] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
+  const [selectedClass, setSelectedClass] = React.useState("");
   const [loader, setLoader] = React.useState(false);
   const [message, setMessage] = React.useState<{
     type: "success" | "error";
@@ -61,9 +63,19 @@ const PreNurseryViewCommulative: React.FC = () => {
   } | null>(null);
   const [showSuccess, setShowSuccess] = React.useState(false);
   const [showError, setShowError] = React.useState(false);
-
+  const [viewData, setViewData] = React.useState([]);
   // State to store the API response
   const [apiData, setApiData] = React.useState<any>([]);
+  React.useEffect(() => {
+    const fetchPosts = async () => {
+      const { data } = await axios.get(createClassApi);
+      console.log(data);
+
+      setViewData(data);
+    };
+
+    fetchPosts();
+  }, []);
 
   // Function to handle the select input change
   const handleSelectChange = (e: any) => {
@@ -71,6 +83,9 @@ const PreNurseryViewCommulative: React.FC = () => {
   };
   const handleSelectTermChange = (e: any) => {
     setSelectedTerm(e.target.value);
+  };
+  const handleSelectClassChange = (e: any) => {
+    setSelectedClass(e.target.value);
   };
 
   const [initialFetch, setInitialFetch] = React.useState(true);
@@ -122,7 +137,7 @@ const PreNurseryViewCommulative: React.FC = () => {
     // Retrieve selectedYear and selectedTerm from storage
     const storedYear = localStorage.getItem("selectedYear");
     const storedTerm = localStorage.getItem("selectedTerm");
-
+    const storedClass = localStorage.getItem("selectedClass");
     if (storedYear) {
       setSelectedYear(storedYear);
     }
@@ -130,13 +145,36 @@ const PreNurseryViewCommulative: React.FC = () => {
     if (storedTerm) {
       setSelectedTerm(storedTerm);
     }
+    if (storedClass) {
+      setSelectedClass(storedClass);
+    }
   }, []);
 
   React.useEffect(() => {
     // Save selectedYear and selectedTerm to storage
     localStorage.setItem("selectedYear", selectedYear);
     localStorage.setItem("selectedTerm", selectedTerm);
-  }, [selectedYear, selectedTerm]);
+    localStorage.setItem("selectedClass", selectedClass);
+  }, [selectedYear, selectedTerm, selectedClass]);
+  // React.useEffect(() => {
+  //   // Retrieve selectedYear and selectedTerm from storage
+  //   const storedYear = localStorage.getItem("selectedYear");
+  //   const storedTerm = localStorage.getItem("selectedTerm");
+
+  //   if (storedYear) {
+  //     setSelectedYear(storedYear);
+  //   }
+
+  //   if (storedTerm) {
+  //     setSelectedTerm(storedTerm);
+  //   }
+  // }, []);
+
+  // React.useEffect(() => {
+  //   // Save selectedYear and selectedTerm to storage
+  //   localStorage.setItem("selectedYear", selectedYear);
+  //   localStorage.setItem("selectedTerm", selectedTerm);
+  // }, [selectedYear, selectedTerm]);
   const [show, setShow] = React.useState(false);
 
   const [Position, setPosition] = React.useState("");
@@ -272,6 +310,16 @@ const PreNurseryViewCommulative: React.FC = () => {
             <option value="">Select Result Term</option>
 
             <option value="3rd-Term">3rd Term</option>
+
+            {/* Add more terms as needed */}
+          </select>
+          <select value={selectedClass} onChange={handleSelectClassChange}>
+            <option value="">Select Class</option>
+            {viewData?.map((item: any, index: number) => (
+              <option key={index} value={item.name}>
+                {item.name}
+              </option>
+            ))}
 
             {/* Add more terms as needed */}
           </select>

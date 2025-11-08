@@ -828,8 +828,8 @@ const InputPreNurseryCommulative = () => {
       });
   };
   const [subjectMarks, setSubjectMarks] = useState<any>([]);
-  const [startYear, setStartYear] = useState<number>(2023);
-  const [endYear, setEndYear] = useState<number>(2024);
+  const [startYear, setStartYear] = useState<number>(2024);
+  const [endYear, setEndYear] = useState<number>(2025);
   const [startTerm, setStartTerm] = useState<string>("1st-Term");
   const [endTerm, setEndTerm] = useState<string>("3rd-Term");
   console.log(subjectMarks);
@@ -839,10 +839,23 @@ const InputPreNurseryCommulative = () => {
         // Calculate total scores for each term
         // setLoader(false);
 
+        // setSubjectMarks(
+        //   response.data.filter(
+        //     (item: any) =>
+        //       // item?.classes === "Pre-Nursery" &&
+        //       item.year >= startYear &&
+        //       item.year <= endYear &&
+        //       item?.user?._id === id
+        //   )
+        // );
         setSubjectMarks(
           response.data.filter(
             (item: any) =>
-              item?.classes === "Pre-Nursery" &&
+              [
+                "Pre-Nursery",
+                "Pre-Nursery-Unity",
+                "Pre-Nursery-Success",
+              ].includes(item?.classes) &&
               item.year >= startYear &&
               item.year <= endYear &&
               item?.user?._id === id
@@ -864,6 +877,9 @@ const InputPreNurseryCommulative = () => {
     calculatePracticalLifeDataTotal();
     calculateRhymesDataTotal();
     calculateSensorialActivityDataTotal();
+    calculateResultTotalScore();
+    calculateResultTotalScore();
+    calculateTotalGrade();
   }, [subjectMarks]);
   return (
     <AdminLayout>
@@ -1031,7 +1047,7 @@ const InputPreNurseryCommulative = () => {
                                       required
                                       rows={4}
                                       id={`outlined-required-${index}`}
-                                      label="1st Term Total "
+                                      label="3rd Term Total"
                                       // label={`Term ${index + 1} TotalScore`}
                                       type="number"
                                       name={`test-${index}`}
@@ -1234,7 +1250,7 @@ const InputPreNurseryCommulative = () => {
                                       required
                                       rows={4}
                                       id={`outlined-required-${index}`}
-                                      label="1st Term Total "
+                                      label="3rd Term Total"
                                       // label={`Term ${index + 1} TotalScore`}
                                       type="number"
                                       name={`test-${index}`}
@@ -1437,7 +1453,7 @@ const InputPreNurseryCommulative = () => {
                                       required
                                       rows={4}
                                       id={`outlined-required-${index}`}
-                                      label="1st Term Total "
+                                      label="3rd Term Total"
                                       // label={`Term ${index + 1} TotalScore`}
                                       type="number"
                                       name={`test-${index}`}
@@ -1645,7 +1661,7 @@ const InputPreNurseryCommulative = () => {
                                         required
                                         rows={4}
                                         id={`outlined-required-${index}`}
-                                        label="1st Term Total "
+                                        label="3rd Term Total"
                                         // label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}
@@ -1853,7 +1869,7 @@ const InputPreNurseryCommulative = () => {
                                         required
                                         rows={4}
                                         id={`outlined-required-${index}`}
-                                        label="1st Term Total "
+                                        label="3rd Term Total"
                                         // label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}
@@ -2068,7 +2084,7 @@ const InputPreNurseryCommulative = () => {
                                         required
                                         rows={4}
                                         id={`outlined-required-${index}`}
-                                        label="1st Term Total "
+                                        label="3rd Term Total"
                                         // label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}
@@ -2259,7 +2275,7 @@ const InputPreNurseryCommulative = () => {
                                       required
                                       rows={4}
                                       id={`outlined-required-${index}`}
-                                      label="1st Term Total "
+                                      label="3rd Term Total"
                                       // label={`Term ${index + 1} TotalScore`}
                                       type="number"
                                       name={`test-${index}`}
@@ -2464,7 +2480,7 @@ const InputPreNurseryCommulative = () => {
                                         required
                                         rows={4}
                                         id={`outlined-required-${index}`}
-                                        label="1st Term Total "
+                                        label="3rd Term Total"
                                         // label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}
@@ -2727,7 +2743,10 @@ const InputPreNurseryCommulative = () => {
                         // input={<OutlinedInput label="Name" />}
                         MenuProps={MenuProps}
                       >
-                        <MenuItem value="Pre-Nursery">Pre Nursery</MenuItem>
+                        <MenuItem value={userDatas?.currentClass}>
+                          {" "}
+                          {userDatas?.currentClass}{" "}
+                        </MenuItem>
                       </Select>
                     </FormControl>
                     <FormControl sx={{ m: 1, width: 370 }}>

@@ -1310,8 +1310,8 @@ const InputBasic5Commulative = () => {
   //   setNumeracyData(NumeracyData.test + NumeracyData.exam);
   // };
   const [subjectMarks, setSubjectMarks] = useState<any>([]);
-  const [startYear, setStartYear] = useState<number>(2023);
-  const [endYear, setEndYear] = useState<number>(2024);
+  const [startYear, setStartYear] = useState<number>(2024);
+  const [endYear, setEndYear] = useState<number>(2025);
   const [startTerm, setStartTerm] = useState<string>("1st-Term");
   const [endTerm, setEndTerm] = useState<string>("3rd-Term");
   console.log(subjectMarks);
@@ -1522,7 +1522,7 @@ const InputBasic5Commulative = () => {
                                       required
                                       rows={4}
                                       id={`outlined-required-${index}`}
-                                      label="1st Term Total "
+                                      label="3rd Term Total "
                                       // label={`Term ${index + 1} TotalScore`}
                                       type="number"
                                       name={`test-${index}`}
@@ -1730,7 +1730,7 @@ const InputBasic5Commulative = () => {
                                         required
                                         rows={4}
                                         id={`outlined-required-${index}`}
-                                        label="1st Term Total "
+                                        label="3rd Term Total "
                                         // label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}
@@ -1939,7 +1939,7 @@ const InputBasic5Commulative = () => {
                                         required
                                         rows={4}
                                         id={`outlined-required-${index}`}
-                                        label="1st Term Total "
+                                        label="3rd Term Total "
                                         // label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}
@@ -2152,7 +2152,7 @@ const InputBasic5Commulative = () => {
                                         required
                                         rows={4}
                                         id={`outlined-required-${index}`}
-                                        label="1st Term Total "
+                                        label="3rd Term Total "
                                         // label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}
@@ -2366,7 +2366,7 @@ const InputBasic5Commulative = () => {
                                         required
                                         rows={4}
                                         id={`outlined-required-${index}`}
-                                        label="1st Term Total "
+                                        label="3rd Term Total "
                                         // label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}
@@ -2780,7 +2780,7 @@ const InputBasic5Commulative = () => {
                                       required
                                       rows={4}
                                       id={`outlined-required-${index}`}
-                                      label="1st Term Total "
+                                      label="3rd Term Total "
                                       // label={`Term ${index + 1} TotalScore`}
                                       type="number"
                                       name={`test-${index}`}
@@ -2976,7 +2976,7 @@ const InputBasic5Commulative = () => {
                                       required
                                       rows={4}
                                       id={`outlined-required-${index}`}
-                                      label="1st Term Total "
+                                      label="3rd Term Total "
                                       // label={`Term ${index + 1} TotalScore`}
                                       type="number"
                                       name={`test-${index}`}
@@ -3184,7 +3184,7 @@ const InputBasic5Commulative = () => {
                                         required
                                         rows={4}
                                         id={`outlined-required-${index}`}
-                                        label="1st Term Total "
+                                        label="3rd Term Total "
                                         // label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}
@@ -3387,7 +3387,7 @@ const InputBasic5Commulative = () => {
                                       required
                                       rows={4}
                                       id={`outlined-required-${index}`}
-                                      label="1st Term Total "
+                                      label="3rd Term Total "
                                       // label={`Term ${index + 1} TotalScore`}
                                       type="number"
                                       name={`test-${index}`}
@@ -3583,7 +3583,7 @@ const InputBasic5Commulative = () => {
                                       required
                                       rows={4}
                                       id={`outlined-required-${index}`}
-                                      label="1st Term Total "
+                                      label="3rd Term Total"
                                       // label={`Term ${index + 1} TotalScore`}
                                       type="number"
                                       name={`test-${index}`}
@@ -3785,7 +3785,7 @@ const InputBasic5Commulative = () => {
                                       required
                                       rows={4}
                                       id={`outlined-required-${index}`}
-                                      label="1st Term Total "
+                                      label="3rd Term Total"
                                       // label={`Term ${index + 1} TotalScore`}
                                       type="number"
                                       name={`test-${index}`}
@@ -3981,7 +3981,7 @@ const InputBasic5Commulative = () => {
                                       required
                                       rows={4}
                                       id={`outlined-required-${index}`}
-                                      label="1st Term Total "
+                                      label="3rd Term Total"
                                       // label={`Term ${index + 1} TotalScore`}
                                       type="number"
                                       name={`test-${index}`}
@@ -4016,7 +4016,7 @@ const InputBasic5Commulative = () => {
                             required
                             rows={4}
                             id="outlined-required"
-                            label="Total Score"
+                            label="3rd Term Total"
                             type="number"
                             name="totalScore"
                             value={FrenchData.totalScore}
@@ -4187,7 +4187,7 @@ const InputBasic5Commulative = () => {
                                         required
                                         rows={4}
                                         id={`outlined-required-${index}`}
-                                        label="1st Term Total "
+                                        label="3rd Term Total"
                                         // label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}

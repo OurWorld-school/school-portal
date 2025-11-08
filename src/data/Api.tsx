@@ -1,4 +1,4 @@
-import { BaseUrl, BaseUrl2 } from "./BaseUrl";
+import { BaseUrl } from "./BaseUrl";
 
 export const registerApi =
   "https://ourworldintschool.onrender.com/api/auth/registers";
@@ -185,3 +185,7 @@ export const DeActivateBasic5CommulativeApi =
 
 export const DeActivateBasic6CommulativeApi =
   "https://ourworldintschool.onrender.com/api/basic6Commulative/deactivateResultEdit/";
+
+///// Update commulative result
+export const UpdateBasic1CommulativeApi =
+  "https://ourworldintschool.onrender.com/api/basic1Commulative/update";

@@ -418,7 +418,7 @@ const InputBasic1Commulative = () => {
       remark = "Very Good";
     } else if (EnglishAverage >= 50 && EnglishAverage <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (EnglishAverage >= 40 && EnglishAverage <= 49) {
       grade = "D";
       remark = "Pass";
@@ -448,7 +448,7 @@ const InputBasic1Commulative = () => {
       remark = "Very Good";
     } else if (MathsAverage >= 50 && MathsAverage <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (MathsAverage >= 40 && MathsAverage <= 49) {
       grade = "D";
       remark = "Pass";
@@ -478,7 +478,7 @@ const InputBasic1Commulative = () => {
       remark = "Very Good";
     } else if (VerbalReasoningAverage >= 50 && VerbalReasoningAverage <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (VerbalReasoningAverage >= 40 && VerbalReasoningAverage <= 49) {
       grade = "D";
       remark = "Pass";
@@ -522,7 +522,7 @@ const InputBasic1Commulative = () => {
       QuantitativeReasoningAverage <= 59
     ) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (
       QuantitativeReasoningAverage >= 40 &&
       QuantitativeReasoningAverage <= 49
@@ -563,7 +563,7 @@ const InputBasic1Commulative = () => {
       remark = "Very Good";
     } else if (HistoryAverage >= 50 && HistoryAverage <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (HistoryAverage >= 40 && HistoryAverage <= 49) {
       grade = "D";
       remark = "Pass";
@@ -593,7 +593,7 @@ const InputBasic1Commulative = () => {
       remark = "Very Good";
     } else if (NationalValuesAverage >= 50 && NationalValuesAverage <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (NationalValuesAverage >= 40 && NationalValuesAverage <= 49) {
       grade = "D";
       remark = "Pass";
@@ -623,7 +623,7 @@ const InputBasic1Commulative = () => {
       remark = "Very Good";
     } else if (CreativeArtAverage >= 50 && CreativeArtAverage <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (CreativeArtAverage >= 40 && CreativeArtAverage <= 49) {
       grade = "D";
       remark = "Pass";
@@ -653,7 +653,7 @@ const InputBasic1Commulative = () => {
       remark = "Very Good";
     } else if (PhonicsAverage >= 50 && PhonicsAverage <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (PhonicsAverage >= 40 && PhonicsAverage <= 49) {
       grade = "D";
       remark = "Pass";
@@ -683,7 +683,7 @@ const InputBasic1Commulative = () => {
       remark = "Very Good";
     } else if (HandWritingAverage >= 50 && HandWritingAverage <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (HandWritingAverage >= 40 && HandWritingAverage <= 49) {
       grade = "D";
       remark = "Pass";
@@ -713,7 +713,7 @@ const InputBasic1Commulative = () => {
       remark = "Very Good";
     } else if (BasicScienceAverage >= 50 && BasicScienceAverage <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (BasicScienceAverage >= 40 && BasicScienceAverage <= 49) {
       grade = "D";
       remark = "Pass";
@@ -743,7 +743,7 @@ const InputBasic1Commulative = () => {
       remark = "Very Good";
     } else if (FrenchAverage >= 50 && FrenchAverage <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (FrenchAverage >= 40 && FrenchAverage <= 49) {
       grade = "D";
       remark = "Pass";
@@ -773,7 +773,7 @@ const InputBasic1Commulative = () => {
       remark = "Very Good";
     } else if (CRKAverage >= 50 && CRKAverage <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (CRKAverage >= 40 && CRKAverage <= 49) {
       grade = "D";
       remark = "Pass";
@@ -803,7 +803,7 @@ const InputBasic1Commulative = () => {
       remark = "Very Good";
     } else if (PVCAverage >= 50 && PVCAverage <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (PVCAverage >= 40 && PVCAverage <= 49) {
       grade = "D";
       remark = "Pass";
@@ -833,7 +833,7 @@ const InputBasic1Commulative = () => {
       remark = "Very Good";
     } else if (IgboAverage >= 50 && IgboAverage <= 59) {
       grade = "C";
-      remark = "Good";
+      remark = "Credit";
     } else if (IgboAverage >= 40 && IgboAverage <= 49) {
       grade = "D";
       remark = "Pass";
@@ -1307,8 +1307,8 @@ const InputBasic1Commulative = () => {
   //   setNumeracyData(NumeracyData.test + NumeracyData.exam);
   // };
   const [subjectMarks, setSubjectMarks] = useState<any>([]);
-  const [startYear, setStartYear] = useState<number>(2023);
-  const [endYear, setEndYear] = useState<number>(2024);
+  const [startYear, setStartYear] = useState<number>(2024);
+  const [endYear, setEndYear] = useState<number>(2025);
   const [startTerm, setStartTerm] = useState<string>("1st-Term");
   const [endTerm, setEndTerm] = useState<string>("3rd-Term");
   console.log(subjectMarks);
@@ -1351,6 +1351,7 @@ const InputBasic1Commulative = () => {
     calculatePVCDataTotal();
     calculateVerbalReasoningDataTotal();
     calculatePhonicsDataTotal();
+    calculateTotalGrade();
   }, [subjectMarks]);
   return (
     <AdminLayout>
@@ -1519,7 +1520,7 @@ const InputBasic1Commulative = () => {
                                       required
                                       rows={4}
                                       id={`outlined-required-${index}`}
-                                      label="1st Term Total "
+                                      label="3rd Term Total "
                                       // label={`Term ${index + 1} TotalScore`}
                                       type="number"
                                       name={`test-${index}`}
@@ -1727,7 +1728,7 @@ const InputBasic1Commulative = () => {
                                         required
                                         rows={4}
                                         id={`outlined-required-${index}`}
-                                        label="1st Term Total "
+                                        label="3rd Term Total "
                                         // label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}
@@ -1936,7 +1937,7 @@ const InputBasic1Commulative = () => {
                                         required
                                         rows={4}
                                         id={`outlined-required-${index}`}
-                                        label="1st Term Total "
+                                        label="3rd Term Total "
                                         // label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}
@@ -2149,7 +2150,7 @@ const InputBasic1Commulative = () => {
                                         required
                                         rows={4}
                                         id={`outlined-required-${index}`}
-                                        label="1st Term Total "
+                                        label="3rd Term Total "
                                         // label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}
@@ -2363,7 +2364,7 @@ const InputBasic1Commulative = () => {
                                         required
                                         rows={4}
                                         id={`outlined-required-${index}`}
-                                        label="1st Term Total "
+                                        label="3rd Term Total "
                                         // label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}
@@ -2584,7 +2585,7 @@ const InputBasic1Commulative = () => {
                                         required
                                         rows={4}
                                         id={`outlined-required-${index}`}
-                                        label="1st Term Total "
+                                        label="3rd Term Total "
                                         // label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}
@@ -2777,7 +2778,7 @@ const InputBasic1Commulative = () => {
                                       required
                                       rows={4}
                                       id={`outlined-required-${index}`}
-                                      label="1st Term Total "
+                                      label="3rd Term Total "
                                       // label={`Term ${index + 1} TotalScore`}
                                       type="number"
                                       name={`test-${index}`}
@@ -2973,7 +2974,7 @@ const InputBasic1Commulative = () => {
                                       required
                                       rows={4}
                                       id={`outlined-required-${index}`}
-                                      label="1st Term Total "
+                                      label="3rd Term Total "
                                       // label={`Term ${index + 1} TotalScore`}
                                       type="number"
                                       name={`test-${index}`}
@@ -3181,7 +3182,7 @@ const InputBasic1Commulative = () => {
                                         required
                                         rows={4}
                                         id={`outlined-required-${index}`}
-                                        label="1st Term Total "
+                                        label="3rd Term Total "
                                         // label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}
@@ -3384,7 +3385,7 @@ const InputBasic1Commulative = () => {
                                       required
                                       rows={4}
                                       id={`outlined-required-${index}`}
-                                      label="1st Term Total "
+                                      label="3rd Term Total "
                                       // label={`Term ${index + 1} TotalScore`}
                                       type="number"
                                       name={`test-${index}`}
@@ -3782,7 +3783,7 @@ const InputBasic1Commulative = () => {
                                       required
                                       rows={4}
                                       id={`outlined-required-${index}`}
-                                      label="1st Term Total "
+                                      label="3rd Term Total "
                                       // label={`Term ${index + 1} TotalScore`}
                                       type="number"
                                       name={`test-${index}`}
@@ -3978,7 +3979,7 @@ const InputBasic1Commulative = () => {
                                       required
                                       rows={4}
                                       id={`outlined-required-${index}`}
-                                      label="1st Term Total "
+                                      label="3rd Term Total "
                                       // label={`Term ${index + 1} TotalScore`}
                                       type="number"
                                       name={`test-${index}`}
@@ -4184,7 +4185,7 @@ const InputBasic1Commulative = () => {
                                         required
                                         rows={4}
                                         id={`outlined-required-${index}`}
-                                        label="1st Term Total "
+                                        label="3rd Term Total "
                                         // label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}
