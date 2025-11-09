@@ -1,2 +1,18 @@
 .table-div-subject {
 }
+
+.stamp-div {
+  width: 200px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+.stamp-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

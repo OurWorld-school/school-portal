@@ -1,3 +1,4 @@
+import { Base_Url } from "../APiData/BaseUrl";
 import { BaseUrl } from "./BaseUrl";
 
 export const registerApi =
@@ -9,9 +10,8 @@ export const deleteClassApi =
 export const updateClassApi =
   "https://ourworldintschool.onrender.com/api/Class/update/";
 
-export const loginApi = "https://ourworldintschool.onrender.com/api/auth/login";
-export const StudentloginApi =
-  "https://ourworldintschool.onrender.com/api/auth/student-login";
+export const loginApi = `${Base_Url}/api/auth/login`;
+export const StudentloginApi = `${Base_Url}/api/auth/student-login`;
 // export const PasswordResetApi =
 //   "https://ourworldintschool.onrender.com/api/auth/reset-password";
 export const PasswordResetApi =

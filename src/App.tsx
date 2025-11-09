@@ -190,6 +190,11 @@ import AdminViewResult from "./admin/AdminResult/AdminViewResult";
 import AdminStudentResult from "./admin/AdminStudentResult/AdminStudentResult";
 import UpdateResult from "./admin/AdminResult/UpdateResult";
 import AdminUpdateSchoolProfile from "./admin/AdminSchool/AdminUpdateSchoolProfile";
+import SelectResultCheck from "./CheckResultScreen/SelectResultCheck";
+import ResultChecker from "./CheckResultScreen/ResultChecker";
+import { MyResult } from "./CheckResultScreen/MyResult";
+import { MyCommutativeResult } from "./CheckResultScreen/MyCommutativeResult";
+import CommutativeResultChecker from "./CheckResultScreen/CommutativeResultChecker";
 
 function App() {
   const { pathname } = useLocation();
@@ -210,13 +215,15 @@ function App() {
         <Route path="/staff-login" element={<StaffLogin />} />
         <Route path="/admission" element={<AdmissionPortal />} />
         <Route path="/staff-registeration" element={<StaffRegisteration />} />
-        <Route path="/check-result" element={<CheckResult />} />
-        <Route path="/select-result-type" element={<SelectResultType />} />
+        {/* <Route path="/check-result" element={<CheckResult />} /> */}
         <Route path="/Nursery1-result" element={<CheckNursery1result />} />
         <Route path="/online-result" element={<ScratchCard />} />
         <Route path="/admission-portal" element={<AdmissionPortal />} />
         <Route path="/Admin" element={<AdminUsers />} />
         {/* <Route path="/Admin" element={<AdminDashboard />} /> */}
+        <Route path="/staffs" element={<AdminViewStaffs />} />
+        <Route path="/viewroles" element={<AdminViewRoles />} />
+        <Route path="/viewadmins" element={<AdminViewAdmin />} />
         <Route path="/view-student" element={<AdminViewStudents />} />
         <Route path="/all-students" element={<AdminViewAllStudents />} />
         <Route path="/register-student" element={<RegisterStudent />} />
@@ -279,6 +286,26 @@ function App() {
         <Route path="/update-student-result/:id" element={<UpdateResult />} />
         <Route path="/updateSchool/" element={<AdminUpdateSchoolProfile />} />
         {/* ///// */}
+        {/* ///////result checker */}
+        {/* <Route path="/select-result-type" element={<SelectResultType />} /> */}
+        <Route path="/check-result" element={<SelectResultCheck />} />
+        <Route path="/Result-check" element={<ResultChecker />} />
+        <Route
+          path="/my-result/:selectedSchool/:selectedClass/:userId/:selectedYear/:selectedTerm"
+          element={<MyResult />}
+        />
+        {/* <Route
+path="/my-result/:selectedSchool/:selectedClass/:userId/:selectedTerm/:selectedYear"
+element={<MyResult />}/> */}
+        <Route
+          path="/my-commutative-result/:selectedSchool/:selectedClass/:userId/:selectedYear/"
+          element={<MyCommutativeResult />}
+        />
+        <Route
+          path="/commutative-Result-check"
+          element={<CommutativeResultChecker />}
+        />
+        {/* ////reult checker */}
         <Route path="/pre-nursery" element={<PreNurserystudents />} />
         <Route path="/nusery1" element={<Nursery1students />} />
         <Route path="/nusery2" element={<Nursery2students />} />
@@ -295,9 +322,6 @@ function App() {
         <Route path="/update-class/:id" element={<UpdateClasses />} />
         {/* classes */}
         {/* ///////// Input results*/}
-        <Route path="/staffs" element={<AdminViewStaffs />} />
-        <Route path="/viewroles" element={<AdminViewRoles />} />
-        <Route path="/viewadmins" element={<AdminViewAdmin />} />
         <Route path="/pre-nurseryResult" element={<AdminPreNurseryResult />} />
         <Route path="/nusery1Result" element={<AdminNursery1Results />} />
         <Route path="/nusery2Result" element={<AdminNursery2Result />} />

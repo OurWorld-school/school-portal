@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Container } from "@material-ui/core";
 
 import Table from "react-bootstrap/Table";
-
+import "./StudentResult.css";
 import { schoolInfo } from "../../store/Info";
 import stamp from "../../assets/images/stamp.png";
 import { CutOffMarkApi, GradeApi, ResultApi } from "../../APiData/Api";
