@@ -47,6 +47,7 @@ const AdminViewSubjectScores = () => {
 
   // State to store the API response
   const [usersData, setUsersData] = React.useState<any>([]);
+  console.log("SubjectmarksData", usersData);
   const [classD, setClassD] = useState([]);
   const [schools, setSchools] = useState([]);
   // Function to handle the select input change
@@ -71,11 +72,22 @@ const AdminViewSubjectScores = () => {
         const data = await response.json();
 
         // Set the fetched data to the state
+        // setUsersData(
+        //   data?.filter(
+        //     (item: any) =>
+        //       item?.schoolName?._id === selectedSchool &&
+        //       item?.classes?._id === selectedClass &&
+        //       item?.year === selectedYear &&
+        //       item?.term === selectedTerm
+        //   )
+        // );
         setUsersData(
-          data.filter(
+          data?.filter(
             (item: any) =>
+              item?.schoolName &&
               item?.schoolName._id === selectedSchool &&
-              item?.classes._id === selectedClass &&
+              item?.classes &&
+              item?.classes?._id === selectedClass &&
               item?.year === selectedYear &&
               item?.term === selectedTerm
           )
@@ -156,8 +168,8 @@ const AdminViewSubjectScores = () => {
         .get(ClassApi)
         .then((response) => {
           setClassD(
-            response.data.filter(
-              (item: any) => item.schoolName._id === schoolInfo
+            response?.data?.filter(
+              (item: any) => item?.schoolName._id === schoolInfo
             )
           );
         })
@@ -257,7 +269,7 @@ const AdminViewSubjectScores = () => {
               {schools
                 .sort((a: any, b: any) => a.name.localeCompare(b.name))
                 .map((classy: any) => (
-                  <option key={classy._id} value={classy._id}>
+                  <option key={classy?._id} value={classy._id}>
                     {" "}
                     {classy.name.replace(/_/g, " ")}
                   </option>
@@ -277,11 +289,11 @@ const AdminViewSubjectScores = () => {
               <option value="">Select Class</option>
 
               {classD
-                .sort((a: any, b: any) => a.name.localeCompare(b.name))
-                .map((classy: any) => (
-                  <option key={classy._id} value={classy._id}>
+                ?.sort((a: any, b: any) => a.name.localeCompare(b.name))
+                ?.map((classy: any) => (
+                  <option key={classy?._id} value={classy._id}>
                     {" "}
-                    {classy.name.replace(/_/g, " ")}
+                    {classy?.name.replace(/_/g, " ")}
                   </option>
                 ))}
 

@@ -108,7 +108,7 @@ export default function AdminUpdateGrade() {
     };
 
     try {
-      const res = await axios.put(`${GradeApi}/update/${id}`, data, {
+      const res = await axios.put(`${GradeApi}update/${id}`, data, {
         headers,
       });
       setLoading(false);
