@@ -33,6 +33,7 @@ import {
   getAllSchools,
 } from "../../APiData/Api";
 import { schoolInfo } from "../../store/Info";
+import { getGradeForScore } from "../../APiData/gradeUtils";
 import { Dropdown } from "react-bootstrap";
 type GroupedSubjects = {
   [subjectName: string]: number[];
@@ -93,6 +94,7 @@ const DynamicResult: React.FC = () => {
   };
   // State to store the API response
   const [subjectMarksData, setSubjectMarksData] = React.useState<any>([]);
+  const [subjectMarks, setSubjectMarks] = useState<any>([]);
   const [classD, setClassD] = useState([]);
   const [schools, setSchools] = useState([]);
   // Function to handle the select input change
@@ -190,24 +192,32 @@ const DynamicResult: React.FC = () => {
 
   // Function to calculate the grand total
 
-  const calculateGrandTotal = () => {
+  const calculateGrandTotal = React.useCallback(() => {
     let grandTotal = 0; // Initialize grandTotal variable
     const total = subjectMarks.flatMap(
       (
         items: any // Use flatMap to flatten the array
       ) => items.subjects.map((item: any) => item.totalScore)
     );
+    if (total.length === 0) return;
     grandTotal = total.reduce((acc: number, curr: number) => acc + curr, 0); // Sum up all the scores
     setTotalScore(grandTotal); // Set the total score
 
-    ///calculate totalAverage
-    let totalAverage = grandTotal / total.length;
-    // Check if the average is greater than 0.5 and round accordingly
-    if (totalAverage > 0.5) {
-      totalAverage = Math.round(totalAverage); // Round the average
+    ///calculate totalAverage with 2 decimal places
+    const rawAverage = grandTotal / total.length;
+    const finalAvg = parseFloat(rawAverage.toFixed(2));
+    setTotalAverage(finalAvg); // Set the total average (2 decimal places)
+
+    const matched = getGradeForScore(finalAvg, grades);
+    if (matched) {
+      setSelectedGrades(matched.grade);
+      setRemark(matched.remark);
     }
-    setTotalAverage(parseFloat(totalAverage.toFixed(2))); // Set the total average
-  };
+  }, [subjectMarks, grades]);
+
+  React.useEffect(() => {
+    calculateGrandTotal();
+  }, [calculateGrandTotal]);
 
   /////handle input change
 
@@ -322,7 +332,6 @@ const DynamicResult: React.FC = () => {
         );
       });
   };
-  const [subjectMarks, setSubjectMarks] = useState<any>([]);
   const [subjectNameExtract, setSubjectNameExtract] = useState("");
 
   const [total2nd, setTotal2nd] = useState<any>(0);
@@ -382,44 +391,69 @@ const DynamicResult: React.FC = () => {
     {}
   );
   useEffect(() => {
-    const groupedSubjects = subjectMarks?.reduce((acc: any, data: any) => {
-      data.subjects.forEach((subject: any) => {
-        if (!acc[subject.subjectName]) {
-          acc[subject.subjectName] = [];
-        }
-        acc[subject.subjectName].push(subject.totalScore);
-      });
+    const grouped = subjectMarks?.reduce((acc: any, data: any) => {
+      let termIndex = -1;
+      if (/1st/i.test(data.term)) termIndex = 0;
+      else if (/2nd/i.test(data.term)) termIndex = 1;
+      else if (/3rd/i.test(data.term)) termIndex = 2;
+
+      if (termIndex !== -1) {
+        data.subjects.forEach((subject: any) => {
+          if (!acc[subject.subjectName]) {
+            acc[subject.subjectName] = [undefined, undefined, undefined];
+          }
+          acc[subject.subjectName][termIndex] = subject.totalScore;
+        });
+      }
       return acc;
-    }, {} as Record<string, number[]>);
+    }, {} as Record<string, (number | undefined)[]>);
 
     const subjectTotals: Record<string, number> = {};
     const subjectAverages: Record<string, number> = {};
+    const calculatedGrades: Record<string, string> = {};
+    const calculatedRemarks: Record<string, string> = {};
 
-    for (const subjectName in groupedSubjects) {
-      const scores = groupedSubjects[subjectName];
-      const total = scores.reduce((sum: any, score: any) => sum + score, 0);
-      const average = total / scores.length;
+    for (const subjectName in grouped) {
+      const scores = grouped[subjectName];
+      const validScores = scores.filter((score: any) => score !== undefined) as number[];
+      const total = validScores.reduce((sum: any, score: any) => sum + score, 0);
+      // Keep 2 decimal places — do NOT round to whole number
+      const average = parseFloat(
+        (validScores.length > 0 ? total / validScores.length : 0).toFixed(2)
+      );
 
       subjectTotals[subjectName] = total;
       subjectAverages[subjectName] = average;
+
+      const matched = getGradeForScore(average, grades);
+      if (matched) {
+        calculatedGrades[subjectName] = matched.grade;
+        calculatedRemarks[subjectName] = matched.remark;
+      }
     }
-    // if (subjectAverages > 0.5) {
-    //   subjectAverages = Math.round(subjectAverages);
-    // }
     setSubjectNameGrandTotal(subjectTotals);
     setSubjectNameGrandAverage(subjectAverages);
-  }, [subjectMarks]);
-  // // Process the data to group by subject name
+    setSubjectGradeChange((prev: any) => ({ ...prev, ...calculatedGrades }));
+    setSubjectRemarkChange((prev: any) => ({ ...prev, ...calculatedRemarks }));
+  }, [subjectMarks, grades]);
+
+  // Process the data to group by subject name
   const groupedSubjects = subjectMarks?.reduce((acc: any, data: any) => {
-    data.subjects.forEach((subject: any) => {
-      if (!acc[subject.subjectName]) {
-        acc[subject.subjectName] = [];
-      }
-      acc[subject.subjectName].push(subject.totalScore);
-      // console.log(acc);
-    });
+    let termIndex = -1;
+    if (/1st/i.test(data.term)) termIndex = 0;
+    else if (/2nd/i.test(data.term)) termIndex = 1;
+    else if (/3rd/i.test(data.term)) termIndex = 2;
+
+    if (termIndex !== -1) {
+      data.subjects.forEach((subject: any) => {
+        if (!acc[subject.subjectName]) {
+          acc[subject.subjectName] = [undefined, undefined, undefined];
+        }
+        acc[subject.subjectName][termIndex] = subject.totalScore;
+      });
+    }
     return acc;
-  }, {} as Record<string, number[]>);
+  }, {} as Record<string, (number | undefined)[]>);
 
   return (
     <>
@@ -428,7 +462,15 @@ const DynamicResult: React.FC = () => {
           <h4 className="text-center">Select Result *Year*</h4>
           <p className="text-center">Before you proceed</p>
 
-          <div className="input-box">
+          <div
+            className="input-box"
+            style={{
+              border: "1px solid rgb(229, 50, 56) ",
+              borderRadius: "6px",
+              padding: "4px",
+              marginBottom: "16px",
+            }}
+          >
             <label>Select 1st Term Result Year</label>
             <select value={selectedYear.year1} onChange={handleYearChange}>
               <option value="">Select Year</option>
@@ -442,7 +484,15 @@ const DynamicResult: React.FC = () => {
               {/* Add more terms as needed */}
             </select>
           </div>
-          <div className="input-box">
+          <div
+            className="input-box"
+            style={{
+              border: "1px solid rgb(229, 50, 56) ",
+              borderRadius: "6px",
+              padding: "4px",
+              marginBottom: "16px",
+            }}
+          >
             <label>Select 2nd Term Result Year</label>
             <select value={selectedYear.year2} onChange={handleYearChange}>
               <option value="">Select Year</option>
@@ -456,7 +506,15 @@ const DynamicResult: React.FC = () => {
               {/* Add more terms as needed */}
             </select>
           </div>
-          <div className="input-box">
+          <div
+            className="input-box"
+            style={{
+              border: "1px solid rgb(229, 50, 56) ",
+              borderRadius: "6px",
+              padding: "4px",
+              marginBottom: "16px",
+            }}
+          >
             <label>Select 1st term Result Term</label>
             <select value={selectedTerm.term1} onChange={handleTermChange}>
               <option value="1st_Term">1st Term</option>
@@ -464,7 +522,15 @@ const DynamicResult: React.FC = () => {
               {/* Add more terms as needed */}
             </select>
           </div>
-          <div className="input-box">
+          <div
+            className="input-box"
+            style={{
+              border: "1px solid rgb(229, 50, 56) ",
+              borderRadius: "6px",
+              padding: "4px",
+              marginBottom: "16px",
+            }}
+          >
             <label>Select 2nd term Result Term</label>
             <select value={selectedTerm.term2} onChange={handleTermChange}>
               <option value="2nd"> 2023</option>
@@ -476,7 +542,15 @@ const DynamicResult: React.FC = () => {
               {/* Add more terms as needed */}
             </select>
           </div>
-          <div className="input-box">
+          <div
+            className="input-box"
+            style={{
+              border: "1px solid rgb(229, 50, 56) ",
+              borderRadius: "6px",
+              padding: "4px",
+              marginBottom: "16px",
+            }}
+          >
             <label>Select 3rd term Result Term</label>
             <select value={selectedTerm.term3} onChange={handleTermChange}>
               <option value="">Select Year</option>
@@ -600,7 +674,7 @@ const DynamicResult: React.FC = () => {
                                   marginTop: "15px",
                                   color: "black",
                                 }}
-                                //   className="result-input-elect-nursery1"
+                              //   className="result-input-elect-nursery1"
                               >
                                 {subjectName}
                               </Dropdown.Toggle>
@@ -619,7 +693,7 @@ const DynamicResult: React.FC = () => {
                                     name="subjectName"
                                     type="text"
                                     value={subjectName}
-                                    // onChange={handleChangeSubjectName}
+                                  // onChange={handleChangeSubjectName}
                                   />
                                 </div>
                                 {groupedSubjects[subjectName]?.map(
@@ -639,20 +713,20 @@ const DynamicResult: React.FC = () => {
                                         label={`Term ${index + 1} TotalScore`}
                                         type="number"
                                         name={`test-${index}`}
-                                        value={totalScore}
-                                        // value={
-                                        //   inputScores[subjectName]?.[
-                                        //     `total${index + 1}TermScore`
-                                        //   ] || totalScore
-                                        // }
+                                        value={totalScore !== undefined && totalScore !== null ? totalScore : ""}
+                                      // value={
+                                      //   inputScores[subjectName]?.[
+                                      //     `total${index + 1}TermScore`
+                                      //   ] || totalScore
+                                      // }
 
-                                        // onChange={(e) =>
-                                        //   handleInputChange(
-                                        //     subjectName,
-                                        //     index,
-                                        //     parseInt(e.target.value)
-                                        //   )
-                                        // }
+                                      // onChange={(e) =>
+                                      //   handleInputChange(
+                                      //     subjectName,
+                                      //     index,
+                                      //     parseInt(e.target.value)
+                                      //   )
+                                      // }
                                       />
                                     </div>
                                   )
@@ -710,7 +784,7 @@ const DynamicResult: React.FC = () => {
                                           e.target.value
                                         )
                                       }
-                                      // input={<OutlinedInput label="Name" />}
+                                    // input={<OutlinedInput label="Name" />}
                                     >
                                       {grades
                                         ?.sort((a: any, b: any) =>
@@ -743,7 +817,7 @@ const DynamicResult: React.FC = () => {
                                           e.target.value
                                         )
                                       }
-                                      // input={<OutlinedInput label="Name" />}
+                                    // input={<OutlinedInput label="Name" />}
                                     >
                                       {grades
                                         ?.sort((a: any, b: any) =>
@@ -807,10 +881,10 @@ const DynamicResult: React.FC = () => {
                     autoComplete="TotalAverage"
                     autoFocus
                     value={TotalAverage}
-                    //   onBlur={calculateTotalGrade}
-                    // onChange={(e) =>
-                    //   setTotalAverage(parseInt(e.target.value, 10))
-                    // }
+                  //   onBlur={calculateTotalGrade}
+                  // onChange={(e) =>
+                  //   setTotalAverage(parseInt(e.target.value, 10))
+                  // }
                   />
 
                   <FormControl fullWidth>
@@ -821,7 +895,7 @@ const DynamicResult: React.FC = () => {
                       // multiple
                       value={selectedGrades}
                       onChange={(e: any) => setSelectedGrades(e.target.value)}
-                      // input={<OutlinedInput label="Name" />}
+                    // input={<OutlinedInput label="Name" />}
                     >
                       {grades
                         ?.sort((a: any, b: any) =>
@@ -887,6 +961,24 @@ const DynamicResult: React.FC = () => {
                         ))}
                     </Select>
                   </FormControl>
+                  <p className="mt-4 mb-2">
+                    You can alternatively type the Head Teacher Remark below
+                  </p>
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    multiline
+                    rows={4}
+                    fullWidth
+                    type="text"
+                    id="hmRemark-text"
+                    label="Head Teacher Remark (type here)"
+                    name="hmRemark"
+                    autoComplete="off"
+                    placeholder="Type head teacher remark here..."
+                    value={HmRemark}
+                    onChange={(e) => setHmRemark(e.target.value)}
+                  />
                   <TextField
                     variant="outlined"
                     margin="normal"
@@ -919,7 +1011,7 @@ const DynamicResult: React.FC = () => {
                       // multiple
                       value={selectedSchools}
                       onChange={handleSelectSchoolChange}
-                      // input={<OutlinedInput label="Name" />}
+                    // input={<OutlinedInput label="Name" />}
                     >
                       {schools?.map((item: any) => (
                         <MenuItem value={item.name}>
@@ -936,7 +1028,7 @@ const DynamicResult: React.FC = () => {
                       // multiple
                       value={selectedClasses}
                       onChange={handleSelectClassChange}
-                      // input={<OutlinedInput label="Name" />}
+                    // input={<OutlinedInput label="Name" />}
                     >
                       {classD?.map((item: any) => (
                         <MenuItem value={item.name}>{item.name}</MenuItem>
@@ -951,7 +1043,7 @@ const DynamicResult: React.FC = () => {
                       // multiple
                       value={term}
                       onChange={(e: any) => setTerm(e.target.value)}
-                      // input={<OutlinedInput label="Name" />}
+                    // input={<OutlinedInput label="Name" />}
                     >
                       <MenuItem value="3rd Term">3rd Term</MenuItem>
                     </Select>
@@ -967,7 +1059,7 @@ const DynamicResult: React.FC = () => {
                       fullWidth
                       value={year}
                       onChange={(e: any) => setYear(e.target.value)}
-                      // input={<OutlinedInput label="Name" />}
+                    // input={<OutlinedInput label="Name" />}
                     >
                       <MenuItem value="2023/2024">2023/2024</MenuItem>
                       <MenuItem value="2024/2025">2024/2025</MenuItem>
@@ -985,7 +1077,7 @@ const DynamicResult: React.FC = () => {
                     <div
                       className="d-flex justify-content-center"
 
-                      // onClick={handleLoader}
+                    // onClick={handleLoader}
                     >
                       <Button
                         fullWidth

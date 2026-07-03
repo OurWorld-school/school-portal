@@ -165,7 +165,7 @@ const AdminViewCommulative = () => {
         .then((response) => {
           setClassD(
             response.data.filter(
-              (item: any) => item.schoolName._id === schoolInfo
+              (item: any) => item?.schoolName?._id === schoolInfo
             )
           );
         })
@@ -335,7 +335,15 @@ const AdminViewCommulative = () => {
     <AdminLayout>
       <div>
         <div className="user-details">
-          <div className="input-box">
+          <div
+            className="input-box"
+            style={{
+              border: "1px solid rgb(229, 50, 56) ",
+              borderRadius: "6px",
+              padding: "4px",
+              marginBottom: "16px",
+            }}
+          >
             {" "}
             <select value={selectedSchool} onChange={handleSelectSchoolChange}>
               <option value="">Select School</option>
@@ -349,7 +357,15 @@ const AdminViewCommulative = () => {
                 ))}
             </select>
           </div>
-          <div className="input-box">
+          <div
+            className="input-box"
+            style={{
+              border: "1px solid rgb(229, 50, 56) ",
+              borderRadius: "6px",
+              padding: "4px",
+              marginBottom: "16px",
+            }}
+          >
             <select value={selectedClass} onChange={handleSelectClassChange}>
               <option value="">Select Class</option>
 
@@ -365,7 +381,15 @@ const AdminViewCommulative = () => {
               {/* Add more terms as needed */}
             </select>
           </div>
-          <div className="input-box">
+          <div
+            className="input-box"
+            style={{
+              border: "1px solid rgb(229, 50, 56) ",
+              borderRadius: "6px",
+              padding: "4px",
+              marginBottom: "16px",
+            }}
+          >
             <select
               value={selectedTerm}
               onChange={(e: any) => setSelectedTerm(e.target.value)}
@@ -377,7 +401,15 @@ const AdminViewCommulative = () => {
               {/* Add more terms as needed */}
             </select>
           </div>
-          <div className="input-box">
+          <div
+            className="input-box"
+            style={{
+              border: "1px solid rgb(229, 50, 56) ",
+              borderRadius: "6px",
+              padding: "4px",
+              marginBottom: "16px",
+            }}
+          >
             <select
               value={selectedYear}
               onChange={(e: any) => setSelectedYear(e.target.value)}
@@ -420,7 +452,7 @@ const AdminViewCommulative = () => {
         <Table responsive striped bordered>
           <thead
             style={{
-              backgroundColor: "#5372f0",
+              backgroundColor: "rgb(229, 50, 56)",
               color: "white",
               fontSize: "medium",
               fontWeight: "500",
@@ -444,7 +476,11 @@ const AdminViewCommulative = () => {
               <th>Form Teacher Remark</th>
               <th>Head Teacher</th>
               <th className="text-center">
-                <h4 style={{ color: "yellow" }}>*Optional*</h4>
+                <h4 style={{ color: "yellow" }}>*Automatic*</h4>
+                <h3>Assign Position</h3>
+              </th>
+              <th className="text-center">
+                <h4 style={{ color: "yellow" }}>*Manual*</h4>
                 <h3>Assign Position</h3>
               </th>
               <th>View Result Details</th>
@@ -480,7 +516,7 @@ const AdminViewCommulative = () => {
                   <td>{row?.term.replace(/_/g, " ")}</td>
                   <td>{row?.year}</td>
                   <td>{row?.TotalScore}</td>
-                  <td>{row?.TotalAverage}</td>
+                  <td>{row?.TotalAverage != null ? parseFloat(row.TotalAverage).toFixed(2) : ''}</td>
                   <td>{row?.TotalGrade}</td>
                   <td>{row?.Position}</td>
 
@@ -498,6 +534,14 @@ const AdminViewCommulative = () => {
                         <FaEdit /> Generate Position
                       </Button>
                     </form>
+                  </td>
+                  <td>
+                    <Button
+                      className="btn-sm"
+                      onClick={() => handleShow(row?._id)}
+                    >
+                      <FaEdit />
+                    </Button>
                   </td>
                   <Modal show={show} onHide={handleClose} centered>
                     <Modal.Header closeButton>

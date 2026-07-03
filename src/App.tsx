@@ -195,6 +195,11 @@ import ResultChecker from "./CheckResultScreen/ResultChecker";
 import { MyResult } from "./CheckResultScreen/MyResult";
 import { MyCommutativeResult } from "./CheckResultScreen/MyCommutativeResult";
 import CommutativeResultChecker from "./CheckResultScreen/CommutativeResultChecker";
+import AdminCommutative from "./admin/AdminCommutativeResult/AdminCommutative";
+import AdminSwitchCommulative from "./admin/AdminCommutativeResult/AdminSwitchCommulative";
+import AdminViewCommulative from "./admin/AdminCommutativeResult/AdminViewCommulative";
+import AdminStudentCommulative from "./admin/AdminStudentResult/AdminStudentCommulative";
+import AdminCommulativeBucklet from "./admin/AdminCommulativeBucklet/AdminCommulativeBucklet";
 
 function App() {
   const { pathname } = useLocation();
@@ -304,6 +309,25 @@ element={<MyResult />}/> */}
         <Route
           path="/commutative-Result-check"
           element={<CommutativeResultChecker />}
+        />
+        {/* Admin Commulative Results */}
+        <Route path="/create-commutative" element={<AdminCommutative />} />
+        <Route path="/view-commulative" element={<AdminViewCommulative />} />
+        <Route
+          path="/view-student-commulative/:id"
+          element={<AdminStudentCommulative />}
+        />
+        <Route
+          path="/student-Commutative-result-create/:id/:selectedClass/:selectedSchool"
+          element={<AdminSwitchCommulative />}
+        />
+        <Route
+          path="/viewCommulativeResult"
+          element={<AdminViewCommulative />}
+        />
+        <Route
+          path="/view-commulative-booklet"
+          element={<AdminCommulativeBucklet />}
         />
         {/* ////reult checker */}
         <Route path="/pre-nursery" element={<PreNurserystudents />} />

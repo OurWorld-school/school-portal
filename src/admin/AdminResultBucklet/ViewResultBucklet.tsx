@@ -535,7 +535,7 @@ const AdminResultBucklet = () => {
                   <td>{row?.term.replace(/_/g, " ")}</td>
                   <td>{row?.year}</td>
                   <td>{row?.TotalScore}</td>
-                  <td>{row?.TotalAverage}</td>
+                  <td>{row?.TotalAverage != null ? parseFloat(row.TotalAverage).toFixed(2) : ''}</td>
                   <td>{row?.TotalGrade}</td>
                   <td>{row?.Position}</td>
 

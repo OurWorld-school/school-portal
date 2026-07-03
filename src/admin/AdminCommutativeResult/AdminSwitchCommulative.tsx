@@ -23,14 +23,14 @@ const AdminSwitchCommulative: React.FC = () => {
           >
             Dynamic Commulative Result
           </div>
-          <div
+          {/* <div
             onClick={() =>
               handleSelectComponent(<ManualCreateCommulativeResult />)
             }
             typeof="button"
           >
             Manual Commulative Result
-          </div>
+          </div> */}
         </div>
         <div>{selectedComponent}</div>
       </div>

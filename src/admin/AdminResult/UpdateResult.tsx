@@ -33,6 +33,7 @@ import {
   getAllSchools,
 } from "../../APiData/Api";
 import { schoolInfo } from "../../store/Info";
+import { getGradeForScore } from "../../APiData/gradeUtils";
 import { Dropdown } from "react-bootstrap";
 import "./CreateResult.css";
 const UpdateResult = () => {
@@ -151,60 +152,50 @@ const UpdateResult = () => {
   }, []);
   // Function to calculate the grand total
 
-  const calculateGrandTotal = () => {
-    let grandTotal = 0; // Initialize grandTotal variable
-    const total = userDatas?.subjects?.flatMap(
-      (
-        items: any // Use flatMap to flatten the array
-      ) => items.subjects.map((item: any) => item.totalScore)
-    );
-    grandTotal = total.reduce((acc: number, curr: number) => acc + curr, 0); // Sum up all the scores
-    setTotalScore(grandTotal); // Set the total score
-
-    ///calculate totalAverage
-    let totalAverage = grandTotal / total.length;
-    // Check if the average is greater than 0.5 and round accordingly
-    if (totalAverage > 0.5) {
-      totalAverage = Math.round(totalAverage); // Round the average
+  const calculateGrandTotal = React.useCallback(() => {
+    // Make sure we have valid data
+    if (!userDatas || !Array.isArray(userDatas.subjects)) {
+      setTotalScore(0);
+      setTotalAverage(0);
+      return;
     }
-    setTotalAverage(parseFloat(totalAverage.toFixed(2))); // Set the total average
-  };
+
+    // Flatten and collect all scores safely
+    const totalScores = userDatas.subjects.flatMap((group: any) =>
+      Array.isArray(group.subjects)
+        ? group.subjects.map((subject: any) => subject?.totalScore || 0)
+        : []
+    );
+
+    // Prevent empty array crash
+    if (totalScores.length === 0) {
+      setTotalScore(0);
+      setTotalAverage(0);
+      return;
+    }
+
+    // Sum them up
+    const grandTotal = totalScores.reduce(
+      (acc: number, curr: number) => acc + curr,
+      0
+    );
+
+    // Compute average safely
+    const average = parseFloat((grandTotal / totalScores.length).toFixed(2));
+
+    setTotalScore(grandTotal);
+    setTotalAverage(average);
+
+    const matched = getGradeForScore(average, grades);
+    if (matched) {
+      setSelectedGrades(matched.grade);
+      setRemark(matched.remark);
+    }
+  }, [userDatas, grades]);
+
   React.useEffect(() => {
-    const calculateGrandTotal = () => {
-      // Make sure we have valid data
-      if (!userDatas || !Array.isArray(userDatas.subjects)) {
-        setTotalScore(0);
-        setTotalAverage(0);
-        return;
-      }
-
-      // Flatten and collect all scores safely
-      const totalScores = userDatas.subjects.flatMap((group: any) =>
-        Array.isArray(group.subjects)
-          ? group.subjects.map((subject: any) => subject?.totalScore || 0)
-          : []
-      );
-
-      // Prevent empty array crash
-      if (totalScores.length === 0) {
-        setTotalScore(0);
-        setTotalAverage(0);
-        return;
-      }
-
-      // Sum them up
-      const grandTotal = totalScores.reduce(
-        (acc: number, curr: number) => acc + curr,
-        0
-      );
-
-      // Compute average safely
-      const average = parseFloat((grandTotal / totalScores.length).toFixed(2));
-
-      setTotalScore(grandTotal);
-      setTotalAverage(average);
-    };
-  }, []);
+    calculateGrandTotal();
+  }, [calculateGrandTotal]);
   const submitHandler = (e: any) => {
     e.preventDefault();
     setLoading(true);

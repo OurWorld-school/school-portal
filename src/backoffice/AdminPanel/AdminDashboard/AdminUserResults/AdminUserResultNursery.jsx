@@ -86,8 +86,8 @@ export const AdminUserResultNursery1 = () => {
                   <tr>
                     {/* <th>#</th> */}
                     <th>SUBJECT</th>
-                    <th>CA</th>
-                    <th>EXAM</th>
+                    <th>TEST (30%)</th>
+                    <th>EXAM (70%)</th>
                     <th>TOTAL</th>
                     <th>GRADE</th>
                     <th>REMARK</th>

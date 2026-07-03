@@ -65,8 +65,8 @@ const AdminCommutative = () => {
         setUsersData(
           data.filter(
             (item: any) =>
-              item?.schoolName._id === selectedSchool &&
-              item?.currentClass._id === selectedClass
+              item?.schoolName?._id === selectedSchool &&
+              item?.currentClass?._id === selectedClass
           )
         );
 
@@ -137,7 +137,7 @@ const AdminCommutative = () => {
         .then((response) => {
           setClassD(
             response.data.filter(
-              (item: any) => item.schoolName._id === schoolInfo
+              (item: any) => item?.schoolName?._id === schoolInfo
             )
           );
         })
@@ -150,7 +150,15 @@ const AdminCommutative = () => {
     <AdminLayout>
       <div>
         <div className="user-details">
-          <div className="input-box">
+          <div
+            className="input-box"
+            style={{
+              border: "1px solid rgb(229, 50, 56) ",
+              borderRadius: "6px",
+              padding: "4px",
+              marginBottom: "16px",
+            }}
+          >
             {" "}
             <select value={selectedSchool} onChange={handleSelectSchoolChange}>
               <option value="">Select School</option>
@@ -164,7 +172,15 @@ const AdminCommutative = () => {
                 ))}
             </select>
           </div>
-          <div className="input-box">
+          <div
+            className="input-box"
+            style={{
+              border: "1px solid rgb(229, 50, 56) ",
+              borderRadius: "6px",
+              padding: "4px",
+              marginBottom: "16px",
+            }}
+          >
             <select value={selectedClass} onChange={handleSelectClassChange}>
               <option value="">Select Class</option>
 
@@ -205,13 +221,14 @@ const AdminCommutative = () => {
         <Table responsive striped bordered>
           <thead
             style={{
-              backgroundColor: "#5372f0",
+              backgroundColor: "rgb(229, 50, 56)",
               color: "white",
               fontSize: "medium",
               fontWeight: "500",
             }}
           >
             <tr>
+              <th>S/N</th>
               <th>Image</th>
               <th>First Name</th>
               <th>Last Name</th>
@@ -225,8 +242,9 @@ const AdminCommutative = () => {
           <tbody>
             {usersData
               ?.sort((a: any, b: any) => a.firstName.localeCompare(b.firstName))
-              .map((row: any) => (
+              .map((row: any, index: number) => (
                 <tr key={row._id}>
+                  <td>{index + 1}</td>
                   <td style={{ width: "20px", height: "70px" }}>
                     <img
                       src={row?.passportPhoto}

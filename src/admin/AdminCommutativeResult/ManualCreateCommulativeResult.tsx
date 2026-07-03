@@ -33,6 +33,7 @@ import {
   UserApi,
   getAllSchools,
 } from "../../APiData/Api";
+import { getGradeForScore } from "../../APiData/gradeUtils";
 import { schoolInfo } from "../../store/Info";
 import { Dropdown } from "react-bootstrap";
 import { MdLegendToggle } from "react-icons/md";
@@ -187,9 +188,20 @@ const ManualCreateCommulativeResult = () => {
         grandAverage: average,
       },
     }));
+
+    const matched = getGradeForScore(average, grades);
+    if (matched) {
+      setSubjectGradeChange((prev: any) => ({
+        ...prev,
+        [subjectName]: matched.grade,
+      }));
+      setSubjectRemarkChange((prev: any) => ({
+        ...prev,
+        [subjectName]: matched.remark,
+      }));
+    }
+
     return { total, average };
-    // setSubjectGrandTotal(total);
-    // setSubjectGrandAverage(average);
   };
   // useEffect(() => {
   //   calculateSubjectTotal(subject);
@@ -256,12 +268,16 @@ const ManualCreateCommulativeResult = () => {
         subjectsCount++;
       }
     });
-    if (totalAverage > 0.5) {
-      totalAverage = Math.round(totalAverage); // Round the average
-    }
+    const finalAvg = subjectsCount > 0 ? parseFloat((totalAverage / subjectsCount).toFixed(2)) : 0;
     setGrandTotalScore(totalScore);
-    setGrandTotalAverage(subjectsCount > 0 ? totalAverage / subjectsCount : 0);
-  }, [subjectsData]);
+    setGrandTotalAverage(finalAvg);
+
+    const matched = getGradeForScore(finalAvg, grades);
+    if (matched) {
+      setSelectedGrades(matched.grade);
+      setRemark(matched.remark);
+    }
+  }, [subjectsData, grades]);
 
   useEffect(() => {
     calculateOverallTotals();
@@ -277,13 +293,9 @@ const ManualCreateCommulativeResult = () => {
     grandTotal = total.reduce((acc: number, curr: number) => acc + curr, 0); // Sum up all the scores
     setTotalScore(grandTotal); // Set the total score
 
-    ///calculate totalAverage
-    let totalAverage = grandTotal / total.length;
-    // Check if the average is greater than 0.5 and round accordingly
-    if (totalAverage > 0.5) {
-      totalAverage = Math.round(totalAverage); // Round the average
-    }
-    setTotalAverage(parseFloat(totalAverage.toFixed(2))); // Set the total average
+    ///calculate totalAverage with 2 decimal places
+    const rawAverage = grandTotal / total.length;
+    setTotalAverage(parseFloat(rawAverage.toFixed(2))); // Set the total average (2 decimal places)
   };
 
   const submitHandler = (e: any) => {
@@ -393,14 +405,57 @@ const ManualCreateCommulativeResult = () => {
 
   // Process the data to group by subject name
   const groupedSubjects = subjectMarks?.reduce((acc: any, data: any) => {
-    data.subjects.forEach((subject: any) => {
-      if (!acc[subject.subjectName]) {
-        acc[subject.subjectName] = [];
-      }
-      acc[subject.subjectName].push(subject.totalScore);
-    });
+    let termIndex = -1;
+    if (/1st/i.test(data.term)) termIndex = 0;
+    else if (/2nd/i.test(data.term)) termIndex = 1;
+    else if (/3rd/i.test(data.term)) termIndex = 2;
+
+    if (termIndex !== -1) {
+      data.subjects.forEach((subject: any) => {
+        if (!acc[subject.subjectName]) {
+          acc[subject.subjectName] = [undefined, undefined, undefined];
+        }
+        acc[subject.subjectName][termIndex] = subject.totalScore;
+      });
+    }
     return acc;
-  }, {} as Record<string, number[]>);
+  }, {} as Record<string, (number | undefined)[]>);
+
+  useEffect(() => {
+    if (groupedSubjects && Object.keys(groupedSubjects).length > 0) {
+      const initialSubjectsData = { ...subjectsData };
+      let hasUpdates = false;
+
+      Object.keys(groupedSubjects).forEach((subjectName) => {
+        const scores = groupedSubjects[subjectName];
+        if (!initialSubjectsData[subjectName] || !initialSubjectsData[subjectName].total1stTermScore) {
+          const total1st = scores[0] !== undefined ? scores[0] : "";
+          const total2nd = scores[1] !== undefined ? scores[1] : "";
+          const total3rd = scores[2] !== undefined ? scores[2] : "";
+          
+          const total = (Number(total1st) || 0) + (Number(total2nd) || 0) + (Number(total3rd) || 0);
+          const count = [total1st, total2nd, total3rd].filter(s => s !== "").length;
+          let average = count > 0 ? total / count : 0;
+          if (average > 0.5) {
+            average = Math.round(average);
+          }
+
+          initialSubjectsData[subjectName] = {
+            total1stTermScore: total1st,
+            total2ndTermScore: total2nd,
+            total3rdTermScore: total3rd,
+            grandTotal: total,
+            grandAverage: average,
+          };
+          hasUpdates = true;
+        }
+      });
+
+      if (hasUpdates) {
+        setSubjectsData(initialSubjectsData);
+      }
+    }
+  }, [groupedSubjects]);
   const [directorsRemark, setDirectorsRemark] = useState([]);
   React.useEffect(() => {
     const fetchPosts = async () => {
@@ -420,7 +475,15 @@ const ManualCreateCommulativeResult = () => {
         <div className="user-details">
           <h4 className="text-center">Select Result Academic *Year*</h4>
           <p className="text-center">Before you proceed</p>
-          <div className="input-box">
+          <div
+            className="input-box"
+            style={{
+              border: "1px solid rgb(229, 50, 56) ",
+              borderRadius: "6px",
+              padding: "4px",
+              marginBottom: "16px",
+            }}
+          >
             <select
               value={selectedYear}
               onChange={(e: any) => setSelectedYear(e.target.value)}
@@ -907,6 +970,24 @@ const ManualCreateCommulativeResult = () => {
                         ))}
                     </Select>
                   </FormControl>
+                  <p className="mt-4 mb-2">
+                    You can alternatively type the Head Teacher Remark below
+                  </p>
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    multiline
+                    rows={4}
+                    fullWidth
+                    type="text"
+                    id="hmRemark-text"
+                    label="Head Teacher Remark (type here)"
+                    name="hmRemark"
+                    autoComplete="off"
+                    placeholder="Type head teacher remark here..."
+                    value={HmRemark}
+                    onChange={(e) => setHmRemark(e.target.value)}
+                  />
                   <TextField
                     variant="outlined"
                     margin="normal"

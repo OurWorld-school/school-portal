@@ -21,6 +21,7 @@ import {
 import CircularIndeterminate from "../../components/Loading/Progress";
 import AdminLayout from "../AdminDashboard/AdminLayout";
 import { schoolInfo } from "../../store/Info";
+import { getGradeForScore } from "../../APiData/gradeUtils";
 
 const UpdateSubjectScores = () => {
   const navigate = useNavigate();
@@ -66,28 +67,36 @@ const UpdateSubjectScores = () => {
     }
   };
 
-  const calculateSubjectsDataTotal = () => {
-    const totalScore = subjectsData.test + subjectsData.exam;
+  const calculateSubjectsDataTotal = React.useCallback(() => {
+    const totalScore = (subjectsData.test || 0) + (subjectsData.exam || 0);
     let grade = "";
     let remark = "";
-    if (subjectsData.totalScore >= 70 && subjectsData.totalScore <= 100) {
-      grade = "A";
-      remark = "Excellent";
-    } else if (subjectsData.totalScore >= 60 && subjectsData.totalScore <= 69) {
-      grade = "B";
-      remark = "Very Good";
-    } else if (subjectsData.totalScore >= 50 && subjectsData.totalScore <= 59) {
-      grade = "C";
-      remark = "Good";
-    } else if (subjectsData.totalScore >= 40 && subjectsData.totalScore <= 49) {
-      grade = "D";
-      remark = "Pass";
-    } else if (subjectsData.totalScore >= 0 && subjectsData.totalScore <= 39) {
-      grade = "F";
-      remark = "Fail";
+    const matched = getGradeForScore(totalScore, grades);
+    if (matched) {
+      grade = matched.grade;
+      remark = matched.remark;
+    } else {
+      if (totalScore >= 70 && totalScore <= 100) {
+        grade = "A";
+        remark = "Excellent";
+      } else if (totalScore >= 60 && totalScore <= 69) {
+        grade = "B";
+        remark = "Very Good";
+      } else if (totalScore >= 50 && totalScore <= 59) {
+        grade = "C";
+        remark = "Good";
+      } else if (totalScore >= 40 && totalScore <= 49) {
+        grade = "D";
+        remark = "Pass";
+      } else if (totalScore >= 0 && totalScore <= 39) {
+        grade = "F";
+        remark = "Fail";
+      }
     }
-    setSubjectsData({ ...subjectsData, totalScore, grade, remark });
-  };
+    setSubjectsData((prev: any) => ({ ...prev, totalScore, grade, remark }));
+    setSelectedGrades(grade);
+    setSelectedRemarks(remark);
+  }, [subjectsData.test, subjectsData.exam, grades]);
 
   React.useEffect(() => {
     const fetchPosts = async () => {
@@ -99,11 +108,10 @@ const UpdateSubjectScores = () => {
 
     fetchPosts();
   }, [id]);
+
   React.useEffect(() => {
     calculateSubjectsDataTotal();
-    const totalScore = subjectsData.test + subjectsData.exam;
-    setSubjectsData({ ...subjectsData, totalScore });
-  }, [calculateSubjectsDataTotal, setSubjectsData]);
+  }, [calculateSubjectsDataTotal]);
   React.useEffect(() => {
     const fetchPosts = async () => {
       const { data } = await axios.get(GradeApi);

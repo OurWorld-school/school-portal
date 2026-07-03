@@ -166,3 +166,56 @@
     width: 100%;
   }
 }
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 5mm 5mm 5mm 5mm;
+  }
+  body, html {
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  .result-main-div-section {
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 100% !important;
+    box-sizing: border-box !important;
+    page-break-inside: avoid !important;
+    page-break-after: avoid !important;
+    page-break-before: avoid !important;
+    overflow: hidden !important;
+    transform: scale(0.92) !important;
+    transform-origin: top center !important;
+  }
+  /* Force tables to fit inline side-by-side in A4 width */
+  .tb-display-tables {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    gap: 15px !important;
+  }
+  .table-div {
+    margin-top: 10px !important;
+    margin-left: 0 !important;
+    flex: 1.2 !important;
+    width: auto !important;
+  }
+  .table-div-2 {
+    margin-top: 10px !important;
+    margin-right: 0 !important;
+    flex: 0.8 !important;
+    width: auto !important;
+  }
+  .stamp-div {
+    margin-top: -30px !important;
+  }
+  table, tr, td, th, div, span, p {
+    page-break-inside: avoid !important;
+  }
+}

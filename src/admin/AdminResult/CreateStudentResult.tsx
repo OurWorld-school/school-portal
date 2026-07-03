@@ -33,6 +33,7 @@ import {
   getAllSchools,
 } from "../../APiData/Api";
 import { schoolInfo } from "../../store/Info";
+import { getGradeForScore } from "../../APiData/gradeUtils";
 import { Dropdown } from "react-bootstrap";
 import "./CreateResult.css";
 import AdminLayout from "../AdminDashboard/AdminLayout";
@@ -234,44 +235,32 @@ const CreateStudentResult = () => {
   }, []);
   // Function to calculate the grand total
 
-  const calculateGrandTotal = () => {
+  const calculateGrandTotal = React.useCallback(() => {
     let grandTotal = 0; // Initialize grandTotal variable
     const total = subjectMarksData.flatMap(
       (
         items: any // Use flatMap to flatten the array
       ) => items.subjects.map((item: any) => item.totalScore)
     );
+    if (total.length === 0) return;
     grandTotal = total.reduce((acc: number, curr: number) => acc + curr, 0); // Sum up all the scores
     setTotalScore(grandTotal); // Set the total score
 
-    ///calculate totalAverage
-    let totalAverage = grandTotal / total.length;
-    // Check if the average is greater than 0.5 and round accordingly
-    if (totalAverage > 0.5) {
-      totalAverage = Math.round(totalAverage); // Round the average
+    ///calculate totalAverage with 2 decimal places
+    const rawAverage = grandTotal / total.length;
+    const finalAvg = parseFloat(rawAverage.toFixed(2));
+    setTotalAverage(finalAvg); // Set the total average (2 decimal places)
+
+    const matched = getGradeForScore(finalAvg, grades);
+    if (matched) {
+      setSelectedGrades(matched.grade);
+      setRemark(matched.remark);
     }
-    setTotalAverage(parseFloat(totalAverage.toFixed(2))); // Set the total average
-  };
+  }, [subjectMarksData, grades]);
 
   React.useEffect(() => {
     calculateGrandTotal();
-    let grandTotal = 0; // Initialize grandTotal variable
-    const total = subjectMarksData.flatMap(
-      (
-        items: any // Use flatMap to flatten the array
-      ) => items.subjects.map((item: any) => item.totalScore)
-    );
-    grandTotal = total.reduce((acc: number, curr: number) => acc + curr, 0); // Sum up all the scores
-    setTotalScore(grandTotal); // Set the total score
-
-    ///calculate totalAverage
-    let totalAverage = grandTotal / total.length;
-    // Check if the average is greater than 0.5 and round accordingly
-    if (totalAverage > 0.5) {
-      totalAverage = Math.round(totalAverage); // Round the average
-    }
-    setTotalAverage(parseFloat(totalAverage.toFixed(2))); // Set the total average
-  }, [calculateGrandTotal, setTotalScore, setTotalAverage]);
+  }, [calculateGrandTotal]);
   const submitHandler = (e: any) => {
     e.preventDefault();
     setLoading(true);
