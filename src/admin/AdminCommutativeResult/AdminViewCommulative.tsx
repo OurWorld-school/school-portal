@@ -606,7 +606,7 @@ const AdminViewCommulative = () => {
                     ) : (
                       <>
                         {" "}
-                        <Link to={`/update-student-result/${row?._id}`}>
+                        <Link to={`/update-student-commulative-result/${row?._id}`}>
                           <Button className="btn-sm">
                             <FaEdit />{" "}
                           </Button>

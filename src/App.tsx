@@ -198,6 +198,7 @@ import CommutativeResultChecker from "./CheckResultScreen/CommutativeResultCheck
 import AdminCommutative from "./admin/AdminCommutativeResult/AdminCommutative";
 import AdminSwitchCommulative from "./admin/AdminCommutativeResult/AdminSwitchCommulative";
 import AdminViewCommulative from "./admin/AdminCommutativeResult/AdminViewCommulative";
+import UpdateCommulativeResult from "./admin/AdminCommutativeResult/UpdateCommulativeResult";
 import AdminStudentCommulative from "./admin/AdminStudentResult/AdminStudentCommulative";
 import AdminCommulativeBucklet from "./admin/AdminCommulativeBucklet/AdminCommulativeBucklet";
 
@@ -289,6 +290,10 @@ function App() {
           element={<AdminStudentResult />}
         />
         <Route path="/update-student-result/:id" element={<UpdateResult />} />
+        <Route
+          path="/update-student-commulative-result/:id"
+          element={<UpdateCommulativeResult />}
+        />
         <Route path="/updateSchool/" element={<AdminUpdateSchoolProfile />} />
         {/* ///// */}
         {/* ///////result checker */}
