@@ -75,22 +75,45 @@ const AdminViewCommulative = () => {
         const data = await response.json();
 
         // Set the fetched data to the state
-        setUsersData(
-          data
-            .sort((a: any, b: any) => b.TotalAverage - a.TotalAverage)
-            .filter(
-              (item: any) =>
-                item?.schoolName === selectedSchool &&
-                item?.classes === selectedClass &&
-                item?.year === selectedYear &&
-                item?.term === selectedTerm
-            )
-        );
-        setNumbers(
-          Array.from({ length: data.length }, (_, index) => index + 1)
-        );
-        // Set the fetched data to the state
+        const getBaseClass = (name: string) => {
+          if (!name) return "";
+          const clean = name.replace(/_/g, " ").trim();
+          const match = clean.match(/^(Pre[-\s]?Nursery|Nursery\s*\d+|Basic\s*\d+|Primary\s*\d+|JSS\s*\d+|SSS\s*\d+)/i);
+          if (match) return match[1];
+          const parts = clean.split(/\s+/);
+          return parts.length >= 2 ? `${parts[0]} ${parts[1]}` : parts[0] || clean;
+        };
 
+        const isClassMatch = (itemClass: string, selected: string) => {
+          if (!selected || !itemClass) return false;
+          const cleanItem = itemClass.replace(/_/g, " ").trim().toLowerCase();
+          const cleanSelected = selected.replace(/_/g, " ").trim().toLowerCase();
+
+          // Exact match
+          if (cleanItem === cleanSelected) return true;
+
+          // Strip optional "(all arms)" suffix
+          const baseSelected = cleanSelected.replace(/\s*\(all arms\)$/i, "").trim();
+
+          // Match if itemClass starts with baseSelected followed by boundary
+          const regex = new RegExp("^" + baseSelected.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + "($|\\s|-|_)", "i");
+          return regex.test(cleanItem);
+        };
+
+        const filtered = data
+          .filter(
+            (item: any) =>
+              item?.schoolName === selectedSchool &&
+              isClassMatch(item?.classes, selectedClass) &&
+              item?.year === selectedYear &&
+              (selectedTerm ? item?.term === selectedTerm : true)
+          )
+          .sort((a: any, b: any) => Number(b.TotalAverage || 0) - Number(a.TotalAverage || 0));
+
+        setUsersData(filtered);
+        setNumbers(
+          Array.from({ length: filtered.length }, (_, index) => index + 1)
+        );
         setLoader(false);
         setTimeout(() => {
           setShowSuccess(false);
@@ -177,32 +200,31 @@ const AdminViewCommulative = () => {
   const [show, setShow] = React.useState(false);
 
   const [Position, setPosition] = React.useState("");
+  const [numberInClass, setNumberInClass] = React.useState<number | string>("");
 
   const handleClose = () => setShow(false);
   const [userId, setUseId] = React.useState(null);
 
-  const handleShow = (_id: any) => {
+  const handleShow = (row: any) => {
     setShow(true);
-    setUseId(_id);
+    setUseId(row?._id);
+    setPosition(row?.Position || "");
+    setNumberInClass(row?.numberInClass || usersData?.length || "");
   };
   const handleLoader = () => {
     setLoading(true);
-
-    // Perform any other actions that need to be done when the button is clicked
   };
   const submitHandler = (e: any) => {
     e.preventDefault();
     setLoading(true);
     const data: any = {
-      //   user: user,
       Position: Position,
+      numberInClass: numberInClass,
     };
 
     const headers: any = {
       "Custom-Header": "xxxx-xxxx-xxxx-xxxx",
       "Content-Type": "application/json",
-      // Accept: "application/json",
-      // body: JSON.stringify(data),
     };
 
     axios
@@ -212,13 +234,9 @@ const AdminViewCommulative = () => {
         console.log(res.data);
         setLoading(false);
         if (res.data) {
-          //   setUser("");
-
-          setPosition(" ");
-
-          console.log(res.data);
-          toast.success("post sucessful");
-          // navigate("/pre-nurseryResult");
+          setPosition("");
+          setNumberInClass("");
+          toast.success("Position and Number in Class updated successfully");
           handleClose();
           window.location.reload();
         } else {
@@ -227,9 +245,7 @@ const AdminViewCommulative = () => {
       })
       .catch((err) => {
         setLoading(false);
-        toast.error(
-          "Failed to create a post, check your network connection or input the correct textfields"
-        );
+        toast.error("Failed to update position and number in class");
       });
   };
   /////to lock result edit
@@ -369,16 +385,41 @@ const AdminViewCommulative = () => {
             <select value={selectedClass} onChange={handleSelectClassChange}>
               <option value="">Select Class</option>
 
-              {classD
-                .sort((a: any, b: any) => a.name.localeCompare(b.name))
-                .map((classy: any) => (
-                  <option key={classy._id} value={classy.name}>
-                    {" "}
-                    {classy.name.replace(/_/g, " ")}
-                  </option>
-                ))}
+              {(() => {
+                const getBaseClass = (name: string) => {
+                  if (!name) return "";
+                  const clean = name.replace(/_/g, " ").trim();
+                  const match = clean.match(/^(Pre[-\s]?Nursery|Nursery\s*\d+|Basic\s*\d+|Primary\s*\d+|JSS\s*\d+|SSS\s*\d+)/i);
+                  if (match) return match[1];
+                  const parts = clean.split(/\s+/);
+                  return parts.length >= 2 ? `${parts[0]} ${parts[1]}` : parts[0] || clean;
+                };
 
-              {/* Add more terms as needed */}
+                const baseClasses = Array.from(
+                  new Set(classD.map((c: any) => getBaseClass(c.name)).filter(Boolean))
+                );
+
+                return (
+                  <>
+                    <optgroup label="Entire Grade Levels (All Arms)">
+                      {baseClasses.map((base: any) => (
+                        <option key={`base-${base}`} value={base}>
+                          {base} (All Arms)
+                        </option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Specific Class Arms">
+                      {classD
+                        .sort((a: any, b: any) => a.name.localeCompare(b.name))
+                        .map((classy: any) => (
+                          <option key={classy._id} value={classy.name}>
+                            {classy.name.replace(/_/g, " ")}
+                          </option>
+                        ))}
+                    </optgroup>
+                  </>
+                );
+              })()}
             </select>
           </div>
           <div
@@ -490,9 +531,7 @@ const AdminViewCommulative = () => {
           </thead>
           <tbody>
             {usersData
-              ?.sort((a: any, b: any) =>
-                a.user.firstName.localeCompare(b.user.firstName)
-              )
+              ?.sort((a: any, b: any) => Number(b?.TotalAverage || 0) - Number(a?.TotalAverage || 0))
               .map((row: any, index: any) => (
                 <tr key={index}>
                   <td>{Numbers[index]}</td>
@@ -520,7 +559,7 @@ const AdminViewCommulative = () => {
                   <td>{row?.TotalGrade}</td>
                   <td>{row?.Position}</td>
 
-                  <td>{row?.numberInClass} </td>
+                  <td>{row?.numberInClass || usersData?.length || 0} </td>
                   <td>{row?.Remark}</td>
                   <td>{row?.HmRemark}</td>
 
@@ -538,14 +577,14 @@ const AdminViewCommulative = () => {
                   <td>
                     <Button
                       className="btn-sm"
-                      onClick={() => handleShow(row?._id)}
+                      onClick={() => handleShow(row)}
                     >
                       <FaEdit />
                     </Button>
                   </td>
                   <Modal show={show} onHide={handleClose} centered>
                     <Modal.Header closeButton>
-                      <Modal.Title>Student Position</Modal.Title>
+                      <Modal.Title>Student Position & Number in Class</Modal.Title>
                     </Modal.Header>
                     <form onSubmit={submitHandler}>
                       <Modal.Body>
@@ -554,12 +593,22 @@ const AdminViewCommulative = () => {
                           margin="normal"
                           fullWidth
                           id="Position"
-                          label="Position"
+                          label="Position (e.g. 1st, 2nd, 3rd)"
                           name="Position"
-                          autoComplete="Position"
                           autoFocus
                           value={Position}
                           onChange={(e) => setPosition(e.target.value)}
+                        />
+                        <TextField
+                          variant="outlined"
+                          margin="normal"
+                          fullWidth
+                          id="numberInClass"
+                          label="Number In Class"
+                          name="numberInClass"
+                          type="number"
+                          value={numberInClass}
+                          onChange={(e) => setNumberInClass(Number(e.target.value))}
                         />
                       </Modal.Body>
                       <Modal.Footer>
