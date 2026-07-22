@@ -107,6 +107,9 @@ const AdminStudentCommulative = () => {
                 <span>NAME:</span> {viewResult?.user?.firstName}{" "}
                 {viewResult?.user?.lastName}
               </div>
+              <div className="mt-4">
+                <span>REG NO:</span> {viewResult?.user?.schoolRegNumber}
+              </div>
               <div className="user-d-class">
                 <span> CLASS:</span> {viewResult?.classes?.replace(/_/g, " ")}
               </div>
@@ -257,7 +260,7 @@ const AdminStudentCommulative = () => {
               </div>{" "}
               <div className="stamp-div">
                 <img
-                  src={viewResult?.school?.schoolStamp}
+                  src={stamp}
                   alt="school stamp or seal"
                   className="stamp-img"
                 />

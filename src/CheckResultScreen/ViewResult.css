@@ -105,16 +105,17 @@
   width: 80px;
   height: 80px;
   display: flex;
-  justify-content: left;
-  align-items: flex-start;
+  justify-content: flex-end;
+  align-items: center;
   margin-left: auto;
-  margin-right: 150px;
-  margin-top: -50px;
+  margin-right: 40px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 .stamp-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .stamp-img-div hr {
   border: 1px solid black;
@@ -170,27 +171,29 @@
 @media print {
   @page {
     size: A4 portrait;
-    margin: 5mm 5mm 5mm 5mm;
+    margin: 0 !important;
   }
   body, html {
     margin: 0 !important;
     padding: 0 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+    height: 100vh !important;
+    overflow: hidden !important;
   }
   .result-main-div-section {
     border: none !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 10px !important;
     width: 100% !important;
-    height: auto !important;
-    max-height: 100% !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
     box-sizing: border-box !important;
     page-break-inside: avoid !important;
     page-break-after: avoid !important;
     page-break-before: avoid !important;
     overflow: hidden !important;
-    transform: scale(0.92) !important;
+    transform: scale(0.90) !important;
     transform-origin: top center !important;
   }
   /* Force tables to fit inline side-by-side in A4 width */
@@ -198,24 +201,29 @@
     display: flex !important;
     flex-direction: row !important;
     justify-content: space-between !important;
-    gap: 15px !important;
+    gap: 10px !important;
+    width: 100% !important;
   }
   .table-div {
-    margin-top: 10px !important;
+    margin-top: 5px !important;
     margin-left: 0 !important;
     flex: 1.2 !important;
     width: auto !important;
   }
   .table-div-2 {
-    margin-top: 10px !important;
+    margin-top: 5px !important;
     margin-right: 0 !important;
     flex: 0.8 !important;
     width: auto !important;
   }
   .stamp-div {
-    margin-top: -30px !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
   }
   table, tr, td, th, div, span, p {
     page-break-inside: avoid !important;
+  }
+  header, footer, nav, .navbar, .btn, button {
+    display: none !important;
   }
 }

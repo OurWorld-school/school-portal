@@ -142,6 +142,9 @@ export const MyResult = React.forwardRef((props, ref) => {
                     <span>NAME:</span> {items?.user?.firstName}{" "}
                     {items?.user?.lastName}
                   </div>
+                  <div className="mt-4">
+                    <span>REG NO:</span> {items?.user?.schoolRegNumber}
+                  </div>
                   <div className="user-d-class">
                     <span> CLASS:</span> {items?.classes?.replace(/_/g, " ")}
                   </div>

@@ -19,6 +19,7 @@ import Button from "@mui/material/Button";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 
 import { Link } from "react-router-dom";
+import stamp from "../../assets/images/stamp.png";
 import CircularIndeterminate from "../../components/Loading/Progress";
 import {
   ClassApi,
@@ -558,7 +559,7 @@ const AdminCommulativeBucklet = () => {
           {usersData?.map((viewResult: any) => (
             <>
               <img
-                src={viewResult?.school?.schoolStamp}
+                src={stamp}
                 alt="stamp"
                 className="stamp-img"
               />

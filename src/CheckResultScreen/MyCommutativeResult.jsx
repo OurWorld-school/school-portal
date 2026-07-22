@@ -5,7 +5,7 @@ import { Button, Container } from "@material-ui/core";
 import "./ViewResult.css";
 
 import Table from "react-bootstrap/Table";
-// import stamp from "../../assets/images/stamp.png";
+import stamp from "../assets/images/stamp.png";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
 import TopNavBar from "../components/TopNavBar/TopNavBar";
 import Header from "../components/Header/Header";
@@ -152,6 +152,9 @@ export const MyCommutativeResult = React.forwardRef((props, ref) => {
                   <div>
                     <span>NAME:</span> {items?.user?.firstName}{" "}
                     {items?.user?.lastName}
+                  </div>
+                  <div className="mt-4">
+                    <span>REG NO:</span> {items?.user?.schoolRegNumber}
                   </div>
                   <div className="user-d-class">
                     <span> CLASS:</span> {items?.classes?.replace(/_/g, " ")}
@@ -317,7 +320,7 @@ export const MyCommutativeResult = React.forwardRef((props, ref) => {
                 </div>
                 <div className="stamp-div">
                   <img
-                    src={items?.school?.schoolStamp}
+                    src={stamp}
                     alt="stamp"
                     className="stamp-img"
                   />
