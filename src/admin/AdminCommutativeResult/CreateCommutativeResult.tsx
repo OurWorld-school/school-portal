@@ -88,6 +88,8 @@ const CreateCommutativeResult: React.FC = () => {
   // State to store the API response
   const [subjectMarksData, setSubjectMarksData] = React.useState<any>([]);
   const [subjectMarks, setSubjectMarks] = useState<any>([]);
+  const [subjectNameGrandTotal, setSubjectNameGrandTotal] = useState<any>({});
+  const [subjectNameGrandAverage, setSubjectNameGrandAverage] = useState<any>({});
   const [classD, setClassD] = useState([]);
   const [schools, setSchools] = useState([]);
   // Function to handle the select input change
@@ -173,30 +175,42 @@ const CreateCommutativeResult: React.FC = () => {
     fetchPosts();
   }, []);
 
-  // Function to calculate the grand total
+  // =====================================================
+  // CUMULATIVE RESULT CALCULATION RULES:
+  // - Subject Total Score = sum of all term scores for that subject
+  // - Subject Average    = Subject Total Score / number of terms the subject was taken
+  // - Grand Total Score  = sum of all subjects' total scores
+  // - Grand Total Average= Grand Total Score / total number of subjects
+  // =====================================================
 
   const calculateGrandTotal = React.useCallback(() => {
-    let grandTotal = 0; // Initialize grandTotal variable
-    const total = subjectMarks.flatMap(
-      (
-        items: any // Use flatMap to flatten the array
-      ) => items.subjects.map((item: any) => item.totalScore)
+    const subjectNames = Object.keys(subjectNameGrandTotal);
+    if (subjectNames.length === 0) return;
+
+    // Grand Total Score = sum of all subject total scores
+    const grandTotalScore = subjectNames.reduce(
+      (sum, name) => sum + (subjectNameGrandTotal[name] || 0),
+      0
     );
-    if (total.length === 0) return;
-    grandTotal = total.reduce((acc: number, curr: number) => acc + curr, 0); // Sum up all the scores
-    setTotalScore(grandTotal); // Set the total score
 
-    ///calculate totalAverage with 2 decimal places
-    const rawAverage = grandTotal / total.length;
-    const finalAvg = parseFloat(rawAverage.toFixed(2));
-    setTotalAverage(finalAvg); // Set the total average (2 decimal places)
+    setTotalScore(grandTotalScore);
 
-    const matched = getGradeForScore(finalAvg, grades);
+    // ✅ Professional: Grand Total Average = sum of each subject's average / number of subjects
+    // Each subject average already accounts for only the terms that were taken.
+    // Using grand total score directly would inflate the average for subjects with more terms.
+    const sumOfSubjectAverages = subjectNames.reduce(
+      (sum, name) => sum + (subjectNameGrandAverage[name] || 0),
+      0
+    );
+    const grandAvg = parseFloat((sumOfSubjectAverages / subjectNames.length).toFixed(2));
+    setTotalAverage(grandAvg);
+
+    const matched = getGradeForScore(grandAvg, grades);
     if (matched) {
       setSelectedGrades(matched.grade);
       setRemark(matched.remark);
     }
-  }, [subjectMarks, grades]);
+  }, [subjectNameGrandTotal, subjectNameGrandAverage, grades]);
 
   React.useEffect(() => {
     calculateGrandTotal();
@@ -331,7 +345,6 @@ const CreateCommutativeResult: React.FC = () => {
           response.data.filter(
             (item: any) =>
               item?.schoolName?._id === selectedSchool &&
-              item?.classes?._id === selectedClass &&
               item?.year === selectedYear &&
               item?.user?._id === id
           )
@@ -368,11 +381,8 @@ const CreateCommutativeResult: React.FC = () => {
       }, {} as Record<string, number[]>)
     );
   };
-  const [subjectNameGrandTotal, setSubjectNameGrandTotal] = useState<any>({});
-  const [subjectNameGrandAverage, setSubjectNameGrandAverage] = useState<any>(
-    {}
-  );
   useEffect(() => {
+    // Group each subject's term scores into a slot: [1stTerm, 2ndTerm, 3rdTerm]
     const grouped = subjectMarks?.reduce((acc: any, data: any) => {
       let termIndex = -1;
       if (/1st/i.test(data.term)) termIndex = 0;
@@ -397,22 +407,32 @@ const CreateCommutativeResult: React.FC = () => {
 
     for (const subjectName in grouped) {
       const scores = grouped[subjectName];
-      const validScores = scores.filter((score: any) => score !== undefined) as number[];
-      const total = validScores.reduce((sum: any, score: any) => sum + score, 0);
-      // Keep 2 decimal places — do NOT round to whole number
-      const average = parseFloat(
-        (validScores.length > 0 ? total / validScores.length : 0).toFixed(2)
+      // Only count terms that actually have a score
+      const validScores = scores.filter(
+        (score: any) => score !== undefined && score !== null
+      ) as number[];
+
+      // Subject Total Score = sum of all available term scores
+      const subjectTotal = validScores.reduce(
+        (sum: number, score: number) => sum + score,
+        0
       );
 
-      subjectTotals[subjectName] = total;
-      subjectAverages[subjectName] = average;
+      // Subject Average = Subject Total Score / number of terms taken
+      const subjectAverage = parseFloat(
+        (validScores.length > 0 ? subjectTotal / validScores.length : 0).toFixed(2)
+      );
 
-      const matched = getGradeForScore(average, grades);
+      subjectTotals[subjectName] = subjectTotal;
+      subjectAverages[subjectName] = subjectAverage;
+
+      const matched = getGradeForScore(subjectAverage, grades);
       if (matched) {
         calculatedGrades[subjectName] = matched.grade;
         calculatedRemarks[subjectName] = matched.remark;
       }
     }
+
     setSubjectNameGrandTotal(subjectTotals);
     setSubjectNameGrandAverage(subjectAverages);
     setSubjectGradeChange((prev: any) => ({ ...prev, ...calculatedGrades }));
@@ -784,12 +804,9 @@ const CreateCommutativeResult: React.FC = () => {
                     label="Total Average"
                     name="TotalAverage"
                     autoComplete="TotalAverage"
-                    autoFocus
-                    value={TotalAverage}
-                  //   onBlur={calculateTotalGrade}
-                  // onChange={(e) =>
-                  //   setTotalAverage(parseInt(e.target.value, 10))
-                  // }
+                    type="text"
+                    value={TotalAverage != null ? parseFloat(String(TotalAverage)).toFixed(2) : ""}
+                    InputProps={{ readOnly: true }}
                   />
 
                   <FormControl fullWidth>

@@ -56,6 +56,9 @@ const UpdateCommulativeResult = () => {
   const [schools, setSchools] = useState([]);
   const [classD, setClassD] = useState([]);
 
+  // Prevents calculateGrandTotal from overwriting the DB-fetched TotalAverage on initial load
+  const isInitialLoad = React.useRef(true);
+
   // Fetch cumulative result data by ID
   useEffect(() => {
     const fetchResult = async () => {
@@ -79,6 +82,7 @@ const UpdateCommulativeResult = () => {
         setSelectedClasses(data.classes || "");
 
         if (Array.isArray(data.subjects)) {
+          isInitialLoad.current = true; // Mark as initial load before setting subjects
           setSubjectsList(
             data.subjects.map((s: any) => ({
               _id: s._id,
@@ -141,6 +145,14 @@ const UpdateCommulativeResult = () => {
     }
   }, []);
 
+  // =====================================================
+  // CUMULATIVE RESULT CALCULATION RULES:
+  // - Subject Total Score = sum of all term scores for that subject
+  // - Subject Average    = Subject Total Score / number of terms the subject was taken
+  // - Grand Total Score  = sum of all subjects' total scores
+  // - Grand Total Average= Grand Total Score / total number of subjects
+  // =====================================================
+
   // Handle subject field changes
   const handleSubjectChange = (
     index: number,
@@ -151,17 +163,23 @@ const UpdateCommulativeResult = () => {
       const updated = [...prevList];
       const target = { ...updated[index], [field]: value };
 
-      // Calculate totalScore and totalAverage dynamically when term scores change
       const t1 = Number(target.total1stTermScore) || 0;
       const t2 = Number(target.total2ndTermScore) || 0;
       const t3 = Number(target.total3rdTermScore) || 0;
-      target.totalScore = t1 + t2 + t3;
-      target.totalAverage = parseFloat((target.totalScore / 3).toFixed(2));
 
-      // Match grade for subject totalAverage if grades loaded
-      const matched = getGradeForScore(Number(target.totalAverage), grades);
-      if (matched) {
-        if (!field || field === "total1stTermScore" || field === "total2ndTermScore" || field === "total3rdTermScore") {
+      // Subject Total Score = sum of all available term scores
+      target.totalScore = t1 + t2 + t3;
+
+      // Count how many terms actually have a score (non-zero)
+      const termCount = [t1, t2, t3].filter((v) => v > 0).length || 1;
+
+      // Subject Average = Subject Total Score / number of terms taken
+      target.totalAverage = parseFloat((target.totalScore / termCount).toFixed(2));
+
+      // Auto-assign grade & remark based on subject average
+      if (field === "total1stTermScore" || field === "total2ndTermScore" || field === "total3rdTermScore") {
+        const matched = getGradeForScore(Number(target.totalAverage), grades);
+        if (matched) {
           target.grade = matched.grade;
           target.remark = matched.remark;
         }
@@ -180,17 +198,19 @@ const UpdateCommulativeResult = () => {
       return;
     }
 
-    const grandTotal = subjectsList.reduce(
+    // Grand Total Score = sum of all subjects' total scores
+    const grandTotalScore = subjectsList.reduce(
       (acc, item) => acc + (Number(item.totalScore) || 0),
       0
     );
 
-    const average = parseFloat((grandTotal / subjectsList.length).toFixed(2));
+    // Grand Total Average = Grand Total Score / number of subjects
+    const grandAvg = parseFloat((grandTotalScore / subjectsList.length).toFixed(2));
 
-    setTotalScore(grandTotal);
-    setTotalAverage(average);
+    setTotalScore(grandTotalScore);
+    setTotalAverage(grandAvg);
 
-    const matched = getGradeForScore(average, grades);
+    const matched = getGradeForScore(grandAvg, grades);
     if (matched) {
       setSelectedGrades(matched.grade);
       if (!Remark) setRemark(matched.remark);
@@ -199,6 +219,11 @@ const UpdateCommulativeResult = () => {
 
   useEffect(() => {
     if (subjectsList.length > 0) {
+      if (isInitialLoad.current) {
+        // Skip recalculation on first load — preserve the TotalAverage from the database
+        isInitialLoad.current = false;
+        return;
+      }
       calculateGrandTotal();
     }
   }, [subjectsList, calculateGrandTotal]);
@@ -471,8 +496,8 @@ const UpdateCommulativeResult = () => {
                 fullWidth
                 id="TotalAverage"
                 label="Grand Total Average"
-                type="number"
-                value={TotalAverage}
+                type="text"
+                value={TotalAverage != null ? parseFloat(String(TotalAverage)).toFixed(2) : ""}
                 onChange={(e) => setTotalAverage(Number(e.target.value))}
               />
 
