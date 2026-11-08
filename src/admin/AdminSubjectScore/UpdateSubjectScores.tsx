@@ -30,7 +30,7 @@ const UpdateSubjectScores = () => {
   const [user, setUser] = useState(id);
   console.log(id);
   const [term, setTerm] = useState("");
-  const [year, setYear] = useState("");
+  const [year, setYear] = useState("2026/2027");
   const [schoolName, setSchoolName] = useState(selectedSchool);
   const [classes, setClasses] = useState(selectedClass);
   const [subjectlist, setSubjectlist] = useState([]);
@@ -104,6 +104,14 @@ const UpdateSubjectScores = () => {
       console.log(data);
 
       setUserDatas(data);
+      if (data?.term) {
+        setTerm(data.term);
+      }
+      if (data?.year && data?.year !== "2025/2026") {
+        setYear(data.year);
+      } else {
+        setYear("2026/2027");
+      }
     };
 
     fetchPosts();
@@ -177,7 +185,7 @@ const UpdateSubjectScores = () => {
         if (res.data) {
           setUser("");
           setTerm(" ");
-          setYear(" ");
+          setYear("2026/2027");
 
           setSchoolName("");
           setClasses(" ");
@@ -436,6 +444,9 @@ const UpdateSubjectScores = () => {
                       <MenuItem value="2024/2025">2024/2025</MenuItem>
                       <MenuItem value="2025/2026">2025/2026</MenuItem> */}
                       <MenuItem value="2026/2027">2026/2027</MenuItem>
+                      {year && year !== "2026/2027" && (
+                        <MenuItem value={year}>{year}</MenuItem>
+                      )}
                       {/* <MenuItem value="2027/2028">2027/2028</MenuItem>
                       <MenuItem value="2028/2029">2028/2029</MenuItem>
                       <MenuItem value="2029/2030">2029/2030</MenuItem>

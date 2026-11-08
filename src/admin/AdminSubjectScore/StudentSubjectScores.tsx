@@ -30,7 +30,7 @@ const StudentSubjectScores = () => {
   console.log(id);
   const [subjectName, setSubjectName] = useState("");
   const [term, setTerm] = useState("");
-  const [year, setYear] = useState("");
+  const [year, setYear] = useState("2026/2027");
   const [schoolName, setSchoolName] = useState(selectedSchool);
   const [classes, setClasses] = useState(selectedClass);
   const [subjectlist, setSubjectlist] = useState([]);
@@ -182,7 +182,7 @@ const StudentSubjectScores = () => {
         if (res.data) {
           setUser("");
           setTerm(" ");
-          setYear(" ");
+          setYear("2026/2027");
           setSubjectName("");
           setSchoolName("");
           setClasses(" ");
