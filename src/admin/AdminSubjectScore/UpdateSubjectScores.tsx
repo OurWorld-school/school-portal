@@ -433,13 +433,13 @@ const UpdateSubjectScores = () => {
                       // input={<OutlinedInput label="Name" />}
                     >
                       {/* <MenuItem value="2023/2024">2023/2024</MenuItem>
-                      <MenuItem value="2024/2025">2024/2025</MenuItem> */}
-                      <MenuItem value="2025/2026">2025/2026</MenuItem>
+                      <MenuItem value="2024/2025">2024/2025</MenuItem>
+                      <MenuItem value="2025/2026">2025/2026</MenuItem> */}
                       <MenuItem value="2026/2027">2026/2027</MenuItem>
-                      <MenuItem value="2027/2028">2027/2028</MenuItem>
+                      {/* <MenuItem value="2027/2028">2027/2028</MenuItem>
                       <MenuItem value="2028/2029">2028/2029</MenuItem>
                       <MenuItem value="2029/2030">2029/2030</MenuItem>
-                      <MenuItem value="2030/2031">2030/2031</MenuItem>
+                      <MenuItem value="2030/2031">2030/2031</MenuItem> */}
                     </Select>
                   </FormControl>
 
